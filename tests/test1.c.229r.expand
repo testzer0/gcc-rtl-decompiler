@@ -1,0 +1,445 @@
+
+;; Function f (f, funcdef_no=0, decl_uid=1797, cgraph_uid=0, symbol_order=0)
+
+f (struct somestruct ss)
+{
+  int D.1804;
+  int _1;
+  int _2;
+  int _4;
+
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  _1 = ss.a;
+  _2 = ss.b;
+  _4 = _1 + _2;
+;;    succ:       3
+
+;;   basic block 3, loop depth 0
+;;    pred:       2
+<L0> [0.00%]:
+  return _4;
+;;    succ:       EXIT
+
+}
+
+
+
+Partition map 
+
+Partition 1 (_1 - 1 )
+Partition 2 (_2 - 2 )
+Partition 4 (_4 - 4 )
+Partition 5 (_5(D) - 5 )
+
+
+Partition map 
+
+Partition 0 (_5(D) - 5 )
+
+
+Conflict graph:
+
+After sorting:
+Coalesce List:
+
+Partition map 
+
+Partition 0 (_5(D) - 5 )
+
+After Coalescing:
+
+Partition map 
+
+Partition 0 (_1 - 1 )
+Partition 1 (_2 - 2 )
+Partition 2 (_4 - 4 )
+Partition 3 (_5(D) - 5 )
+
+f (struct somestruct ss)
+{
+  int D.1804;
+  int _1;
+  int _2;
+  int _4;
+
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  _1 = ss.a;
+  _2 = ss.b;
+  _4 = _1 + _2;
+;;    succ:       3
+
+;;   basic block 3, loop depth 0
+;;    pred:       2
+<L0> [0.00%]:
+  return _4;
+;;    succ:       EXIT
+
+}
+
+
+
+;; Generating RTL for gimple basic block 2
+
+;; _1 = ss.a;
+
+(insn 9 8 0 (set (reg:SI 87 [ _1 ])
+        (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -16 [0xfffffffffffffff0])) [2 ss.a+0 S4 A64])) "test1.c":8 -1
+     (nil))
+
+;; _2 = ss.b;
+
+(insn 10 9 0 (set (reg:SI 88 [ _2 ])
+        (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -12 [0xfffffffffffffff4])) [2 ss.b+0 S4 A32])) "test1.c":8 -1
+     (nil))
+
+;; _4 = _1 + _2;
+
+(insn 11 10 0 (parallel [
+            (set (reg:SI 89 [ _4 ])
+                (plus:SI (reg:SI 87 [ _1 ])
+                    (reg:SI 88 [ _2 ])))
+            (clobber (reg:CC 17 flags))
+        ]) "test1.c":8 -1
+     (nil))
+
+;; Generating RTL for gimple basic block 3
+
+;; <L0> [0.00%]:
+
+(code_label 12 11 13 2 (nil) [0 uses])
+
+(note 13 12 0 NOTE_INSN_BASIC_BLOCK)
+
+;; return _4;
+
+(insn 14 13 15 (set (reg:SI 90 [ <retval> ])
+        (reg:SI 89 [ _4 ])) "test1.c":8 -1
+     (nil))
+
+(jump_insn 15 14 16 (set (pc)
+        (label_ref 0)) "test1.c":8 -1
+     (nil))
+
+(barrier 16 15 0)
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Merging block 4 into block 2...
+Merged blocks 2 and 4.
+Merged 2 and 4 without moving.
+Removing jump 15.
+Merging block 5 into block 2...
+Merged blocks 2 and 5.
+Merged 2 and 5 without moving.
+
+
+try_optimize_cfg iteration 2
+
+fix_loop_structure: fixing up loops for function
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 7 NOTE_INSN_DELETED)
+;; basic block 2, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 0, next block 1, flags: (NEW, REACHABLE, RTL)
+;;  pred:       ENTRY (FALLTHRU)
+(note 7 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 7 3 2 (set (reg:DI 91)
+        (reg:DI 5 di [ ss ])) "test1.c":7 -1
+     (nil))
+(insn 3 2 4 2 (set (reg:SI 92)
+        (reg:SI 4 si [ ss+8 ])) "test1.c":7 -1
+     (nil))
+(insn 4 3 5 2 (set (mem/c:DI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -16 [0xfffffffffffffff0])) [1 ss+0 S8 A64])
+        (reg:DI 91)) "test1.c":7 -1
+     (nil))
+(insn 5 4 6 2 (set (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -8 [0xfffffffffffffff8])) [1 ss+8 S4 A64])
+        (reg:SI 92)) "test1.c":7 -1
+     (nil))
+(note 6 5 9 2 NOTE_INSN_FUNCTION_BEG)
+(insn 9 6 10 2 (set (reg:SI 87 [ _1 ])
+        (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -16 [0xfffffffffffffff0])) [2 ss.a+0 S4 A64])) "test1.c":8 -1
+     (nil))
+(insn 10 9 11 2 (set (reg:SI 88 [ _2 ])
+        (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -12 [0xfffffffffffffff4])) [2 ss.b+0 S4 A32])) "test1.c":8 -1
+     (nil))
+(insn 11 10 14 2 (parallel [
+            (set (reg:SI 89 [ _4 ])
+                (plus:SI (reg:SI 87 [ _1 ])
+                    (reg:SI 88 [ _2 ])))
+            (clobber (reg:CC 17 flags))
+        ]) "test1.c":8 -1
+     (nil))
+(insn 14 11 18 2 (set (reg:SI 90 [ <retval> ])
+        (reg:SI 89 [ _4 ])) "test1.c":8 -1
+     (nil))
+(insn 18 14 19 2 (set (reg/i:SI 0 ax)
+        (reg:SI 90 [ <retval> ])) "test1.c":9 -1
+     (nil))
+(insn 19 18 0 2 (use (reg/i:SI 0 ax)) "test1.c":9 -1
+     (nil))
+;;  succ:       EXIT [100.0%]  (FALLTHRU)
+
+
+;; Function main (main, funcdef_no=1, decl_uid=1799, cgraph_uid=1, symbol_order=1)
+
+main ()
+{
+  int c;
+  struct somestruct s;
+  int D.1806;
+  int _6;
+
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  s.a = 2;
+  s.b = 3;
+  c_5 = f (s);
+  _6 = 0;
+  s ={v} {CLOBBER};
+;;    succ:       3
+
+;;   basic block 3, loop depth 0
+;;    pred:       2
+<L1> [0.00%]:
+  return _6;
+;;    succ:       EXIT
+
+}
+
+
+
+Partition map 
+
+Partition 5 (c_5 - 5 )
+Partition 6 (_6 - 6 )
+Partition 8 (_8(D) - 8 )
+
+
+Partition map 
+
+Partition 0 (_8(D) - 8 )
+
+
+Conflict graph:
+
+After sorting:
+Coalesce List:
+
+Partition map 
+
+Partition 0 (_8(D) - 8 )
+
+After Coalescing:
+
+Partition map 
+
+Partition 0 (c_5 - 5 )
+Partition 1 (_6 - 6 )
+Partition 2 (_8(D) - 8 )
+
+main ()
+{
+  int c;
+  struct somestruct s;
+  int D.1806;
+  int _6;
+
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  s.a = 2;
+  s.b = 3;
+  c_5 = f (s);
+  _6 = 0;
+  s ={v} {CLOBBER};
+;;    succ:       3
+
+;;   basic block 3, loop depth 0
+;;    pred:       2
+<L1> [0.00%]:
+  return _6;
+;;    succ:       EXIT
+
+}
+
+
+Partition 1: size 12 align 4
+	s
+Partition 0: size 4 align 4
+	c_5
+
+;; Generating RTL for gimple basic block 2
+
+;; s.a = 2;
+
+(insn 5 4 0 (set (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -12 [0xfffffffffffffff4])) [2 s.a+0 S4 A32])
+        (const_int 2 [0x2])) "test1.c":13 -1
+     (nil))
+
+;; s.b = 3;
+
+(insn 6 5 0 (set (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -8 [0xfffffffffffffff8])) [2 s.b+0 S4 A32])
+        (const_int 3 [0x3])) "test1.c":14 -1
+     (nil))
+
+;; c_5 = f (s);
+
+(insn 7 6 8 (set (reg:DI 89)
+        (mem/c:DI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -12 [0xfffffffffffffff4])) [1 s+0 S8 A32])) "test1.c":15 -1
+     (nil))
+
+(insn 8 7 9 (set (reg:SI 90)
+        (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -4 [0xfffffffffffffffc])) [1 s+8 S4 A32])) "test1.c":15 -1
+     (nil))
+
+(insn 9 8 10 (set (reg:DI 5 di)
+        (reg:DI 89)) "test1.c":15 -1
+     (nil))
+
+(insn 10 9 11 (set (reg:SI 4 si)
+        (reg:SI 90)) "test1.c":15 -1
+     (nil))
+
+(call_insn 11 10 12 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("f") [flags 0x3]  <function_decl 0x7f8c26eebe00 f>) [0 f S1 A8])
+            (const_int 0 [0]))) "test1.c":15 -1
+     (nil)
+    (expr_list (use (reg:SI 4 si))
+        (expr_list (use (reg:DI 5 di))
+            (nil))))
+
+(insn 12 11 13 (set (reg:SI 91)
+        (reg:SI 0 ax)) "test1.c":15 -1
+     (nil))
+
+(insn 13 12 0 (set (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -16 [0xfffffffffffffff0])) [2 c+0 S4 A32])
+        (reg:SI 91)) "test1.c":15 -1
+     (nil))
+
+;; _6 = 0;
+
+(insn 14 13 0 (set (reg:SI 87 [ _6 ])
+        (const_int 0 [0])) "test1.c":16 -1
+     (nil))
+
+;; s ={v} {CLOBBER};
+
+(nil)
+
+;; Generating RTL for gimple basic block 3
+
+;; <L1> [0.00%]:
+
+(code_label 15 14 16 4 (nil) [0 uses])
+
+(note 16 15 0 NOTE_INSN_BASIC_BLOCK)
+
+;; return _6;
+
+(insn 17 16 18 (set (reg:SI 88 [ <retval> ])
+        (reg:SI 87 [ _6 ])) -1
+     (nil))
+
+(jump_insn 18 17 19 (set (pc)
+        (label_ref 0)) -1
+     (nil))
+
+(barrier 19 18 0)
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Merging block 4 into block 2...
+Merged blocks 2 and 4.
+Merged 2 and 4 without moving.
+Removing jump 18.
+Merging block 5 into block 2...
+Merged blocks 2 and 5.
+Merged 2 and 5 without moving.
+
+
+try_optimize_cfg iteration 2
+
+fix_loop_structure: fixing up loops for function
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 3 NOTE_INSN_DELETED)
+;; basic block 2, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 0, next block 1, flags: (NEW, REACHABLE, RTL)
+;;  pred:       ENTRY (FALLTHRU)
+(note 3 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(note 2 3 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 6 2 (set (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -12 [0xfffffffffffffff4])) [2 s.a+0 S4 A32])
+        (const_int 2 [0x2])) "test1.c":13 -1
+     (nil))
+(insn 6 5 7 2 (set (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -8 [0xfffffffffffffff8])) [2 s.b+0 S4 A32])
+        (const_int 3 [0x3])) "test1.c":14 -1
+     (nil))
+(insn 7 6 8 2 (set (reg:DI 89)
+        (mem/c:DI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -12 [0xfffffffffffffff4])) [1 s+0 S8 A32])) "test1.c":15 -1
+     (nil))
+(insn 8 7 9 2 (set (reg:SI 90)
+        (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -4 [0xfffffffffffffffc])) [1 s+8 S4 A32])) "test1.c":15 -1
+     (nil))
+(insn 9 8 10 2 (set (reg:DI 5 di)
+        (reg:DI 89)) "test1.c":15 -1
+     (nil))
+(insn 10 9 11 2 (set (reg:SI 4 si)
+        (reg:SI 90)) "test1.c":15 -1
+     (nil))
+(call_insn 11 10 12 2 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("f") [flags 0x3]  <function_decl 0x7f8c26eebe00 f>) [0 f S1 A8])
+            (const_int 0 [0]))) "test1.c":15 -1
+     (nil)
+    (expr_list (use (reg:SI 4 si))
+        (expr_list (use (reg:DI 5 di))
+            (nil))))
+(insn 12 11 13 2 (set (reg:SI 91)
+        (reg:SI 0 ax)) "test1.c":15 -1
+     (nil))
+(insn 13 12 14 2 (set (mem/c:SI (plus:DI (reg/f:DI 82 virtual-stack-vars)
+                (const_int -16 [0xfffffffffffffff0])) [2 c+0 S4 A32])
+        (reg:SI 91)) "test1.c":15 -1
+     (nil))
+(insn 14 13 17 2 (set (reg:SI 87 [ _6 ])
+        (const_int 0 [0])) "test1.c":16 -1
+     (nil))
+(insn 17 14 21 2 (set (reg:SI 88 [ <retval> ])
+        (reg:SI 87 [ _6 ])) -1
+     (nil))
+(insn 21 17 22 2 (set (reg/i:SI 0 ax)
+        (reg:SI 88 [ <retval> ])) "test1.c":17 -1
+     (nil))
+(insn 22 21 0 2 (use (reg/i:SI 0 ax)) "test1.c":17 -1
+     (nil))
+;;  succ:       EXIT [100.0%]  (FALLTHRU)
+
