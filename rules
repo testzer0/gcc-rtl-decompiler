@@ -1,0 +1,54 @@
+FuncBegin 		:= ";; Function.*"
+Comment 		:= ";; ^(?!Function).*"
+Note 			:= "\(note.*?\)"
+Prog			:= StmtList
+StmtList 		:= /*empty*/ 	
+				:= StmtList Stmt 	
+Stmt 			:= FuncBegin | Comment | Note | Insn | JumpInsn | CallInsn | BarrierInsn
+Insn 			:= "\(insn \d+ \d+ \d+ \d+ " Cmd ".*?\(nil\)\)"  
+Cmd 			:= Subcmd
+				 | "\(" "parallel" "\[" Subcmds "\]" "\)"
+Subcmds 		:= Subcmd
+				 | Subcmds Subcmd
+Subcmd 			:= Clobbercmd 
+				 | SetCmd 
+				 | Usecmd
+Clobbercmd	 	:= "\(" "clobber" .*? "\)"
+Setcmd 			:= "\(" "set" "\(" Operand "\)" "\(" Operand "\)" "\)"
+Usecmd 			:= "\(" "use" .*?  "\)" 
+Operand 		:=  "\(" ConstInt "\)"
+				 | LocInfo ":" TypeInfo Expr ("\[" .*? "\]")?
+ConstInt 		:= "const_int" "\d+" "\[ .*? \]" 
+LocInfo 		:= MemOrReg Flags
+MemOrReg 		:= "mem" 
+				 | "reg"
+Flags			:= /* empty */
+				 | Flags Flag
+Flag 			:= "/i" | "/v" | "/f" | "/c"
+TypeInfo  		:= "SI" | "DI" | "QI" | "CC.*" 
+Expr 			:=  PrimitiveExpr
+				 | "\(" PlusExpr "\)"	
+				 | "\(" MinusExpr "\)"
+				 | "\(" MultExpr "\)"
+				 | "\(" AshiftExpr "\)"
+				 | "\(" SubregExpr "\)"
+PrimitiveExpr 	:= "\d+"" (".*")?
+PlusExpr		:= "plus:" TypeInfo Operand Operand
+MinusExpr 		:= "minus:" TypeInfo Operand Operand
+MultExpr 		:= "mult:" TypeInfo Operand Operand
+AshiftExpr 		:= "ashift:" TypeInfo Operand Operand
+SubregExpr 		:= "subreg:" TypeInfo Operand "\d+"
+
+JumpInsn 		:= "\(jump\_insn \d+ \d+ \d+ \d+ " "\(" SetCmd "\)" ".*?\(nil\)\)"
+SetCmd 			:= "set" "\(pc\)" "\(" IfThenElseCmd "\)"
+IfThenElseCmd   := "if\_then\_else" "\(" Comparator Operand Operand "\)" "\( Loc "\)" "\(" Loc "\)"
+Loc 			:= "label_ref" "\d+"
+				 | "pc"
+
+CallInsn 		:= RetCallInsn | NoRetCallInsn
+RetCallInsn  	:= "\(call_insn \d+ \d+ \d+ \d+" "\(" SetInternal "\)" ".*?\(nil\)\)" 
+SetInternal     :=  "set \(reg.*?\)" "\(" CallCmd "\)"
+NoRetCallInsn   :=  "\(call_insn \d+ \d+ \d+ \d+" "\(" CallCmd "\)"
+CallCmd 		:=  "call \(mem:QI \(symbol_ref:DI \(\"" FnName "\) \[flags .*?\]" "<function_decl .*?>" "\[.*?\]"
+FnName			:= ".*" 
+BarrierInsn 	:= "\(barrier \d+ \d+ \d+\)"
