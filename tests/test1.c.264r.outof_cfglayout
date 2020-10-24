@@ -60,20 +60,20 @@ Reordered sequence:
 (note 3 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
 (note 2 3 5 2 NOTE_INSN_FUNCTION_BEG)
 (insn 5 2 6 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -12 [0xfffffffffffffff4])) [2 s.a+0 S4 A32])
+                (const_int -16 [0xfffffffffffffff0])) [2 s.a+0 S4 A64])
         (const_int 2 [0x2])) "test1.c":13 82 {*movsi_internal}
      (nil))
 (insn 6 5 7 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -8 [0xfffffffffffffff8])) [2 s.b+0 S4 A32])
+                (const_int -12 [0xfffffffffffffff4])) [2 s.b+0 S4 A32])
         (const_int 3 [0x3])) "test1.c":14 82 {*movsi_internal}
      (nil))
 (insn 7 6 8 2 (set (reg:DI 89)
         (mem/c:DI (plus:DI (reg/f:DI 20 frame)
-                (const_int -12 [0xfffffffffffffff4])) [1 s+0 S8 A32])) "test1.c":15 81 {*movdi_internal}
+                (const_int -16 [0xfffffffffffffff0])) [1 s+0 S8 A64])) "test1.c":15 81 {*movdi_internal}
      (nil))
 (insn 8 7 9 2 (set (reg:SI 90)
         (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -4 [0xfffffffffffffffc])) [1 s+8 S4 A32])) "test1.c":15 82 {*movsi_internal}
+                (const_int -8 [0xfffffffffffffff8])) [1 s+8 S4 A64])) "test1.c":15 82 {*movsi_internal}
      (nil))
 (insn 9 8 10 2 (set (reg:DI 5 di)
         (reg:DI 89)) "test1.c":15 81 {*movdi_internal}
@@ -82,7 +82,7 @@ Reordered sequence:
         (reg:SI 90)) "test1.c":15 82 {*movsi_internal}
      (nil))
 (call_insn 11 10 12 2 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("f") [flags 0x3]  <function_decl 0x7f8c26eebe00 f>) [0 f S1 A8])
+        (call (mem:QI (symbol_ref:DI ("f") [flags 0x3]  <function_decl 0x7f4f7cc3fe00 f>) [0 f S1 A8])
             (const_int 0 [0]))) "test1.c":15 676 {*call_value}
      (nil)
     (expr_list (use (reg:SI 4 si))
@@ -92,7 +92,7 @@ Reordered sequence:
         (reg:SI 0 ax)) "test1.c":15 82 {*movsi_internal}
      (nil))
 (insn 13 12 14 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -16 [0xfffffffffffffff0])) [2 c+0 S4 A32])
+                (const_int -4 [0xfffffffffffffffc])) [2 c+0 S4 A32])
         (reg:SI 91)) "test1.c":15 82 {*movsi_internal}
      (nil))
 (insn 14 13 17 2 (set (reg:SI 87 [ _6 ])

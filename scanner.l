@@ -74,6 +74,7 @@ END_IGNORE3     (">")
 "ashift:"			{ return T_Ashift; }
 "subreg:"			{ return T_Subreg; }
 "expr_list:"		{ return T_ExprList; }
+"sign_extend:"		{ return T_SiExtend; }
 
 {PUNCTUATION}		{ return yytext[0]; }
 {STRING} 			{ yylval.stringConstant = strdup(yytext); 
@@ -118,12 +119,13 @@ END_IGNORE3     (">")
 					  lineno++; colno = 1; }
 [ _A-Z]				;
 "\]"				{ return T_EndPara;}
+"->"				{ return T_RArrow; }
 . 					{ ReportError::UnrecogChar(&yylloc, yytext[0]); }
 
 %%
 void InitScanner()
 {
-	printf("Initializing scanner.\n");
+	printf("Initializing scanner.\n\n");
     yy_flex_debug = false;
     lineno = 1;
     colno = 1;

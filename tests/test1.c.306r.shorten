@@ -113,20 +113,20 @@ Dataflow summary:
 (note 28 27 2 2 NOTE_INSN_PROLOGUE_END)
 (note 2 28 5 2 NOTE_INSN_FUNCTION_BEG)
 (insn 5 2 6 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
-                (const_int -12 [0xfffffffffffffff4])) [2 s.a+0 S4 A32])
+                (const_int -16 [0xfffffffffffffff0])) [2 s.a+0 S4 A64])
         (const_int 2 [0x2])) "test1.c":13 82 {*movsi_internal}
      (nil))
 (insn 6 5 7 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
-                (const_int -8 [0xfffffffffffffff8])) [2 s.b+0 S4 A32])
+                (const_int -12 [0xfffffffffffffff4])) [2 s.b+0 S4 A32])
         (const_int 3 [0x3])) "test1.c":14 82 {*movsi_internal}
      (nil))
 (insn 7 6 8 2 (set (reg:DI 1 dx [89])
         (mem/c:DI (plus:DI (reg/f:DI 6 bp)
-                (const_int -12 [0xfffffffffffffff4])) [1 s+0 S8 A32])) "test1.c":15 81 {*movdi_internal}
+                (const_int -16 [0xfffffffffffffff0])) [1 s+0 S8 A64])) "test1.c":15 81 {*movdi_internal}
      (nil))
 (insn 8 7 9 2 (set (reg:SI 0 ax [90])
         (mem/c:SI (plus:DI (reg/f:DI 6 bp)
-                (const_int -4 [0xfffffffffffffffc])) [1 s+8 S4 A32])) "test1.c":15 82 {*movsi_internal}
+                (const_int -8 [0xfffffffffffffff8])) [1 s+8 S4 A64])) "test1.c":15 82 {*movsi_internal}
      (nil))
 (insn 9 8 10 2 (set (reg:DI 5 di)
         (reg:DI 1 dx [89])) "test1.c":15 81 {*movdi_internal}
@@ -135,14 +135,14 @@ Dataflow summary:
         (reg:SI 0 ax [90])) "test1.c":15 82 {*movsi_internal}
      (nil))
 (call_insn 11 10 13 2 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("f") [flags 0x3]  <function_decl 0x7f8c26eebe00 f>) [0 f S1 A8])
+        (call (mem:QI (symbol_ref:DI ("f") [flags 0x3]  <function_decl 0x7f4f7cc3fe00 f>) [0 f S1 A8])
             (const_int 0 [0]))) "test1.c":15 676 {*call_value}
      (nil)
     (expr_list (use (reg:SI 4 si))
         (expr_list (use (reg:DI 5 di))
             (nil))))
 (insn 13 11 14 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
-                (const_int -16 [0xfffffffffffffff0])) [2 c+0 S4 A32])
+                (const_int -4 [0xfffffffffffffffc])) [2 c+0 S4 A32])
         (reg:SI 0 ax [91])) "test1.c":15 82 {*movsi_internal}
      (nil))
 (insn 14 13 22 2 (set (reg:SI 0 ax [orig:87 _6 ] [87])
