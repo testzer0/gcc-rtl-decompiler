@@ -16,12 +16,15 @@
 	#define YY_USER_ACTION DoBeforeEachAction();
 
 	#define TAB_SIZE 8
-
+	
 	int lineno, colno;
 	List<const char*> savedlines;
+	// Note that {} arent in punctuation. If needed add later
+	// Also, '-' is in punctuation, but instead should be taken later as part of a number, e.g. -2.
+	// Add this when doing parsing.
 %}
 
-PUNCTUATION   	([!:,.{}()])
+PUNCTUATION   	([!:,.()*-])
 DECIMAL         ([0-9]+)
 HEXADECIMAL     (0[xX][0-9a-fA-F]+)
 INTEGER         ({DECIMAL}|{HEXADECIMAL})
@@ -29,8 +32,12 @@ IDENTIFIER      ([a-zA-Z][a-zA-Z0-9_]*)
 STRING 			(\"[^"\n]*\")
 BEG_IGNORE 		("\[")
 END_IGNORE 		("\]")
+BEG_IGNORE2     ("{")
+END_IGNORE2     ("}")
+BEG_IGNORE3     ("<")
+END_IGNORE3     (">")
 
-%x EXPECT CATCH COMMENT IGNORE
+%x EXPECT CATCH COMMENT IGNORE IGNORE2 IGNORE3
 %%			/* BEGIN RULES SECTION */
 "note" 				{ return T_Note; }		
 "insn"				{ return T_Insn; }
@@ -40,7 +47,7 @@ END_IGNORE 		("\]")
 "symbol\_ref"		{ return T_SymbolRef; }
 "flags"				{ return T_Flags; }
 "nil" 				{ return T_Nil; }
-"parallel" 			{ return T_Parallel; }
+"parallel \[" 			{ return T_Parallel; }
 "clobber" 			{ return T_Clobber; }
 "set" 				{ return T_Set; }
 "use" 				{ return T_Use; }
@@ -60,11 +67,13 @@ END_IGNORE 		("\]")
 "QI" 				{ return T_QIType; }
 "CCZ" 				{ return T_CCZType; }
 "CCGC" 				{ return T_CCGCType; }
+"CC"				{ return T_CCType;}
 "plus:" 			{ return T_Plus; }
 "minus:" 			{ return T_Minus; }
 "mult:"				{ return T_Mult; }
 "ashift:"			{ return T_Ashift; }
 "subreg:"			{ return T_Subreg; }
+"expr_list:"		{ return T_ExprList; }
 
 {PUNCTUATION}		{ return yytext[0]; }
 {STRING} 			{ yylval.stringConstant = strdup(yytext); 
@@ -78,6 +87,16 @@ END_IGNORE 		("\]")
 <IGNORE>{END_IGNORE}		{ BEGIN INITIAL; }
 <IGNORE>.			;
 <IGNORE><<EOF>>		{ ReportError::UntermBrack();
+					  BEGIN INITIAL; }
+{BEG_IGNORE2} 		{ BEGIN IGNORE2; }
+<IGNORE2>{END_IGNORE2}		{ BEGIN INITIAL; }
+<IGNORE2>.			;
+<IGNORE2><<EOF>>		{ ReportError::UntermBrack();
+					  BEGIN INITIAL; }
+{BEG_IGNORE3} 		{ BEGIN IGNORE3; }
+<IGNORE3>{END_IGNORE3}		{ BEGIN INITIAL; }
+<IGNORE3>.			;
+<IGNORE3><<EOF>>		{ ReportError::UntermBrack();
 					  BEGIN INITIAL; }
 <EXPECT>" "			;
 <EXPECT>"Function"	{ BEGIN CATCH; }		
@@ -94,10 +113,11 @@ END_IGNORE 		("\]")
 <COMMENT>"\n"		{ BEGIN INITIAL; 
 					  lineno++; colno = 1; }
 <COMMENT><<EOF>> 	{ BEGIN INITIAL; }
-
+{IDENTIFIER} 		;
 \"[^\"\n]*\n 		{ ReportError::UntermString(&yylloc, yytext);
 					  lineno++; colno = 1; }
-[ _A-Z]					;
+[ _A-Z]				;
+"\]"				{ return T_EndPara;}
 . 					{ ReportError::UnrecogChar(&yylloc, yytext[0]); }
 
 %%
