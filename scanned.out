@@ -4,35 +4,9 @@ Initializing scanner.
 T_FunBegin 
 ( T_Note T_IntConstant T_IntConstant T_IntConstant ) 
 ( T_Note T_IntConstant T_IntConstant T_IntConstant T_IntConstant ) 
-( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_DIType T_IntConstant ) 
-( T_Reg : T_DIType T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
-( T_Nil ) ) 
-( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_SIType T_IntConstant ) 
-( T_Reg : T_SIType T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
-( T_Nil ) ) 
-( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Mem T_CFlag : T_DIType ( T_Plus T_DIType ( T_Reg T_FFlag : T_DIType T_IntConstant ) 
-( T_ConstInt - T_IntConstant ) ) ) 
-( T_Reg : T_DIType T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
-( T_Nil ) ) 
-( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Mem T_CFlag : T_SIType ( T_Plus T_DIType ( T_Reg T_FFlag : T_DIType T_IntConstant ) 
-( T_ConstInt - T_IntConstant ) ) ) 
-( T_Reg : T_SIType T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
-( T_Nil ) ) 
 ( T_Note T_IntConstant T_IntConstant T_IntConstant T_IntConstant ) 
 ( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_SIType T_IntConstant ) 
-( T_Mem T_CFlag : T_SIType ( T_Plus T_DIType ( T_Reg T_FFlag : T_DIType T_IntConstant ) 
-( T_ConstInt - T_IntConstant ) ) ) ) T_StringConstant : T_IntConstant T_IntConstant 
-( T_Nil ) ) 
-( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_SIType T_IntConstant ) 
-( T_Mem T_CFlag : T_SIType ( T_Plus T_DIType ( T_Reg T_FFlag : T_DIType T_IntConstant ) 
-( T_ConstInt - T_IntConstant ) ) ) ) T_StringConstant : T_IntConstant T_IntConstant 
-( T_Nil ) ) 
-( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Parallel 
-( T_Set ( T_Reg : T_SIType T_IntConstant ) 
-( T_Plus T_SIType ( T_Reg : T_SIType T_IntConstant ) 
-( T_Reg : T_SIType T_IntConstant ) ) ) 
-( T_Clobber ( T_Reg : T_CCType T_IntConstant T_Flags ) ) 
-T_EndPara ) T_StringConstant : T_IntConstant T_IntConstant 
+( T_ConstInt T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
 ( T_Nil ) ) 
 ( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_SIType T_IntConstant ) 
 ( T_Reg : T_SIType T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
@@ -52,31 +26,23 @@ T_FunBegin
 ( T_ConstInt - T_IntConstant ) ) ) 
 ( T_ConstInt T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
 ( T_Nil ) ) 
-( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Mem T_CFlag : T_SIType ( T_Plus T_DIType ( T_Reg T_FFlag : T_DIType T_IntConstant ) 
-( T_ConstInt - T_IntConstant ) ) ) 
+( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_ConstInt T_IntConstant ) T_StringConstant : T_IntConstant T_IntConstant 
+( T_Nil ) ) 
+
+
+T_FunBegin 
+( T_Note T_IntConstant T_IntConstant T_IntConstant ) 
+( T_Note T_IntConstant T_IntConstant T_IntConstant T_IntConstant ) 
+( T_Note T_IntConstant T_IntConstant T_IntConstant T_IntConstant ) 
+( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_QIType T_IntConstant ) 
 ( T_ConstInt T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
-( T_Nil ) ) 
-( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_DIType T_IntConstant ) 
-( T_Mem T_CFlag : T_DIType ( T_Plus T_DIType ( T_Reg T_FFlag : T_DIType T_IntConstant ) 
-( T_ConstInt - T_IntConstant ) ) ) ) T_StringConstant : T_IntConstant T_IntConstant 
-( T_Nil ) ) 
-( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_SIType T_IntConstant ) 
-( T_Mem T_CFlag : T_SIType ( T_Plus T_DIType ( T_Reg T_FFlag : T_DIType T_IntConstant ) 
-( T_ConstInt - T_IntConstant ) ) ) ) T_StringConstant : T_IntConstant T_IntConstant 
-( T_Nil ) ) 
-( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_DIType T_IntConstant ) 
-( T_Reg : T_DIType T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
-( T_Nil ) ) 
-( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_SIType T_IntConstant ) 
-( T_Reg : T_SIType T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
 ( T_Nil ) ) 
 ( T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_SIType T_IntConstant ) 
 ( T_Call ( T_Mem : T_QIType ( T_SymbolRef : T_DIType ( T_StringConstant ) ) ) 
 ( T_ConstInt T_IntConstant ) ) ) T_StringConstant : T_IntConstant T_IntConstant 
 ( T_Nil ) 
-( ( T_Use ( T_Reg : T_SIType T_IntConstant ) ) 
-( ( T_Use ( T_Reg : T_DIType T_IntConstant ) ) 
-( T_Nil ) ) ) ) 
+( ( T_Use ( T_Reg : T_QIType T_IntConstant ) ) 
+( T_Nil ) ) ) 
 ( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_SIType T_IntConstant ) 
 ( T_Reg : T_SIType T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
 ( T_Nil ) ) 
@@ -84,6 +50,14 @@ T_FunBegin
 ( T_ConstInt - T_IntConstant ) ) ) 
 ( T_Reg : T_SIType T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
 ( T_Nil ) ) 
+( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_QIType T_IntConstant ) 
+( T_ConstInt T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
+( T_Nil ) ) 
+( T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Call ( T_Mem : T_QIType ( T_SymbolRef : T_DIType ( T_StringConstant ) ) ) 
+( T_ConstInt T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
+( T_Nil ) 
+( ( T_Use ( T_Reg : T_QIType T_IntConstant ) ) 
+( T_Nil ) ) ) 
 ( T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant ( T_Set ( T_Reg : T_SIType T_IntConstant ) 
 ( T_ConstInt T_IntConstant ) ) T_StringConstant : T_IntConstant T_IntConstant 
 ( T_Nil ) ) 

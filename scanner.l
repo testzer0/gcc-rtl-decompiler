@@ -75,6 +75,13 @@ END_IGNORE3     (">")
 "subreg:"			{ return T_Subreg; }
 "expr_list:"		{ return T_ExprList; }
 "sign_extend:"		{ return T_SiExtend; }
+"compare:"			{ return T_Compare; }
+"lt" 				{ return T_Lt; }
+"gt" 				{ return T_Gt; }
+"le" 				{ return T_Le; }
+"ge"				{ return T_Ge; }
+"eq"				{ return T_Eq; }
+"ne"				{ return T_Ne; }
 
 {PUNCTUATION}		{ return yytext[0]; }
 {STRING} 			{ yylval.stringConstant = strdup(yytext); 

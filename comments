@@ -1,0 +1,7 @@
+1) It seems that each program is made up of FuncBodyList's.
+2) It also seems so far that each FuncBodyList always ends with a use statement, and exactly one use statement
+   is found throughout the FuncBodyList. Even when there are multiple return statements based on conditionals, 
+   so far it seems that RTL upholds its one-use-statement-per-function policy. This has potential to be factored 
+   into Parsing to mark the end of a FuncBodyList, but further testing is needed to validate the above hypothesis.
+   As for now, the reduce-reduce conflict should be resolved by bison to use the first appearing rule, i.e. to 
+   create a new FuncBodyList whenever it sees a T_FunBegin.

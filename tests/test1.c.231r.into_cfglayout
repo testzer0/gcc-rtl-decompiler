@@ -1,56 +1,5 @@
 
-;; Function f (f, funcdef_no=0, decl_uid=1797, cgraph_uid=0, symbol_order=0)
-
-
-
-try_optimize_cfg iteration 1
-
-;; basic block 2, loop depth 0, count 0, freq 0, maybe hot
-;;  prev block 0, next block 1, flags: (NEW, REACHABLE, RTL)
-;;  pred:       ENTRY (FALLTHRU)
-(note 7 0 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
-(insn 2 7 3 2 (set (reg:DI 91)
-        (reg:DI 5 di [ ss ])) "test1.c":7 81 {*movdi_internal}
-     (nil))
-(insn 3 2 4 2 (set (reg:SI 92)
-        (reg:SI 4 si [ ss+8 ])) "test1.c":7 82 {*movsi_internal}
-     (nil))
-(insn 4 3 5 2 (set (mem/c:DI (plus:DI (reg/f:DI 20 frame)
-                (const_int -16 [0xfffffffffffffff0])) [1 ss+0 S8 A64])
-        (reg:DI 91)) "test1.c":7 81 {*movdi_internal}
-     (nil))
-(insn 5 4 6 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -8 [0xfffffffffffffff8])) [1 ss+8 S4 A64])
-        (reg:SI 92)) "test1.c":7 82 {*movsi_internal}
-     (nil))
-(note 6 5 9 2 NOTE_INSN_FUNCTION_BEG)
-(insn 9 6 10 2 (set (reg:SI 87 [ _1 ])
-        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -16 [0xfffffffffffffff0])) [2 ss.a+0 S4 A64])) "test1.c":8 82 {*movsi_internal}
-     (nil))
-(insn 10 9 11 2 (set (reg:SI 88 [ _2 ])
-        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -12 [0xfffffffffffffff4])) [2 ss.b+0 S4 A32])) "test1.c":8 82 {*movsi_internal}
-     (nil))
-(insn 11 10 14 2 (parallel [
-            (set (reg:SI 89 [ _4 ])
-                (plus:SI (reg:SI 87 [ _1 ])
-                    (reg:SI 88 [ _2 ])))
-            (clobber (reg:CC 17 flags))
-        ]) "test1.c":8 217 {*addsi_1}
-     (nil))
-(insn 14 11 18 2 (set (reg:SI 90 [ <retval> ])
-        (reg:SI 89 [ _4 ])) "test1.c":8 82 {*movsi_internal}
-     (nil))
-(insn 18 14 19 2 (set (reg/i:SI 0 ax)
-        (reg:SI 90 [ <retval> ])) "test1.c":9 82 {*movsi_internal}
-     (nil))
-(insn 19 18 0 2 (use (reg/i:SI 0 ax)) "test1.c":9 -1
-     (nil))
-;;  succ:       EXIT [100.0%]  (FALLTHRU)
-
-
-;; Function main (main, funcdef_no=1, decl_uid=1799, cgraph_uid=1, symbol_order=1)
+;; Function f (f, funcdef_no=0, decl_uid=2247, cgraph_uid=0, symbol_order=0)
 
 
 
@@ -61,52 +10,85 @@ try_optimize_cfg iteration 1
 ;;  pred:       ENTRY (FALLTHRU)
 (note 3 0 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
 (note 2 3 5 2 NOTE_INSN_FUNCTION_BEG)
-(insn 5 2 6 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -16 [0xfffffffffffffff0])) [2 s.a+0 S4 A64])
-        (const_int 2 [0x2])) "test1.c":13 82 {*movsi_internal}
+(insn 5 2 8 2 (set (reg:SI 87 [ _1 ])
+        (const_int 2 [0x2])) "test1.c":4 82 {*movsi_internal}
      (nil))
-(insn 6 5 7 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -12 [0xfffffffffffffff4])) [2 s.b+0 S4 A32])
-        (const_int 3 [0x3])) "test1.c":14 82 {*movsi_internal}
+(insn 8 5 12 2 (set (reg:SI 88 [ <retval> ])
+        (reg:SI 87 [ _1 ])) "test1.c":4 82 {*movsi_internal}
      (nil))
-(insn 7 6 8 2 (set (reg:DI 89)
-        (mem/c:DI (plus:DI (reg/f:DI 20 frame)
-                (const_int -16 [0xfffffffffffffff0])) [1 s+0 S8 A64])) "test1.c":15 81 {*movdi_internal}
+(insn 12 8 13 2 (set (reg/i:SI 0 ax)
+        (reg:SI 88 [ <retval> ])) "test1.c":5 82 {*movsi_internal}
      (nil))
-(insn 8 7 9 2 (set (reg:SI 90)
-        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -8 [0xfffffffffffffff8])) [1 s+8 S4 A64])) "test1.c":15 82 {*movsi_internal}
+(insn 13 12 0 2 (use (reg/i:SI 0 ax)) "test1.c":5 -1
      (nil))
-(insn 9 8 10 2 (set (reg:DI 5 di)
-        (reg:DI 89)) "test1.c":15 81 {*movdi_internal}
+;;  succ:       EXIT [100.0%]  (FALLTHRU)
+
+
+;; Function g (g, funcdef_no=1, decl_uid=2249, cgraph_uid=1, symbol_order=1)
+
+
+
+try_optimize_cfg iteration 1
+
+;; basic block 2, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 0, next block 1, flags: (NEW, REACHABLE, RTL)
+;;  pred:       ENTRY (FALLTHRU)
+(note 3 0 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(note 2 3 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 8 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -4 [0xfffffffffffffffc])) [1 a+0 S4 A32])
+        (const_int 2 [0x2])) "test1.c":8 82 {*movsi_internal}
      (nil))
-(insn 10 9 11 2 (set (reg:SI 4 si)
-        (reg:SI 90)) "test1.c":15 82 {*movsi_internal}
+(insn 8 5 0 2 (const_int 0 [0]) "test1.c":9 694 {nop}
      (nil))
-(call_insn 11 10 12 2 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("f") [flags 0x3]  <function_decl 0x7f4f7cc3fe00 f>) [0 f S1 A8])
-            (const_int 0 [0]))) "test1.c":15 676 {*call_value}
+;;  succ:       EXIT [100.0%]  (FALLTHRU)
+
+
+;; Function main (main, funcdef_no=2, decl_uid=2252, cgraph_uid=2, symbol_order=2)
+
+
+
+try_optimize_cfg iteration 1
+
+;; basic block 2, loop depth 0, count 0, freq 0, maybe hot
+;;  prev block 0, next block 1, flags: (NEW, REACHABLE, RTL)
+;;  pred:       ENTRY (FALLTHRU)
+(note 3 0 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(note 2 3 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 6 2 (set (reg:QI 0 ax)
+        (const_int 0 [0])) "test1.c":12 84 {*movqi_internal}
+     (nil))
+(call_insn 6 5 7 2 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("f") [flags 0x3]  <function_decl 0x7efe40389f00 f>) [0 f S1 A8])
+            (const_int 0 [0]))) "test1.c":12 676 {*call_value}
      (nil)
-    (expr_list (use (reg:SI 4 si))
-        (expr_list (use (reg:DI 5 di))
-            (nil))))
-(insn 12 11 13 2 (set (reg:SI 91)
-        (reg:SI 0 ax)) "test1.c":15 82 {*movsi_internal}
+    (expr_list (use (reg:QI 0 ax))
+        (nil)))
+(insn 7 6 8 2 (set (reg:SI 89)
+        (reg:SI 0 ax)) "test1.c":12 82 {*movsi_internal}
      (nil))
-(insn 13 12 14 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -4 [0xfffffffffffffffc])) [2 c+0 S4 A32])
-        (reg:SI 91)) "test1.c":15 82 {*movsi_internal}
+(insn 8 7 9 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -4 [0xfffffffffffffffc])) [1 b+0 S4 A32])
+        (reg:SI 89)) "test1.c":12 82 {*movsi_internal}
      (nil))
-(insn 14 13 17 2 (set (reg:SI 87 [ _6 ])
-        (const_int 0 [0])) "test1.c":16 82 {*movsi_internal}
+(insn 9 8 10 2 (set (reg:QI 0 ax)
+        (const_int 0 [0])) "test1.c":13 84 {*movqi_internal}
      (nil))
-(insn 17 14 21 2 (set (reg:SI 88 [ <retval> ])
-        (reg:SI 87 [ _6 ])) 82 {*movsi_internal}
+(call_insn 10 9 11 2 (call (mem:QI (symbol_ref:DI ("g") [flags 0x3]  <function_decl 0x7efe4038e100 g>) [0 g S1 A8])
+        (const_int 0 [0])) "test1.c":13 665 {*call}
+     (nil)
+    (expr_list (use (reg:QI 0 ax))
+        (nil)))
+(insn 11 10 14 2 (set (reg:SI 87 [ _5 ])
+        (const_int 0 [0])) "test1.c":14 82 {*movsi_internal}
      (nil))
-(insn 21 17 22 2 (set (reg/i:SI 0 ax)
-        (reg:SI 88 [ <retval> ])) "test1.c":17 82 {*movsi_internal}
+(insn 14 11 18 2 (set (reg:SI 88 [ <retval> ])
+        (reg:SI 87 [ _5 ])) 82 {*movsi_internal}
      (nil))
-(insn 22 21 0 2 (use (reg/i:SI 0 ax)) "test1.c":17 -1
+(insn 18 14 19 2 (set (reg/i:SI 0 ax)
+        (reg:SI 88 [ <retval> ])) "test1.c":15 82 {*movsi_internal}
+     (nil))
+(insn 19 18 0 2 (use (reg/i:SI 0 ax)) "test1.c":15 -1
      (nil))
 ;;  succ:       EXIT [100.0%]  (FALLTHRU)
 

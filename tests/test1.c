@@ -1,17 +1,15 @@
-struct somestruct{
-	int a;
-	int b;
-	char c;
-};
+#include <stdio.h>
 
-int f(struct somestruct ss) {
-	return ss.a+ss.b;
+int f() {
+    return 2;
+}
+
+void g() {
+    int a = 2;
 }
 
 int main() {
-	struct somestruct s;
-	s.a = 2;
-	s.b = 3;
-	int c = f(s);
-	return 0;
+    int b = f();
+    g();
+    return 0;
 }
