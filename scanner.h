@@ -6,6 +6,7 @@
 extern char *yytext;    
 
 #define MaxIdentLen 31
+#define T_NumTokenTypes 36
 
 typedef enum { 
     T_Note = 256, T_Insn, T_JumpInsn, T_CallInsn, T_Call, T_SymbolRef, T_Flags, T_Nil, T_Parallel, T_Clobber, 
