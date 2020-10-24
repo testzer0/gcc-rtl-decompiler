@@ -97,7 +97,7 @@ END_IGNORE 		("\]")
 
 \"[^\"\n]*\n 		{ ReportError::UntermString(&yylloc, yytext);
 					  lineno++; colno = 1; }
-
+[ _A-Z]					;
 . 					{ ReportError::UnrecogChar(&yylloc, yytext[0]); }
 
 %%

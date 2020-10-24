@@ -22,7 +22,9 @@
 static void PrintOneToken(TokenType token, const char *text, YYSTYPE value, yyltype loc) {
     // For now doesn't print the attributes of, say, T_StringContant, i.e. prints
     // only the token type. Should suffice for debugging purposes.
-    printf("%s ", gTokenNames[token - T_Note]);
+    if (token < 256)
+        printf("%c ", token);
+    else printf("%s ", gTokenNames[token - T_Note]);
 }
 
 /*--------------------------------------------------------*
