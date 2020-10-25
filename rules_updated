@@ -17,7 +17,7 @@ Integer         :=       T_IntConstant
 Insn            :=       T_Insn T_IntConstant T_IntConstant T_IntConstant "(" MainCmd ")" \  
                           T_StringConstant ":" T_IntConstant Integer "(" T_Nil ")" ;
 MainCmd         :=      PlainCmd 
-                |       T_Parallel CmdList T_EndPara ;
+                |       T_Parallel CmdList T_EndPara ;  /* ParallelCmd */
 CmdList         :=      "(" PlainCmd ")"
                 |       "(" PlainCmd ")" CmdList     ;
 PlainCmd        :=      ClobberCmd | SetCmd | UseCmd ;
@@ -47,7 +47,7 @@ AshiftExpr      :=      T_Ashift TypeInfo "(" Operand ")" "(" Operand ")" ;
 SubregExpr      :=      T_SubReg TypeInfo "(" Operand ")" Integer ;
 CompareExpr     :=      T_Compare TypeInfo "(" Operand ")" "(" Operand ")" ;
 JumpInsn        :=      T_JumpInsn T_IntConstant T_IntConstant T_IntConstant "(" T_Set \
-                          "(" T_Pc ")" "(" Dest ")" ")" T_StringConstant ":" T_IntConstant Integer "(" T_Nil ")" ;
+                          "(" T_Pc ")" "(" Dest ")" ")" T_StringConstant ":" T_IntConstant Integer "(" T_Nil ")" T_RArrow T_IntConstant ;
 Dest            :=      T_LabelRef T_IntConstant        /* Label */
                 |       T_IfThenElse "(" Comparison ")" "(" InDest ")" "(" InDest ")" ;  /* IfThenElse */
                         /* While Parsing we shall use Dest instead of InDest for convenience even though its more general */

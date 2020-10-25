@@ -67,9 +67,9 @@ class Condition;
 
 class Program : public Node {
     protected:
-        List<FuncBodyList *> *funcbodylist;
+        List<FuncBody *> *funcbodylist;
     public:
-        Program(List<FuncBodyList *> *bodylist);
+        Program(List<FuncBody *> *bodylist);
         const char *GetPrintNameForNode() {
             return "Program";
         }
@@ -78,26 +78,18 @@ class Program : public Node {
 
 class FuncBody : public Node {
     protected:
-        StmtList *stmtlist;
+        List<Stmt *> *stmts;
         char *name;
     public :
-        FuncBody(StmtList *slist, char *n);
+        FuncBody(List<Stmt *> *ss, char *n);
         const char *GetPrintNameForNode() {
             return "FuncBody";
         }
         void PrintChildren(int indentlevel);
 };
 
-class StmtList : public Node {
-    protected:
-        List<Stmt *> *stmts;
-    public:
-        StmtList(List<Stmt *> *ss);
-        const char *GetPrintNameForNode() {
-            return "StmtList";
-        }
-        void PrintChildren(int indentlevel);
-};
+// StmtList not needed to be declared as a separate class
+// can create intermediate var in parser.y
 
 class Stmt : public Node {
     public:
@@ -164,13 +156,13 @@ class PlainCmd : public MainCmd {
         // Again, PlainCmd is of three types so we define nothing here
 };
 
-class CmdList : public MainCmd {
+class ParallelCmd : public MainCmd {
     protected:
         List<PlainCmd *> *cmds;
     public:
-        CmdList(List<PlainCmd *> *cs);
+        ParallelCmd(List<PlainCmd *> *cs);
         const char *GetPrintNameForNode() {
-            return "CmdList";
+            return "ParallelCmd";
         }
         void PrintChildren(int indentlevel);
 };
@@ -264,9 +256,9 @@ class TypeInfo : public Node {
 class LocInfo : public Node {
     protected:
         MemType *mtype;
-        Flags *flags;
+        List<Flag *> *flags;
     public:
-        LocInfo(MemType *mt, Flags *f);
+        LocInfo(MemType *mt, List<Flag *> *f);
         const char *GetPrintNameForNode() {
             return "LocInfo";
         }
@@ -284,16 +276,8 @@ class MemType : public Node {
         void PrintChildren(int indentlevel);
 };
 
-class Flags : public Node {
-    protected:
-        List<Flag *> *flags;
-    public:
-        Flags(List<Flag *> *f);
-        const char *GetPrintNameForNode() {
-            return "Flags";
-        }
-        void PrintChildren(int indentlevel);
-};
+// There is no need to declare a class for flags
+// An intermediate bison variable of List<Flag *> * type will suffice.
 
 class Flag : public Node {
     protected:

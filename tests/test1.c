@@ -1,15 +1,14 @@
 #include <stdio.h>
 
-int f() {
-    return 2;
-}
-
-void g() {
-    int a = 2;
+int f(int a) {
+	int b;
+	if (a < 3)
+		b = 2;
+	else b = 3;
+	return b;
 }
 
 int main() {
-    int b = f();
-    g();
+    int b = f(3);
     return 0;
 }

@@ -22,7 +22,7 @@ void Node::Print(int indentlevel, const char *label) {
     PrintChildren(indentlevel);
 }
 
-Program::Program(List<FuncBodyList *> *bodylist) {
+Program::Program(List<FuncBody *> *bodylist) {
     Assert(bodylist != NULL);
     (funcbodylist = bodylist)->SetParentAll(this); // Set the parent pointers of the fn bodies
 }
@@ -32,21 +32,16 @@ void Program::PrintChildren(int indentlevel) {
     printf("\n");
 }
 
-FuncBody::FuncBody(StmtList *slist, char *n) {
-    Assert(slist != NULL && n != NULL);
-    (stmtlist = slist)->SetParent(this);
+FuncBody::FuncBody(List<Stmt *> *ss, char *n) {
+    Assert(ss != NULL && n != NULL);
+    (stmts = ss)->SetParentAll(this);
     strcpy(name, n);   
 }
 
 void FuncBody::PrintChildren(int indentlevel) {
-    stmtlist->Print(indentlevel+1);
+    stmts->PrintAll(indentlevel+1);
     printf("%s\n",name);
 } 
-
-StmtList::StmtList(List<Stmt *> *ss) {
-    Assert(ss != NULL);
-    (stmts = ss)->SetParentAll(this);
-}
 
 Integer::Integer(int val) {
     value = val;
@@ -65,12 +60,12 @@ void Insn::PrintChildren(int indentlevel) {
     maincmd->Print(indentlevel+1);
 }
 
-CmdList::CmdList(List<PlainCmd *> *cs) {
+ParallelCmd::ParallelCmd(List<PlainCmd *> *cs) {
     Assert(cs != NULL);
     (cmds = cs)->SetParentAll(this);
 }
 
-void CmdList::PrintChildren(int indentlevel) {
+void ParallelCmd::PrintChildren(int indentlevel) {
     cmds->PrintAll(indentlevel+1);
 }
 
@@ -125,19 +120,19 @@ void TypeInfo::PrintChildren(int indentlevel) {
     printf("%s",type);
 }
 
-LocInfo::LocInfo(MemType *mt, Flags *f) {
+LocInfo::LocInfo(MemType *mt, List<Flag *> *f) {
     Assert(mt != NULL);
     // NOTE that f can be null
     (mtype = mt)->SetParent(this);
     flags = f;
     if (flags)
-        flags->SetParent(this);
+        flags->SetParentAll(this);
 }
 
 void LocInfo::PrintChildren(int indentlevel) {
     mtype->Print(indentlevel+1);
     if (flags)
-        flags->Print(indentlevel+1);
+        flags->PrintAll(indentlevel+1);
 }
 
 MemType::MemType(const char *t) {
@@ -146,18 +141,6 @@ MemType::MemType(const char *t) {
 
 void MemType::PrintChildren(int indentlevel) {
     printf("%s",type);
-}
-
-Flags::Flags(List<Flag *> *f) {
-    Assert(f != NULL);
-    // While there may be no flags for an operand, in that case the whole
-    // flaglist would be passed as NULL. Given that there is a non NULL
-    // flaglist it must not be empty
-    (flags = f)->SetParentAll(this);
-}
-
-void Flags::PrintChildren(int indentlevel) {
-    flags->PrintAll(indentlevel+1);
 }
 
 Flag::Flag(const char *f) {
