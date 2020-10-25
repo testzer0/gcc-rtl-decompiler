@@ -79,9 +79,9 @@ class Program : public Node {
 class FuncBody : public Node {
     protected:
         List<Stmt *> *stmts;
-        char *name;
+        const char *name;
     public :
-        FuncBody(List<Stmt *> *ss, char *n);
+        FuncBody(List<Stmt *> *ss, const char *n);
         const char *GetPrintNameForNode() {
             return "FuncBody";
         }

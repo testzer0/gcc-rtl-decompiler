@@ -32,10 +32,10 @@ void Program::PrintChildren(int indentlevel) {
     printf("\n");
 }
 
-FuncBody::FuncBody(List<Stmt *> *ss, char *n) {
+FuncBody::FuncBody(List<Stmt *> *ss, const char *n) {
     Assert(ss != NULL && n != NULL);
     (stmts = ss)->SetParentAll(this);
-    strcpy(name, n);   
+    name = n;   
 }
 
 void FuncBody::PrintChildren(int indentlevel) {
