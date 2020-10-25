@@ -28,6 +28,7 @@
     SetCmd *setcmd;
     UseCmd *usecmd;
     Operand *operand;
+    IntOperand *intoperand;
     ExprOperand *exproperand;
     ExtendOperand *extendoperand;
     TypeInfo *typeinfo;
@@ -86,6 +87,7 @@
 %type <setcmd> SetCmd
 %type <usecmd> UseCmd
 %type <operand> Operand
+%type <intoperand> IntOperand;
 %type <exproperand> ExprOperand
 %type <typeinfo> TypeInfo
 %type <locinfo> LocInfo
@@ -164,7 +166,57 @@ MainCmd         :   PlainCmd
                 |   ParallelCmd
                 ;
 
-PlainCmd        :   
+PlainCmd        :   ClobberCmd
+                |   SetCmd
+                |   UseCmd
+                ;
+
+ClobberCmd      :   T_Clobber "(" T_Reg T_CCType T_IntConstant T_Flags ")"
+                ;
+
+SetCmd          :   T_Set "(" Operand ")" "(" Operand ")"       { $$ = new SetCmd($1,$2); }
+                ;
+
+Operand         :   IntOperand
+                |   ExprOperand
+                |   ExtendOperand
+                ;
+
+IntOperand      :   Integer                     { $$ = new IntOperand($1); }
+                ;
+
+ExprOperand     :   LocInfo ":" TypeInfo Expr   { $$ = new ExprOperand($1,$3,$4); }
+                ;
+
+ExtendOperand   :   T_SiExtend ":" TypeInfo "(" Operand ")" { $$ = new ExtendOperand($3,$5); }
+                ;
+
+LocInfo         :   MemType Flags               { $$ = new LocInfo($1, $2); }
+                |   MemType                     { $$ = new LocInfo($1,NULL); }
+                ;
+
+Flags           :   Flags Flag                  { ($$ = $1)->Append($2); }
+                |   Flag                        { ($$ = new List<Flag *>)->Append($1); }
+                ;
+
+Flag            :   T_IFlag                     { $$ = new Flag("i"); }
+                |   T_VFlag                     { $$ = new Flag("v"); }
+                |   T_FFlag                     { $$ = new Flag("f"); }
+                |   T_CFlag                     { $$ = new Flag("c"); }
+                ;
+
+MemType         :   T_Mem                       { $$ = new MemType("mem"); }
+                |   T_Reg                       { $$ = new MemType("reg"); }
+                |   T_SymbolRef                 { $$ = new MemType("symbol_ref"); }
+                ;
+
+TypeInfo        :   T_SIType                    { $$ = new TypeInfo("si"); }
+                |   T_DIType                    { $$ = new TypeInfo("di"); }
+                |   T_QIType                    { $$ = new TypeInfo("qi"); }
+                |   T_CCType                    { $$ = new TypeInfo("cc"); }
+                |   T_CCZType                   { $$ = new TypeInfo("ccz"); }
+                |   T_CCGCType                  { $$ = new TypeInfo("ccgc"); }
+                ;
 
 %%
 
