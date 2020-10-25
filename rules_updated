@@ -1,8 +1,8 @@
 Program         :=      FuncBodyList                ;
-FuncBodyList    :=      /* empty */                             
+FuncBodyList    :=      FuncBody                             
                 |       FuncBodyList FuncBody       ;
 FuncBody        :=      T_FunBegin StmtList         ;
-StmtList        :=      /* empty */                            
+StmtList        :=      Stmt                            
                 |       StmtList Stmt               ;
 Stmt            :=      "(" Note ")" 
                 |       "(" Barrier ")"
@@ -18,22 +18,22 @@ Insn            :=       T_Insn T_IntConstant T_IntConstant T_IntConstant "(" Ma
                           T_StringConstant ":" T_IntConstant Integer "(" T_Nil ")" ;
 MainCmd         :=      PlainCmd 
                 |       T_Parallel CmdList T_EndPara ;
-CmdList         :=      /* empty */
-                |       SingleCmd CmdList           ;
-SingleCmd       :=      "(" PlainCmd ")"            ;
+CmdList         :=      "(" PlainCmd ")"
+                |       "(" PlainCmd ")" CmdList     ;
 PlainCmd        :=      ClobberCmd | SetCmd | UseCmd ;
 ClobberCmd      :=      T_Clobber "(" T_Reg T_CCType T_IntConstant T_Flags ")" ;
 SetCmd          :=      T_Set "(" Operand ")" "(" Operand ")" ;
-Operand         :=      T_ConstInt Integer 
-                |       LocInfo ":" TypeInfo Expr   
-                |       T_SiExtend ":" TypeInfo  "(" Operand ")" ;
-LocInfo         :=      MemType Flags               ;
+Operand         :=      T_ConstInt Integer                  /* IntOperand */
+                |       LocInfo ":" TypeInfo Expr           /* ExprOperand */    
+                |       T_SiExtend ":" TypeInfo  "(" Operand ")" ;  /* ExtendOperand */
+LocInfo         :=      MemType
+                |       MemType Flags               ;
 MemType         :=      T_Mem | T_Reg | T_SymbolRef ;
-Flags           :=      /* empty */ 
+Flags           :=      Flag
                 |       Flags Flag                  ;
 Flag            :=      T_IFlag | T_VFlag | T_FFlag | T_CFlag ;
 TypeInfo        :=      T_SIType | T_DIType | T_QIType | T_CCType | T_CCZType | T_CCGCType ;
-Expr            :=      Integer 
+Expr            :=      Integer                 /* IntegerExpr */
                 |       "(" PlusExpr ")"
                 |       "(" MinusExpr ")"
                 |       "(" MultExpr  ")"
@@ -48,18 +48,30 @@ SubregExpr      :=      T_SubReg TypeInfo "(" Operand ")" Integer ;
 CompareExpr     :=      T_Compare TypeInfo "(" Operand ")" "(" Operand ")" ;
 JumpInsn        :=      T_JumpInsn T_IntConstant T_IntConstant T_IntConstant "(" T_Set \
                           "(" T_Pc ")" "(" Dest ")" ")" T_StringConstant ":" T_IntConstant Integer "(" T_Nil ")" ;
-Dest            :=      T_LabelRef T_IntConstant 
-                |       T_IfThenElse "(" Comparison ")" "(" InDest ")" "(" InDest ")" ;
+Dest            :=      T_LabelRef T_IntConstant        /* Label */
+                |       T_IfThenElse "(" Comparison ")" "(" InDest ")" "(" InDest ")" ;  /* IfThenElse */
+                        /* While Parsing we shall use Dest instead of InDest for convenience even though its more general */
 Comparison      :=      Condition "(" Operand ")" "(" Operand ")" ;
 Condition       :=      T_Lt | T_Gt | T_Le | T_Ge | T_Eq | T_Ne ;
 InDest          :=      T_LabelRef T_IntConstant 
                 |       T_Pc ;
 Call            :=      RetCall | NoRetCall  ;
-RetCall         :=      T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant "(" SetInternal ")" \
-                         T_StringConstant ":" T_IntConstant Integer "(" T_Nil ")" "(" Junk ")" ;
+RetCall         :=      T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant "(" T_Set "(" \
+                        T_Reg ":" TypeInfo T_IntConstant ")" "(" T_Call "(" T_Mem ":" T_QIType "(" \
+                        T_SymbolRef ":" T_DIType "(" T_StringConstant ")" ")" ")" "(" T_ConstInt Integer ")" \
+                        ")" ")" T_StringConstant ":" T_IntConstant Integer "(" T_Nil ")" "(" Junk ")" ;
 Junk            :=      T_ExprList "(" T_Use "(" T_Reg ":" TypeInfo T_IntConstant ")" ")" "(" T_Nil ")" ;
+NoRetCall       :=      T_CallInsn "(" T_Call "(" T_Mem ":" T_QIType "(" T_SymbolRef ":" T_DIType "(" \
+                        T_StringConstant ")" ")" ")" "(" T_ConstInt Integer ")" ")" T_StringConstant \
+                        ":" T_IntConstant Integer "(" T_Nil ")" "(" Junk ")" ;
+UseCmd          :=      T_Use "(" T_Reg ":" Flags TypeInfo T_IntConstant ")" ;
+
+
+Removed         
+=========
+
 SetInternal     :=      T_Set "(" T_Reg ":" TypeInfo T_IntConstant ")" "(" CallInternal ")" ;
-NoRetCall       :=      T_CallInsn "(" CallInternal ")" T_StringConstant ":" T_IntConstant Integer \
-                          "(" T_Nil ")" "(" Junk ")" ;
 CallInternal    :=      T_Call "(" T_Mem ":" T_QIType "(" T_SymbolRef ":" T_DIType \
-                          "(" T_StringConstant ")" ")" ")" "(" T_ConstInt Integer ")"
+                          "(" T_StringConstant ")" ")" ")" "(" T_ConstInt Integer ")"   ;
+^ These were used to define RetCall and NoRetCall, but less number of classes can get it done at the 
+  cost of long rules.
