@@ -1,7 +1,7 @@
 Program         :=      FuncBodyList                ;
 FuncBodyList    :=      /* empty */                             
                 |       FuncBodyList FuncBody       ;
-FuncBodyList    :=      T_FunBegin StmtList         ;
+FuncBody        :=      T_FunBegin StmtList         ;
 StmtList        :=      /* empty */                            
                 |       StmtList Stmt               ;
 Stmt            :=      "(" Note ")" 
