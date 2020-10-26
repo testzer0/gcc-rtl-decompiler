@@ -5,15 +5,11 @@
 	#include <string.h>
 	#include <ctype.h>
 	#include "scanner.h"
+	#include "utility.h"
 	#include "errors.h"
+	#include "parser.h"
 	#include "list.h"
 	#include <stdio.h>
-
-	YYSTYPE yylval; // Later bison will provide, remove then
-	struct yyltype yylloc; // Again, later bison will provide. Remove then
-
-	static void DoBeforeEachAction(); 
-	#define YY_USER_ACTION DoBeforeEachAction();
 
 	#define TAB_SIZE 8
 	
@@ -45,7 +41,6 @@ END_IGNORE3     (">")
 "call\_insn" 		{ return T_CallInsn; }
 "call"				{ return T_Call; }
 "symbol\_ref"		{ return T_SymbolRef; }
-"flags"				{ return T_Flags; }
 "nil" 				{ return T_Nil; }
 "parallel \[" 			{ return T_Parallel; }
 "clobber" 			{ return T_Clobber; }
@@ -58,6 +53,7 @@ END_IGNORE3     (">")
 "reg" 				{ return T_Reg; }
 "pc" 				{ return T_Pc; }
 "label\_ref"		{ return T_LabelRef; }
+"code\_label"		{ return T_CodeLabel; }
 "/i" 				{ return T_IFlag; }
 "/v" 				{ return T_VFlag; }
 "/f" 				{ return T_FFlag; }
@@ -71,7 +67,11 @@ END_IGNORE3     (">")
 "plus:" 			{ return T_Plus; }
 "minus:" 			{ return T_Minus; }
 "mult:"				{ return T_Mult; }
+"div:"				{ return T_Div; }
+"ashiftrt:"			{ return T_AshiftRt; }
+"lshiftrt:"			{ return T_LshiftRt; }
 "ashift:"			{ return T_Ashift; }
+"lshift:"			{ return T_Lshift; }
 "subreg:"			{ return T_Subreg; }
 "expr_list:"		{ return T_ExprList; }
 "sign_extend:"		{ return T_SiExtend; }

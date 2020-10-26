@@ -31,3 +31,7 @@ void ReportError::UntermBrack() {
 int ReportError::findNumErrors() {
     return numErrors;
 }
+
+void yyerror (char const *s) {
+   fprintf (stderr, "%s\n", s);
+ }

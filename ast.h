@@ -11,6 +11,7 @@
 
 #include <stdlib.h>   // for NULL
 #include "location.h"
+#include "list.h"
 
 class Node{
     protected:
@@ -117,6 +118,16 @@ class Barrier : public Stmt {
         void PrintChildren(int indentlevel) {}
 };
 
+class CodeLabel : public Stmt {
+    public:
+        CodeLabel() : Stmt() {}
+        CodeLabel(yyltype loc) : Stmt() {}
+        const char *GetPrintNameForNode() {
+            return "CodeLabel";
+        }
+        void PrintChildren(int indentlevel) {}
+};
+
 class Integer : public Node {
     protected:
         int value;
@@ -128,6 +139,7 @@ class Integer : public Node {
         // The difference of Integer from T_IntConstant is that Integer also allows negative integers
         // If the integer is negative then remember to pass -yylval.intconstant instead of +
         void PrintChildren(int indentlevel);
+        int getValue() { return value; }
 };
 
 
@@ -242,6 +254,30 @@ class ExtendOperand : public Operand {
         void PrintChildren(int indentlevel);
 };
 
+class DerefOperand : public Operand {
+    protected:
+        LocInfo *linfo;
+        TypeInfo *tinfo;
+        Operand *op;
+    public:
+        DerefOperand(LocInfo *li, TypeInfo *ti, Operand *o);
+        const char *GetPrintNameForNode() {
+            return "DerefOperand";
+        }
+        void PrintChildren(int indentlevel);
+};
+
+class SymbolRefOperand : public Operand {
+    protected:
+        const char *symbol;
+    public:
+        SymbolRefOperand(const char *s);
+        const char *GetPrintNameForNode() {
+            return "SymbolRefOperand";
+        }
+        void PrintChildren(int indentlevel);
+};
+
 class TypeInfo : public Node {
     protected:
         const char *type;
@@ -347,6 +383,45 @@ class MultExpr : public Expr {
         void PrintChildren(int indentlevel);
 };
 
+class DivExpr : public Expr {
+    protected:
+        TypeInfo *tinfo;
+        Operand *op1;
+        Operand *op2;
+    public:
+        DivExpr(TypeInfo *ti, Operand *o1, Operand *o2);
+        const char *GetPrintNameForNode() {
+            return "DivExpr";
+        }
+        void PrintChildren(int indentlevel);
+};
+
+class LshiftExpr : public Expr {
+    protected:
+        TypeInfo *tinfo;
+        Operand *op1;
+        Operand *op2;
+    public:
+        LshiftExpr(TypeInfo *ti, Operand *o1, Operand *o2);
+        const char *GetPrintNameForNode() {
+            return "LshiftExpr";
+        }
+        void PrintChildren(int indentlevel);
+};
+
+class LshiftRtExpr : public Expr {
+    protected:
+        TypeInfo *tinfo;
+        Operand *op1;
+        Operand *op2;
+    public:
+        LshiftRtExpr(TypeInfo *ti, Operand *o1, Operand *o2);
+        const char *GetPrintNameForNode() {
+            return "LshiftRtExpr";
+        }
+        void PrintChildren(int indentlevel);
+};
+
 class AshiftExpr : public Expr {
     protected:
         TypeInfo *tinfo;
@@ -356,6 +431,19 @@ class AshiftExpr : public Expr {
         AshiftExpr(TypeInfo *ti, Operand *o1, Operand *o2);
         const char *GetPrintNameForNode() {
             return "AshiftExpr";
+        }
+        void PrintChildren(int indentlevel);
+};
+
+class AshiftRtExpr : public Expr {
+    protected:
+        TypeInfo *tinfo;
+        Operand *op1;
+        Operand *op2;
+    public:
+        AshiftRtExpr(TypeInfo *ti, Operand *o1, Operand *o2);
+        const char *GetPrintNameForNode() {
+            return "AshiftRtExpr";
         }
         void PrintChildren(int indentlevel);
 };
@@ -403,7 +491,7 @@ class Dest : public Node {
         // Dest is also of two types, label or if_then_else
 };
 
-class Label : Dest {
+class Label : public Dest {
     protected:
         int labelno;
     public:
@@ -414,7 +502,7 @@ class Label : Dest {
         void PrintChildren(int indentlevel);
 };
 
-class Pc : Dest {
+class Pc : public Dest {
     // Not actually a possible production. However since we need Dest
     // to double up as InDest as well, we will let Pc derive from Dest.
     public:
@@ -426,7 +514,7 @@ class Pc : Dest {
         void PrintChildren() {}
 };
 
-class IfThenElse : Dest {
+class IfThenElse : public Dest {
     protected:
         Comparison *comp;
         Dest *dest1;
@@ -474,9 +562,9 @@ class RetCall : public Call {
     protected:
         TypeInfo *tinfo;
         int returnreg;
-        char *fnname;
+        const char *fnname;
     public:
-        RetCall(TypeInfo *ti, int rr, char *fn);
+        RetCall(TypeInfo *ti, int rr, const char *fn);
         const char *GetPrintNameForNode() {
             return "RetCall";
         }
@@ -485,9 +573,9 @@ class RetCall : public Call {
 
 class NoRetCall : public Call {
     protected:
-        char *fnname;
+        const char *fnname;
     public:
-        NoRetCall(char *fn);
+        NoRetCall(const char *fn);
         const char *GetPrintNameForNode() {
             return "NoRetCall";
         }

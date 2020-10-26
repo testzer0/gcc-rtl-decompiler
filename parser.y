@@ -9,6 +9,7 @@
 
     void yyerror(const char *msg);
 %}
+// %error-verbose
 
 %union {
     Program *program;
@@ -18,6 +19,7 @@
     List<Stmt *> *stmts;
     Note *note;
     Barrier *barrier;
+    CodeLabel *codelabel;
     Integer *integer;
     Insn *insn;
     MainCmd *maincmd;
@@ -31,6 +33,8 @@
     IntOperand *intoperand;
     ExprOperand *exproperand;
     ExtendOperand *extendoperand;
+    DerefOperand *derefoperand;
+    SymbolRefOperand *symbolrefoperand;
     TypeInfo *typeinfo;
     LocInfo *locinfo;
     MemType *memtype;
@@ -41,7 +45,11 @@
     PlusExpr *plusexpr;
     MinusExpr *minusexpr;
     MultExpr *multexpr;
+    DivExpr *divexpr;
+    LshiftExpr *lshiftexpr;
     AshiftExpr *ashiftexpr;
+    LshiftRtExpr *lshiftrtexpr;
+    AshiftRtExpr *ashiftrtexpr;
     SubregExpr *subregexpr;
     CompareExpr *compareexpr;
     JumpInsn *jumpinsn;
@@ -55,16 +63,16 @@
     RetCall *retcall;
     NoRetCall *noretcall;
 
-    int integerconstant;
-    const char *stringconstant;
+    int integerConstant;
+    const char *stringConstant;
     char identifier[32];
 }
 
-%token T_Note T_Insn T_JumpInsn T_CallInsn T_Call T_SymbolRef T_Flags T_Nil T_Parallel
+%token T_Note T_Insn T_JumpInsn T_CallInsn T_Call T_SymbolRef T_Nil T_Parallel
 %token T_Clobber T_Set T_Use T_IfThenElse T_ConstInt T_Barrier T_Mem T_Reg T_Pc T_LabelRef
 %token T_IFlag T_VFlag T_FFlag T_CFlag T_SIType T_DIType T_QIType T_CCType T_CCZType T_CCGCType
-%token T_Plus T_Minus T_Mult T_Ashift T_Subreg T_ExprList T_EndPara T_RArrow T_SiExtend
-%token T_Compare T_Lt T_Gt T_Le T_Eq T_Ne
+%token T_Plus T_Minus T_Mult T_Div T_Lshift T_Ashift T_LshiftRt T_AshiftRt T_Subreg T_ExprList 
+%token T_EndPara T_RArrow T_SiExtend T_Compare T_Lt T_Gt T_Le T_Ge T_Eq T_Ne T_CodeLabel
 
 %token <stringConstant> T_StringConstant
 %token <integerConstant> T_IntConstant
@@ -77,6 +85,7 @@
 %type <stmts> Stmts 
 %type <note> Note
 %type <barrier> Barrier
+%type <codelabel> CodeLabel
 %type <integer> Integer
 %type <insn> Insn
 %type <maincmd> MainCmd
@@ -87,8 +96,11 @@
 %type <setcmd> SetCmd
 %type <usecmd> UseCmd
 %type <operand> Operand
-%type <intoperand> IntOperand;
+%type <intoperand> IntOperand
 %type <exproperand> ExprOperand
+%type <extendoperand> ExtendOperand
+%type <derefoperand> DerefOperand;
+%type <symbolrefoperand> SymbolRefOperand
 %type <typeinfo> TypeInfo
 %type <locinfo> LocInfo
 %type <memtype> MemType
@@ -99,7 +111,11 @@
 %type <plusexpr> PlusExpr
 %type <minusexpr> MinusExpr
 %type <multexpr> MultExpr
+%type <divexpr> DivExpr
+%type <lshiftexpr> LshiftExpr
 %type <ashiftexpr> AshiftExpr
+%type <lshiftrtexpr> LshiftRtExpr
+%type <ashiftrtexpr> AshiftRtExpr
 %type <subregexpr> SubregExpr
 %type <compareexpr> CompareExpr
 %type <jumpinsn> JumpInsn
@@ -112,9 +128,6 @@
 %type <call> Call
 %type <retcall> RetCall
 %type <noretcall> NoRetCall
-%type <integerconstant> IntConstant
-%type <stringconstant> stringConstant
-%type <identifier> Identifier
 
 %%
 
@@ -133,18 +146,19 @@ FuncBodies      :   FuncBodies FuncBody         { ($$=$1)->Append($2); }
                 |   FuncBody                    { ($$ = new List<FuncBody *>)->Append($1); }
                 ;
 
-FuncBody        :   T_FunBegin StmtList         { $$ = new FuncBody($2, $1); }
+FuncBody        :   T_FunBegin Stmts            { $$ = new FuncBody($2, $1); }
                 ;
 
-Stmtlist        :   StmtList Stmt               { ($$=$1)->Append($2); }
+Stmts           :   Stmts Stmt                  { ($$=$1)->Append($2); }
                 |   Stmt                        { ($$ = new List<Stmt *>)->Append($1); }
                 ;
 
-Stmt            :   "(" Note ")"
-                |   "( Barrier ")"
-                |   "(" Insn ")"
-                |   "(" JumpInsn ")"
-                |   "(" Call ")"
+Stmt            :   '(' Note ')'                { $$ = $2; }
+                |   '(' Barrier ')'             { $$ = $2; }
+                |   '(' Insn ')'                { $$ = $2; }
+                |   '(' JumpInsn ')'            { $$ = $2; }
+                |   '(' Call ')'                { $$ = $2; }
+                |   '(' CodeLabel ')'           { $$ = $2; }
                 ;
 
 Note            :   T_Note T_IntConstant T_IntConstant T_IntConstant T_IntConstant { $$ = new Note(); }
@@ -154,41 +168,80 @@ Note            :   T_Note T_IntConstant T_IntConstant T_IntConstant T_IntConsta
 Barrier         :   T_Barrier T_IntConstant T_IntConstant T_IntConstant { $$ = new Barrier(); }
                 ;
 
-Integer         :   "-" T_IntConstant           { $$ = new Integer(-$2); }
+CodeLabel       :   T_CodeLabel T_IntConstant T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Nil ')'
+                                                { $$ = new CodeLabel(); }
+                |   T_CodeLabel T_IntConstant T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_StringConstant ')'
+                                                { $$ = new CodeLabel(); }
+                ;
+
+Integer         :   '-' T_IntConstant           { $$ = new Integer(-$2); }
                 |   T_IntConstant               { $$ = new Integer($1); }
                 ;
 
-Insn            :   T_Insn T_IntConstant T_IntConstant T_IntConstant "(" MainCmd ")"   
-                      T_StringConstant ":" T_IntConstant Integer "(" T_Nil ")"  { $$ = new Insn($6); }
+Insn            :   T_Insn T_IntConstant T_IntConstant T_IntConstant  T_IntConstant '(' MainCmd ')'   
+                      T_StringConstant ':' T_IntConstant Integer '(' T_Nil ')'  { $$ = new Insn($7); }
+                |   T_Insn T_IntConstant T_IntConstant T_IntConstant  T_IntConstant '(' MainCmd ')'   
+                      T_StringConstant ':' T_IntConstant Integer '(' T_ExprList '(' Operand ')' '('
+                      T_Nil ')' ')'                             { $$ = new Insn($7); } 
+                |   T_Insn T_IntConstant T_IntConstant T_IntConstant  T_IntConstant '(' MainCmd ')'   
+                      Integer '(' T_Nil ')'  { $$ = new Insn($7); }
                 ;
 
-MainCmd         :   PlainCmd 
-                |   ParallelCmd
+MainCmd         :   PlainCmd                    { $$ = $1; }
+                |   ParallelCmd                 { $$ = $1; }
                 ;
 
-PlainCmd        :   ClobberCmd
-                |   SetCmd
-                |   UseCmd
+PlainCmd        :   ClobberCmd                  { $$ = $1; }
+                |   SetCmd                      { $$ = $1; }
+                |   UseCmd                      { $$ = $1; }
                 ;
 
-ClobberCmd      :   T_Clobber "(" T_Reg T_CCType T_IntConstant T_Flags ")"
+ParallelCmd     :  T_Parallel Cmds T_EndPara    { $$ = new ParallelCmd($2); }
                 ;
 
-SetCmd          :   T_Set "(" Operand ")" "(" Operand ")"       { $$ = new SetCmd($1,$2); }
+Cmds            :   Cmds '(' PlainCmd ')'              { ($$ = $1)->Append($3); }
+                |   '(' PlainCmd ')'                   { ($$ = new List<PlainCmd *>)->Append($2); }
                 ;
 
-Operand         :   IntOperand
-                |   ExprOperand
-                |   ExtendOperand
+ClobberCmd      :   T_Clobber '(' T_Reg ':' T_CCType T_IntConstant ')' { $$ = new ClobberCmd(); }
                 ;
 
-IntOperand      :   Integer                     { $$ = new IntOperand($1); }
+SetCmd          :   T_Set '(' Operand ')' '(' Operand ')'       { $$ = new SetCmd($3,$6); }
                 ;
 
-ExprOperand     :   LocInfo ":" TypeInfo Expr   { $$ = new ExprOperand($1,$3,$4); }
+UseCmd          :   T_Use '(' T_Reg Flags ':' TypeInfo T_IntConstant ')'  { $$ = new UseCmd(); }
                 ;
 
-ExtendOperand   :   T_SiExtend ":" TypeInfo "(" Operand ")" { $$ = new ExtendOperand($3,$5); }
+Operand         :   IntOperand                  { $$ = $1; }
+                |   ExprOperand                 { $$ = $1; }
+                |   ExtendOperand               { $$ = $1; }
+                |   SymbolRefOperand            { $$ = $1; }
+                |   DerefOperand                { $$ = $1; }
+                ;
+
+IntOperand      :  T_ConstInt Integer                     { $$ = new IntOperand($2->getValue()); }
+                ;
+
+ExprOperand     :   LocInfo ':' TypeInfo Expr   { $$ = new ExprOperand($1,$3,$4); }
+                |   AshiftExpr                  { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   LshiftExpr                  { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   AshiftRtExpr                { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   LshiftRtExpr                { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   CompareExpr                 { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   PlusExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   MinusExpr                   { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   MultExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   DivExpr                     { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   SubregExpr                  { $$ = new ExprOperand(NULL,NULL,$1); }
+                ;
+
+ExtendOperand   :   T_SiExtend TypeInfo '(' Operand ')' { $$ = new ExtendOperand($2,$4); }
+                ;
+
+DerefOperand    :   LocInfo ':' TypeInfo '(' Operand ')' { $$ = new DerefOperand($1,$3,$5); }
+                ;
+
+SymbolRefOperand :  T_SymbolRef Flags ':' T_DIType '(' T_StringConstant ')' { $$ = new SymbolRefOperand($6); }
                 ;
 
 LocInfo         :   MemType Flags               { $$ = new LocInfo($1, $2); }
@@ -207,7 +260,6 @@ Flag            :   T_IFlag                     { $$ = new Flag("i"); }
 
 MemType         :   T_Mem                       { $$ = new MemType("mem"); }
                 |   T_Reg                       { $$ = new MemType("reg"); }
-                |   T_SymbolRef                 { $$ = new MemType("symbol_ref"); }
                 ;
 
 TypeInfo        :   T_SIType                    { $$ = new TypeInfo("si"); }
@@ -218,10 +270,113 @@ TypeInfo        :   T_SIType                    { $$ = new TypeInfo("si"); }
                 |   T_CCGCType                  { $$ = new TypeInfo("ccgc"); }
                 ;
 
+Expr            :   IntegerExpr                 { $$ = $1; }
+                |   '(' PlusExpr ')'            { $$ = $2; }
+                |   '(' MinusExpr ')'           { $$ = $2; }
+                |   '(' MultExpr ')'            { $$ = $2; }
+                |   '(' AshiftExpr ')'          { $$ = $2; }
+                |   '(' LshiftExpr ')'          { $$ = $2; }
+                |   '(' AshiftRtExpr ')'        { $$ = $2; }
+                |   '(' LshiftRtExpr ')'        { $$ = $2; }
+                |   '(' SubregExpr ')'          { $$ = $2; }
+                |   '(' CompareExpr ')'         { $$ = $2; }
+                |   '(' DivExpr ')'             { $$ = $2; }
+                ;
+
+IntegerExpr     :   Integer                     { $$ = new IntegerExpr($1->getValue()); }
+                ;
+
+PlusExpr        :   T_Plus TypeInfo '(' Operand ')' '(' Operand ')'     { $$ = new PlusExpr($2,$4,$7); }
+                ;
+
+MinusExpr       :   T_Minus TypeInfo '(' Operand ')' '(' Operand ')'     { $$ = new MinusExpr($2,$4,$7); }
+                ;
+                
+MultExpr        :   T_Mult TypeInfo '(' Operand ')' '(' Operand ')'     { $$ = new MultExpr($2,$4,$7); }
+                ;
+
+DivExpr         :   T_Div TypeInfo '(' Operand ')' '(' Operand ')'      { $$ = new DivExpr($2,$4,$7); }
+                ;
+
+LshiftExpr      :   T_Lshift TypeInfo '(' Operand ')' '(' Operand ')'     { $$ = new LshiftExpr($2,$4,$7); }
+                ;
+
+AshiftExpr      :   T_Ashift TypeInfo '(' Operand ')' '(' Operand ')'     { $$ = new AshiftExpr($2,$4,$7); }
+                ;
+
+LshiftRtExpr    :   T_LshiftRt TypeInfo '(' Operand ')' '(' Operand ')'     { $$ = new LshiftRtExpr($2,$4,$7); }
+                ;
+
+AshiftRtExpr    :   T_AshiftRt TypeInfo '(' Operand ')' '(' Operand ')'     { $$ = new AshiftRtExpr($2,$4,$7); }
+                ;
+
+SubregExpr      :   T_Subreg TypeInfo '(' Operand ')' Integer           { $$ = new SubregExpr($2,$4); }
+                ;
+
+CompareExpr     :   T_Compare TypeInfo '(' Operand ')' '(' Operand ')'  { $$ = new CompareExpr($2,$4,$7); }
+                ;
+
+JumpInsn        :   T_JumpInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set
+                      '(' T_Pc ')' '(' Dest ')' ')' T_StringConstant ':' T_IntConstant 
+                      Integer '(' T_Nil ')' T_RArrow T_IntConstant      { $$ = new JumpInsn($12); }
+                ;
+
+Dest            :   Label                         { $$ = $1; }
+                |   IfThenElse                    { $$ = $1; }
+                |   Pc                            { $$ = $1; }
+                ;
+
+Label           :   T_LabelRef T_IntConstant      { $$ = new Label($2); }
+                ;
+
+IfThenElse      :   T_IfThenElse '(' Comparison ')' '(' Dest ')' '(' Dest ')'  { $$ = new IfThenElse($3,$6,$9); }
+                ;
+
+Pc              :   T_Pc                           { $$ = new Pc(); }       
+                ;
+
+Comparison      :   Condition '(' Operand ')' '(' Operand ')'   { $$ = new Comparison($1,$3,$6); }
+                ;
+
+Condition       :   T_Lt                           { $$ = new Condition("lt"); }
+                |   T_Gt                           { $$ = new Condition("gt"); }
+                |   T_Le                           { $$ = new Condition("le"); }
+                |   T_Ge                           { $$ = new Condition("ge"); }
+                |   T_Eq                           { $$ = new Condition("eq"); }
+                |   T_Ne                           { $$ = new Condition("ne"); }
+                ;
+
+Call            :   RetCall                        { $$ = $1; }
+                |   NoRetCall                      { $$ = $1; }
+                ;
+
+RetCall         :   T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' 
+                        T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' 
+                        T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' 
+                        ')' ')' T_StringConstant ':' T_IntConstant Integer '(' T_Nil ')' '(' Junk ')'
+                                                    { $$ = new RetCall($11,$12,$25); }
+                ;
+
+NoRetCall       :   T_CallInsn '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' 
+                        T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant 
+                        ':' T_IntConstant Integer '(' T_Nil ')' '(' Junk ')'
+                                                    { $$ = new NoRetCall($13); }
+                ;
+
+Junk            :   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+                                                    {  }
+                |   '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+                                                    {  }
+                |   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
+                                                    {  }
+                |   '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
+                                                    {  }
+                ;
+
 %%
 
 void InitParser()
 {
-   PrintDebug("parser", "Initializing parser");
-   yydebug = false;
+   printf("Initializing parser.\n\n");
+   yydebug = true;
 }

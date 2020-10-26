@@ -8,13 +8,15 @@ Stmt            :=      "(" Note ")"
                 |       "(" Barrier ")"
                 |       "(" Insn ")"
                 |       "(" JumpInsn ")"
-                |       "(" Call ")"                ;
+                |       "(" Call ")"                
+                |       "(" CodeLabel ")"             ;
 Note            :=       T_Note T_IntConstant T_IntConstant T_IntConstant     
                 |        T_Note T_IntConstant T_IntConstant T_IntConstant T_IntConstant ;
 Barrier         :=       T_Barrier T_IntConstant T_IntConstant T_IntConstant ;
+CodeLabel       :=       T_CodeLabel T_IntConstant T_IntConstant T_IntConstant T_IntConstant T_IntConstant "(" T_Nil ")" ;
 Integer         :=       T_IntConstant 
                          "-" T_IntConstant           ;
-Insn            :=       T_Insn T_IntConstant T_IntConstant T_IntConstant "(" MainCmd ")" \  
+Insn            :=       T_Insn T_IntConstant T_IntConstant T_IntConstant T_IntConstant "(" MainCmd ")" \  
                           T_StringConstant ":" T_IntConstant Integer "(" T_Nil ")" ;
 MainCmd         :=      PlainCmd 
                 |       T_Parallel CmdList T_EndPara ;  /* ParallelCmd */
@@ -33,7 +35,7 @@ Flags           :=      Flag
                 |       Flags Flag                  ;
 Flag            :=      T_IFlag | T_VFlag | T_FFlag | T_CFlag ;
 TypeInfo        :=      T_SIType | T_DIType | T_QIType | T_CCType | T_CCZType | T_CCGCType ;
-Expr            :=      Integer                 /* IntegerExpr */
+Expr            :=      T_ConstInt Integer                 /* IntegerExpr */
                 |       "(" PlusExpr ")"
                 |       "(" MinusExpr ")"
                 |       "(" MultExpr  ")"
@@ -46,7 +48,7 @@ MultExpr        :=      T_Mult TypeInfo "(" Operand ")" "(" Operand ")" ;
 AshiftExpr      :=      T_Ashift TypeInfo "(" Operand ")" "(" Operand ")" ;
 SubregExpr      :=      T_SubReg TypeInfo "(" Operand ")" Integer ;
 CompareExpr     :=      T_Compare TypeInfo "(" Operand ")" "(" Operand ")" ;
-JumpInsn        :=      T_JumpInsn T_IntConstant T_IntConstant T_IntConstant "(" T_Set \
+JumpInsn        :=      T_JumpInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant"(" T_Set \
                           "(" T_Pc ")" "(" Dest ")" ")" T_StringConstant ":" T_IntConstant Integer "(" T_Nil ")" T_RArrow T_IntConstant ;
 Dest            :=      T_LabelRef T_IntConstant        /* Label */
                 |       T_IfThenElse "(" Comparison ")" "(" InDest ")" "(" InDest ")" ;  /* IfThenElse */
@@ -64,7 +66,7 @@ Junk            :=      T_ExprList "(" T_Use "(" T_Reg ":" TypeInfo T_IntConstan
 NoRetCall       :=      T_CallInsn "(" T_Call "(" T_Mem ":" T_QIType "(" T_SymbolRef ":" T_DIType "(" \
                         T_StringConstant ")" ")" ")" "(" T_ConstInt Integer ")" ")" T_StringConstant \
                         ":" T_IntConstant Integer "(" T_Nil ")" "(" Junk ")" ;
-UseCmd          :=      T_Use "(" T_Reg ":" Flags TypeInfo T_IntConstant ")" ;
+UseCmd          :=      T_Use "(" T_Reg Flags ":" TypeInfo T_IntConstant ")" ;
 
 
 Removed         

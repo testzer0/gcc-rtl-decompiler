@@ -18,7 +18,7 @@ void Node::Print(int indentlevel, const char *label) {
         printf("%*d", 3, location->first_line);
     else 
         printf("%*s",3,"");
-    printf("%*s%s%s", indentlevel*3, label? label:"",GetPrintNameForNode());
+    printf("%*s%s%s", indentlevel*3, "", label? label : "",GetPrintNameForNode());
     PrintChildren(indentlevel);
 }
 
@@ -89,15 +89,19 @@ void IntOperand::PrintChildren(int indentlevel) {
 }
 
 ExprOperand::ExprOperand(LocInfo *li, TypeInfo *ti, Expr *e) {
-    Assert(li != NULL && ti != NULL && e != NULL);
-    (linfo = li)->SetParent(this);
-    (tinfo = ti)->SetParent(this);
+    Assert(e != NULL);
+    linfo = li;
+    if (linfo) linfo->SetParent(this);
+    tinfo = ti;
+    if(tinfo) tinfo->SetParent(this);
     (expr = e)->SetParent(this);
 }
 
 void ExprOperand::PrintChildren(int indentlevel) {
-    linfo->Print(indentlevel+1);
-    tinfo->Print(indentlevel+1);
+    if (linfo)
+        linfo->Print(indentlevel+1);
+    if (tinfo)
+        tinfo->Print(indentlevel+1);
     expr->Print(indentlevel+1);
 }
 
@@ -110,6 +114,27 @@ ExtendOperand::ExtendOperand(TypeInfo *ti, Operand *o) {
 void ExtendOperand::PrintChildren(int indentlevel) {
     tinfo->Print(indentlevel+1);
     op->Print(indentlevel+1);
+}
+
+DerefOperand::DerefOperand(LocInfo *li, TypeInfo *ti, Operand *o) {
+    Assert(li != NULL && ti != NULL && o != NULL);
+    (linfo = li)->SetParent(this);
+    (tinfo = ti)->SetParent(this);
+    (op = o)->SetParent(this);
+}
+
+void DerefOperand::PrintChildren(int indentlevel) {
+    linfo->Print(indentlevel+1);
+    tinfo->Print(indentlevel+1);
+    op->Print(indentlevel+1);
+}
+
+SymbolRefOperand::SymbolRefOperand(const char *s) {
+    symbol = s;
+}
+
+void SymbolRefOperand::PrintChildren(int indentlevel) {
+    printf("%s",symbol);
 }
 
 TypeInfo::TypeInfo(const char *t) {
@@ -198,6 +223,45 @@ void MultExpr::PrintChildren(int indentlevel) {
     op2->Print(indentlevel+1);
 }
 
+DivExpr::DivExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
+    Assert(ti != NULL && o1 != NULL && o2 != NULL);
+    (tinfo = ti)->SetParent(this);
+    (op1 = o1)->SetParent(this);
+    (op2 = o2)->SetParent(this);
+}
+
+void DivExpr::PrintChildren(int indentlevel) {
+    tinfo->Print(indentlevel+1);
+    op1->Print(indentlevel+1);
+    op2->Print(indentlevel+1);
+}
+
+LshiftExpr::LshiftExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
+    Assert(ti != NULL && o1 != NULL && o2 != NULL);
+    (tinfo = ti)->SetParent(this);
+    (op1 = o1)->SetParent(this);
+    (op2 = o2)->SetParent(this);
+}
+
+void LshiftExpr::PrintChildren(int indentlevel) {
+    tinfo->Print(indentlevel+1);
+    op1->Print(indentlevel+1);
+    op2->Print(indentlevel+1);
+}
+
+LshiftRtExpr::LshiftRtExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
+    Assert(ti != NULL && o1 != NULL && o2 != NULL);
+    (tinfo = ti)->SetParent(this);
+    (op1 = o1)->SetParent(this);
+    (op2 = o2)->SetParent(this);
+}
+
+void LshiftRtExpr::PrintChildren(int indentlevel) {
+    tinfo->Print(indentlevel+1);
+    op1->Print(indentlevel+1);
+    op2->Print(indentlevel+1);
+}
+
 AshiftExpr::AshiftExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
     Assert(ti != NULL && o1 != NULL && o2 != NULL);
     (tinfo = ti)->SetParent(this);
@@ -206,6 +270,19 @@ AshiftExpr::AshiftExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
 }
 
 void AshiftExpr::PrintChildren(int indentlevel) {
+    tinfo->Print(indentlevel+1);
+    op1->Print(indentlevel+1);
+    op2->Print(indentlevel+1);
+}
+
+AshiftRtExpr::AshiftRtExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
+    Assert(ti != NULL && o1 != NULL && o2 != NULL);
+    (tinfo = ti)->SetParent(this);
+    (op1 = o1)->SetParent(this);
+    (op2 = o2)->SetParent(this);
+}
+
+void AshiftRtExpr::PrintChildren(int indentlevel) {
     tinfo->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
@@ -286,11 +363,11 @@ void Condition::PrintChildren(int indentlevel) {
     printf("%s",cond);
 }
 
-RetCall::RetCall(TypeInfo *ti, int rr, char *fn) {
+RetCall::RetCall(TypeInfo *ti, int rr, const char *fn) {
     Assert(ti != NULL && fn != NULL);
     (tinfo = ti)->SetParent(this);
     returnreg = rr;
-    strcpy(fnname, fn);
+    fnname = fn;
 }
 
 void RetCall::PrintChildren(int indentlevel) {
@@ -299,9 +376,9 @@ void RetCall::PrintChildren(int indentlevel) {
     // Not too important for now for debugging.
 }
 
-NoRetCall::NoRetCall(char *fn) {
+NoRetCall::NoRetCall(const char *fn) {
     Assert(fn != NULL);
-    strcpy(fnname,fn);
+    fnname = fn;
 }
 
 void NoRetCall::PrintChildren(int indentlevel) {

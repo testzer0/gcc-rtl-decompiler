@@ -1,14 +1,17 @@
-#include <stdio.h>
-
-int f(int a) {
+struct somestruct{
+	int a;
 	int b;
-	if (a < 3)
-		b = 2;
-	else b = 3;
-	return b;
+	char c;
+};
+
+int f(struct somestruct ss) {
+	return ss.a+ss.b;
 }
 
 int main() {
-    int b = f(3);
-    return 0;
+	struct somestruct s;
+	s.a = 2;
+	s.b = 3;
+	int c = f(s);
+	return 0;
 }

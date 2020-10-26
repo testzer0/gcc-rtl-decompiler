@@ -4,15 +4,15 @@
 .PHONY: clean strip
 
 DECOMPILER = rcc
-PRODUCTS = $(DECOMPILER) $(PREPROCESSOR)
+PRODUCTS = $(DECOMPILER)
 default: $(PRODUCTS)
 
 # Set up sources
-SRCS = errors.cc utility.cc main.cc
+SRCS = ast.cc errors.cc utility.cc main.cc
 # patsubst a,b,X replaces all occurences of a with b in X
 # filter a,X filters all words from X matching a.
 # The line below defines objects as .o files from all .c and .cc files
-OBJS = lex.yy.o $(patsubst %.cc, %.o, $(filter %.cc,$(SRCS))) $(patsubst %.c, %.o, $(filter %.c, $(SRCS)))
+OBJS = y.tab.o lex.yy.o $(patsubst %.cc, %.o, $(filter %.cc,$(SRCS))) $(patsubst %.c, %.o, $(filter %.c, $(SRCS)))
 
 # Files we don't care about
 JUNK = *.log *~ *.o lex.yy.c dpp.yy.c y.tab.c y.tab.h *.core core
@@ -44,20 +44,26 @@ LIBS = -lc -lm -ll
 lex.yy.c: scanner.l 
 	$(LEX) $(LEXFLAGS) scanner.l
 
+y.tab.o : y.tab.c
+	$(CC) $(CFLAGS) -c -o y.tab.o y.tab.c
+
+y.tab.h y.tab.c : parser.y
+	$(YACC) $(YACCFLAGS) parser.y
+
 .cc.o: $*.cc
 	$(CC) $(CFLAGS) -c -o $@ $*.cc
 
 # rules to build decompiler (rcc)
 
-$(DECOMPILER) : $(PREPROCESSOR) $(OBJS)
+$(DECOMPILER) : $(OBJS)
 	$(LD) -o $@ $(OBJS) $(LIBS)
 
 
 # This target is to build small for testing (no debugging info), removes
 # all intermediate products, too
 strip : $(PRODUCTS)
-	strip $(PRODUCTS)
-	rm -rf $(JUNK)
+		strip $(PRODUCTS)
+		rm -rf $(JUNK)
 
 
 # make depend will set up the header file dependencies for the 
