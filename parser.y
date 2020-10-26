@@ -46,6 +46,9 @@
     MinusExpr *minusexpr;
     MultExpr *multexpr;
     DivExpr *divexpr;
+    UDivExpr *udivexpr;
+    ModExpr *modexpr;
+    UModExpr *umodexpr;
     LshiftExpr *lshiftexpr;
     AshiftExpr *ashiftexpr;
     LshiftRtExpr *lshiftrtexpr;
@@ -68,11 +71,12 @@
     char identifier[32];
 }
 
-%token T_Note T_Insn T_JumpInsn T_CallInsn T_Call T_SymbolRef T_Nil T_Parallel
+%token T_Note T_Insn T_JumpInsn T_CallInsn T_Call T_SymbolRef T_Nil T_Parallel T_TIType
 %token T_Clobber T_Set T_Use T_IfThenElse T_ConstInt T_Barrier T_Mem T_Reg T_Pc T_LabelRef
 %token T_IFlag T_VFlag T_FFlag T_CFlag T_SIType T_DIType T_QIType T_CCType T_CCZType T_CCGCType
 %token T_Plus T_Minus T_Mult T_Div T_Lshift T_Ashift T_LshiftRt T_AshiftRt T_Subreg T_ExprList 
-%token T_EndPara T_RArrow T_SiExtend T_Compare T_Lt T_Gt T_Le T_Ge T_Eq T_Ne T_CodeLabel
+%token T_EndPara T_RArrow T_SiExtend T_Compare T_Lt T_Gt T_Le T_Ge T_Eq T_Ne T_CodeLabel T_UDiv
+%token T_Mod T_UMod T_CCGOCType
 
 %token <stringConstant> T_StringConstant
 %token <integerConstant> T_IntConstant
@@ -112,6 +116,9 @@
 %type <minusexpr> MinusExpr
 %type <multexpr> MultExpr
 %type <divexpr> DivExpr
+%type <udivexpr> UDivExpr
+%type <modexpr> ModExpr
+%type <umodexpr> UModExpr
 %type <lshiftexpr> LshiftExpr
 %type <ashiftexpr> AshiftExpr
 %type <lshiftrtexpr> LshiftRtExpr
@@ -182,9 +189,13 @@ Insn            :   T_Insn T_IntConstant T_IntConstant T_IntConstant  T_IntConst
                       T_StringConstant ':' T_IntConstant Integer '(' T_Nil ')'  { $$ = new Insn($7); }
                 |   T_Insn T_IntConstant T_IntConstant T_IntConstant  T_IntConstant '(' MainCmd ')'   
                       T_StringConstant ':' T_IntConstant Integer '(' T_ExprList '(' Operand ')' '('
-                      T_Nil ')' ')'                             { $$ = new Insn($7); } 
+                      T_Nil ')' ')'                             { $$ = new Insn($7); }
+                |   T_Insn T_IntConstant T_IntConstant T_IntConstant  T_IntConstant '(' MainCmd ')'   
+                     Integer '(' T_ExprList '(' Operand ')' '(' T_Nil ')' ')'   { $$ = new Insn($7); } 
                 |   T_Insn T_IntConstant T_IntConstant T_IntConstant  T_IntConstant '(' MainCmd ')'   
                       Integer '(' T_Nil ')'  { $$ = new Insn($7); }
+                |   T_Insn T_IntConstant T_IntConstant T_IntConstant  T_IntConstant '(' T_ConstInt T_IntConstant ')'
+                      T_StringConstant ':' T_IntConstant Integer '(' T_Nil ')' { $$ = new Insn(NULL); }
                 ;
 
 MainCmd         :   PlainCmd                    { $$ = $1; }
@@ -204,6 +215,8 @@ Cmds            :   Cmds '(' PlainCmd ')'              { ($$ = $1)->Append($3); 
                 ;
 
 ClobberCmd      :   T_Clobber '(' T_Reg ':' T_CCType T_IntConstant ')' { $$ = new ClobberCmd(); }
+                |   T_Clobber '(' T_Mem ':' '(' ')' ')' { $$ = new ClobberCmd(); }
+                |   T_Clobber '(' T_Mem ':' '(' Operand ')' ')' { $$ = new ClobberCmd(); }
                 ;
 
 SetCmd          :   T_Set '(' Operand ')' '(' Operand ')'       { $$ = new SetCmd($3,$6); }
@@ -232,6 +245,9 @@ ExprOperand     :   LocInfo ':' TypeInfo Expr   { $$ = new ExprOperand($1,$3,$4)
                 |   MinusExpr                   { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   MultExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   DivExpr                     { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   UDivExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   ModExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   UModExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   SubregExpr                  { $$ = new ExprOperand(NULL,NULL,$1); }
                 ;
 
@@ -265,9 +281,11 @@ MemType         :   T_Mem                       { $$ = new MemType("mem"); }
 TypeInfo        :   T_SIType                    { $$ = new TypeInfo("si"); }
                 |   T_DIType                    { $$ = new TypeInfo("di"); }
                 |   T_QIType                    { $$ = new TypeInfo("qi"); }
+                |   T_TIType                    { $$ = new TypeInfo("ti"); }
                 |   T_CCType                    { $$ = new TypeInfo("cc"); }
                 |   T_CCZType                   { $$ = new TypeInfo("ccz"); }
                 |   T_CCGCType                  { $$ = new TypeInfo("ccgc"); }
+                |   T_CCGOCType                  { $$ = new TypeInfo("ccgoc"); }
                 ;
 
 Expr            :   IntegerExpr                 { $$ = $1; }
@@ -281,6 +299,9 @@ Expr            :   IntegerExpr                 { $$ = $1; }
                 |   '(' SubregExpr ')'          { $$ = $2; }
                 |   '(' CompareExpr ')'         { $$ = $2; }
                 |   '(' DivExpr ')'             { $$ = $2; }
+                |   '(' UDivExpr ')'            { $$ = $2; }
+                |   '(' ModExpr ')'            { $$ = $2; }
+                |   '(' UModExpr ')'            { $$ = $2; }
                 ;
 
 IntegerExpr     :   Integer                     { $$ = new IntegerExpr($1->getValue()); }
@@ -296,6 +317,15 @@ MultExpr        :   T_Mult TypeInfo '(' Operand ')' '(' Operand ')'     { $$ = n
                 ;
 
 DivExpr         :   T_Div TypeInfo '(' Operand ')' '(' Operand ')'      { $$ = new DivExpr($2,$4,$7); }
+                ;
+
+UDivExpr        :   T_UDiv TypeInfo '(' Operand ')' '(' Operand ')'      { $$ = new UDivExpr($2,$4,$7); }
+                ;
+
+ModExpr         :   T_Mod TypeInfo '(' Operand ')' '(' Operand ')'      { $$ = new ModExpr($2,$4,$7); }
+                ;
+
+UModExpr        :   T_UMod TypeInfo '(' Operand ')' '(' Operand ')'      { $$ = new UModExpr($2,$4,$7); }
                 ;
 
 LshiftExpr      :   T_Lshift TypeInfo '(' Operand ')' '(' Operand ')'     { $$ = new LshiftExpr($2,$4,$7); }
@@ -319,6 +349,8 @@ CompareExpr     :   T_Compare TypeInfo '(' Operand ')' '(' Operand ')'  { $$ = n
 JumpInsn        :   T_JumpInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set
                       '(' T_Pc ')' '(' Dest ')' ')' T_StringConstant ':' T_IntConstant 
                       Integer '(' T_Nil ')' T_RArrow T_IntConstant      { $$ = new JumpInsn($12); }
+                |   T_JumpInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set
+                      '(' T_Pc ')' '(' Dest ')' ')' T_IntConstant '(' T_Nil ')' T_RArrow T_IntConstant      { $$ = new JumpInsn($12); }
                 ;
 
 Dest            :   Label                         { $$ = $1; }
@@ -327,6 +359,7 @@ Dest            :   Label                         { $$ = $1; }
                 ;
 
 Label           :   T_LabelRef T_IntConstant      { $$ = new Label($2); }
+                |   T_LabelRef ':' TypeInfo T_IntConstant { $$ = new Label($4); }
                 ;
 
 IfThenElse      :   T_IfThenElse '(' Comparison ')' '(' Dest ')' '(' Dest ')'  { $$ = new IfThenElse($3,$6,$9); }
@@ -357,10 +390,11 @@ RetCall         :   T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntCo
                                                     { $$ = new RetCall($11,$12,$25); }
                 ;
 
-NoRetCall       :   T_CallInsn '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' 
+NoRetCall       :   T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call 
+                        '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' 
                         T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant 
                         ':' T_IntConstant Integer '(' T_Nil ')' '(' Junk ')'
-                                                    { $$ = new NoRetCall($13); }
+                                                    { $$ = new NoRetCall($17); }
                 ;
 
 Junk            :   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'

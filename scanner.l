@@ -61,13 +61,18 @@ END_IGNORE3     (">")
 "SI" 				{ return T_SIType; }
 "DI" 				{ return T_DIType; }
 "QI" 				{ return T_QIType; }
+"TI"				{ return T_TIType; }
 "CCZ" 				{ return T_CCZType; }
 "CCGC" 				{ return T_CCGCType; }
+"CCGOC"				{ return T_CCGOCType; }
 "CC"				{ return T_CCType;}
 "plus:" 			{ return T_Plus; }
 "minus:" 			{ return T_Minus; }
 "mult:"				{ return T_Mult; }
 "div:"				{ return T_Div; }
+"udiv:"				{ return T_UDiv; }
+"mod:"				{ return T_Mod; }
+"umod:"				{ return T_UMod; }
 "ashiftrt:"			{ return T_AshiftRt; }
 "lshiftrt:"			{ return T_LshiftRt; }
 "ashift:"			{ return T_Ashift; }

@@ -396,6 +396,45 @@ class DivExpr : public Expr {
         void PrintChildren(int indentlevel);
 };
 
+class UDivExpr : public Expr {
+    protected:
+        TypeInfo *tinfo;
+        Operand *op1;
+        Operand *op2;
+    public:
+        UDivExpr(TypeInfo *ti, Operand *o1, Operand *o2);
+        const char *GetPrintNameForNode() {
+            return "UDivExpr";
+        }
+        void PrintChildren(int indentlevel);
+};
+
+class ModExpr : public Expr {
+    protected:
+        TypeInfo *tinfo;
+        Operand *op1;
+        Operand *op2;
+    public:
+        ModExpr(TypeInfo *ti, Operand *o1, Operand *o2);
+        const char *GetPrintNameForNode() {
+            return "ModExpr";
+        }
+        void PrintChildren(int indentlevel);
+};
+
+class UModExpr : public Expr {
+    protected:
+        TypeInfo *tinfo;
+        Operand *op1;
+        Operand *op2;
+    public:
+        UModExpr(TypeInfo *ti, Operand *o1, Operand *o2);
+        const char *GetPrintNameForNode() {
+            return "UModExpr";
+        }
+        void PrintChildren(int indentlevel);
+};
+
 class LshiftExpr : public Expr {
     protected:
         TypeInfo *tinfo;

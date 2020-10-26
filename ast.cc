@@ -62,13 +62,15 @@ void CodeLabel::PrintChildren(int indentlevel) {
 }
 
 Insn::Insn(MainCmd *mc) {
-    Assert(mc != NULL);
-    (maincmd = mc)->SetParent(this);
+    maincmd = mc;
+    if (maincmd)
+        maincmd->SetParent(this);
 }
 
 void Insn::PrintChildren(int indentlevel) {
     printf("\n");
-    maincmd->Print(indentlevel+1);
+    if (maincmd)
+        maincmd->Print(indentlevel+1);
 }
 
 ParallelCmd::ParallelCmd(List<PlainCmd *> *cs) {
@@ -259,6 +261,48 @@ DivExpr::DivExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
 }
 
 void DivExpr::PrintChildren(int indentlevel) {
+    printf("\n");
+    tinfo->Print(indentlevel+1);
+    op1->Print(indentlevel+1);
+    op2->Print(indentlevel+1);
+}
+
+UDivExpr::UDivExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
+    Assert(ti != NULL && o1 != NULL && o2 != NULL);
+    (tinfo = ti)->SetParent(this);
+    (op1 = o1)->SetParent(this);
+    (op2 = o2)->SetParent(this);
+}
+
+void UDivExpr::PrintChildren(int indentlevel) {
+    printf("\n");
+    tinfo->Print(indentlevel+1);
+    op1->Print(indentlevel+1);
+    op2->Print(indentlevel+1);
+}
+
+ModExpr::ModExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
+    Assert(ti != NULL && o1 != NULL && o2 != NULL);
+    (tinfo = ti)->SetParent(this);
+    (op1 = o1)->SetParent(this);
+    (op2 = o2)->SetParent(this);
+}
+
+void ModExpr::PrintChildren(int indentlevel) {
+    printf("\n");
+    tinfo->Print(indentlevel+1);
+    op1->Print(indentlevel+1);
+    op2->Print(indentlevel+1);
+}
+
+UModExpr::UModExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
+    Assert(ti != NULL && o1 != NULL && o2 != NULL);
+    (tinfo = ti)->SetParent(this);
+    (op1 = o1)->SetParent(this);
+    (op2 = o2)->SetParent(this);
+}
+
+void UModExpr::PrintChildren(int indentlevel) {
     printf("\n");
     tinfo->Print(indentlevel+1);
     op1->Print(indentlevel+1);

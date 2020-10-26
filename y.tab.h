@@ -53,50 +53,55 @@ extern int yydebug;
     T_SymbolRef = 263,
     T_Nil = 264,
     T_Parallel = 265,
-    T_Clobber = 266,
-    T_Set = 267,
-    T_Use = 268,
-    T_IfThenElse = 269,
-    T_ConstInt = 270,
-    T_Barrier = 271,
-    T_Mem = 272,
-    T_Reg = 273,
-    T_Pc = 274,
-    T_LabelRef = 275,
-    T_IFlag = 276,
-    T_VFlag = 277,
-    T_FFlag = 278,
-    T_CFlag = 279,
-    T_SIType = 280,
-    T_DIType = 281,
-    T_QIType = 282,
-    T_CCType = 283,
-    T_CCZType = 284,
-    T_CCGCType = 285,
-    T_Plus = 286,
-    T_Minus = 287,
-    T_Mult = 288,
-    T_Div = 289,
-    T_Lshift = 290,
-    T_Ashift = 291,
-    T_LshiftRt = 292,
-    T_AshiftRt = 293,
-    T_Subreg = 294,
-    T_ExprList = 295,
-    T_EndPara = 296,
-    T_RArrow = 297,
-    T_SiExtend = 298,
-    T_Compare = 299,
-    T_Lt = 300,
-    T_Gt = 301,
-    T_Le = 302,
-    T_Ge = 303,
-    T_Eq = 304,
-    T_Ne = 305,
-    T_CodeLabel = 306,
-    T_StringConstant = 307,
-    T_IntConstant = 308,
-    T_FunBegin = 309
+    T_TIType = 266,
+    T_Clobber = 267,
+    T_Set = 268,
+    T_Use = 269,
+    T_IfThenElse = 270,
+    T_ConstInt = 271,
+    T_Barrier = 272,
+    T_Mem = 273,
+    T_Reg = 274,
+    T_Pc = 275,
+    T_LabelRef = 276,
+    T_IFlag = 277,
+    T_VFlag = 278,
+    T_FFlag = 279,
+    T_CFlag = 280,
+    T_SIType = 281,
+    T_DIType = 282,
+    T_QIType = 283,
+    T_CCType = 284,
+    T_CCZType = 285,
+    T_CCGCType = 286,
+    T_Plus = 287,
+    T_Minus = 288,
+    T_Mult = 289,
+    T_Div = 290,
+    T_Lshift = 291,
+    T_Ashift = 292,
+    T_LshiftRt = 293,
+    T_AshiftRt = 294,
+    T_Subreg = 295,
+    T_ExprList = 296,
+    T_EndPara = 297,
+    T_RArrow = 298,
+    T_SiExtend = 299,
+    T_Compare = 300,
+    T_Lt = 301,
+    T_Gt = 302,
+    T_Le = 303,
+    T_Ge = 304,
+    T_Eq = 305,
+    T_Ne = 306,
+    T_CodeLabel = 307,
+    T_UDiv = 308,
+    T_Mod = 309,
+    T_UMod = 310,
+    T_CCGOCType = 311,
+    T_StringConstant = 312,
+    T_IntConstant = 313,
+    T_FunBegin = 314
   };
 #endif
 /* Tokens.  */
@@ -108,50 +113,55 @@ extern int yydebug;
 #define T_SymbolRef 263
 #define T_Nil 264
 #define T_Parallel 265
-#define T_Clobber 266
-#define T_Set 267
-#define T_Use 268
-#define T_IfThenElse 269
-#define T_ConstInt 270
-#define T_Barrier 271
-#define T_Mem 272
-#define T_Reg 273
-#define T_Pc 274
-#define T_LabelRef 275
-#define T_IFlag 276
-#define T_VFlag 277
-#define T_FFlag 278
-#define T_CFlag 279
-#define T_SIType 280
-#define T_DIType 281
-#define T_QIType 282
-#define T_CCType 283
-#define T_CCZType 284
-#define T_CCGCType 285
-#define T_Plus 286
-#define T_Minus 287
-#define T_Mult 288
-#define T_Div 289
-#define T_Lshift 290
-#define T_Ashift 291
-#define T_LshiftRt 292
-#define T_AshiftRt 293
-#define T_Subreg 294
-#define T_ExprList 295
-#define T_EndPara 296
-#define T_RArrow 297
-#define T_SiExtend 298
-#define T_Compare 299
-#define T_Lt 300
-#define T_Gt 301
-#define T_Le 302
-#define T_Ge 303
-#define T_Eq 304
-#define T_Ne 305
-#define T_CodeLabel 306
-#define T_StringConstant 307
-#define T_IntConstant 308
-#define T_FunBegin 309
+#define T_TIType 266
+#define T_Clobber 267
+#define T_Set 268
+#define T_Use 269
+#define T_IfThenElse 270
+#define T_ConstInt 271
+#define T_Barrier 272
+#define T_Mem 273
+#define T_Reg 274
+#define T_Pc 275
+#define T_LabelRef 276
+#define T_IFlag 277
+#define T_VFlag 278
+#define T_FFlag 279
+#define T_CFlag 280
+#define T_SIType 281
+#define T_DIType 282
+#define T_QIType 283
+#define T_CCType 284
+#define T_CCZType 285
+#define T_CCGCType 286
+#define T_Plus 287
+#define T_Minus 288
+#define T_Mult 289
+#define T_Div 290
+#define T_Lshift 291
+#define T_Ashift 292
+#define T_LshiftRt 293
+#define T_AshiftRt 294
+#define T_Subreg 295
+#define T_ExprList 296
+#define T_EndPara 297
+#define T_RArrow 298
+#define T_SiExtend 299
+#define T_Compare 300
+#define T_Lt 301
+#define T_Gt 302
+#define T_Le 303
+#define T_Ge 304
+#define T_Eq 305
+#define T_Ne 306
+#define T_CodeLabel 307
+#define T_UDiv 308
+#define T_Mod 309
+#define T_UMod 310
+#define T_CCGOCType 311
+#define T_StringConstant 312
+#define T_IntConstant 313
+#define T_FunBegin 314
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -194,6 +204,9 @@ union YYSTYPE
     MinusExpr *minusexpr;
     MultExpr *multexpr;
     DivExpr *divexpr;
+    UDivExpr *udivexpr;
+    ModExpr *modexpr;
+    UModExpr *umodexpr;
     LshiftExpr *lshiftexpr;
     AshiftExpr *ashiftexpr;
     LshiftRtExpr *lshiftrtexpr;
@@ -215,7 +228,7 @@ union YYSTYPE
     const char *stringConstant;
     char identifier[32];
 
-#line 219 "y.tab.h" /* yacc.c:1909  */
+#line 232 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
