@@ -124,7 +124,7 @@ END_IGNORE3     (">")
 {IDENTIFIER} 		;
 \"[^\"\n]*\n 		{ ReportError::UntermString(&yylloc, yytext);
 					  lineno++; colno = 1; }
-[ _A-Z]				;
+[ \r\n_A-Z]				;
 "\]"				{ return T_EndPara;}
 "->"				{ return T_RArrow; }
 . 					{ ReportError::UnrecogChar(&yylloc, yytext[0]); }

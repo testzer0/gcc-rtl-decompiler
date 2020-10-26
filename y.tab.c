@@ -2674,5 +2674,5 @@ yyreturn:
 void InitParser()
 {
    printf("Initializing parser.\n\n");
-   yydebug = true;
+   yydebug = false;
 }

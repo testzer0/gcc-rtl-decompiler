@@ -378,5 +378,5 @@ Junk            :   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntCo
 void InitParser()
 {
    printf("Initializing parser.\n\n");
-   yydebug = true;
+   yydebug = false;
 }

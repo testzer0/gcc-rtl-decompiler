@@ -14,11 +14,8 @@ Node::Node() {
 }
 
 void Node::Print(int indentlevel, const char *label) {
-    if (location) 
-        printf("%*d", 3, location->first_line);
-    else 
-        printf("%*s",3,"");
-    printf("%*s%s%s", indentlevel*3, "", label? label : "",GetPrintNameForNode());
+    int num = 3*indentlevel; 
+    printf("%*s%s",num,"",GetPrintNameForNode());
     PrintChildren(indentlevel);
 }
 
@@ -28,6 +25,7 @@ Program::Program(List<FuncBody *> *bodylist) {
 }
 
 void Program::PrintChildren(int indentlevel) {
+    printf("\n");
     funcbodylist->PrintAll(indentlevel+1);
     printf("\n");
 }
@@ -35,12 +33,12 @@ void Program::PrintChildren(int indentlevel) {
 FuncBody::FuncBody(List<Stmt *> *ss, const char *n) {
     Assert(ss != NULL && n != NULL);
     (stmts = ss)->SetParentAll(this);
-    name = n;   
+    name = strdup(n);   
 }
 
 void FuncBody::PrintChildren(int indentlevel) {
+    printf(" %s\n",name);
     stmts->PrintAll(indentlevel+1);
-    printf("%s\n",name);
 } 
 
 Integer::Integer(int val) {
@@ -48,7 +46,19 @@ Integer::Integer(int val) {
 }
 
 void Integer::PrintChildren(int indentlevel) {
-    printf("%d",value);
+    printf(" %d\n",value);
+}
+
+void Note::PrintChildren(int indentlevel) {
+    printf("\n");
+}
+
+void Barrier::PrintChildren(int indentlevel) {
+    printf("\n");
+}
+
+void CodeLabel::PrintChildren(int indentlevel) {
+    printf("\n");
 }
 
 Insn::Insn(MainCmd *mc) {
@@ -57,6 +67,7 @@ Insn::Insn(MainCmd *mc) {
 }
 
 void Insn::PrintChildren(int indentlevel) {
+    printf("\n");
     maincmd->Print(indentlevel+1);
 }
 
@@ -66,7 +77,12 @@ ParallelCmd::ParallelCmd(List<PlainCmd *> *cs) {
 }
 
 void ParallelCmd::PrintChildren(int indentlevel) {
+    printf("\n");
     cmds->PrintAll(indentlevel+1);
+}
+
+void ClobberCmd::PrintChildren(int indentlevel) {
+    printf("\n");
 }
 
 SetCmd::SetCmd(Operand *o1, Operand *o2) {
@@ -76,8 +92,13 @@ SetCmd::SetCmd(Operand *o1, Operand *o2) {
 }
 
 void SetCmd::PrintChildren(int indentlevel) {
+    printf("\n");
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
+}
+
+void UseCmd::PrintChildren(int indentlevel) {
+    printf("\n");
 }
 
 IntOperand::IntOperand(int iv) {
@@ -85,7 +106,7 @@ IntOperand::IntOperand(int iv) {
 }
 
 void IntOperand::PrintChildren(int indentlevel) {
-    printf("%d",intvalue);
+    printf(" %d\n",intvalue);
 }
 
 ExprOperand::ExprOperand(LocInfo *li, TypeInfo *ti, Expr *e) {
@@ -98,6 +119,7 @@ ExprOperand::ExprOperand(LocInfo *li, TypeInfo *ti, Expr *e) {
 }
 
 void ExprOperand::PrintChildren(int indentlevel) {
+    printf("\n");
     if (linfo)
         linfo->Print(indentlevel+1);
     if (tinfo)
@@ -112,6 +134,7 @@ ExtendOperand::ExtendOperand(TypeInfo *ti, Operand *o) {
 }
 
 void ExtendOperand::PrintChildren(int indentlevel) {
+    printf("\n");
     tinfo->Print(indentlevel+1);
     op->Print(indentlevel+1);
 }
@@ -124,6 +147,7 @@ DerefOperand::DerefOperand(LocInfo *li, TypeInfo *ti, Operand *o) {
 }
 
 void DerefOperand::PrintChildren(int indentlevel) {
+    printf("\n");
     linfo->Print(indentlevel+1);
     tinfo->Print(indentlevel+1);
     op->Print(indentlevel+1);
@@ -134,7 +158,7 @@ SymbolRefOperand::SymbolRefOperand(const char *s) {
 }
 
 void SymbolRefOperand::PrintChildren(int indentlevel) {
-    printf("%s",symbol);
+    printf(" %s\n",symbol);
 }
 
 TypeInfo::TypeInfo(const char *t) {
@@ -142,7 +166,7 @@ TypeInfo::TypeInfo(const char *t) {
 }
 
 void TypeInfo::PrintChildren(int indentlevel) {
-    printf("%s",type);
+    printf(" %s\n",type);
 }
 
 LocInfo::LocInfo(MemType *mt, List<Flag *> *f) {
@@ -155,6 +179,7 @@ LocInfo::LocInfo(MemType *mt, List<Flag *> *f) {
 }
 
 void LocInfo::PrintChildren(int indentlevel) {
+    printf("\n");
     mtype->Print(indentlevel+1);
     if (flags)
         flags->PrintAll(indentlevel+1);
@@ -165,7 +190,7 @@ MemType::MemType(const char *t) {
 }
 
 void MemType::PrintChildren(int indentlevel) {
-    printf("%s",type);
+    printf(" %s\n",type);
 }
 
 Flag::Flag(const char *f) {
@@ -173,7 +198,7 @@ Flag::Flag(const char *f) {
 }
 
 void Flag::PrintChildren(int indentlevel) {
-    printf("%s",flag);
+    printf(" %s\n",flag);
 }
 
 IntegerExpr::IntegerExpr(int v) {
@@ -181,7 +206,7 @@ IntegerExpr::IntegerExpr(int v) {
 }
 
 void IntegerExpr::PrintChildren(int indentlevel) {
-    printf("%d",value);
+    printf(" %d\n",value);
 }
 
 PlusExpr::PlusExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
@@ -192,6 +217,7 @@ PlusExpr::PlusExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
 } 
 
 void PlusExpr::PrintChildren(int indentlevel) {
+    printf("\n");
     tinfo->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
@@ -205,6 +231,7 @@ MinusExpr::MinusExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
 }
 
 void MinusExpr::PrintChildren(int indentlevel) {
+    printf("\n");
     tinfo->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
@@ -218,6 +245,7 @@ MultExpr::MultExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
 }
 
 void MultExpr::PrintChildren(int indentlevel) {
+    printf("\n");
     tinfo->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
@@ -231,6 +259,7 @@ DivExpr::DivExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
 }
 
 void DivExpr::PrintChildren(int indentlevel) {
+    printf("\n");
     tinfo->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
@@ -244,6 +273,7 @@ LshiftExpr::LshiftExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
 }
 
 void LshiftExpr::PrintChildren(int indentlevel) {
+    printf("\n");
     tinfo->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
@@ -257,6 +287,7 @@ LshiftRtExpr::LshiftRtExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
 }
 
 void LshiftRtExpr::PrintChildren(int indentlevel) {
+    printf("\n");
     tinfo->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
@@ -270,6 +301,7 @@ AshiftExpr::AshiftExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
 }
 
 void AshiftExpr::PrintChildren(int indentlevel) {
+    printf("\n");
     tinfo->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
@@ -283,6 +315,7 @@ AshiftRtExpr::AshiftRtExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
 }
 
 void AshiftRtExpr::PrintChildren(int indentlevel) {
+    printf("\n");
     tinfo->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
@@ -295,6 +328,7 @@ SubregExpr::SubregExpr(TypeInfo *ti, Operand *o) {
 }
 
 void SubregExpr::PrintChildren(int indentlevel) {
+    printf("\n");
     tinfo->Print(indentlevel+1);
     op->Print(indentlevel+1);
 }
@@ -307,6 +341,7 @@ CompareExpr::CompareExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
 }
 
 void CompareExpr::PrintChildren(int indentlevel) {
+    printf("\n");
     tinfo->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
@@ -318,6 +353,7 @@ JumpInsn::JumpInsn(Dest *d) {
 }
 
 void JumpInsn::PrintChildren(int indentlevel) {
+    printf("\n");
     dest->Print(indentlevel+1);
 }
 
@@ -326,7 +362,7 @@ Label::Label(int lno) {
 }
 
 void Label::PrintChildren(int indentlevel) {
-    printf("%d", labelno);
+    printf(" %d\n", labelno);
 }
 
 IfThenElse::IfThenElse(Comparison *c, Dest *d1, Dest *d2) {
@@ -337,6 +373,7 @@ IfThenElse::IfThenElse(Comparison *c, Dest *d1, Dest *d2) {
 }
 
 void IfThenElse::PrintChildren(int indentlevel) {
+    printf("\n");
     comp->Print(indentlevel+1);
     dest1->Print(indentlevel+1);
     dest2->Print(indentlevel+1);
@@ -350,6 +387,7 @@ Comparison::Comparison(Condition *c, Operand *o1, Operand *o2) {
 }
 
 void Comparison::PrintChildren(int indentlevel) {
+    printf("\n");
     cond->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
@@ -360,7 +398,7 @@ Condition::Condition(const char *c) {
 }
 
 void Condition::PrintChildren(int indentlevel) {
-    printf("%s",cond);
+    printf(" %s\n",cond);
 }
 
 RetCall::RetCall(TypeInfo *ti, int rr, const char *fn) {
@@ -371,7 +409,7 @@ RetCall::RetCall(TypeInfo *ti, int rr, const char *fn) {
 }
 
 void RetCall::PrintChildren(int indentlevel) {
-    printf("%s",fnname);
+    printf(" %s\n",fnname);
     // Return reg is always rax; type so far has always been SI.
     // Not too important for now for debugging.
 }
@@ -382,6 +420,6 @@ NoRetCall::NoRetCall(const char *fn) {
 }
 
 void NoRetCall::PrintChildren(int indentlevel) {
-    printf("%s",fnname);
+    printf(" %s\n",fnname);
 }
 

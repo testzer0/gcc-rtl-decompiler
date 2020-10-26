@@ -105,7 +105,7 @@ class Note : public Stmt {
         const char *GetPrintNameForNode() {
             return "Note";
         }
-        void PrintChildren(int indentlevel) {}
+        void PrintChildren(int indentlevel);
 };
 
 class Barrier : public Stmt {
@@ -115,7 +115,7 @@ class Barrier : public Stmt {
         const char *GetPrintNameForNode() {
             return "Barrier";
         }
-        void PrintChildren(int indentlevel) {}
+        void PrintChildren(int indentlevel);
 };
 
 class CodeLabel : public Stmt {
@@ -125,7 +125,7 @@ class CodeLabel : public Stmt {
         const char *GetPrintNameForNode() {
             return "CodeLabel";
         }
-        void PrintChildren(int indentlevel) {}
+        void PrintChildren(int indentlevel);
 };
 
 class Integer : public Node {
@@ -187,7 +187,7 @@ class ClobberCmd : public PlainCmd {
         const char *GetPrintNameForNode() {
             return "ClobberCmd";
         }
-        void PrintChildren(int indentlevel) {}
+        void PrintChildren(int indentlevel);
 };
 
 class SetCmd : public PlainCmd {
@@ -208,7 +208,7 @@ class UseCmd : public PlainCmd {
         const char *GetPrintNameForNode() {
             return "UseCmd";
         }
-        void PrintChildren(int indentlevel) {}
+        void PrintChildren(int indentlevel);
 };
 
 class Operand : public Node {
