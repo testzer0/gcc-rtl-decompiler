@@ -512,6 +512,20 @@ class CompareExpr : public Expr {
         void PrintChildren(int indentlevel);
 };
 
+class ConditionExpr : public Expr {
+    protected:
+        Condition *cond;
+        TypeInfo *tinfo;
+        Operand *op1;
+        Operand *op2;
+    public:
+        ConditionExpr(Condition *c, TypeInfo *ti, Operand *o1, Operand *o2);
+        const char *GetPrintNameForNode() {
+            return "ConditionExpr";
+        }
+        void PrintChildren(int indentlevel);
+};
+
 class JumpInsn : public Stmt {
     protected:
         Dest *dest;
@@ -523,10 +537,10 @@ class JumpInsn : public Stmt {
         void PrintChildren(int indentlevel);
 };
 
-class Dest : public Node {
+class Dest : public Operand {
     public:
-        Dest() : Node() {}
-        Dest(yyltype loc) : Node(loc) {}
+        Dest() : Operand() {}
+        Dest(yyltype loc) : Operand(loc) {}
         // Dest is also of two types, label or if_then_else
 };
 
@@ -556,10 +570,10 @@ class Pc : public Dest {
 class IfThenElse : public Dest {
     protected:
         Comparison *comp;
-        Dest *dest1;
-        Dest *dest2; // these should be InDests actually, but Dest will do.
+        Operand *op1;
+        Operand *op2; // these should be InDests actually, but Dest will do.
     public:
-        IfThenElse(Comparison *c, Dest *d1, Dest *d2);
+        IfThenElse(Comparison *c, Operand *o1, Operand *o2);
         const char *GetPrintNameForNode() {
             return "IfThenElse";
         }

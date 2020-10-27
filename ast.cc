@@ -391,6 +391,22 @@ void CompareExpr::PrintChildren(int indentlevel) {
     op2->Print(indentlevel+1);
 }
 
+ConditionExpr::ConditionExpr(Condition *c, TypeInfo *ti, Operand *o1, Operand *o2) {
+    Assert(c != NULL && ti != NULL && o1 != NULL && o2 != NULL);
+    (cond = c)->SetParent(this);
+    (tinfo = ti)->SetParent(this);
+    (op1 = o1)->SetParent(this);
+    (op2 = o2)->SetParent(this);
+}
+
+void ConditionExpr::PrintChildren(int indentlevel) {
+    printf("\n");
+    cond->Print(indentlevel+1);
+    tinfo->Print(indentlevel+1);
+    op1->Print(indentlevel+1);
+    op2->Print(indentlevel+1);
+}
+
 JumpInsn::JumpInsn(Dest *d) {
     Assert(d != NULL);
     (dest = d)->SetParent(this);
@@ -409,18 +425,18 @@ void Label::PrintChildren(int indentlevel) {
     printf(" %d\n", labelno);
 }
 
-IfThenElse::IfThenElse(Comparison *c, Dest *d1, Dest *d2) {
-    Assert(c != NULL && d1 != NULL && d2 != NULL);
+IfThenElse::IfThenElse(Comparison *c, Operand *o1, Operand *o2) {
+    Assert(c != NULL && o1 != NULL && o2 != NULL);
     (comp = c)->SetParent(this);
-    (dest1 = d1)->SetParent(this);
-    (dest2 = d2)->SetParent(this);
+    (op1 = o1)->SetParent(this);
+    (op2 = o2)->SetParent(this);
 }
 
 void IfThenElse::PrintChildren(int indentlevel) {
     printf("\n");
     comp->Print(indentlevel+1);
-    dest1->Print(indentlevel+1);
-    dest2->Print(indentlevel+1);
+    op1->Print(indentlevel+1);
+    op2->Print(indentlevel+1);
 }
 
 Comparison::Comparison(Condition *c, Operand *o1, Operand *o2) {

@@ -80,7 +80,10 @@ END_IGNORE3     (">")
 "subreg:"			{ return T_Subreg; }
 "expr_list:"		{ return T_ExprList; }
 "sign_extend:"		{ return T_SiExtend; }
+"zero_extend:"		{ return T_ZeExtend; }
 "compare:"			{ return T_Compare; }
+"ltu"				{ return T_Ltu; }
+"gtu"				{ return T_Gtu; }
 "lt" 				{ return T_Lt; }
 "gt" 				{ return T_Gt; }
 "le" 				{ return T_Le; }

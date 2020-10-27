@@ -55,6 +55,7 @@
     AshiftRtExpr *ashiftrtexpr;
     SubregExpr *subregexpr;
     CompareExpr *compareexpr;
+    ConditionExpr *conditionexpr;
     JumpInsn *jumpinsn;
     Dest *dest;
     Label *label;
@@ -76,7 +77,7 @@
 %token T_IFlag T_VFlag T_FFlag T_CFlag T_SIType T_DIType T_QIType T_CCType T_CCZType T_CCGCType
 %token T_Plus T_Minus T_Mult T_Div T_Lshift T_Ashift T_LshiftRt T_AshiftRt T_Subreg T_ExprList 
 %token T_EndPara T_RArrow T_SiExtend T_Compare T_Lt T_Gt T_Le T_Ge T_Eq T_Ne T_CodeLabel T_UDiv
-%token T_Mod T_UMod T_CCGOCType
+%token T_Mod T_UMod T_CCGOCType T_ZeExtend T_Gtu T_Ltu
 
 %token <stringConstant> T_StringConstant
 %token <integerConstant> T_IntConstant
@@ -125,6 +126,7 @@
 %type <ashiftrtexpr> AshiftRtExpr
 %type <subregexpr> SubregExpr
 %type <compareexpr> CompareExpr
+%type <conditionexpr> ConditionExpr
 %type <jumpinsn> JumpInsn
 %type <dest> Dest
 %type <label> Label
@@ -177,6 +179,8 @@ Barrier         :   T_Barrier T_IntConstant T_IntConstant T_IntConstant { $$ = n
 
 CodeLabel       :   T_CodeLabel T_IntConstant T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Nil ')'
                                                 { $$ = new CodeLabel(); }
+                |   T_CodeLabel T_IntConstant T_IntConstant T_IntConstant T_IntConstant'(' T_Nil ')'
+                                                { $$ = new CodeLabel(); }
                 |   T_CodeLabel T_IntConstant T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_StringConstant ')'
                                                 { $$ = new CodeLabel(); }
                 ;
@@ -196,6 +200,9 @@ Insn            :   T_Insn T_IntConstant T_IntConstant T_IntConstant  T_IntConst
                       Integer '(' T_Nil ')'  { $$ = new Insn($7); }
                 |   T_Insn T_IntConstant T_IntConstant T_IntConstant  T_IntConstant '(' T_ConstInt T_IntConstant ')'
                       T_StringConstant ':' T_IntConstant Integer '(' T_Nil ')' { $$ = new Insn(NULL); }
+                |   T_Insn T_IntConstant T_IntConstant T_IntConstant  T_IntConstant '(' MainCmd ')'   
+                      T_StringConstant ':' T_IntConstant Integer '(' ':' T_IntConstant '('
+                      T_Nil ')' ')'                             { $$ = new Insn($7); }
                 ;
 
 MainCmd         :   PlainCmd                    { $$ = $1; }
@@ -215,6 +222,7 @@ Cmds            :   Cmds '(' PlainCmd ')'              { ($$ = $1)->Append($3); 
                 ;
 
 ClobberCmd      :   T_Clobber '(' T_Reg ':' T_CCType T_IntConstant ')' { $$ = new ClobberCmd(); }
+                |   T_Clobber '(' T_Reg Flags ':' TypeInfo T_IntConstant ')' { $$ = new ClobberCmd(); }
                 |   T_Clobber '(' T_Mem ':' '(' ')' ')' { $$ = new ClobberCmd(); }
                 |   T_Clobber '(' T_Mem ':' '(' Operand ')' ')' { $$ = new ClobberCmd(); }
                 ;
@@ -230,6 +238,7 @@ Operand         :   IntOperand                  { $$ = $1; }
                 |   ExtendOperand               { $$ = $1; }
                 |   SymbolRefOperand            { $$ = $1; }
                 |   DerefOperand                { $$ = $1; }
+                |   Dest                        { $$ = $1; }
                 ;
 
 IntOperand      :  T_ConstInt Integer                     { $$ = new IntOperand($2->getValue()); }
@@ -246,12 +255,14 @@ ExprOperand     :   LocInfo ':' TypeInfo Expr   { $$ = new ExprOperand($1,$3,$4)
                 |   MultExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   DivExpr                     { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   UDivExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   ModExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   ModExpr                     { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   UModExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   SubregExpr                  { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   ConditionExpr               { $$ = new ExprOperand(NULL,NULL,$1); }
                 ;
 
 ExtendOperand   :   T_SiExtend TypeInfo '(' Operand ')' { $$ = new ExtendOperand($2,$4); }
+                |   T_ZeExtend TypeInfo '(' Operand ')' { $$ = new ExtendOperand($2,$4); }
                 ;
 
 DerefOperand    :   LocInfo ':' TypeInfo '(' Operand ')' { $$ = new DerefOperand($1,$3,$5); }
@@ -300,8 +311,9 @@ Expr            :   IntegerExpr                 { $$ = $1; }
                 |   '(' CompareExpr ')'         { $$ = $2; }
                 |   '(' DivExpr ')'             { $$ = $2; }
                 |   '(' UDivExpr ')'            { $$ = $2; }
-                |   '(' ModExpr ')'            { $$ = $2; }
+                |   '(' ModExpr ')'             { $$ = $2; }
                 |   '(' UModExpr ')'            { $$ = $2; }
+                |   '(' ConditionExpr ')'       { $$ = $2; }
                 ;
 
 IntegerExpr     :   Integer                     { $$ = new IntegerExpr($1->getValue()); }
@@ -346,6 +358,9 @@ SubregExpr      :   T_Subreg TypeInfo '(' Operand ')' Integer           { $$ = n
 CompareExpr     :   T_Compare TypeInfo '(' Operand ')' '(' Operand ')'  { $$ = new CompareExpr($2,$4,$7); }
                 ;
 
+ConditionExpr   :   Condition ':' TypeInfo '(' Operand ')' '(' Operand ')' { $$ = new ConditionExpr($1,$3,$5,$8); }
+                ;
+
 JumpInsn        :   T_JumpInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set
                       '(' T_Pc ')' '(' Dest ')' ')' T_StringConstant ':' T_IntConstant 
                       Integer '(' T_Nil ')' T_RArrow T_IntConstant      { $$ = new JumpInsn($12); }
@@ -362,7 +377,8 @@ Label           :   T_LabelRef T_IntConstant      { $$ = new Label($2); }
                 |   T_LabelRef ':' TypeInfo T_IntConstant { $$ = new Label($4); }
                 ;
 
-IfThenElse      :   T_IfThenElse '(' Comparison ')' '(' Dest ')' '(' Dest ')'  { $$ = new IfThenElse($3,$6,$9); }
+IfThenElse      :   T_IfThenElse '(' Comparison ')' '(' Operand ')' '(' Operand ')'  { $$ = new IfThenElse($3,$6,$9); }
+                |   T_IfThenElse ':' TypeInfo '(' Comparison ')' '(' Operand ')' '(' Operand ')'  { $$ = new IfThenElse($5,$8,$11); }
                 ;
 
 Pc              :   T_Pc                           { $$ = new Pc(); }       
@@ -377,6 +393,8 @@ Condition       :   T_Lt                           { $$ = new Condition("lt"); }
                 |   T_Ge                           { $$ = new Condition("ge"); }
                 |   T_Eq                           { $$ = new Condition("eq"); }
                 |   T_Ne                           { $$ = new Condition("ne"); }
+                |   T_Gtu                          { $$ = new Condition("gtu"); }
+                |   T_Ltu                          { $$ = new Condition("ltu"); }
                 ;
 
 Call            :   RetCall                        { $$ = $1; }
@@ -386,14 +404,14 @@ Call            :   RetCall                        { $$ = $1; }
 RetCall         :   T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' 
                         T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' 
                         T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' 
-                        ')' ')' T_StringConstant ':' T_IntConstant Integer '(' T_Nil ')' '(' Junk ')'
+                        ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
                                                     { $$ = new RetCall($11,$12,$25); }
                 ;
 
 NoRetCall       :   T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call 
                         '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' 
                         T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant 
-                        ':' T_IntConstant Integer '(' T_Nil ')' '(' Junk ')'
+                        ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
                                                     { $$ = new NoRetCall($17); }
                 ;
 
@@ -405,6 +423,11 @@ Junk            :   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntCo
                                                     {  }
                 |   '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
                                                     {  }
+                ;
+
+Junk2           :    T_Nil          { }
+                |    T_ExprList '(' Operand ')' '(' Junk2 ')' { }
+                |    T_ExprList TypeInfo '(' Operand ')' '(' Junk2 ')' { }
                 ;
 
 %%
