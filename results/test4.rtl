@@ -276,7 +276,7 @@
         (reg:DI 117)) "test1.c":9 81 {*movdi_internal}
      (nil))
 (call_insn 62 61 63 8 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("binary_search") [flags 0x3]  <function_decl 0x7ff398854e00 binary_search>) [0 binary_search S1 A8])
+        (call (mem:QI (symbol_ref:DI ("binary_search") [flags 0x3]  <function_decl 0x7fe17a936e00 binary_search>) [0 binary_search S1 A8])
             (const_int 0 [0]))) "test1.c":9 676 {*call_value}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))
@@ -338,7 +338,7 @@
         (reg:DI 121)) "test1.c":10 81 {*movdi_internal}
      (nil))
 (call_insn 77 76 78 9 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("binary_search") [flags 0x3]  <function_decl 0x7ff398854e00 binary_search>) [0 binary_search S1 A8])
+        (call (mem:QI (symbol_ref:DI ("binary_search") [flags 0x3]  <function_decl 0x7fe17a936e00 binary_search>) [0 binary_search S1 A8])
             (const_int 0 [0]))) "test1.c":10 676 {*call_value}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))
@@ -372,64 +372,53 @@
 
 ;; Function main (main, funcdef_no=1, decl_uid=1799, cgraph_uid=1, symbol_order=1)
 
-(note 1 0 4 NOTE_INSN_DELETED)
+(note 1 0 3 NOTE_INSN_DELETED)
 ;; basic block 2, loop depth 0, count 0, freq 0, maybe hot
-;;  prev block 0, next block 6, flags: (NEW, REACHABLE, RTL, MODIFIED)
+;;  prev block 0, next block 1, flags: (NEW, REACHABLE, RTL)
 ;;  pred:       ENTRY (FALLTHRU)
-(note 4 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
-(note 2 4 3 2 NOTE_INSN_FUNCTION_BEG)
-(insn 3 2 6 2 (parallel [
-            (set (mem/v/f/c:DI (plus:DI (reg/f:DI 20 frame)
-                        (const_int -8 [0xfffffffffffffff8])) [3 D.1817+0 S8 A64])
-                (unspec:DI [
-                        (const_int 40 [0x28])
-                    ] UNSPEC_SP_TLS_SET))
-            (set (scratch:DI)
-                (const_int 0 [0]))
-            (clobber (reg:CC 17 flags))
-        ]) "test1.c":13 1012 {stack_tls_protect_set_di}
-     (nil))
-(insn 6 3 7 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+(note 3 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(note 2 3 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 6 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
                 (const_int -32 [0xffffffffffffffe0])) [1 a+0 S4 A64])
         (const_int 3 [0x3])) "test1.c":14 82 {*movsi_internal}
      (nil))
-(insn 7 6 8 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+(insn 6 5 7 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
                 (const_int -28 [0xffffffffffffffe4])) [1 a+4 S4 A32])
         (const_int 5 [0x5])) "test1.c":14 82 {*movsi_internal}
      (nil))
-(insn 8 7 9 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+(insn 7 6 8 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
                 (const_int -24 [0xffffffffffffffe8])) [1 a+8 S4 A64])
         (const_int 11 [0xb])) "test1.c":14 82 {*movsi_internal}
      (nil))
-(insn 9 8 10 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+(insn 8 7 9 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
                 (const_int -20 [0xffffffffffffffec])) [1 a+12 S4 A32])
         (const_int 33 [0x21])) "test1.c":14 82 {*movsi_internal}
      (nil))
-(insn 10 9 11 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+(insn 9 8 10 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
                 (const_int -16 [0xfffffffffffffff0])) [1 a+16 S4 A64])
         (const_int 71 [0x47])) "test1.c":14 82 {*movsi_internal}
      (nil))
-(insn 11 10 12 2 (parallel [
+(insn 10 9 11 2 (parallel [
             (set (reg:DI 89)
                 (plus:DI (reg/f:DI 20 frame)
                     (const_int -32 [0xffffffffffffffe0])))
             (clobber (reg:CC 17 flags))
         ]) "test1.c":15 218 {*adddi_1}
      (nil))
-(insn 12 11 13 2 (set (reg:SI 2 cx)
+(insn 11 10 12 2 (set (reg:SI 2 cx)
         (const_int 33 [0x21])) "test1.c":15 82 {*movsi_internal}
      (nil))
-(insn 13 12 14 2 (set (reg:SI 1 dx)
+(insn 12 11 13 2 (set (reg:SI 1 dx)
         (const_int 4 [0x4])) "test1.c":15 82 {*movsi_internal}
      (nil))
-(insn 14 13 15 2 (set (reg:SI 4 si)
+(insn 13 12 14 2 (set (reg:SI 4 si)
         (const_int 0 [0])) "test1.c":15 82 {*movsi_internal}
      (nil))
-(insn 15 14 16 2 (set (reg:DI 5 di)
+(insn 14 13 15 2 (set (reg:DI 5 di)
         (reg:DI 89)) "test1.c":15 81 {*movdi_internal}
      (nil))
-(call_insn 16 15 17 2 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("binary_search") [flags 0x3]  <function_decl 0x7ff398854e00 binary_search>) [0 binary_search S1 A8])
+(call_insn 15 14 16 2 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("binary_search") [flags 0x3]  <function_decl 0x7fe17a936e00 binary_search>) [0 binary_search S1 A8])
             (const_int 0 [0]))) "test1.c":15 676 {*call_value}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))
@@ -437,62 +426,23 @@
             (expr_list:SI (use (reg:SI 1 dx))
                 (expr_list:SI (use (reg:SI 2 cx))
                     (nil))))))
-(insn 17 16 18 2 (set (reg:SI 90)
+(insn 16 15 17 2 (set (reg:SI 90)
         (reg:SI 0 ax)) "test1.c":15 82 {*movsi_internal}
      (nil))
-(insn 18 17 19 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -36 [0xffffffffffffffdc])) [1 pos+0 S4 A32])
+(insn 17 16 18 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -4 [0xfffffffffffffffc])) [1 pos+0 S4 A32])
         (reg:SI 90)) "test1.c":15 82 {*movsi_internal}
      (nil))
-(insn 19 18 22 2 (set (reg:SI 87 [ _9 ])
+(insn 18 17 21 2 (set (reg:SI 87 [ _9 ])
         (const_int 0 [0])) "test1.c":16 82 {*movsi_internal}
      (nil))
-(insn 22 19 26 2 (set (reg:SI 88 [ <retval> ])
+(insn 21 18 25 2 (set (reg:SI 88 [ <retval> ])
         (reg:SI 87 [ _9 ])) 82 {*movsi_internal}
      (nil))
-(insn 26 22 27 2 (set (reg/i:SI 0 ax)
+(insn 25 21 26 2 (set (reg/i:SI 0 ax)
         (reg:SI 88 [ <retval> ])) "test1.c":17 82 {*movsi_internal}
      (nil))
-(insn 27 26 28 2 (parallel [
-            (set (reg:CCZ 17 flags)
-                (unspec:CCZ [
-                        (mem/v/f/c:DI (plus:DI (reg/f:DI 20 frame)
-                                (const_int -8 [0xfffffffffffffff8])) [3 D.1817+0 S8 A64])
-                        (const_int 40 [0x28])
-                    ] UNSPEC_SP_TLS_TEST))
-            (clobber (scratch:DI))
-        ]) "test1.c":17 1016 {stack_tls_protect_test_di}
-     (nil))
-(jump_insn 28 27 34 2 (set (pc)
-        (if_then_else (eq (reg:CCZ 17 flags)
-                (const_int 0 [0]))
-            (label_ref 31)
-            (pc))) "test1.c":17 627 {*jcc_1}
-     (nil)
- -> 31)
-;;  succ:       7
-;;              6 (FALLTHRU)
-
-;; basic block 6, loop depth 0, count 0, freq 0, maybe hot
-;;  prev block 2, next block 7, flags: (NEW, REACHABLE, RTL, MODIFIED)
-;;  pred:       2 (FALLTHRU)
-(note 34 28 29 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
-(call_insn 29 34 30 6 (call (mem:QI (symbol_ref:DI ("__stack_chk_fail") [flags 0x41]  <function_decl 0x7ff398879800 __stack_chk_fail>) [0 __stack_chk_fail S1 A8])
-        (const_int 0 [0])) "test1.c":17 665 {*call}
-     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
-        (expr_list:REG_NORETURN (const_int 0 [0])
-            (expr_list:REG_EH_REGION (const_int 0 [0])
-                (nil))))
-    (nil))
-;;  succ:      
-
-(barrier 30 29 31)
-;; basic block 7, loop depth 0, count 0, freq 0, maybe hot
-;;  prev block 6, next block 1, flags: (NEW, REACHABLE, RTL)
-;;  pred:       2
-(code_label 31 30 35 7 8 (nil) [1 uses])
-(note 35 31 32 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
-(insn 32 35 0 7 (use (reg/i:SI 0 ax)) "test1.c":17 -1
+(insn 26 25 0 2 (use (reg/i:SI 0 ax)) "test1.c":17 -1
      (nil))
 ;;  succ:       EXIT [100.0%]  (FALLTHRU)
 

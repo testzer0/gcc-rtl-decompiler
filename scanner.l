@@ -82,10 +82,13 @@ END_IGNORE3     (">")
 "sign_extend:"		{ return T_SiExtend; }
 "zero_extend:"		{ return T_ZeExtend; }
 "compare:"			{ return T_Compare; }
+"neg"				{ return T_Neg; }
 "ltu"				{ return T_Ltu; }
 "gtu"				{ return T_Gtu; }
 "lt" 				{ return T_Lt; }
 "gt" 				{ return T_Gt; }
+"leu"				{ return T_Leu; }
+"geu"				{ return T_Geu; }
 "le" 				{ return T_Le; }
 "ge"				{ return T_Ge; }
 "eq"				{ return T_Eq; }

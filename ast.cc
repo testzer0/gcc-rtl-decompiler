@@ -14,8 +14,16 @@ Node::Node() {
 }
 
 void Node::Print(int indentlevel, const char *label) {
-    int num = 3*indentlevel; 
-    printf("%*s%s",num,"",GetPrintNameForNode());
+    // int num = 3*indentlevel; 
+    //printf("%*s%s",num,"",GetPrintNameForNode());
+    if (indentlevel == 0)
+        printf("%s",GetPrintNameForNode());
+    else {
+        for (int i = 0; i < indentlevel-1; i++) {
+            printf("|   ");
+        }
+        printf("+==> %s",GetPrintNameForNode());
+    }
     PrintChildren(indentlevel);
 }
 
@@ -407,6 +415,17 @@ void ConditionExpr::PrintChildren(int indentlevel) {
     op2->Print(indentlevel+1);
 }
 
+SymbolRefExpr::SymbolRefExpr(TypeInfo *t, const char *s) {
+    Assert(t != NULL && s != NULL);
+    (ti = t)->SetParent(this);
+    sym = strdup(s);
+}
+
+void SymbolRefExpr::PrintChildren(int indentlevel) {
+    printf("\n");
+    ti->Print(indentlevel+1);
+}
+
 JumpInsn::JumpInsn(Dest *d) {
     Assert(d != NULL);
     (dest = d)->SetParent(this);
@@ -415,6 +434,16 @@ JumpInsn::JumpInsn(Dest *d) {
 void JumpInsn::PrintChildren(int indentlevel) {
     printf("\n");
     dest->Print(indentlevel+1);
+}
+
+NegOperand::NegOperand(Operand *o) {
+    Assert(o != NULL);
+    (op = o)->SetParent(this);
+}
+
+void NegOperand::PrintChildren(int indentlevel) {
+    printf("\n");
+    op->Print(indentlevel+1);
 }
 
 Label::Label(int lno) {

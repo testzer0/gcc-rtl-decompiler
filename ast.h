@@ -526,6 +526,18 @@ class ConditionExpr : public Expr {
         void PrintChildren(int indentlevel);
 };
 
+class SymbolRefExpr : public Expr {
+     protected:
+        TypeInfo *ti;
+        const char *sym;
+    public:
+        SymbolRefExpr(TypeInfo *t, const char *s);
+        const char *GetPrintNameForNode() {
+            return "SymbolRefExpr";
+        }
+        void PrintChildren(int indentlevel);
+};
+
 class JumpInsn : public Stmt {
     protected:
         Dest *dest;
@@ -542,6 +554,17 @@ class Dest : public Operand {
         Dest() : Operand() {}
         Dest(yyltype loc) : Operand(loc) {}
         // Dest is also of two types, label or if_then_else
+};
+
+class NegOperand : public Operand {
+    protected:
+        Operand *op;
+    public:
+        NegOperand(Operand *o);
+        const char *GetPrintNameForNode() {
+            return "NegOperand";
+        }
+        void PrintChildren(int indentlevel);
 };
 
 class Label : public Dest {

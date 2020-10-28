@@ -35,6 +35,7 @@
     ExtendOperand *extendoperand;
     DerefOperand *derefoperand;
     SymbolRefOperand *symbolrefoperand;
+    NegOperand *negoperand;
     TypeInfo *typeinfo;
     LocInfo *locinfo;
     MemType *memtype;
@@ -56,6 +57,7 @@
     SubregExpr *subregexpr;
     CompareExpr *compareexpr;
     ConditionExpr *conditionexpr;
+    SymbolRefExpr *symbolrefexpr;
     JumpInsn *jumpinsn;
     Dest *dest;
     Label *label;
@@ -77,7 +79,7 @@
 %token T_IFlag T_VFlag T_FFlag T_CFlag T_SIType T_DIType T_QIType T_CCType T_CCZType T_CCGCType
 %token T_Plus T_Minus T_Mult T_Div T_Lshift T_Ashift T_LshiftRt T_AshiftRt T_Subreg T_ExprList 
 %token T_EndPara T_RArrow T_SiExtend T_Compare T_Lt T_Gt T_Le T_Ge T_Eq T_Ne T_CodeLabel T_UDiv
-%token T_Mod T_UMod T_CCGOCType T_ZeExtend T_Gtu T_Ltu
+%token T_Mod T_UMod T_CCGOCType T_ZeExtend T_Gtu T_Ltu T_Leu T_Geu T_Neg
 
 %token <stringConstant> T_StringConstant
 %token <integerConstant> T_IntConstant
@@ -106,6 +108,7 @@
 %type <extendoperand> ExtendOperand
 %type <derefoperand> DerefOperand;
 %type <symbolrefoperand> SymbolRefOperand
+%type <negoperand> NegOperand
 %type <typeinfo> TypeInfo
 %type <locinfo> LocInfo
 %type <memtype> MemType
@@ -127,6 +130,7 @@
 %type <subregexpr> SubregExpr
 %type <compareexpr> CompareExpr
 %type <conditionexpr> ConditionExpr
+%type <symbolrefexpr> SymbolRefExpr
 %type <jumpinsn> JumpInsn
 %type <dest> Dest
 %type <label> Label
@@ -238,6 +242,7 @@ Operand         :   IntOperand                  { $$ = $1; }
                 |   ExtendOperand               { $$ = $1; }
                 |   SymbolRefOperand            { $$ = $1; }
                 |   DerefOperand                { $$ = $1; }
+                |   NegOperand                  { $$ = $1; }
                 |   Dest                        { $$ = $1; }
                 ;
 
@@ -259,6 +264,7 @@ ExprOperand     :   LocInfo ':' TypeInfo Expr   { $$ = new ExprOperand($1,$3,$4)
                 |   UModExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   SubregExpr                  { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   ConditionExpr               { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   SymbolRefExpr               { $$ = new ExprOperand(NULL,NULL,$1); }
                 ;
 
 ExtendOperand   :   T_SiExtend TypeInfo '(' Operand ')' { $$ = new ExtendOperand($2,$4); }
@@ -269,6 +275,10 @@ DerefOperand    :   LocInfo ':' TypeInfo '(' Operand ')' { $$ = new DerefOperand
                 ;
 
 SymbolRefOperand :  T_SymbolRef Flags ':' T_DIType '(' T_StringConstant ')' { $$ = new SymbolRefOperand($6); }
+                ;
+
+NegOperand      :  T_Neg ':' TypeInfo '(' Operand ')'       { $$ = new NegOperand($5); }
+                |  T_Neg '(' Operand ')'                    { $$ = new NegOperand($3); }
                 ;
 
 LocInfo         :   MemType Flags               { $$ = new LocInfo($1, $2); }
@@ -314,6 +324,7 @@ Expr            :   IntegerExpr                 { $$ = $1; }
                 |   '(' ModExpr ')'             { $$ = $2; }
                 |   '(' UModExpr ')'            { $$ = $2; }
                 |   '(' ConditionExpr ')'       { $$ = $2; }
+                |   '(' SymbolRefExpr ')'       { $$ = $2; }
                 ;
 
 IntegerExpr     :   Integer                     { $$ = new IntegerExpr($1->getValue()); }
@@ -361,6 +372,9 @@ CompareExpr     :   T_Compare TypeInfo '(' Operand ')' '(' Operand ')'  { $$ = n
 ConditionExpr   :   Condition ':' TypeInfo '(' Operand ')' '(' Operand ')' { $$ = new ConditionExpr($1,$3,$5,$8); }
                 ;
 
+SymbolRefExpr   :   T_SymbolRef ':' TypeInfo '(' T_StringConstant ')'  { $$ = new SymbolRefExpr($3,$5); }
+                ;
+
 JumpInsn        :   T_JumpInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set
                       '(' T_Pc ')' '(' Dest ')' ')' T_StringConstant ':' T_IntConstant 
                       Integer '(' T_Nil ')' T_RArrow T_IntConstant      { $$ = new JumpInsn($12); }
@@ -395,6 +409,8 @@ Condition       :   T_Lt                           { $$ = new Condition("lt"); }
                 |   T_Ne                           { $$ = new Condition("ne"); }
                 |   T_Gtu                          { $$ = new Condition("gtu"); }
                 |   T_Ltu                          { $$ = new Condition("ltu"); }
+                |   T_Geu                          { $$ = new Condition("geu"); }
+                |   T_Leu                          { $$ = new Condition("leu"); }
                 ;
 
 Call            :   RetCall                        { $$ = $1; }

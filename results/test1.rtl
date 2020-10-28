@@ -16,7 +16,7 @@
                 (const_int -20 [0xffffffffffffffec])) [1 a+0 S4 A32])) "test1.c":4 82 {*movsi_internal}
      (nil))
 (insn 7 6 8 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -8 [0xfffffffffffffff8])) [1 b+0 S4 A32])
+                (const_int -4 [0xfffffffffffffffc])) [1 b+0 S4 A32])
         (reg:SI 89)) "test1.c":4 82 {*movsi_internal}
      (nil))
 (jump_insn 8 7 9 2 (set (pc)
@@ -32,7 +32,7 @@
 (code_label 29 9 10 4 5 (nil) [1 uses])
 (note 10 29 11 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
 (insn 11 10 12 4 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -4 [0xfffffffffffffffc])) [1 c+0 S4 A32])
+                (const_int -8 [0xfffffffffffffff8])) [1 c+0 S4 A32])
         (const_int 1 [0x1])) "test1.c":6 82 {*movsi_internal}
      (nil))
 (jump_insn 12 11 13 4 (set (pc)
@@ -49,9 +49,9 @@
 (note 14 18 15 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
 (insn 15 14 16 5 (parallel [
             (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                        (const_int -4 [0xfffffffffffffffc])) [1 c+0 S4 A32])
+                        (const_int -8 [0xfffffffffffffff8])) [1 c+0 S4 A32])
                 (ashift:SI (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                            (const_int -4 [0xfffffffffffffffc])) [1 c+0 S4 A32])
+                            (const_int -8 [0xfffffffffffffff8])) [1 c+0 S4 A32])
                     (const_int 1 [0x1])))
             (clobber (reg:CC 17 flags))
         ]) "test1.c":8 521 {*ashlsi3_1}
@@ -71,7 +71,7 @@
 (insn 20 19 21 6 (set (reg:CCGC 17 flags)
         (compare:CCGC (reg:SI 90)
             (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                    (const_int -4 [0xfffffffffffffffc])) [1 c+0 S4 A32]))) "test1.c":7 7 {*cmpsi_1}
+                    (const_int -8 [0xfffffffffffffff8])) [1 c+0 S4 A32]))) "test1.c":7 7 {*cmpsi_1}
      (nil))
 (jump_insn 21 20 22 6 (set (pc)
         (if_then_else (gt (reg:CCGC 17 flags)
@@ -89,20 +89,20 @@
 (note 22 21 23 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
 (insn 23 22 24 7 (set (reg:SI 91)
         (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -4 [0xfffffffffffffffc])) [1 c+0 S4 A32])) "test1.c":10 82 {*movsi_internal}
+                (const_int -8 [0xfffffffffffffff8])) [1 c+0 S4 A32])) "test1.c":10 82 {*movsi_internal}
      (nil))
 (insn 24 23 25 7 (parallel [
             (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                        (const_int -8 [0xfffffffffffffff8])) [1 b+0 S4 A32])
+                        (const_int -4 [0xfffffffffffffffc])) [1 b+0 S4 A32])
                 (plus:SI (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                            (const_int -8 [0xfffffffffffffff8])) [1 b+0 S4 A32])
+                            (const_int -4 [0xfffffffffffffffc])) [1 b+0 S4 A32])
                     (reg:SI 91)))
             (clobber (reg:CC 17 flags))
         ]) "test1.c":10 217 {*addsi_1}
      (nil))
 (insn 25 24 26 7 (set (reg:SI 92)
         (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -4 [0xfffffffffffffffc])) [1 c+0 S4 A32])) "test1.c":11 82 {*movsi_internal}
+                (const_int -8 [0xfffffffffffffff8])) [1 c+0 S4 A32])) "test1.c":11 82 {*movsi_internal}
      (nil))
 (insn 26 25 27 7 (parallel [
             (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
@@ -123,7 +123,7 @@
 (note 28 27 30 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
 (insn 30 28 31 8 (set (reg:CCGC 17 flags)
         (compare:CCGC (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                    (const_int -8 [0xfffffffffffffff8])) [1 b+0 S4 A32])
+                    (const_int -4 [0xfffffffffffffffc])) [1 b+0 S4 A32])
             (const_int 999 [0x3e7]))) "test1.c":5 7 {*cmpsi_1}
      (nil))
 (jump_insn 31 30 32 8 (set (pc)
@@ -142,7 +142,7 @@
 (note 32 31 33 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
 (insn 33 32 36 9 (set (reg:SI 87 [ _6 ])
         (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -8 [0xfffffffffffffff8])) [1 b+0 S4 A32])) "test1.c":13 82 {*movsi_internal}
+                (const_int -4 [0xfffffffffffffffc])) [1 b+0 S4 A32])) "test1.c":13 82 {*movsi_internal}
      (nil))
 (insn 36 33 40 9 (set (reg:SI 88 [ <retval> ])
         (reg:SI 87 [ _6 ])) "test1.c":13 82 {*movsi_internal}
@@ -172,10 +172,10 @@
 (code_label 4 2 5 3 8 ("gotoboy") [1 uses])
 (note 5 4 6 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
 (insn 6 5 7 3 (set (reg:DI 5 di)
-        (symbol_ref/f:DI ("*.LC0") [flags 0x2]  <var_decl 0x7f1bf80f5750 *.LC0>)) "test1.c":19 81 {*movdi_internal}
+        (symbol_ref/f:DI ("*.LC0") [flags 0x2]  <var_decl 0x7fa6cb344750 *.LC0>)) "test1.c":19 81 {*movdi_internal}
      (nil))
 (call_insn 7 6 8 3 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("puts") [flags 0x41]  <function_decl 0x7f1bf7ff9600 __builtin_puts>) [0 __builtin_puts S1 A8])
+        (call (mem:QI (symbol_ref:DI ("puts") [flags 0x41]  <function_decl 0x7fa6cb248600 __builtin_puts>) [0 __builtin_puts S1 A8])
             (const_int 0 [0]))) "test1.c":19 676 {*call_value}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))

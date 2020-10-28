@@ -1,0 +1,330 @@
+Initializing scanner.
+
+Initializing parser.
+
+Program
+   FuncBody inttochar
+      Note
+      Note
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType mem
+                  Flag c
+               TypeInfo si
+               PlusExpr
+                  TypeInfo di
+                  ExprOperand
+                     LocInfo
+                        MemType reg
+                        Flag f
+                     TypeInfo di
+                     IntegerExpr 20
+                  IntOperand -20
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 5
+      Note
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 89
+            ExprOperand
+               LocInfo
+                  MemType mem
+                  Flag c
+               TypeInfo si
+               PlusExpr
+                  TypeInfo di
+                  ExprOperand
+                     LocInfo
+                        MemType reg
+                        Flag f
+                     TypeInfo di
+                     IntegerExpr 20
+                  IntOperand -20
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType mem
+                  Flag c
+               TypeInfo qi
+               PlusExpr
+                  TypeInfo di
+                  ExprOperand
+                     LocInfo
+                        MemType reg
+                        Flag f
+                     TypeInfo di
+                     IntegerExpr 20
+                  IntOperand -1
+            ExprOperand
+               SubregExpr
+                  TypeInfo qi
+                  ExprOperand
+                     LocInfo
+                        MemType reg
+                     TypeInfo si
+                     IntegerExpr 89
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo qi
+               IntegerExpr 87
+            ExprOperand
+               LocInfo
+                  MemType mem
+                  Flag c
+               TypeInfo qi
+               PlusExpr
+                  TypeInfo di
+                  ExprOperand
+                     LocInfo
+                        MemType reg
+                        Flag f
+                     TypeInfo di
+                     IntegerExpr 20
+                  IntOperand -1
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo qi
+               IntegerExpr 88
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo qi
+               IntegerExpr 87
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+                  Flag i
+               TypeInfo qi
+               IntegerExpr 0
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo qi
+               IntegerExpr 88
+      Insn
+         UseCmd
+   FuncBody main
+      Note
+      Note
+      Note
+      Insn
+         ParallelCmd
+            SetCmd
+               ExprOperand
+                  LocInfo
+                     MemType reg
+                  TypeInfo di
+                  IntegerExpr 91
+               ExprOperand
+                  PlusExpr
+                     TypeInfo di
+                     ExprOperand
+                        LocInfo
+                           MemType reg
+                           Flag f
+                        TypeInfo di
+                        IntegerExpr 20
+                     IntOperand -8
+            ClobberCmd
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo di
+               IntegerExpr 4
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo di
+               IntegerExpr 91
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo di
+               IntegerExpr 5
+            SymbolRefOperand "*.LC0"
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo qi
+               IntegerExpr 0
+            IntOperand 0
+      RetCall "*__isoc99_scanf"
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 87
+            ExprOperand
+               LocInfo
+                  MemType mem
+                  Flag c
+               TypeInfo si
+               PlusExpr
+                  TypeInfo di
+                  ExprOperand
+                     LocInfo
+                        MemType reg
+                        Flag f
+                     TypeInfo di
+                     IntegerExpr 20
+                  IntOperand -8
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 5
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 87
+      RetCall "inttochar"
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo qi
+               IntegerExpr 92
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo qi
+               IntegerExpr 0
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType mem
+                  Flag c
+               TypeInfo qi
+               PlusExpr
+                  TypeInfo di
+                  ExprOperand
+                     LocInfo
+                        MemType reg
+                        Flag f
+                     TypeInfo di
+                     IntegerExpr 20
+                  IntOperand -1
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo qi
+               IntegerExpr 92
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 88
+            ExtendOperand
+               TypeInfo si
+               ExprOperand
+                  LocInfo
+                     MemType mem
+                     Flag c
+                  TypeInfo qi
+                  PlusExpr
+                     TypeInfo di
+                     ExprOperand
+                        LocInfo
+                           MemType reg
+                           Flag f
+                        TypeInfo di
+                        IntegerExpr 20
+                     IntOperand -1
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 4
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 88
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo di
+               IntegerExpr 5
+            SymbolRefOperand "*.LC1"
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo qi
+               IntegerExpr 0
+            IntOperand 0
+      RetCall "printf"
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 89
+            IntOperand 0
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 90
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 89
+      Insn
+         SetCmd
+            ExprOperand
+               LocInfo
+                  MemType reg
+                  Flag i
+               TypeInfo si
+               IntegerExpr 0
+            ExprOperand
+               LocInfo
+                  MemType reg
+               TypeInfo si
+               IntegerExpr 90
+      Insn
+         UseCmd
+
