@@ -39,16 +39,34 @@ void Program::PrintChildren(int indentlevel) {
     printf("\n");
 }
 
+void Program::Analyze() {
+    for (int i = 0; i < funcbodylist->NumElements(); i++) 
+        funcbodylist->Nth(i)->Analyze();   
+}
+
 FuncBody::FuncBody(List<Stmt *> *ss, const char *n) {
     Assert(ss != NULL && n != NULL);
     (stmts = ss)->SetParentAll(this);
     name = strdup(n);   
+    numArgs = -1;
+    types = NULL;
 }
 
 void FuncBody::PrintChildren(int indentlevel) {
     printf(" %s\n",name);
     stmts->PrintAll(indentlevel+1);
 } 
+
+void FuncBody::Analyze() {
+    gSymbolTable[string(name)] = (void *)this;
+}
+
+void FuncBody::setTypes(List<string> *ts) {
+    if (numArgs != -1)
+        return;
+    numArgs = ts->NumElements();
+    types = ts;
+}
 
 Integer::Integer(int val) {
     value = val;
@@ -506,6 +524,10 @@ void RetCall::PrintChildren(int indentlevel) {
     // Not too important for now for debugging.
 }
 
+void RetCall::Analyze() {
+    elist->SetArgs(string(fnname));
+}
+
 NoRetCall::NoRetCall(const char *fn, ExprList *el) {
     Assert(fn != NULL && el != NULL);
     fnname = fn;
@@ -517,6 +539,10 @@ void NoRetCall::PrintChildren(int indentlevel) {
     elist->Print(indentlevel+1);
 }
 
+void NoRetCall::Analyze() {
+    elist->SetArgs(string(fnname));
+}
+
 ExprList::ExprList(List<pair<int,const char*>> *as) {
     args = as;
 }
@@ -526,4 +552,22 @@ void ExprList::PrintChildren(int indentlevel) {
         printf(" (%s,%d)", args->Nth(i).second, args->Nth(i).first);
     }
     printf("\n");
+}
+
+void ExprList::SetArgs(string name) {
+    FuncBody *fb = (FuncBody *)gSymbolTable[name];
+    if (!fb) // imported fn
+        return;
+    List<string> *types = new List<string>;
+    for (int i = 0; i < args->NumElements(); i++) {
+        string temp = args->Nth(i).second;
+        if (temp == "qi") {
+            types->Append("char");
+        }
+        else if (temp == "si") {
+            types->Append("int");
+        }
+        else types->Append("long long int");
+    }
+    fb->setTypes(types);
 }
