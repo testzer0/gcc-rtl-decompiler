@@ -2,6 +2,8 @@
 #include <string.h> // strdup
 #include <stdio.h>  // printf
 #include "list.h"
+#include <bits/stdc++.h>  // later replace by specific header
+
 
 Node::Node(yyltype loc) {
     location = new yyltype(loc);
@@ -516,13 +518,13 @@ void NoRetCall::PrintChildren(int indentlevel) {
     elist->Print(indentlevel+1);
 }
 
-ExprList::ExprList(List<int> *as) {
+ExprList::ExprList(List<pair<int,const char*>> *as) {
     args = as;
 }
 
 void ExprList::PrintChildren(int indentlevel) {
     for (int i = 0; i < args->NumElements(); i++) {
-        printf(" %d", args->Nth(i));
+        printf(" (%s,%d)", args->Nth(i).second, args->Nth(i).first);
     }
     printf("\n");
 }

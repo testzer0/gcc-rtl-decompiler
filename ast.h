@@ -12,6 +12,7 @@
 #include <stdlib.h>   // for NULL
 #include "location.h"
 #include "list.h"
+#include <bits/stdc++.h>    // later replace by specific header
 
 class Node{
     protected:
@@ -290,6 +291,7 @@ class TypeInfo : public Node {
             return "TypeInfo";
         }
         void PrintChildren(int indentlevel);
+        const char *getType() { return type; }
 };
 
 class LocInfo : public Node {
@@ -665,9 +667,9 @@ class NoRetCall : public Call {
 
 class ExprList : public Node{
     protected:
-        List<int> *args;
+        List<pair<int,const char*>> *args;
     public:
-        ExprList(List<int> *as);
+        ExprList(List<pair<int,const char*>> *as);
         const char *GetPrintNameForNode() {
             return "ExprList";
         }

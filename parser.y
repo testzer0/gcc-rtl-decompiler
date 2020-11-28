@@ -69,7 +69,7 @@
     RetCall *retcall;
     NoRetCall *noretcall;
     ExprList *exprlist;
-    List<int> *exprlistexpr;
+    List<pair<int,const char *>> *exprlistexpr;
 
     int integerConstant;
     const char *stringConstant;
@@ -439,13 +439,13 @@ ExprList        :   ExprListExpr    { $$ = new ExprList($1); }
                 ;
 
 ExprListExpr    :   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-                                                    { ($$ = new List<int>)->Append($9); }
+                                                    { ($$ = new List<pair<int, const char*>>)->Append(make_pair($9,$8->getType())); }
                 |   '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-                                                    { ($$ = new List<int>)->Append($7); }
+                                                    { ($$ = new List<pair<int, const char*>>)->Append(make_pair($7,$6->getType())); }
                 |   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
-                                                    { ($$=$13)->Append($9); }
+                                                    { ($$=$13)->Append(make_pair($9,$8->getType())); }
                 |   '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
-                                                    { ($$=$11)->Append($7); }
+                                                    { ($$=$11)->Append(make_pair($7,$6->getType())); }
                 ;
 
 Junk2           :    T_Nil          { }

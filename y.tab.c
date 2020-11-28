@@ -299,7 +299,7 @@ union YYSTYPE
     RetCall *retcall;
     NoRetCall *noretcall;
     ExprList *exprlist;
-    List<int> *exprlistexpr;
+    List<pair<int,const char *>> *exprlistexpr;
 
     int integerConstant;
     const char *stringConstant;
@@ -2766,25 +2766,25 @@ yyreduce:
 
   case 148:
 #line 442 "parser.y" /* yacc.c:1646  */
-    { ((yyval.exprlistexpr) = new List<int>)->Append((yyvsp[-5].integerConstant)); }
+    { ((yyval.exprlistexpr) = new List<pair<int, const char*>>)->Append(make_pair((yyvsp[-5].integerConstant),(yyvsp[-6].typeinfo)->getType())); }
 #line 2771 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 149:
 #line 444 "parser.y" /* yacc.c:1646  */
-    { ((yyval.exprlistexpr) = new List<int>)->Append((yyvsp[-5].integerConstant)); }
+    { ((yyval.exprlistexpr) = new List<pair<int, const char*>>)->Append(make_pair((yyvsp[-5].integerConstant),(yyvsp[-6].typeinfo)->getType())); }
 #line 2777 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 150:
 #line 446 "parser.y" /* yacc.c:1646  */
-    { ((yyval.exprlistexpr)=(yyvsp[-1].exprlistexpr))->Append((yyvsp[-5].integerConstant)); }
+    { ((yyval.exprlistexpr)=(yyvsp[-1].exprlistexpr))->Append(make_pair((yyvsp[-5].integerConstant),(yyvsp[-6].typeinfo)->getType())); }
 #line 2783 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 151:
 #line 448 "parser.y" /* yacc.c:1646  */
-    { ((yyval.exprlistexpr)=(yyvsp[-1].exprlistexpr))->Append((yyvsp[-5].integerConstant)); }
+    { ((yyval.exprlistexpr)=(yyvsp[-1].exprlistexpr))->Append(make_pair((yyvsp[-5].integerConstant),(yyvsp[-6].typeinfo)->getType())); }
 #line 2789 "y.tab.c" /* yacc.c:1646  */
     break;
 

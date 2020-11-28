@@ -239,7 +239,7 @@ union YYSTYPE
     RetCall *retcall;
     NoRetCall *noretcall;
     ExprList *exprlist;
-    List<int> *exprlistexpr;
+    List<pair<int,const char *>> *exprlistexpr;
 
     int integerConstant;
     const char *stringConstant;
