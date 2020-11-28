@@ -1,125 +1,420 @@
-#include <inc/x86.h>
-#include <inc/elf.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-/**********************************************************************
- * This a dirt simple boot loader, whose sole job is to boot
- * an ELF kernel image from the first IDE hard disk.
- *
- * DISK LAYOUT
- *  * This program(boot.S and main.c) is the bootloader.  It should
- *    be stored in the first sector of the disk.
- *
- *  * The 2nd sector onward holds the kernel image.
- *
- *  * The kernel image must be in ELF format.
- *
- * BOOT UP STEPS
- *  * when the CPU boots it loads the BIOS into memory and executes it
- *
- *  * the BIOS intializes devices, sets of the interrupt routines, and
- *    reads the first sector of the boot device(e.g., hard-drive)
- *    into memory and jumps to it.
- *
- *  * Assuming this boot loader is stored in the first sector of the
- *    hard-drive, this code takes over...
- *
- *  * control starts in boot.S -- which sets up protected mode,
- *    and a stack so C code then run, then calls bootmain()
- *
- *  * bootmain() in this file takes over, reads in the kernel and jumps to it.
- **********************************************************************/
-
-#define SECTSIZE    512
-#define ELFHDR      ((struct Elf *) 0x10000) // scratch space
-
-void readsect(void*, uint32_t);
-void readseg(uint32_t, uint32_t, uint32_t);
-
-void
-bootmain(void)
+struct AVLnode
 {
-    struct Proghdr *ph, *eph;
+    int key;
+    struct AVLnode *left;
+    struct AVLnode *right;
+    int height;
+};
+typedef struct AVLnode avlNode;
 
-    // read 1st page off disk
-    readseg((uint32_t) ELFHDR, SECTSIZE*8, 0);
+int max(int a, int b) { return (a > b) ? a : b; }
 
-    // is this a valid ELF?
-    if (ELFHDR->e_magic != ELF_MAGIC)
-        goto bad;
+avlNode *newNode(int key)
+{
+    avlNode *node = (avlNode *)malloc(sizeof(avlNode));
 
-    // load each program segment (ignores ph flags)
-    ph = (struct Proghdr *) ((uint8_t *) ELFHDR + ELFHDR->e_phoff);
-    eph = ph + ELFHDR->e_phnum;
-    for (; ph < eph; ph++)
-        // p_pa is the load address of this segment (as well
-        // as the physical address)
-        readseg(ph->p_pa, ph->p_memsz, ph->p_offset);
+    if (node == NULL)
+        printf("!! Out of Space !!\n");
+    else
+    {
+        node->key = key;
+        node->left = NULL;
+        node->right = NULL;
+        node->height = 0;
+    }
 
-    // call the entry point from the ELF header
-    // note: does not return!
-    ((void (*)(void)) (ELFHDR->e_entry))();
-
-bad:
-    outw(0x8A00, 0x8A00);
-    outw(0x8A00, 0x8E00);
-    while (1)
-        /* do nothing */;
+    return node;
 }
 
-// Read 'count' bytes at 'offset' from kernel into physical address 'pa'.
-// Might copy more than asked
-void
-readseg(uint32_t pa, uint32_t count, uint32_t offset)
+int nodeHeight(avlNode *node)
 {
-    uint32_t end_pa;
+    if (node == NULL)
+        return -1;
+    else
+        return (node->height);
+}
 
-    end_pa = pa + count;
+int heightDiff(avlNode *node)
+{
+    if (node == NULL)
+        return 0;
+    else
+        return (nodeHeight(node->left) - nodeHeight(node->right));
+}
 
-    // round down to sector boundary
-    pa &= ~(SECTSIZE - 1);
+/* Returns the node with min key in the left subtree*/
+avlNode *minNode(avlNode *node)
+{
+    avlNode *temp = node;
 
-    // translate from bytes to sectors, and kernel starts at sector 1
-    offset = (offset / SECTSIZE) + 1;
+    while (temp->left != NULL) temp = temp->left;
 
-    // If this is too slow, we could read lots of sectors at a time.
-    // We'd write more to memory than asked, but it doesn't matter --
-    // we load in increasing order.
-    while (pa < end_pa) {
-        // Since we haven't enabled paging yet and we're using
-        // an identity segment mapping (see boot.S), we can
-        // use physical addresses directly.  This won't be the
-        // case once JOS enables the MMU.
-        readsect((uint8_t*) pa, offset);
-        pa += SECTSIZE;
-        offset++;
+    return temp;
+}
+
+void printAVL(avlNode *node, int level)
+{
+    int i;
+    if (node != NULL)
+    {
+        printAVL(node->right, level + 1);
+        printf("\n\n");
+
+        for (i = 0; i < level; i++) printf("\t");
+
+        printf("%d", node->key);
+
+        printAVL(node->left, level + 1);
     }
 }
 
-void
-waitdisk(void)
+avlNode *rightRotate(avlNode *z)
 {
-    // wait for disk reaady
-    while ((inb(0x1F7) & 0xC0) != 0x40)
-        /* do nothing */;
+    avlNode *y = z->left;
+    avlNode *T3 = y->right;
+
+    y->right = z;
+    z->left = T3;
+
+    z->height = (max(nodeHeight(z->left), nodeHeight(z->right)) + 1);
+    y->height = (max(nodeHeight(y->left), nodeHeight(y->right)) + 1);
+
+    return y;
 }
 
-void
-readsect(void *dst, uint32_t offset)
+avlNode *leftRotate(avlNode *z)
 {
-    // wait for disk to be ready
-    waitdisk();
+    avlNode *y = z->right;
+    avlNode *T3 = y->left;
 
-    outb(0x1F2, 1);     // count = 1
-    outb(0x1F3, offset);
-    outb(0x1F4, offset >> 8);
-    outb(0x1F5, offset >> 16);
-    outb(0x1F6, (offset >> 24) | 0xE0);
-    outb(0x1F7, 0x20);  // cmd 0x20 - read sectors
+    y->left = z;
+    z->right = T3;
 
-    // wait for disk to be ready
-    waitdisk();
+    z->height = (max(nodeHeight(z->left), nodeHeight(z->right)) + 1);
+    y->height = (max(nodeHeight(y->left), nodeHeight(y->right)) + 1);
 
-    // read a sector
-    insl(0x1F0, dst, SECTSIZE/4);
+    return y;
 }
 
+avlNode *LeftRightRotate(avlNode *z)
+{
+    z->left = leftRotate(z->left);
+
+    return (rightRotate(z));
+}
+
+avlNode *RightLeftRotate(avlNode *z)
+{
+    z->right = rightRotate(z->right);
+
+    return (leftRotate(z));
+}
+
+avlNode *insert(avlNode *node, int key)
+{
+    if (node == NULL)
+        return (newNode(key));
+
+    /*Binary Search Tree insertion*/
+
+    if (key < node->key)
+        node->left =
+            insert(node->left, key); /*Recursive insertion in L subtree*/
+    else if (key > node->key)
+        node->right =
+            insert(node->right, key); /*Recursive insertion in R subtree*/
+
+    /* Node  Height as per the AVL formula*/
+    node->height = (max(nodeHeight(node->left), nodeHeight(node->right)) + 1);
+
+    /*Checking for the balance condition*/
+    int balance = heightDiff(node);
+
+    /*Left Left */
+    if (balance > 1 && key < (node->left->key))
+        return rightRotate(node);
+
+    /*Right Right */
+    if (balance < -1 && key > (node->right->key))
+        return leftRotate(node);
+
+    /*Left Right */
+    if (balance > 1 && key > (node->left->key))
+    {
+        node = LeftRightRotate(node);
+    }
+
+    /*Right Left */
+    if (balance < -1 && key < (node->right->key))
+    {
+        node = RightLeftRotate(node);
+    }
+
+    return node;
+}
+
+avlNode *delete (avlNode *node, int queryNum)
+{
+    if (node == NULL)
+        return node;
+
+    if (queryNum < node->key)
+        node->left =
+            delete (node->left, queryNum); /*Recursive deletion in L subtree*/
+    else if (queryNum > node->key)
+        node->right =
+            delete (node->right, queryNum); /*Recursive deletion in R subtree*/
+    else
+    {
+        /*Single or No Child*/
+        if ((node->left == NULL) || (node->right == NULL))
+        {
+            avlNode *temp = node->left ? node->left : node->right;
+
+            /* No Child*/
+            if (temp == NULL)
+            {
+                temp = node;
+                node = NULL;
+            }
+            else /*Single Child : copy data to the parent*/
+                *node = *temp;
+
+            free(temp);
+        }
+        else
+        {
+            /*Two Child*/
+
+            /*Get the smallest key in the R subtree*/
+            avlNode *temp = minNode(node->right);
+            node->key = temp->key; /*Copy that to the root*/
+            node->right =
+                delete (node->right,
+                        temp->key); /*Delete the smallest in the R subtree.*/
+        }
+    }
+
+    /*single node in tree*/
+    if (node == NULL)
+        return node;
+
+    /*Update height*/
+    node->height = (max(nodeHeight(node->left), nodeHeight(node->right)) + 1);
+
+    int balance = heightDiff(node);
+
+    /*Left Left */
+    if ((balance > 1) && (heightDiff(node->left) >= 0))
+        return rightRotate(node);
+
+    /*Left Right */
+    if ((balance > 1) && (heightDiff(node->left) < 0))
+    {
+        node = LeftRightRotate(node);
+    }
+
+    /*Right Right */
+    if ((balance < -1) && (heightDiff(node->right) >= 0))
+        return leftRotate(node);
+
+    /*Right Left */
+    if ((balance < -1) && (heightDiff(node->right) < 0))
+    {
+        node = RightLeftRotate(node);
+    }
+
+    return node;
+}
+
+avlNode *findNode(avlNode *node, int queryNum)
+{
+    if (node != NULL)
+    {
+        if (queryNum < node->key)
+            node = findNode(node->left, queryNum);
+        else if (queryNum > node->key)
+            node = findNode(node->right, queryNum);
+    }
+
+    return node;
+}
+
+void printPreOrder(avlNode *node)
+{
+    if (node == NULL)
+        return;
+
+    printf("  %d  ", (node->key));
+    printPreOrder(node->left);
+    printPreOrder(node->right);
+}
+
+void printInOrder(avlNode *node)
+{
+    if (node == NULL)
+        return;
+    printInOrder(node->left);
+    printf("  %d  ", (node->key));
+    printInOrder(node->right);
+}
+
+void printPostOrder(avlNode *node)
+{
+    if (node == NULL)
+        return;
+    printPostOrder(node->left);
+    printPostOrder(node->right);
+    printf("  %d  ", (node->key));
+}
+
+int main()
+{
+    int choice;
+    int flag = 1;
+    int insertNum;
+    int queryNum;
+
+    avlNode *root = NULL;
+    avlNode *tempNode;
+
+    while (flag == 1)
+    {
+        printf("\n\nEnter the Step to Run : \n");
+
+        printf("\t1: Insert a node into AVL tree\n");
+        printf("\t2: Delete a node in AVL tree\n");
+        printf("\t3: Search a node into AVL tree\n");
+        printf("\t4: printPreOrder (Ro L R) Tree\n");
+        printf("\t5: printInOrder (L Ro R) Tree\n");
+        printf("\t6: printPostOrder (L R Ro) Tree\n");
+        printf("\t7: printAVL Tree\n");
+
+        printf("\t0: EXIT\n");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 0:
+        {
+            flag = 0;
+            printf("\n\t\tExiting, Thank You !!\n");
+            break;
+        }
+
+        case 1:
+        {
+            printf("\n\tEnter the Number to insert: ");
+            scanf("%d", &insertNum);
+
+            tempNode = findNode(root, insertNum);
+
+            if (tempNode != NULL)
+                printf("\n\t %d Already exists in the tree\n", insertNum);
+            else
+            {
+                printf("\n\tPrinting AVL Tree\n");
+                printAVL(root, 1);
+                printf("\n");
+
+                root = insert(root, insertNum);
+                printf("\n\tPrinting AVL Tree\n");
+                printAVL(root, 1);
+                printf("\n");
+            }
+
+            break;
+        }
+
+        case 2:
+        {
+            printf("\n\tEnter the Number to Delete: ");
+            scanf("%d", &queryNum);
+
+            tempNode = findNode(root, queryNum);
+
+            if (tempNode == NULL)
+                printf("\n\t %d Does not exist in the tree\n", queryNum);
+            else
+            {
+                printf("\n\tPrinting AVL Tree\n");
+                printAVL(root, 1);
+                printf("\n");
+                root = delete (root, queryNum);
+
+                printf("\n\tPrinting AVL Tree\n");
+                printAVL(root, 1);
+                printf("\n");
+            }
+
+            break;
+        }
+
+        case 3:
+        {
+            printf("\n\tEnter the Number to Search: ");
+            scanf("%d", &queryNum);
+
+            tempNode = findNode(root, queryNum);
+
+            if (tempNode == NULL)
+                printf("\n\t %d : Not Found\n", queryNum);
+            else
+            {
+                printf("\n\t %d : Found at height %d \n", queryNum,
+                       tempNode->height);
+
+                printf("\n\tPrinting AVL Tree\n");
+                printAVL(root, 1);
+                printf("\n");
+            }
+
+            break;
+        }
+
+        case 4:
+        {
+            printf("\nPrinting Tree preOrder\n");
+            printPreOrder(root);
+
+            break;
+        }
+
+        case 5:
+        {
+            printf("\nPrinting Tree inOrder\n");
+            printInOrder(root);
+
+            break;
+        }
+
+        case 6:
+        {
+            printf("\nPrinting Tree PostOrder\n");
+            printPostOrder(root);
+
+            break;
+        }
+
+        case 7:
+        {
+            printf("\nPrinting AVL Tree\n");
+            printAVL(root, 1);
+
+            break;
+        }
+
+        default:
+        {
+            flag = 0;
+            printf("\n\t\tExiting, Thank You !!\n");
+            break;
+        }
+        }
+    }
+
+    return 0;
+}

@@ -216,18 +216,20 @@ Grammar
   142 Call: RetCall
   143     | NoRetCall
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
-  146 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  147     | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  148     | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
-  149     | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
+  146 ExprList: ExprListExpr
 
-  150 Junk2: T_Nil
-  151      | T_ExprList '(' Operand ')' '(' Junk2 ')'
-  152      | T_ExprList TypeInfo '(' Operand ')' '(' Junk2 ')'
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  148             | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  149             | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
+  150             | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
+
+  151 Junk2: T_Nil
+  152      | T_ExprList '(' Operand ')' '(' Junk2 ')'
+  153      | T_ExprList TypeInfo '(' Operand ')' '(' Junk2 ')'
 
 
 Terminals, with rules where they appear
@@ -236,14 +238,14 @@ $end (0) 0
 '(' (40) 7 8 9 10 11 12 16 17 18 21 22 23 24 25 26 33 34 35 36 37 38
     39 40 65 66 67 68 69 70 90 91 92 93 94 95 96 97 98 99 100 101 102
     103 104 106 107 108 109 110 111 112 113 114 115 116 117 118 119
-    120 121 122 128 129 131 144 145 146 147 148 149 151 152
+    120 121 122 128 129 131 144 145 147 148 149 150 152 153
 ')' (41) 7 8 9 10 11 12 16 17 18 21 22 23 24 25 26 33 34 35 36 37 38
     39 40 65 66 67 68 69 70 90 91 92 93 94 95 96 97 98 99 100 101 102
     103 104 106 107 108 109 110 111 112 113 114 115 116 117 118 119
-    120 121 122 128 129 131 144 145 146 147 148 149 151 152
+    120 121 122 128 129 131 144 145 147 148 149 150 152 153
 '-' (45) 19
 ':' (58) 21 22 25 26 35 36 37 38 40 49 67 68 69 119 120 121 127 129
-    144 145 146 147 148 149
+    144 145 147 148 149 150
 error (256)
 T_Note (258) 13 14
 T_Insn (259) 21 22 23 24 25 26
@@ -251,17 +253,17 @@ T_JumpInsn (260) 121 122
 T_CallInsn (261) 144 145
 T_Call (262) 144 145
 T_SymbolRef (263) 68 120 144 145
-T_Nil (264) 16 17 21 22 23 24 25 26 121 122 146 147 150
+T_Nil (264) 16 17 21 22 23 24 25 26 121 122 147 148 151
 T_Parallel (265) 32
 T_TIType (266) 84
 T_Clobber (267) 35 36 37 38
 T_Set (268) 39 121 122 144
-T_Use (269) 40 146 147 148 149
+T_Use (269) 40 147 148 149 150
 T_IfThenElse (270) 128 129
 T_ConstInt (271) 25 48 144 145
 T_Barrier (272) 15
 T_Mem (273) 37 38 79 144 145
-T_Reg (274) 35 36 40 80 144 146 147 148 149
+T_Reg (274) 35 36 40 80 144 147 148 149 150
 T_Pc (275) 121 122 130
 T_LabelRef (276) 126 127
 T_IFlag (277) 75
@@ -283,7 +285,7 @@ T_Ashift (292) 114
 T_LshiftRt (293) 115
 T_AshiftRt (294) 116
 T_Subreg (295) 117
-T_ExprList (296) 22 23 146 148 151 152
+T_ExprList (296) 22 23 147 149 152 153
 T_EndPara (297) 32
 T_RArrow (298) 121 122
 T_SiExtend (299) 65
@@ -307,7 +309,7 @@ T_Geu (316) 140
 T_Neg (317) 69 70
 T_StringConstant (318) 18 21 22 25 26 68 120 121 144 145
 T_IntConstant (319) 13 14 15 16 17 18 19 20 21 22 23 24 25 26 35 36
-    40 121 122 126 127 144 145 146 147 148 149
+    40 121 122 126 127 144 145 147 148 149 150
 T_FunBegin (320) 4
 
 
@@ -353,7 +355,7 @@ UseCmd (87)
 Operand (88)
     on left: 41 42 43 44 45 46 47, on right: 22 23 38 39 65 66 67 69
     70 106 107 108 109 110 111 112 113 114 115 116 117 118 119 128
-    129 131 151 152
+    129 131 152 153
 IntOperand (89)
     on left: 48, on right: 41
 ExprOperand (90)
@@ -378,7 +380,7 @@ MemType (98)
 TypeInfo (99)
     on left: 81 82 83 84 85 86 87 88, on right: 36 40 49 65 66 67 69
     106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 127
-    129 144 146 147 148 149 152
+    129 144 147 148 149 150 153
 Expr (100)
     on left: 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104,
     on right: 49
@@ -435,10 +437,12 @@ RetCall (125)
     on left: 144, on right: 142
 NoRetCall (126)
     on left: 145, on right: 143
-Junk (127)
-    on left: 146 147 148 149, on right: 144 145 148 149
-Junk2 (128)
-    on left: 150 151 152, on right: 144 145 151 152
+ExprList (127)
+    on left: 146, on right: 144 145
+ExprListExpr (128)
+    on left: 147 148 149 150, on right: 146 149 150
+Junk2 (129)
+    on left: 151 152 153, on right: 144 145 152 153
 
 
 State 0
@@ -577,8 +581,8 @@ State 12
 
 State 13
 
-  144 RetCall: T_CallInsn . T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
-  145 NoRetCall: T_CallInsn . T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn . T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
+  145 NoRetCall: T_CallInsn . T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_IntConstant  shift, and go to state 28
 
@@ -692,8 +696,8 @@ State 27
 
 State 28
 
-  144 RetCall: T_CallInsn T_IntConstant . T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
-  145 NoRetCall: T_CallInsn T_IntConstant . T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant . T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
+  145 NoRetCall: T_CallInsn T_IntConstant . T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_IntConstant  shift, and go to state 40
 
@@ -786,8 +790,8 @@ State 39
 
 State 40
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant . T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant . T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant . T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant . T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_IntConstant  shift, and go to state 46
 
@@ -840,8 +844,8 @@ State 45
 
 State 46
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant . T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant . T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant . T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant . T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_IntConstant  shift, and go to state 52
 
@@ -891,8 +895,8 @@ State 51
 
 State 52
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant . '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant . '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant . '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant . '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 56
 
@@ -940,8 +944,8 @@ State 55
 
 State 56
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' . T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' . T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' . T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' . T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_Call  shift, and go to state 71
     T_Set   shift, and go to state 72
@@ -1058,14 +1062,14 @@ State 70
 
 State 71
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call . '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call . '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 83
 
 
 State 72
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set . '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set . '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 84
 
@@ -1228,14 +1232,14 @@ State 82
 
 State 83
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' . T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' . T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_Mem  shift, and go to state 162
 
 
 State 84
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' . T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' . T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_Reg  shift, and go to state 163
 
@@ -1969,14 +1973,14 @@ State 161
 
 State 162
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem . ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem . ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ':'  shift, and go to state 218
 
 
 State 163
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg . ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg . ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ':'  shift, and go to state 219
 
@@ -2525,14 +2529,14 @@ State 217
 
 State 218
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' . T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' . T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_QIType  shift, and go to state 257
 
 
 State 219
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' . TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' . TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_TIType     shift, and go to state 183
     T_SIType     shift, and go to state 184
@@ -3901,14 +3905,14 @@ State 256
 
 State 257
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType . '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType . '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 298
 
 
 State 258
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo . T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo . T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_IntConstant  shift, and go to state 299
 
@@ -4531,14 +4535,14 @@ State 297
 
 State 298
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' . T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' . T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_SymbolRef  shift, and go to state 348
 
 
 State 299
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant . ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant . ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ')'  shift, and go to state 349
 
@@ -4996,14 +5000,14 @@ State 347
 
 State 348
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef . ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef . ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ':'  shift, and go to state 395
 
 
 State 349
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' . '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' . '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 396
 
@@ -6071,14 +6075,14 @@ State 394
 
 State 395
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' . T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' . T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_DIType  shift, and go to state 421
 
 
 State 396
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' . T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' . T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_Call  shift, and go to state 422
 
@@ -6501,14 +6505,14 @@ State 420
 
 State 421
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType . '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType . '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 445
 
 
 State 422
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call . '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call . '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 446
 
@@ -6731,14 +6735,14 @@ State 444
 
 State 445
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' . T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' . T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_StringConstant  shift, and go to state 456
 
 
 State 446
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' . T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' . T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_Mem  shift, and go to state 457
 
@@ -6811,14 +6815,14 @@ State 455
 
 State 456
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant . ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant . ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ')'  shift, and go to state 465
 
 
 State 457
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem . ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem . ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ':'  shift, and go to state 466
 
@@ -6936,14 +6940,14 @@ State 464
 
 State 465
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' . ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' . ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ')'  shift, and go to state 472
 
 
 State 466
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' . T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' . T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_QIType  shift, and go to state 473
 
@@ -6985,14 +6989,14 @@ State 471
 
 State 472
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' . ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' . ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ')'  shift, and go to state 478
 
 
 State 473
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType . '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType . '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 479
 
@@ -7027,14 +7031,14 @@ State 477
 
 State 478
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' . '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' . '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 482
 
 
 State 479
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' . T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' . T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_SymbolRef  shift, and go to state 483
 
@@ -7055,14 +7059,14 @@ State 481
 
 State 482
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' . T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' . T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_ConstInt  shift, and go to state 485
 
 
 State 483
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef . ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef . ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ':'  shift, and go to state 486
 
@@ -7076,7 +7080,7 @@ State 484
 
 State 485
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt . Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt . Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_IntConstant  shift, and go to state 158
     '-'            shift, and go to state 159
@@ -7086,7 +7090,7 @@ State 485
 
 State 486
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' . T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' . T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_DIType  shift, and go to state 489
 
@@ -7100,77 +7104,77 @@ State 487
 
 State 488
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer . ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer . ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ')'  shift, and go to state 490
 
 
 State 489
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType . '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType . '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 491
 
 
 State 490
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' . ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' . ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ')'  shift, and go to state 492
 
 
 State 491
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' . T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' . T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_StringConstant  shift, and go to state 493
 
 
 State 492
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' . T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' . T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_StringConstant  shift, and go to state 494
 
 
 State 493
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant . ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant . ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ')'  shift, and go to state 495
 
 
 State 494
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant . ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant . ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ':'  shift, and go to state 496
 
 
 State 495
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' . ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' . ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ')'  shift, and go to state 497
 
 
 State 496
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' . T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' . T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_IntConstant  shift, and go to state 498
 
 
 State 497
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' . ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' . ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ')'  shift, and go to state 499
 
 
 State 498
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant . Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant . Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_IntConstant  shift, and go to state 158
     '-'            shift, and go to state 159
@@ -7180,28 +7184,28 @@ State 498
 
 State 499
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' . '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' . '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 501
 
 
 State 500
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer . '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer . '(' Junk2 ')' '(' ExprList ')'
 
     '('  shift, and go to state 502
 
 
 State 501
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' . T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' . T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_ConstInt  shift, and go to state 503
 
 
 State 502
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' . Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' . Junk2 ')' '(' ExprList ')'
 
     T_Nil       shift, and go to state 504
     T_ExprList  shift, and go to state 505
@@ -7211,7 +7215,7 @@ State 502
 
 State 503
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt . Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt . Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     T_IntConstant  shift, and go to state 158
     '-'            shift, and go to state 159
@@ -7221,15 +7225,15 @@ State 503
 
 State 504
 
-  150 Junk2: T_Nil .
+  151 Junk2: T_Nil .
 
-    $default  reduce using rule 150 (Junk2)
+    $default  reduce using rule 151 (Junk2)
 
 
 State 505
 
-  151 Junk2: T_ExprList . '(' Operand ')' '(' Junk2 ')'
-  152      | T_ExprList . TypeInfo '(' Operand ')' '(' Junk2 ')'
+  152 Junk2: T_ExprList . '(' Operand ')' '(' Junk2 ')'
+  153      | T_ExprList . TypeInfo '(' Operand ')' '(' Junk2 ')'
 
     T_TIType     shift, and go to state 183
     T_SIType     shift, and go to state 184
@@ -7246,21 +7250,21 @@ State 505
 
 State 506
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 . ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 . ')' '(' ExprList ')'
 
     ')'  shift, and go to state 510
 
 
 State 507
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer . ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer . ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ')'  shift, and go to state 511
 
 
 State 508
 
-  151 Junk2: T_ExprList '(' . Operand ')' '(' Junk2 ')'
+  152 Junk2: T_ExprList '(' . Operand ')' '(' Junk2 ')'
 
     T_SymbolRef   shift, and go to state 93
     T_IfThenElse  shift, and go to state 94
@@ -7329,35 +7333,35 @@ State 508
 
 State 509
 
-  152 Junk2: T_ExprList TypeInfo . '(' Operand ')' '(' Junk2 ')'
+  153 Junk2: T_ExprList TypeInfo . '(' Operand ')' '(' Junk2 ')'
 
     '('  shift, and go to state 513
 
 
 State 510
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' . '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' . '(' ExprList ')'
 
     '('  shift, and go to state 514
 
 
 State 511
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' . ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' . ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
     ')'  shift, and go to state 515
 
 
 State 512
 
-  151 Junk2: T_ExprList '(' Operand . ')' '(' Junk2 ')'
+  152 Junk2: T_ExprList '(' Operand . ')' '(' Junk2 ')'
 
     ')'  shift, and go to state 516
 
 
 State 513
 
-  152 Junk2: T_ExprList TypeInfo '(' . Operand ')' '(' Junk2 ')'
+  153 Junk2: T_ExprList TypeInfo '(' . Operand ')' '(' Junk2 ')'
 
     T_SymbolRef   shift, and go to state 93
     T_IfThenElse  shift, and go to state 94
@@ -7426,39 +7430,40 @@ State 513
 
 State 514
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' . Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' . ExprList ')'
 
     T_ExprList  shift, and go to state 518
     '('         shift, and go to state 519
 
-    Junk  go to state 520
+    ExprList      go to state 520
+    ExprListExpr  go to state 521
 
 
 State 515
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' . ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' . ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
-    ')'  shift, and go to state 521
+    ')'  shift, and go to state 522
 
 
 State 516
 
-  151 Junk2: T_ExprList '(' Operand ')' . '(' Junk2 ')'
+  152 Junk2: T_ExprList '(' Operand ')' . '(' Junk2 ')'
 
-    '('  shift, and go to state 522
+    '('  shift, and go to state 523
 
 
 State 517
 
-  152 Junk2: T_ExprList TypeInfo '(' Operand . ')' '(' Junk2 ')'
+  153 Junk2: T_ExprList TypeInfo '(' Operand . ')' '(' Junk2 ')'
 
-    ')'  shift, and go to state 523
+    ')'  shift, and go to state 524
 
 
 State 518
 
-  146 Junk: T_ExprList . TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  148     | T_ExprList . TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
+  147 ExprListExpr: T_ExprList . TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  149             | T_ExprList . TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
 
     T_TIType     shift, and go to state 183
     T_SIType     shift, and go to state 184
@@ -7469,227 +7474,184 @@ State 518
     T_CCGCType   shift, and go to state 189
     T_CCGOCType  shift, and go to state 190
 
-    TypeInfo  go to state 524
+    TypeInfo  go to state 525
 
 
 State 519
 
-  147 Junk: '(' . T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  149     | '(' . T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
+  148 ExprListExpr: '(' . T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  150             | '(' . T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
 
-    T_Use  shift, and go to state 525
+    T_Use  shift, and go to state 526
 
 
 State 520
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk . ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList . ')'
 
-    ')'  shift, and go to state 526
+    ')'  shift, and go to state 527
 
 
 State 521
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' . T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  146 ExprList: ExprListExpr .
 
-    T_StringConstant  shift, and go to state 527
+    $default  reduce using rule 146 (ExprList)
 
 
 State 522
 
-  151 Junk2: T_ExprList '(' Operand ')' '(' . Junk2 ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' . T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
-    T_Nil       shift, and go to state 504
-    T_ExprList  shift, and go to state 505
-
-    Junk2  go to state 528
+    T_StringConstant  shift, and go to state 528
 
 
 State 523
 
-  152 Junk2: T_ExprList TypeInfo '(' Operand ')' . '(' Junk2 ')'
+  152 Junk2: T_ExprList '(' Operand ')' '(' . Junk2 ')'
 
-    '('  shift, and go to state 529
+    T_Nil       shift, and go to state 504
+    T_ExprList  shift, and go to state 505
+
+    Junk2  go to state 529
 
 
 State 524
 
-  146 Junk: T_ExprList TypeInfo . '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  148     | T_ExprList TypeInfo . '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
+  153 Junk2: T_ExprList TypeInfo '(' Operand ')' . '(' Junk2 ')'
 
     '('  shift, and go to state 530
 
 
 State 525
 
-  147 Junk: '(' T_Use . '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  149     | '(' T_Use . '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
+  147 ExprListExpr: T_ExprList TypeInfo . '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  149             | T_ExprList TypeInfo . '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
 
     '('  shift, and go to state 531
 
 
 State 526
 
-  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')' .
+  148 ExprListExpr: '(' T_Use . '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  150             | '(' T_Use . '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
 
-    $default  reduce using rule 145 (NoRetCall)
+    '('  shift, and go to state 532
 
 
 State 527
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant . ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
+  145 NoRetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')' .
 
-    ':'  shift, and go to state 532
+    $default  reduce using rule 145 (NoRetCall)
 
 
 State 528
 
-  151 Junk2: T_ExprList '(' Operand ')' '(' Junk2 . ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant . ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
 
-    ')'  shift, and go to state 533
+    ':'  shift, and go to state 533
 
 
 State 529
 
-  152 Junk2: T_ExprList TypeInfo '(' Operand ')' '(' . Junk2 ')'
+  152 Junk2: T_ExprList '(' Operand ')' '(' Junk2 . ')'
 
-    T_Nil       shift, and go to state 504
-    T_ExprList  shift, and go to state 505
-
-    Junk2  go to state 534
+    ')'  shift, and go to state 534
 
 
 State 530
 
-  146 Junk: T_ExprList TypeInfo '(' . T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  148     | T_ExprList TypeInfo '(' . T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
-
-    T_Use  shift, and go to state 535
-
-
-State 531
-
-  147 Junk: '(' T_Use '(' . T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  149     | '(' T_Use '(' . T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
-
-    T_Reg  shift, and go to state 536
-
-
-State 532
-
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' . T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
-
-    T_IntConstant  shift, and go to state 537
-
-
-State 533
-
-  151 Junk2: T_ExprList '(' Operand ')' '(' Junk2 ')' .
-
-    $default  reduce using rule 151 (Junk2)
-
-
-State 534
-
-  152 Junk2: T_ExprList TypeInfo '(' Operand ')' '(' Junk2 . ')'
-
-    ')'  shift, and go to state 538
-
-
-State 535
-
-  146 Junk: T_ExprList TypeInfo '(' T_Use . '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  148     | T_ExprList TypeInfo '(' T_Use . '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
-
-    '('  shift, and go to state 539
-
-
-State 536
-
-  147 Junk: '(' T_Use '(' T_Reg . ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  149     | '(' T_Use '(' T_Reg . ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
-
-    ':'  shift, and go to state 540
-
-
-State 537
-
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant . Integer '(' Junk2 ')' '(' Junk ')'
-
-    T_IntConstant  shift, and go to state 158
-    '-'            shift, and go to state 159
-
-    Integer  go to state 541
-
-
-State 538
-
-  152 Junk2: T_ExprList TypeInfo '(' Operand ')' '(' Junk2 ')' .
-
-    $default  reduce using rule 152 (Junk2)
-
-
-State 539
-
-  146 Junk: T_ExprList TypeInfo '(' T_Use '(' . T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  148     | T_ExprList TypeInfo '(' T_Use '(' . T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
-
-    T_Reg  shift, and go to state 542
-
-
-State 540
-
-  147 Junk: '(' T_Use '(' T_Reg ':' . TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  149     | '(' T_Use '(' T_Reg ':' . TypeInfo T_IntConstant ')' ')' '(' Junk ')'
-
-    T_TIType     shift, and go to state 183
-    T_SIType     shift, and go to state 184
-    T_DIType     shift, and go to state 185
-    T_QIType     shift, and go to state 186
-    T_CCType     shift, and go to state 187
-    T_CCZType    shift, and go to state 188
-    T_CCGCType   shift, and go to state 189
-    T_CCGOCType  shift, and go to state 190
-
-    TypeInfo  go to state 543
-
-
-State 541
-
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer . '(' Junk2 ')' '(' Junk ')'
-
-    '('  shift, and go to state 544
-
-
-State 542
-
-  146 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg . ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  148     | T_ExprList TypeInfo '(' T_Use '(' T_Reg . ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
-
-    ':'  shift, and go to state 545
-
-
-State 543
-
-  147 Junk: '(' T_Use '(' T_Reg ':' TypeInfo . T_IntConstant ')' ')' '(' T_Nil ')'
-  149     | '(' T_Use '(' T_Reg ':' TypeInfo . T_IntConstant ')' ')' '(' Junk ')'
-
-    T_IntConstant  shift, and go to state 546
-
-
-State 544
-
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' . Junk2 ')' '(' Junk ')'
+  153 Junk2: T_ExprList TypeInfo '(' Operand ')' '(' . Junk2 ')'
 
     T_Nil       shift, and go to state 504
     T_ExprList  shift, and go to state 505
 
-    Junk2  go to state 547
+    Junk2  go to state 535
 
 
-State 545
+State 531
 
-  146 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' . TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-  148     | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' . TypeInfo T_IntConstant ')' ')' '(' Junk ')'
+  147 ExprListExpr: T_ExprList TypeInfo '(' . T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  149             | T_ExprList TypeInfo '(' . T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
+
+    T_Use  shift, and go to state 536
+
+
+State 532
+
+  148 ExprListExpr: '(' T_Use '(' . T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  150             | '(' T_Use '(' . T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
+
+    T_Reg  shift, and go to state 537
+
+
+State 533
+
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' . T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
+
+    T_IntConstant  shift, and go to state 538
+
+
+State 534
+
+  152 Junk2: T_ExprList '(' Operand ')' '(' Junk2 ')' .
+
+    $default  reduce using rule 152 (Junk2)
+
+
+State 535
+
+  153 Junk2: T_ExprList TypeInfo '(' Operand ')' '(' Junk2 . ')'
+
+    ')'  shift, and go to state 539
+
+
+State 536
+
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use . '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  149             | T_ExprList TypeInfo '(' T_Use . '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
+
+    '('  shift, and go to state 540
+
+
+State 537
+
+  148 ExprListExpr: '(' T_Use '(' T_Reg . ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  150             | '(' T_Use '(' T_Reg . ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
+
+    ':'  shift, and go to state 541
+
+
+State 538
+
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant . Integer '(' Junk2 ')' '(' ExprList ')'
+
+    T_IntConstant  shift, and go to state 158
+    '-'            shift, and go to state 159
+
+    Integer  go to state 542
+
+
+State 539
+
+  153 Junk2: T_ExprList TypeInfo '(' Operand ')' '(' Junk2 ')' .
+
+    $default  reduce using rule 153 (Junk2)
+
+
+State 540
+
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' . T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  149             | T_ExprList TypeInfo '(' T_Use '(' . T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
+
+    T_Reg  shift, and go to state 543
+
+
+State 541
+
+  148 ExprListExpr: '(' T_Use '(' T_Reg ':' . TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  150             | '(' T_Use '(' T_Reg ':' . TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
 
     T_TIType     shift, and go to state 183
     T_SIType     shift, and go to state 184
@@ -7700,178 +7662,229 @@ State 545
     T_CCGCType   shift, and go to state 189
     T_CCGOCType  shift, and go to state 190
 
-    TypeInfo  go to state 548
+    TypeInfo  go to state 544
+
+
+State 542
+
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer . '(' Junk2 ')' '(' ExprList ')'
+
+    '('  shift, and go to state 545
+
+
+State 543
+
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg . ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  149             | T_ExprList TypeInfo '(' T_Use '(' T_Reg . ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
+
+    ':'  shift, and go to state 546
+
+
+State 544
+
+  148 ExprListExpr: '(' T_Use '(' T_Reg ':' TypeInfo . T_IntConstant ')' ')' '(' T_Nil ')'
+  150             | '(' T_Use '(' T_Reg ':' TypeInfo . T_IntConstant ')' ')' '(' ExprListExpr ')'
+
+    T_IntConstant  shift, and go to state 547
+
+
+State 545
+
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' . Junk2 ')' '(' ExprList ')'
+
+    T_Nil       shift, and go to state 504
+    T_ExprList  shift, and go to state 505
+
+    Junk2  go to state 548
 
 
 State 546
 
-  147 Junk: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant . ')' ')' '(' T_Nil ')'
-  149     | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant . ')' ')' '(' Junk ')'
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' . TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+  149             | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' . TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
 
-    ')'  shift, and go to state 549
+    T_TIType     shift, and go to state 183
+    T_SIType     shift, and go to state 184
+    T_DIType     shift, and go to state 185
+    T_QIType     shift, and go to state 186
+    T_CCType     shift, and go to state 187
+    T_CCZType    shift, and go to state 188
+    T_CCGCType   shift, and go to state 189
+    T_CCGOCType  shift, and go to state 190
+
+    TypeInfo  go to state 549
 
 
 State 547
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 . ')' '(' Junk ')'
+  148 ExprListExpr: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant . ')' ')' '(' T_Nil ')'
+  150             | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant . ')' ')' '(' ExprListExpr ')'
 
     ')'  shift, and go to state 550
 
 
 State 548
 
-  146 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo . T_IntConstant ')' ')' '(' T_Nil ')'
-  148     | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo . T_IntConstant ')' ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 . ')' '(' ExprList ')'
 
-    T_IntConstant  shift, and go to state 551
+    ')'  shift, and go to state 551
 
 
 State 549
 
-  147 Junk: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' . ')' '(' T_Nil ')'
-  149     | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' . ')' '(' Junk ')'
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo . T_IntConstant ')' ')' '(' T_Nil ')'
+  149             | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo . T_IntConstant ')' ')' '(' ExprListExpr ')'
 
-    ')'  shift, and go to state 552
+    T_IntConstant  shift, and go to state 552
 
 
 State 550
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' . '(' Junk ')'
+  148 ExprListExpr: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' . ')' '(' T_Nil ')'
+  150             | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' . ')' '(' ExprListExpr ')'
 
-    '('  shift, and go to state 553
+    ')'  shift, and go to state 553
 
 
 State 551
 
-  146 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant . ')' ')' '(' T_Nil ')'
-  148     | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant . ')' ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' . '(' ExprList ')'
 
-    ')'  shift, and go to state 554
+    '('  shift, and go to state 554
 
 
 State 552
 
-  147 Junk: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' . '(' T_Nil ')'
-  149     | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' . '(' Junk ')'
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant . ')' ')' '(' T_Nil ')'
+  149             | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant . ')' ')' '(' ExprListExpr ')'
 
-    '('  shift, and go to state 555
+    ')'  shift, and go to state 555
 
 
 State 553
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' . Junk ')'
+  148 ExprListExpr: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' . '(' T_Nil ')'
+  150             | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' . '(' ExprListExpr ')'
 
-    T_ExprList  shift, and go to state 518
-    '('         shift, and go to state 519
-
-    Junk  go to state 556
+    '('  shift, and go to state 556
 
 
 State 554
 
-  146 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' . ')' '(' T_Nil ')'
-  148     | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' . ')' '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' . ExprList ')'
 
-    ')'  shift, and go to state 557
+    T_ExprList  shift, and go to state 518
+    '('         shift, and go to state 519
+
+    ExprList      go to state 557
+    ExprListExpr  go to state 521
 
 
 State 555
 
-  147 Junk: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' . T_Nil ')'
-  149     | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' . Junk ')'
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' . ')' '(' T_Nil ')'
+  149             | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' . ')' '(' ExprListExpr ')'
 
-    T_Nil       shift, and go to state 558
-    T_ExprList  shift, and go to state 518
-    '('         shift, and go to state 519
-
-    Junk  go to state 559
+    ')'  shift, and go to state 558
 
 
 State 556
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk . ')'
+  148 ExprListExpr: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' . T_Nil ')'
+  150             | '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' . ExprListExpr ')'
 
-    ')'  shift, and go to state 560
+    T_Nil       shift, and go to state 559
+    T_ExprList  shift, and go to state 518
+    '('         shift, and go to state 519
+
+    ExprListExpr  go to state 560
 
 
 State 557
 
-  146 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' . '(' T_Nil ')'
-  148     | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' . '(' Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList . ')'
 
-    '('  shift, and go to state 561
+    ')'  shift, and go to state 561
 
 
 State 558
 
-  147 Junk: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil . ')'
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' . '(' T_Nil ')'
+  149             | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' . '(' ExprListExpr ')'
 
-    ')'  shift, and go to state 562
+    '('  shift, and go to state 562
 
 
 State 559
 
-  149 Junk: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk . ')'
+  148 ExprListExpr: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil . ')'
 
     ')'  shift, and go to state 563
 
 
 State 560
 
-  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')' .
+  150 ExprListExpr: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr . ')'
 
-    $default  reduce using rule 144 (RetCall)
+    ')'  shift, and go to state 564
 
 
 State 561
 
-  146 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' . T_Nil ')'
-  148     | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' . Junk ')'
+  144 RetCall: T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')' .
 
-    T_Nil       shift, and go to state 564
-    T_ExprList  shift, and go to state 518
-    '('         shift, and go to state 519
-
-    Junk  go to state 565
+    $default  reduce using rule 144 (RetCall)
 
 
 State 562
 
-  147 Junk: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')' .
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' . T_Nil ')'
+  149             | T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' . ExprListExpr ')'
 
-    $default  reduce using rule 147 (Junk)
+    T_Nil       shift, and go to state 565
+    T_ExprList  shift, and go to state 518
+    '('         shift, and go to state 519
+
+    ExprListExpr  go to state 566
 
 
 State 563
 
-  149 Junk: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')' .
+  148 ExprListExpr: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')' .
 
-    $default  reduce using rule 149 (Junk)
+    $default  reduce using rule 148 (ExprListExpr)
 
 
 State 564
 
-  146 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil . ')'
+  150 ExprListExpr: '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')' .
 
-    ')'  shift, and go to state 566
+    $default  reduce using rule 150 (ExprListExpr)
 
 
 State 565
 
-  148 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk . ')'
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil . ')'
 
     ')'  shift, and go to state 567
 
 
 State 566
 
-  146 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')' .
+  149 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr . ')'
 
-    $default  reduce using rule 146 (Junk)
+    ')'  shift, and go to state 568
 
 
 State 567
 
-  148 Junk: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')' .
+  147 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')' .
 
-    $default  reduce using rule 148 (Junk)
+    $default  reduce using rule 147 (ExprListExpr)
+
+
+State 568
+
+  149 ExprListExpr: T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')' .
+
+    $default  reduce using rule 149 (ExprListExpr)

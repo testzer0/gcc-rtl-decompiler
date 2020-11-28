@@ -41,6 +41,8 @@ class Node{
         // should not be overriden.
 
         virtual void PrintChildren(int indentlevel) {}
+        // void PrintCode(int indentlevel)
+        // virtual const char *PrintCodeChilfren(int indentlevel)
 };
 
 class Error : public Node
@@ -65,6 +67,7 @@ class Flag;
 class Dest;
 class Comparison;
 class Condition;
+class ExprList;
 
 class Program : public Node {
     protected:
@@ -639,8 +642,9 @@ class RetCall : public Call {
         TypeInfo *tinfo;
         int returnreg;
         const char *fnname;
+        ExprList *elist;
     public:
-        RetCall(TypeInfo *ti, int rr, const char *fn);
+        RetCall(TypeInfo *ti, int rr, const char *fn, ExprList *el);
         const char *GetPrintNameForNode() {
             return "RetCall";
         }
@@ -650,10 +654,22 @@ class RetCall : public Call {
 class NoRetCall : public Call {
     protected:
         const char *fnname;
+        ExprList *elist;
     public:
-        NoRetCall(const char *fn);
+        NoRetCall(const char *fn, ExprList *el);
         const char *GetPrintNameForNode() {
             return "NoRetCall";
+        }
+        void PrintChildren(int indentlevel);
+};
+
+class ExprList : public Node{
+    protected:
+        List<int> *args;
+    public:
+        ExprList(List<int> *as);
+        const char *GetPrintNameForNode() {
+            return "ExprList";
         }
         void PrintChildren(int indentlevel);
 };

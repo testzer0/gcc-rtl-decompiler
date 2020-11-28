@@ -490,25 +490,39 @@ void Condition::PrintChildren(int indentlevel) {
     printf(" %s\n",cond);
 }
 
-RetCall::RetCall(TypeInfo *ti, int rr, const char *fn) {
-    Assert(ti != NULL && fn != NULL);
+RetCall::RetCall(TypeInfo *ti, int rr, const char *fn, ExprList *el) {
+    Assert(ti != NULL && fn != NULL && el != NULL);
     (tinfo = ti)->SetParent(this);
     returnreg = rr;
     fnname = fn;
+    (elist = el)->SetParent(this);
 }
 
 void RetCall::PrintChildren(int indentlevel) {
     printf(" %s\n",fnname);
+    elist->Print(indentlevel+1);
     // Return reg is always rax; type so far has always been SI.
     // Not too important for now for debugging.
 }
 
-NoRetCall::NoRetCall(const char *fn) {
-    Assert(fn != NULL);
+NoRetCall::NoRetCall(const char *fn, ExprList *el) {
+    Assert(fn != NULL && el != NULL);
     fnname = fn;
+    (elist = el)->SetParent(this);
 }
 
 void NoRetCall::PrintChildren(int indentlevel) {
     printf(" %s\n",fnname);
+    elist->Print(indentlevel+1);
 }
 
+ExprList::ExprList(List<int> *as) {
+    args = as;
+}
+
+void ExprList::PrintChildren(int indentlevel) {
+    for (int i = 0; i < args->NumElements(); i++) {
+        printf(" %d", args->Nth(i));
+    }
+    printf("\n");
+}

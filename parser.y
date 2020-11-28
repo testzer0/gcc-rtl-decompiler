@@ -68,6 +68,8 @@
     Call *call;
     RetCall *retcall;
     NoRetCall *noretcall;
+    ExprList *exprlist;
+    List<int> *exprlistexpr;
 
     int integerConstant;
     const char *stringConstant;
@@ -141,6 +143,8 @@
 %type <call> Call
 %type <retcall> RetCall
 %type <noretcall> NoRetCall
+%type <exprlist> ExprList
+%type <exprlistexpr> ExprListExpr
 
 %%
 
@@ -420,25 +424,28 @@ Call            :   RetCall                        { $$ = $1; }
 RetCall         :   T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Set '(' 
                         T_Reg ':' TypeInfo T_IntConstant ')' '(' T_Call '(' T_Mem ':' T_QIType '(' 
                         T_SymbolRef ':' T_DIType '(' T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' 
-                        ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
-                                                    { $$ = new RetCall($11,$12,$25); }
+                        ')' ')' T_StringConstant ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
+                                                    { $$ = new RetCall($11,$12,$25,$43); }
                 ;
 
 NoRetCall       :   T_CallInsn T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Call 
                         '(' T_Mem ':' T_QIType '(' T_SymbolRef ':' T_DIType '(' 
                         T_StringConstant ')' ')' ')' '(' T_ConstInt Integer ')' ')' T_StringConstant 
-                        ':' T_IntConstant Integer '(' Junk2 ')' '(' Junk ')'
-                                                    { $$ = new NoRetCall($17); }
+                        ':' T_IntConstant Integer '(' Junk2 ')' '(' ExprList ')'
+                                                    { $$ = new NoRetCall($17,$34); }
                 ;
 
-Junk            :   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-                                                    {  }
+ExprList        :   ExprListExpr    { $$ = new ExprList($1); }
+                ;
+
+ExprListExpr    :   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
+                                                    { ($$ = new List<int>)->Append($9); }
                 |   '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' T_Nil ')'
-                                                    {  }
-                |   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
-                                                    {  }
-                |   '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' Junk ')'
-                                                    {  }
+                                                    { ($$ = new List<int>)->Append($7); }
+                |   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
+                                                    { ($$=$13)->Append($9); }
+                |   '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
+                                                    { ($$=$11)->Append($7); }
                 ;
 
 Junk2           :    T_Nil          { }

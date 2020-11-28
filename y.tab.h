@@ -238,12 +238,14 @@ union YYSTYPE
     Call *call;
     RetCall *retcall;
     NoRetCall *noretcall;
+    ExprList *exprlist;
+    List<int> *exprlistexpr;
 
     int integerConstant;
     const char *stringConstant;
     char identifier[32];
 
-#line 247 "y.tab.h" /* yacc.c:1909  */
+#line 249 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
