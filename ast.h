@@ -14,6 +14,8 @@
 #include "list.h"
 #include <bits/stdc++.h>    // later replace by specific header
 
+map<string,void *> gSymbolTable;
+
 class Node{
     protected:
         yyltype *location;

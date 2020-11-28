@@ -4,7 +4,6 @@
 #include "list.h"
 #include <bits/stdc++.h>  // later replace by specific header
 
-
 Node::Node(yyltype loc) {
     location = new yyltype(loc);
     parent = NULL;
