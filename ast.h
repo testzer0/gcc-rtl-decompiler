@@ -232,7 +232,13 @@ class SetCmd : public PlainCmd {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
-        string GenerateCode(int indentlevel);
+        string GenerateCode(int indentlevel){
+            ind="";
+            for(int i=0;i<indentlevel;i++)ind+="   ";
+            l=op1->generate_code(0);
+            r=op2->generate_code(0);
+            return ind+l+" = "+"("+type+")"+r;
+        }
 };
 
 class UseCmd : public PlainCmd {
@@ -279,7 +285,10 @@ class ExprOperand : public Operand {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
-        string GenerateCode(int indentlevel);
+        string GenerateCode(int indentlevel){
+            //type=...;
+            return expr->generate_code(0)
+        }
 };
 
 class ExtendOperand : public Operand {
@@ -415,7 +424,10 @@ class PlusExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
-        string GenerateCode(int indentlevel);
+        string GenerateCode(int indentlevel){
+            //return "temp"+temp_num+" = "+op1->generate_code(0)+op2->generate_code(0);
+            return "temp"+(temp_num++);
+        }
 };
 
 class MinusExpr : public Expr {
@@ -430,7 +442,10 @@ class MinusExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
-        string GenerateCode(int indentlevel);
+        string GenerateCode(int indentlevel){
+            //return "temp"+temp_num+" = "+op1->generate_code(0)-op2->generate_code(0);
+            return "temp"+(temp_num++);
+        }
 };
 
 class MultExpr : public Expr {
@@ -445,7 +460,10 @@ class MultExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
-        string GenerateCode(int indentlevel);
+        string GenerateCode(int indentlevel){
+            //return "temp"+temp_num+" = "+op1->generate_code(0)*op2->generate_code(0);
+            return "temp"+(temp_num++);
+        }
 };
 
 class DivExpr : public Expr {
@@ -460,7 +478,10 @@ class DivExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
-        string GenerateCode(int indentlevel);
+        string GenerateCode(int indentlevel){
+            //return "temp"+temp_num+" = "+op1->generate_code(0)/op2->generate_code(0);
+            return "temp"+(temp_num++);
+        }
 };
 
 class UDivExpr : public Expr {
@@ -490,7 +511,10 @@ class ModExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
-        string GenerateCode(int indentlevel);
+        string GenerateCode(int indentlevel){
+            //return "temp"+temp_num+" = "+op1->generate_code(0)%op2->generate_code(0);
+            return "temp"+(temp_num++);
+        }
 };
 
 class UModExpr : public Expr {
