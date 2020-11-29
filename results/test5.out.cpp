@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+long long int regs[512];
+map<string, long long int> externSymbolTable;
+
+int f(int arg0, int arg1) {
+    regs[4] = (long long int)arg0;
+    regs[5] = (long long int)arg1;
+    // THERE WAS A NOTE HERE
+    // THERE WAS A NOTE HERE
+    regs[91] = (long long int)(regs[5]);
+    regs[92] = (int)(regs[4]);
+    long long int temp0 = (long long int)(regs[20] + -16);
+    long long int *temp1 = (long long int *)temp0;
+    *temp1 = (long long int)(regs[91]);
+    long long int temp2 = (long long int)(regs[20] + -8);
+    int *temp3 = (int *)temp2;
+    *temp3 = (int)(regs[92]);
+    // THERE WAS A NOTE HERE
+    long long int temp4 = (long long int)(regs[20] + -16);
+    int *temp5 = (int *)temp4;
+    regs[87] = (int)(*temp5);
+    long long int temp6 = (long long int)(regs[20] + -12);
+    int *temp7 = (int *)temp6;
+    regs[88] = (int)(*temp7);
+    // PARALLEL COMMAND BEGIN
+    int temp8 = (int)(regs[87] + regs[88]);
+    regs[89] = (int)(temp8);
+    // CLOBBER COMMAND
+    // PARALLEL COMMAND END
+    regs[90] = (int)(regs[89]);
+    regs[0] = (int)(regs[90]);
+    return (int)(regs[0]);
+}
+int main(int argc, char **argv) {
+    // THERE WAS A NOTE HERE
+    // THERE WAS A NOTE HERE
+    // THERE WAS A NOTE HERE
+    long long int temp9 = (long long int)(regs[20] + -16);
+    int *temp10 = (int *)temp9;
+    *temp10 = (int)(2);
+    long long int temp11 = (long long int)(regs[20] + -12);
+    int *temp12 = (int *)temp11;
+    *temp12 = (int)(3);
+    long long int temp13 = (long long int)(regs[20] + -16);
+    long long int *temp14 = (long long int *)temp13;
+    regs[89] = (long long int)(*temp14);
+    long long int temp15 = (long long int)(regs[20] + -8);
+    int *temp16 = (int *)temp15;
+    regs[90] = (int)(*temp16);
+    regs[5] = (long long int)(regs[89]);
+    regs[4] = (int)(regs[90]);
+    int temp17 = f((int)regs[4], regs[5]);
+    regs[0] = (long long int)temp17;
+    regs[91] = (int)(regs[0]);
+    long long int temp18 = (long long int)(regs[20] + -4);
+    int *temp19 = (int *)temp18;
+    *temp19 = (int)(regs[91]);
+    regs[87] = (int)(0);
+    regs[88] = (int)(regs[87]);
+    regs[0] = (int)(regs[88]);
+    return (int)(regs[0]);
+}
