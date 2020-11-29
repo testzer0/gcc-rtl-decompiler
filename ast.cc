@@ -9,6 +9,8 @@
 int tempcounter = 0, argcounter;
 int genCodeReg, genCodeVal, genCodeTempNum;
 string genCodeType, genCodeSymbol;
+string jumpAddr;
+bool genCodeSignal;
 
 map<string,void *> gSymbolTable;
 
@@ -55,9 +57,9 @@ void Program::Analyze() {
 string Program::GenerateCode(int indentlevel) {
     string indentation = string(indentlevel*4, ' ');
     out << "#include <bits/stdc++.h>\n";
-    out << "using namespace std;\n";
+    out << "using namespace std;\n\n";
     out << "long long int regs[512];\n";
-    out << "map<string, long long int> externSymbolTable;\n";
+    out << "map<string, long long int> externSymbolTable;\n\n";
     for (int i = 0; i < funcbodylist->NumElements(); i++) {
         funcbodylist->Nth(i)->GenerateCode(indentlevel);
     }
@@ -186,7 +188,8 @@ void Insn::PrintChildren(int indentlevel) {
 }
 
 string Insn::GenerateCode(int indentlevel) {
-    maincmd->GenerateCode(indentlevel);
+    if (maincmd)
+        maincmd->GenerateCode(indentlevel);
     return "";
 }
 
@@ -234,8 +237,8 @@ void SetCmd::PrintChildren(int indentlevel) {
 string SetCmd::GenerateCode(int indentlevel) {
     string indentation = string(indentlevel*4, ' ');
     string lop = op1->GenerateCode(indentlevel);
-    string rop = op2->GenerateCode(indentlevel);
     string tp = genCodeType;
+    string rop = op2->GenerateCode(indentlevel);
     out << lop << " = (" << tp << ")(" << rop << ");\n";
     return "";
 }
@@ -768,7 +771,7 @@ string SubregExpr::GenerateCode(int indentlevel) {
         genCodeType = "int";
     }
     else {
-        out << "long long int" << tempname << " = " << retstring << ";\n";
+        out << "long long int " << tempname << " = " << retstring << ";\n";
         genCodeType = "long long int";
         // TODO: This is actually from a __int128 to a long long, for now have assumed that
         // max width on machine is 64 bit so __int128 does not exist
@@ -804,9 +807,10 @@ string CompareExpr::GenerateCode(int indentlevel) {
     temp3 = "temp" + to_string(tempcounter++);
     out << type << " " << temp1 << " = (" << type << ")" << opone << ";\n";
     out << type << " " << temp2 << " = (" << type << ")" << optwo << ";\n";
-    out << "if (" << temp1 << " == " << temp2 << ") " << temp3 << " = 0";
-    out << "else if (" << temp1 << " < " << temp2 << ") " << temp3 << " = -1";
-    out << "else " << temp3 << " = 0";
+    out << "int " << temp3 << ";\n";
+    out << "if (" << temp1 << " == " << temp2 << ") " << temp3 << " = 0;\n";
+    out << "else if (" << temp1 << " < " << temp2 << ") " << temp3 << " = -1;\n";
+    out << "else " << temp3 << " = 1;\n";
     return temp3;
 }
 
@@ -826,6 +830,20 @@ void ConditionExpr::PrintChildren(int indentlevel) {
     op2->Print(indentlevel+1);
 }
 
+string ConditionExpr::GenerateCode(int indentlevel) {
+    string indentation = string(indentlevel*4, ' ');
+    string opone = op1->GenerateCode(indentlevel), optwo = op2->GenerateCode(indentlevel);
+    string temp1, t(tinfo->getType()), type;
+    if (t == "qi")
+        type = "char";
+    else if (t == "si")
+        type = "int";
+    else type = "long long int";
+    temp1 = "temp" + to_string(tempcounter++);
+    out << temp1 << " = (" << type << ")(" << opone << " == " << optwo << ");\n";
+    return temp1;
+}
+
 SymbolRefExpr::SymbolRefExpr(TypeInfo *t, const char *s) {
     Assert(t != NULL && s != NULL);
     (ti = t)->SetParent(this);
@@ -837,6 +855,19 @@ void SymbolRefExpr::PrintChildren(int indentlevel) {
     ti->Print(indentlevel+1);
 }
 
+string SymbolRefExpr::GenerateCode(int indentlevel) {
+    string indentation = string(indentlevel*4, ' ');
+    string tempname = "temp" + to_string(tempcounter++);
+    string type, t(ti->getType());
+    if (t == "qi")
+        type = "char";
+    else if (t == "si")
+        type = "int";
+    else type = "long long int";
+    out << type << " " << tempname << " = (" << type << ")externSymbolTable[" << string(sym) << "];\n";
+    return tempname;
+}
+
 JumpInsn::JumpInsn(Dest *d) {
     Assert(d != NULL);
     (dest = d)->SetParent(this);
@@ -845,6 +876,12 @@ JumpInsn::JumpInsn(Dest *d) {
 void JumpInsn::PrintChildren(int indentlevel) {
     printf("\n");
     dest->Print(indentlevel+1);
+}
+
+string JumpInsn::GenerateCode(int indentlevel) {
+    genCodeSignal = true;
+    dest->GenerateCode(indentlevel);
+    return "";
 }
 
 NegOperand::NegOperand(Operand *o) {
@@ -865,6 +902,18 @@ void Label::PrintChildren(int indentlevel) {
     printf(" %d\n", labelno);
 }
 
+string Label::GenerateCode(int indentlevel) {
+    string indentation = string(indentlevel*4, ' ');
+    if (genCodeSignal) {
+        string dest = "label" + to_string(labelno);
+        out << "goto " << dest << ";\n";
+        return "";
+    }
+    else {
+        return "label"+to_string(labelno);
+    }
+}
+
 IfThenElse::IfThenElse(Comparison *c, Operand *o1, Operand *o2) {
     Assert(c != NULL && o1 != NULL && o2 != NULL);
     (comp = c)->SetParent(this);
@@ -879,6 +928,26 @@ void IfThenElse::PrintChildren(int indentlevel) {
     op2->Print(indentlevel+1);
 }
 
+string IfThenElse::GenerateCode(int indentlevel) {
+    string indentation = string(indentlevel*4, ' ');
+    string comparison = comp->GenerateCode(indentlevel);
+    genCodeSignal = false;
+    string dest1 = op1->GenerateCode(indentlevel);
+    genCodeSignal = false;
+    string dest2 = op2->GenerateCode(indentlevel);
+    if (dest1 == "Pc") {
+        out << "if (!" << comparison << ") goto " << dest2 << ";\n";
+    }
+    else if (dest2 == "Pc") {
+        out << "if (" << comparison << ") goto " << dest1 << ";\n";
+    }
+    else {
+        out << "if (" << comparison << ") goto " << dest1 << ";\n";
+        out << "else goto " << dest2 << ";\n";
+    }
+    return "";
+}
+
 Comparison::Comparison(Condition *c, Operand *o1, Operand *o2) {
     Assert(c != NULL && o1 != NULL && o2 != NULL);
     (cond = c)->SetParent(this);
@@ -891,6 +960,32 @@ void Comparison::PrintChildren(int indentlevel) {
     cond->Print(indentlevel+1);
     op1->Print(indentlevel+1);
     op2->Print(indentlevel+1);
+}
+
+string Comparison::GenerateCode(int indentlevel) {
+    string indentation = string(indentlevel*4, ' ');
+    string lop = op1->GenerateCode(indentlevel), rop = op2->GenerateCode(indentlevel);
+    string condition = cond->getCondition();
+    string tempname = "temp" + to_string(tempcounter++);
+    if (condition == "lt" || condition == "ltu") {
+        out << "bool " << tempname << " = (" << lop << " < " << rop << ");\n";
+    }
+    else if (condition == "gt" || condition == "gtu") {
+        out << "bool " << tempname << " = (" << lop << " > " << rop << ");\n";
+    }
+    else if (condition == "le" || condition == "leu") {
+        out << "bool " << tempname << " = (" << lop << " <= " << rop << ");\n";
+    }
+    else if (condition == "ge" || condition == "geu") {
+        out << "bool " << tempname << " = (" << lop << " >= " << rop << ");\n";
+    }
+    else if (condition == "eq") {
+        out << "bool " << tempname << " = (" << lop << " == " << rop << ");\n";
+    }
+    else {
+        out << "bool " << tempname << " = (" << lop << " != " << rop << ");\n";
+    }
+    return tempname;
 }
 
 Condition::Condition(const char *c) {
@@ -920,6 +1015,24 @@ void RetCall::Analyze() {
     elist->SetArgs(string(fnname), string(tinfo->getType()));
 }
 
+string RetCall::GenerateCode(int indentlevel) {
+    string indentation = string(indentlevel*4, ' ');
+    string tempname = "temp" + to_string(tempcounter++);
+    string type, t(tinfo->getType());
+    string fname(fnname);
+    fname = fname.substr(1,fname.size()-2);
+    if (t == "qi")
+        type = "char";
+    else if (t == "si")
+        type = "int";
+    else type = "long long int";
+    out << type << " " << tempname << " = " << fname << "(";
+    elist->GenerateCode(indentlevel);
+    cout << ");\n";
+    out << "regs[0] = (long long int)" << tempname << ";\n";
+    return "";
+}
+
 NoRetCall::NoRetCall(const char *fn, ExprList *el) {
     Assert(fn != NULL && el != NULL);
     fnname = fn;
@@ -933,6 +1046,16 @@ void NoRetCall::PrintChildren(int indentlevel) {
 
 void NoRetCall::Analyze() {
     elist->SetArgs(string(fnname),"");
+}
+
+string NoRetCall::GenerateCode(int indentlevel) {
+    string indentation = string(indentlevel*4, ' ');
+    string fname(fnname);
+    fname = fname.substr(1,fname.size()-2);
+    out << fname << "(";
+    elist->GenerateCode(indentlevel);
+    cout << ");\n";
+    return "";
 }
 
 ExprList::ExprList(List<pair<int,const char*>> *as) {
@@ -972,4 +1095,34 @@ void ExprList::SetArgs(string sname, string rettype) {
     else if (rettype == "di")
         rtype = "long long int";
     fb->setTypes(types, regs, rtype);
+}
+
+string ExprList::GenerateCode(int indentlevel) {
+    int n = args->NumElements();
+    string type, t;
+    if (!n)
+        return "";
+    for (int i = n-1; i > 0; i--) {
+        int reg = args->Nth(i).first;
+        t = string(args->Nth(i).second);
+        if (t == "qi")
+            type = "char";
+        else if (t == "si")
+            type = "int";
+        else type = "long long int";
+        if (type != "long long int")
+            cout << "(" << type << ")" << "regs[" << reg << "], ";
+        else cout << "regs[" << reg << "], "; 
+    }
+    int reg = args->Nth(0).first;
+    t = string(args->Nth(0).second);
+    if (t == "qi")
+        type = "char";
+    else if (t == "si")
+        type = "int";
+    else type = "long long int";
+    if (type == "long long int")
+        cout << "regs[" << reg << "]";
+    else cout << "(" << type << ")regs[" << reg << "]";
+    return "";
 }

@@ -143,7 +143,7 @@ END_IGNORE3     (">")
 %%
 void InitScanner()
 {
-	printf("Initializing scanner.\n\n");
+	// printf("Initializing scanner.\n\n");
     yy_flex_debug = false;
     lineno = 1;
     colno = 1;

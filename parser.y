@@ -157,7 +157,7 @@ Program         :   FuncBodies                  {
                                                     @1;
                                                     $$ = new Program($1);
                                                     if (ReportError::findNumErrors() == 0) {
-                                                        $$->Print(0);
+                                                        // $$->Print(0);
                                                         $$->Analyze();
                                                         $$->GenerateCode(0);
                                                     }
@@ -462,6 +462,6 @@ Junk2           :    T_Nil          { }
 
 void InitParser()
 {
-   printf("Initializing parser.\n\n");
+   // printf("Initializing parser.\n\n");
    yydebug = false;
 }

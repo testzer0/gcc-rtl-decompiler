@@ -1893,7 +1893,7 @@ yyreduce:
                                                     (yylsp[0]);
                                                     (yyval.program) = new Program((yyvsp[0].funcbodies));
                                                     if (ReportError::findNumErrors() == 0) {
-                                                        (yyval.program)->Print(0);
+                                                        // $$->Print(0);
                                                         (yyval.program)->Analyze();
                                                         (yyval.program)->GenerateCode(0);
                                                     }
@@ -3054,6 +3054,6 @@ yyreturn:
 
 void InitParser()
 {
-   printf("Initializing parser.\n\n");
+   // printf("Initializing parser.\n\n");
    yydebug = false;
 }

@@ -610,7 +610,7 @@ class ConditionExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
-        // continue here
+        string GenerateCode(int indentlevel);
 };
 
 class SymbolRefExpr : public Expr {
@@ -624,6 +624,7 @@ class SymbolRefExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class JumpInsn : public Stmt {
@@ -636,6 +637,7 @@ class JumpInsn : public Stmt {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class Dest : public Operand {
@@ -667,6 +669,7 @@ class Label : public Dest {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class Pc : public Dest {
@@ -678,8 +681,9 @@ class Pc : public Dest {
         const char *GetPrintNameForNode() {
             return "Pc";
         }
-        void PrintChildren() {}
+        void PrintChildren(int indentlevel) {}
         void Analyze() { }
+        string GenerateCode(int indentlevel) { return "Pc"; }
 };
 
 class IfThenElse : public Dest {
@@ -694,6 +698,7 @@ class IfThenElse : public Dest {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class Comparison : public Node {
@@ -708,6 +713,7 @@ class Comparison : public Node {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class Condition : public Node {
@@ -743,6 +749,7 @@ class RetCall : public Call {
         }
         void PrintChildren(int indentlevel);
         void Analyze();
+        string GenerateCode(int indentlevel);
 };
 
 class NoRetCall : public Call {
@@ -756,6 +763,7 @@ class NoRetCall : public Call {
         }
         void PrintChildren(int indentlevel);
         void Analyze();
+        string GenerateCode(int indentlevel);
 };
 
 class ExprList : public Node{
@@ -769,6 +777,7 @@ class ExprList : public Node{
         void PrintChildren(int indentlevel);
         void Analyze() { }
         void SetArgs(string name, string rettype);
+        string GenerateCode(int indentlevel);
 };
 
 #endif

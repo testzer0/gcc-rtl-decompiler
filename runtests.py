@@ -8,6 +8,5 @@ for root, dirs, files in os.walk(rootdir):
         ext = os.path.splitext(file)[-1]
         if ext == ".rtl":
             fullname = rootdir + "/" + name + ".rtl"
-            outname = rootdir + "/" + name + ".out"
-            print("./rcc < %s > %s" % (fullname,outname))
+            outname = rootdir + "/" + name + ".out.cpp"
             subprocess.run("./rcc < %s > %s" % (fullname,outname), shell=True)
