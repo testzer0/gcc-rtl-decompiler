@@ -158,6 +158,8 @@ Program         :   FuncBodies                  {
                                                     $$ = new Program($1);
                                                     if (ReportError::findNumErrors() == 0) {
                                                         $$->Print(0);
+                                                        $$->Analyze();
+                                                        $$->GenerateCode(0);
                                                     }
                                                 }
                 ;
@@ -189,11 +191,11 @@ Barrier         :   T_Barrier T_IntConstant T_IntConstant T_IntConstant { $$ = n
                 ;
 
 CodeLabel       :   T_CodeLabel T_IntConstant T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_Nil ')'
-                                                { $$ = new CodeLabel(); }
+                                                { $$ = new CodeLabel($2); }
                 |   T_CodeLabel T_IntConstant T_IntConstant T_IntConstant T_IntConstant'(' T_Nil ')'
-                                                { $$ = new CodeLabel(); }
+                                                { $$ = new CodeLabel($2); }
                 |   T_CodeLabel T_IntConstant T_IntConstant T_IntConstant T_IntConstant T_IntConstant '(' T_StringConstant ')'
-                                                { $$ = new CodeLabel(); }
+                                                { $$ = new CodeLabel($2); }
                 ;
 
 Integer         :   '-' T_IntConstant           { $$ = new Integer(-$2); }

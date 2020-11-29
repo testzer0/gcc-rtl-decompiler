@@ -14,6 +14,9 @@
 #include "list.h"
 #include <bits/stdc++.h>    // later replace by specific header
 
+// TODO: For now the unsigned versions of operators are same as the signed versions.
+// Fix this later.
+
 class Node{
     protected:
         yyltype *location;
@@ -45,6 +48,7 @@ class Node{
         // void PrintCode(int indentlevel)
         // virtual const char *PrintCodeChilfren(int indentlevel)
         virtual void Analyze() {}
+        virtual string GenerateCode(int indentlevel) { return ""; }
 };
 
 class Error : public Node
@@ -81,6 +85,7 @@ class Program : public Node {
         }
         void PrintChildren(int indentlevel);
         void Analyze();
+        string GenerateCode(int indentlevel);
 };
 
 class FuncBody : public Node {
@@ -90,6 +95,7 @@ class FuncBody : public Node {
         List<int> *regs;
         const char *name;
         int numArgs;
+        string retType;
     public :
         FuncBody(List<Stmt *> *ss, const char *n);
         const char *GetPrintNameForNode() {
@@ -97,7 +103,8 @@ class FuncBody : public Node {
         }
         void PrintChildren(int indentlevel);
         void Analyze();
-        void setTypes(List<string> *types, List<int> *regs);
+        void setTypes(List<string> *types, List<int> *regs, string rtype);
+        string GenerateCode(int indentlevel);
 };
 
 // StmtList not needed to be declared as a separate class
@@ -118,6 +125,7 @@ class Note : public Stmt {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class Barrier : public Stmt {
@@ -129,17 +137,20 @@ class Barrier : public Stmt {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class CodeLabel : public Stmt {
+    protected:
+        int labelno;
     public:
-        CodeLabel() : Stmt() {}
-        CodeLabel(yyltype loc) : Stmt() {}
+        CodeLabel(int lno) { labelno = lno; }
         const char *GetPrintNameForNode() {
             return "CodeLabel";
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class Integer : public Node {
@@ -168,6 +179,7 @@ class Insn : public Stmt {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class MainCmd : public Node {
@@ -194,6 +206,7 @@ class ParallelCmd : public MainCmd {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class ClobberCmd : public PlainCmd {
@@ -206,6 +219,7 @@ class ClobberCmd : public PlainCmd {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class SetCmd : public PlainCmd {
@@ -218,6 +232,7 @@ class SetCmd : public PlainCmd {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class UseCmd : public PlainCmd {
@@ -229,6 +244,7 @@ class UseCmd : public PlainCmd {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel) { return ""; }
 };
 
 class Operand : public Node {
@@ -248,6 +264,7 @@ class IntOperand : public Operand {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel) { return to_string(intvalue); }
 };
 
 class ExprOperand : public Operand {
@@ -262,6 +279,7 @@ class ExprOperand : public Operand {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class ExtendOperand : public Operand {
@@ -275,6 +293,7 @@ class ExtendOperand : public Operand {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class DerefOperand : public Operand {
@@ -289,6 +308,7 @@ class DerefOperand : public Operand {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class SymbolRefOperand : public Operand {
@@ -301,6 +321,7 @@ class SymbolRefOperand : public Operand {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class TypeInfo : public Node {
@@ -312,7 +333,9 @@ class TypeInfo : public Node {
             return "TypeInfo";
         }
         void PrintChildren(int indentlevel);
-        const char *getType() { return type; }
+        const char *getType() { 
+            return (type? type : (const char *)""); 
+        }
         void Analyze() { }
 };
 
@@ -327,6 +350,8 @@ class LocInfo : public Node {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        bool checkForFlag(string flag);
+        string getMemType();
 };
 
 class MemType : public Node {
@@ -339,6 +364,7 @@ class MemType : public Node {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string getType() { return string(type); }
 };
 
 // There is no need to declare a class for flags
@@ -354,6 +380,7 @@ class Flag : public Node {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string getFlag() { return string(flag); }
 };
 
 class Expr : public Node {
@@ -373,6 +400,7 @@ class IntegerExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class PlusExpr : public Expr {
@@ -387,6 +415,7 @@ class PlusExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class MinusExpr : public Expr {
@@ -401,6 +430,7 @@ class MinusExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class MultExpr : public Expr {
@@ -415,6 +445,7 @@ class MultExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class DivExpr : public Expr {
@@ -429,6 +460,7 @@ class DivExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class UDivExpr : public Expr {
@@ -443,6 +475,7 @@ class UDivExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class ModExpr : public Expr {
@@ -457,6 +490,7 @@ class ModExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class UModExpr : public Expr {
@@ -471,6 +505,7 @@ class UModExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class LshiftExpr : public Expr {
@@ -485,6 +520,7 @@ class LshiftExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class LshiftRtExpr : public Expr {
@@ -499,6 +535,7 @@ class LshiftRtExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class AshiftExpr : public Expr {
@@ -513,6 +550,7 @@ class AshiftExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class AshiftRtExpr : public Expr {
@@ -527,6 +565,7 @@ class AshiftRtExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class SubregExpr : public Expr {
@@ -540,6 +579,7 @@ class SubregExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class CompareExpr : public Expr {
@@ -554,6 +594,7 @@ class CompareExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class ConditionExpr : public Expr {
@@ -569,6 +610,7 @@ class ConditionExpr : public Expr {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        // continue here
 };
 
 class SymbolRefExpr : public Expr {
@@ -678,6 +720,7 @@ class Condition : public Node {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string getCondition() { return string(cond); }
 };
 
 class Call : public Stmt {
@@ -725,7 +768,7 @@ class ExprList : public Node{
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
-        void SetArgs(string name);
+        void SetArgs(string name, string rettype);
 };
 
 #endif
