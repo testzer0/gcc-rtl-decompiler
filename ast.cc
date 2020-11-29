@@ -4,6 +4,8 @@
 #include "list.h"
 #include <bits/stdc++.h>  // later replace by specific header
 
+map<string,void *> gSymbolTable;
+
 Node::Node(yyltype loc) {
     location = new yyltype(loc);
     parent = NULL;
@@ -61,11 +63,12 @@ void FuncBody::Analyze() {
     gSymbolTable[string(name)] = (void *)this;
 }
 
-void FuncBody::setTypes(List<string> *ts) {
+void FuncBody::setTypes(List<string> *ts, List<int> *rs) {
     if (numArgs != -1)
         return;
     numArgs = ts->NumElements();
     types = ts;
+    regs = rs;
 }
 
 Integer::Integer(int val) {
@@ -559,7 +562,9 @@ void ExprList::SetArgs(string name) {
     if (!fb) // imported fn
         return;
     List<string> *types = new List<string>;
+    List<int> *regs = new List<int>;
     for (int i = 0; i < args->NumElements(); i++) {
+        regs->Append(args->Nth(i).first);
         string temp = args->Nth(i).second;
         if (temp == "qi") {
             types->Append("char");
@@ -569,5 +574,5 @@ void ExprList::SetArgs(string name) {
         }
         else types->Append("long long int");
     }
-    fb->setTypes(types);
+    fb->setTypes(types, regs);
 }

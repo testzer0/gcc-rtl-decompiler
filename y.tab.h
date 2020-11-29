@@ -107,7 +107,8 @@ extern int yydebug;
     T_Neg = 317,
     T_StringConstant = 318,
     T_IntConstant = 319,
-    T_FunBegin = 320
+    T_FunBegin = 320,
+    TWO = 321
   };
 #endif
 /* Tokens.  */
@@ -174,6 +175,7 @@ extern int yydebug;
 #define T_StringConstant 318
 #define T_IntConstant 319
 #define T_FunBegin 320
+#define TWO 321
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -245,7 +247,7 @@ union YYSTYPE
     const char *stringConstant;
     char identifier[32];
 
-#line 249 "y.tab.h" /* yacc.c:1909  */
+#line 251 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

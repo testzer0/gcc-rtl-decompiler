@@ -146,6 +146,9 @@
 %type <exprlist> ExprList
 %type <exprlistexpr> ExprListExpr
 
+%left TWO
+%left ')'
+
 %%
 
 /* Rules begin */
@@ -254,21 +257,21 @@ IntOperand      :  T_ConstInt Integer                     { $$ = new IntOperand(
                 ;
 
 ExprOperand     :   LocInfo ':' TypeInfo Expr   { $$ = new ExprOperand($1,$3,$4); }
-                |   AshiftExpr                  { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   LshiftExpr                  { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   AshiftRtExpr                { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   LshiftRtExpr                { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   CompareExpr                 { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   PlusExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   MinusExpr                   { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   MultExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   DivExpr                     { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   UDivExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   ModExpr                     { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   UModExpr                    { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   SubregExpr                  { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   ConditionExpr               { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   SymbolRefExpr               { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   AshiftExpr %prec TWO                 { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   LshiftExpr %prec TWO                 { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   AshiftRtExpr %prec TWO               { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   LshiftRtExpr %prec TWO               { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   CompareExpr %prec TWO                { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   PlusExpr %prec TWO                   { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   MinusExpr %prec TWO                  { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   MultExpr  %prec TWO                  { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   DivExpr  %prec TWO                   { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   UDivExpr %prec TWO                   { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   ModExpr %prec TWO                    { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   UModExpr %prec TWO                   { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   SubregExpr %prec TWO                 { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   ConditionExpr %prec TWO              { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   SymbolRefExpr %prec TWO              { $$ = new ExprOperand(NULL,NULL,$1); }
                 ;
 
 ExtendOperand   :   T_SiExtend TypeInfo '(' Operand ')' { $$ = new ExtendOperand($2,$4); }
@@ -314,7 +317,7 @@ TypeInfo        :   T_SIType                    { $$ = new TypeInfo("si"); }
                 ;
 
 Expr            :   IntegerExpr                 { $$ = $1; }
-                |   '(' PlusExpr ')'            { $$ = $2; }
+                |   '(' PlusExpr ')'           { $$ = $2; }
                 |   '(' MinusExpr ')'           { $$ = $2; }
                 |   '(' MultExpr ')'            { $$ = $2; }
                 |   '(' AshiftExpr ')'          { $$ = $2; }

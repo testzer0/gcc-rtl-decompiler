@@ -14,8 +14,6 @@
 #include "list.h"
 #include <bits/stdc++.h>    // later replace by specific header
 
-map<string,void *> gSymbolTable;
-
 class Node{
     protected:
         yyltype *location;
@@ -89,6 +87,7 @@ class FuncBody : public Node {
     protected:
         List<Stmt *> *stmts;
         List<string> *types;
+        List<int> *regs;
         const char *name;
         int numArgs;
     public :
@@ -98,7 +97,7 @@ class FuncBody : public Node {
         }
         void PrintChildren(int indentlevel);
         void Analyze();
-        void setTypes(List<string> *types);
+        void setTypes(List<string> *types, List<int> *regs);
 };
 
 // StmtList not needed to be declared as a separate class
