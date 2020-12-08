@@ -23,4 +23,6 @@ the repository, and then either open the HTML documentation in an internet brows
 ## Graphical User Interface
 
 We have also included a GUI for easier utilization of this decompiler tool. It is present under the 'gui' directory, which further contains
-the frontend and the backend.
+the frontend and the backend. Here is an example of the GUI in action!
+
+![GUI in Action](./gui/example.png)
