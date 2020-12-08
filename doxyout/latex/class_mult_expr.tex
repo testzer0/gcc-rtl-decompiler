@@ -1,0 +1,137 @@
+\hypertarget{class_mult_expr}{}\section{Mult\+Expr Class Reference}
+\label{class_mult_expr}\index{Mult\+Expr@{Mult\+Expr}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Mult\+Expr\+:
+% FIG 0
+
+
+Collaboration diagram for Mult\+Expr\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mult_expr_a9f22ce81d1c6111368ba4a94381a0af0}{Mult\+Expr} (\hyperlink{class_type_info}{Type\+Info} $\ast$ti, \hyperlink{class_operand}{Operand} $\ast$o1, \hyperlink{class_operand}{Operand} $\ast$o2)
+\item 
+const char $\ast$ \hyperlink{class_mult_expr_af09a0cb0e06bfc24892dee567f48808c}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_mult_expr_ae87b8f5f11f98d66a6327a110267348d}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_mult_expr_accc5d3ee9e4a837eb82c8a51440f69ac}{Analyze} ()
+\item 
+string \hyperlink{class_mult_expr_a06698bfc99d60d7ce2fde5d7f0addc66}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_type_info}{Type\+Info} $\ast$ \hyperlink{class_mult_expr_ae2bc9b1b3fc5234d5d15411f82e5d882}{tinfo}
+\item 
+\hyperlink{class_operand}{Operand} $\ast$ \hyperlink{class_mult_expr_aa5ca086a99b10f512002938ec619b0e3}{op1}
+\item 
+\hyperlink{class_operand}{Operand} $\ast$ \hyperlink{class_mult_expr_a92004aab48eaa8d46b2bbe4caa250c80}{op2}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A multiplication expression denotes the multiplication of the left and right operands followed by a possible typecast into the specified type (width). 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_mult_expr_a9f22ce81d1c6111368ba4a94381a0af0}\label{class_mult_expr_a9f22ce81d1c6111368ba4a94381a0af0}} 
+\index{Mult\+Expr@{Mult\+Expr}!Mult\+Expr@{Mult\+Expr}}
+\index{Mult\+Expr@{Mult\+Expr}!Mult\+Expr@{Mult\+Expr}}
+\subsubsection{\texorpdfstring{Mult\+Expr()}{MultExpr()}}
+{\footnotesize\ttfamily Mult\+Expr\+::\+Mult\+Expr (\begin{DoxyParamCaption}\item[{\hyperlink{class_type_info}{Type\+Info} $\ast$}]{ti,  }\item[{\hyperlink{class_operand}{Operand} $\ast$}]{o1,  }\item[{\hyperlink{class_operand}{Operand} $\ast$}]{o2 }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em ti} & The type information to be assigned to tinfo \\
+\hline
+{\em o1} & The left operand \\
+\hline
+{\em o2} & The right operand. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mult_expr_accc5d3ee9e4a837eb82c8a51440f69ac}\label{class_mult_expr_accc5d3ee9e4a837eb82c8a51440f69ac}} 
+\index{Mult\+Expr@{Mult\+Expr}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Mult\+Expr@{Mult\+Expr}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Mult\+Expr\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+No analysis to be done for \hyperlink{class_mult_expr}{Mult\+Expr}. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_mult_expr_a06698bfc99d60d7ce2fde5d7f0addc66}\label{class_mult_expr_a06698bfc99d60d7ce2fde5d7f0addc66}} 
+\index{Mult\+Expr@{Mult\+Expr}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Mult\+Expr@{Mult\+Expr}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string Mult\+Expr\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generates code for multiplying the two operands together, and returns the name of the temporary variable in which the result is stored. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the code is to be generated. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_mult_expr_af09a0cb0e06bfc24892dee567f48808c}\label{class_mult_expr_af09a0cb0e06bfc24892dee567f48808c}} 
+\index{Mult\+Expr@{Mult\+Expr}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Mult\+Expr@{Mult\+Expr}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Mult\+Expr\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_mult_expr_ae87b8f5f11f98d66a6327a110267348d}\label{class_mult_expr_ae87b8f5f11f98d66a6327a110267348d}} 
+\index{Mult\+Expr@{Mult\+Expr}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Mult\+Expr@{Mult\+Expr}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Mult\+Expr\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Calls \hyperlink{class_node_a9ef727fd72d1a37792b3db60a8a479dd}{Print()} on the children of this node in the A\+ST. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the current node must be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_mult_expr_aa5ca086a99b10f512002938ec619b0e3}\label{class_mult_expr_aa5ca086a99b10f512002938ec619b0e3}} 
+\index{Mult\+Expr@{Mult\+Expr}!op1@{op1}}
+\index{op1@{op1}!Mult\+Expr@{Mult\+Expr}}
+\subsubsection{\texorpdfstring{op1}{op1}}
+{\footnotesize\ttfamily \hyperlink{class_operand}{Operand}$\ast$ Mult\+Expr\+::op1\hspace{0.3cm}{\ttfamily [protected]}}
+
+The left operand. \mbox{\Hypertarget{class_mult_expr_a92004aab48eaa8d46b2bbe4caa250c80}\label{class_mult_expr_a92004aab48eaa8d46b2bbe4caa250c80}} 
+\index{Mult\+Expr@{Mult\+Expr}!op2@{op2}}
+\index{op2@{op2}!Mult\+Expr@{Mult\+Expr}}
+\subsubsection{\texorpdfstring{op2}{op2}}
+{\footnotesize\ttfamily \hyperlink{class_operand}{Operand}$\ast$ Mult\+Expr\+::op2\hspace{0.3cm}{\ttfamily [protected]}}
+
+The right operand. \mbox{\Hypertarget{class_mult_expr_ae2bc9b1b3fc5234d5d15411f82e5d882}\label{class_mult_expr_ae2bc9b1b3fc5234d5d15411f82e5d882}} 
+\index{Mult\+Expr@{Mult\+Expr}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!Mult\+Expr@{Mult\+Expr}}
+\subsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \hyperlink{class_type_info}{Type\+Info}$\ast$ Mult\+Expr\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+The type (width) into which the result is cast. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

@@ -1,0 +1,85 @@
+\hypertarget{class_report_error}{}\section{Report\+Error Class Reference}
+\label{class_report_error}\index{Report\+Error@{Report\+Error}}
+
+
+{\ttfamily \#include $<$errors.\+h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_report_error_afcea6674af39a926a615b9318db590e3}{Unterm\+String} (\hyperlink{structyyltype}{yyltype} $\ast$loc, const char $\ast$ident)
+\item 
+static void \hyperlink{class_report_error_a8c066b4ee6cd5e854099af3bdaedad39}{Unrecog\+Char} (\hyperlink{structyyltype}{yyltype} $\ast$loc, char ch)
+\item 
+static void \hyperlink{class_report_error_af21c5aee5a4009e032599b34a1066bfc}{Long\+Identifier} (\hyperlink{structyyltype}{yyltype} $\ast$loc, const char $\ast$ident)
+\item 
+static void \hyperlink{class_report_error_a25e0847a7068c5543494a2e0fc6da6eb}{Unterm\+Brack} ()
+\item 
+static int \hyperlink{class_report_error_a2b36be5bf0fb43372cd2e9d6ef52262b}{find\+Num\+Errors} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A custom class for handling different kinds of errors in the R\+TL code. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_report_error_a2b36be5bf0fb43372cd2e9d6ef52262b}\label{class_report_error_a2b36be5bf0fb43372cd2e9d6ef52262b}} 
+\index{Report\+Error@{Report\+Error}!find\+Num\+Errors@{find\+Num\+Errors}}
+\index{find\+Num\+Errors@{find\+Num\+Errors}!Report\+Error@{Report\+Error}}
+\subsubsection{\texorpdfstring{find\+Num\+Errors()}{findNumErrors()}}
+{\footnotesize\ttfamily int Report\+Error\+::find\+Num\+Errors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+calculates the total number of errors. \begin{DoxyReturn}{Returns}
+number of errors 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_report_error_af21c5aee5a4009e032599b34a1066bfc}\label{class_report_error_af21c5aee5a4009e032599b34a1066bfc}} 
+\index{Report\+Error@{Report\+Error}!Long\+Identifier@{Long\+Identifier}}
+\index{Long\+Identifier@{Long\+Identifier}!Report\+Error@{Report\+Error}}
+\subsubsection{\texorpdfstring{Long\+Identifier()}{LongIdentifier()}}
+{\footnotesize\ttfamily void Report\+Error\+::\+Long\+Identifier (\begin{DoxyParamCaption}\item[{\hyperlink{structyyltype}{yyltype} $\ast$}]{loc,  }\item[{const char $\ast$}]{ident }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Name of function too long. 
+\begin{DoxyParams}{Parameters}
+{\em loc} & location of error \\
+\hline
+{\em ident} & the name of the function \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_report_error_a8c066b4ee6cd5e854099af3bdaedad39}\label{class_report_error_a8c066b4ee6cd5e854099af3bdaedad39}} 
+\index{Report\+Error@{Report\+Error}!Unrecog\+Char@{Unrecog\+Char}}
+\index{Unrecog\+Char@{Unrecog\+Char}!Report\+Error@{Report\+Error}}
+\subsubsection{\texorpdfstring{Unrecog\+Char()}{UnrecogChar()}}
+{\footnotesize\ttfamily void Report\+Error\+::\+Unrecog\+Char (\begin{DoxyParamCaption}\item[{\hyperlink{structyyltype}{yyltype} $\ast$}]{loc,  }\item[{char}]{ch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Unrecognized character error. 
+\begin{DoxyParams}{Parameters}
+{\em loc} & location of error \\
+\hline
+{\em the} & character itself \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_report_error_a25e0847a7068c5543494a2e0fc6da6eb}\label{class_report_error_a25e0847a7068c5543494a2e0fc6da6eb}} 
+\index{Report\+Error@{Report\+Error}!Unterm\+Brack@{Unterm\+Brack}}
+\index{Unterm\+Brack@{Unterm\+Brack}!Report\+Error@{Report\+Error}}
+\subsubsection{\texorpdfstring{Unterm\+Brack()}{UntermBrack()}}
+{\footnotesize\ttfamily void Report\+Error\+::\+Unterm\+Brack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Unterms square brackets \mbox{\Hypertarget{class_report_error_afcea6674af39a926a615b9318db590e3}\label{class_report_error_afcea6674af39a926a615b9318db590e3}} 
+\index{Report\+Error@{Report\+Error}!Unterm\+String@{Unterm\+String}}
+\index{Unterm\+String@{Unterm\+String}!Report\+Error@{Report\+Error}}
+\subsubsection{\texorpdfstring{Unterm\+String()}{UntermString()}}
+{\footnotesize\ttfamily void Report\+Error\+::\+Unterm\+String (\begin{DoxyParamCaption}\item[{\hyperlink{structyyltype}{yyltype} $\ast$}]{loc,  }\item[{const char $\ast$}]{ident }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Unterminated string error. 
+\begin{DoxyParams}{Parameters}
+{\em loc} & location of error \\
+\hline
+{\em ident} & the string itself \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/errors.\+h\item 
+/home/zer0/rtl2\+C/errors.\+cc\end{DoxyCompactItemize}

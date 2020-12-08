@@ -1,0 +1,137 @@
+\hypertarget{class_ashift_rt_expr}{}\section{Ashift\+Rt\+Expr Class Reference}
+\label{class_ashift_rt_expr}\index{Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Ashift\+Rt\+Expr\+:
+% FIG 0
+
+
+Collaboration diagram for Ashift\+Rt\+Expr\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_ashift_rt_expr_a70ad2de1ccc23dfed85711d4c9ad6b3f}{Ashift\+Rt\+Expr} (\hyperlink{class_type_info}{Type\+Info} $\ast$ti, \hyperlink{class_operand}{Operand} $\ast$o1, \hyperlink{class_operand}{Operand} $\ast$o2)
+\item 
+const char $\ast$ \hyperlink{class_ashift_rt_expr_a59b494552a66bdb8a407acb30d6ddc5b}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_ashift_rt_expr_a2964d2199eef48495ab173bf2170eb8b}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_ashift_rt_expr_a324ffb5777b5ccea0e63eba79e0c67c8}{Analyze} ()
+\item 
+string \hyperlink{class_ashift_rt_expr_aec58e35be6c2f84aeb345e48777e2370}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_type_info}{Type\+Info} $\ast$ \hyperlink{class_ashift_rt_expr_a553f113d3c2b9dae1165a0b9852dc99a}{tinfo}
+\item 
+\hyperlink{class_operand}{Operand} $\ast$ \hyperlink{class_ashift_rt_expr_a9559eedf8e5f553ec14eb4503c956ab8}{op1}
+\item 
+\hyperlink{class_operand}{Operand} $\ast$ \hyperlink{class_ashift_rt_expr_af343100baf13dc58ccbb76a7224ff449}{op2}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Like Lshift\+Rt, but the behaviour differs on machines in which the maximum supported width is $<$ 64 bit. This difference is not handled here. For our purposes, Ashift\+Rt and Lshift\+Rt are identical. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_ashift_rt_expr_a70ad2de1ccc23dfed85711d4c9ad6b3f}\label{class_ashift_rt_expr_a70ad2de1ccc23dfed85711d4c9ad6b3f}} 
+\index{Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}!Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}}
+\index{Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}!Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}}
+\subsubsection{\texorpdfstring{Ashift\+Rt\+Expr()}{AshiftRtExpr()}}
+{\footnotesize\ttfamily Ashift\+Rt\+Expr\+::\+Ashift\+Rt\+Expr (\begin{DoxyParamCaption}\item[{\hyperlink{class_type_info}{Type\+Info} $\ast$}]{ti,  }\item[{\hyperlink{class_operand}{Operand} $\ast$}]{o1,  }\item[{\hyperlink{class_operand}{Operand} $\ast$}]{o2 }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em ti} & The type information to be assigned to tinfo \\
+\hline
+{\em o1} & The left operand \\
+\hline
+{\em o2} & The right operand. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_ashift_rt_expr_a324ffb5777b5ccea0e63eba79e0c67c8}\label{class_ashift_rt_expr_a324ffb5777b5ccea0e63eba79e0c67c8}} 
+\index{Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Ashift\+Rt\+Expr\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+No analysis to be done for \hyperlink{class_ashift_rt_expr}{Ashift\+Rt\+Expr}. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_ashift_rt_expr_aec58e35be6c2f84aeb345e48777e2370}\label{class_ashift_rt_expr_aec58e35be6c2f84aeb345e48777e2370}} 
+\index{Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string Ashift\+Rt\+Expr\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generates code to perform the right shift, and then returns the name of the temporary variable in which the result is stored. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the code is to be generated. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_ashift_rt_expr_a59b494552a66bdb8a407acb30d6ddc5b}\label{class_ashift_rt_expr_a59b494552a66bdb8a407acb30d6ddc5b}} 
+\index{Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Ashift\+Rt\+Expr\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_ashift_rt_expr_a2964d2199eef48495ab173bf2170eb8b}\label{class_ashift_rt_expr_a2964d2199eef48495ab173bf2170eb8b}} 
+\index{Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Ashift\+Rt\+Expr\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Calls \hyperlink{class_node_a9ef727fd72d1a37792b3db60a8a479dd}{Print()} on the children of this node in the A\+ST. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the current node must be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_ashift_rt_expr_a9559eedf8e5f553ec14eb4503c956ab8}\label{class_ashift_rt_expr_a9559eedf8e5f553ec14eb4503c956ab8}} 
+\index{Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}!op1@{op1}}
+\index{op1@{op1}!Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}}
+\subsubsection{\texorpdfstring{op1}{op1}}
+{\footnotesize\ttfamily \hyperlink{class_operand}{Operand}$\ast$ Ashift\+Rt\+Expr\+::op1\hspace{0.3cm}{\ttfamily [protected]}}
+
+The left operand. \mbox{\Hypertarget{class_ashift_rt_expr_af343100baf13dc58ccbb76a7224ff449}\label{class_ashift_rt_expr_af343100baf13dc58ccbb76a7224ff449}} 
+\index{Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}!op2@{op2}}
+\index{op2@{op2}!Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}}
+\subsubsection{\texorpdfstring{op2}{op2}}
+{\footnotesize\ttfamily \hyperlink{class_operand}{Operand}$\ast$ Ashift\+Rt\+Expr\+::op2\hspace{0.3cm}{\ttfamily [protected]}}
+
+The right operand. \mbox{\Hypertarget{class_ashift_rt_expr_a553f113d3c2b9dae1165a0b9852dc99a}\label{class_ashift_rt_expr_a553f113d3c2b9dae1165a0b9852dc99a}} 
+\index{Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!Ashift\+Rt\+Expr@{Ashift\+Rt\+Expr}}
+\subsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \hyperlink{class_type_info}{Type\+Info}$\ast$ Ashift\+Rt\+Expr\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+The type (width) into which the result is cast. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

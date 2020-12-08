@@ -1,0 +1,177 @@
+\hypertarget{class_node}{}\section{Node Class Reference}
+\label{class_node}\index{Node@{Node}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Node\+:
+% FIG 0
+
+
+Collaboration diagram for Node\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_node_ae1a193c43abc2eea6d7c12e8eff40312}{Node} (\hyperlink{structyyltype}{yyltype} loc)
+\item 
+\hyperlink{class_node_ad7a34779cad45d997bfd6d3d8043c75f}{Node} ()
+\item 
+\hyperlink{structyyltype}{yyltype} $\ast$ \hyperlink{class_node_a4cdeb731db84c3787e77be957f9474a1}{Get\+Location} ()
+\item 
+void \hyperlink{class_node_ac8f490bfdc412494ac4793e36ecf3a16}{Set\+Parent} (\hyperlink{class_node}{Node} $\ast$p)
+\item 
+\hyperlink{class_node}{Node} $\ast$ \hyperlink{class_node_a3c762d37b1cad8d617db9620784da897}{Get\+Parent} ()
+\item 
+virtual const char $\ast$ \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Get\+Print\+Name\+For\+Node} ()=0
+\item 
+void \hyperlink{class_node_a9ef727fd72d1a37792b3db60a8a479dd}{Print} (int indentlevel, const char $\ast$label=N\+U\+LL)
+\item 
+virtual void \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Print\+Children} (int indentlevel)
+\item 
+virtual void \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Analyze} ()
+\item 
+virtual string \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structyyltype}{yyltype} $\ast$ \hyperlink{class_node_aa4d56e7ecdd3fd9c483b2309af3e9abf}{location}
+\item 
+\hyperlink{class_node}{Node} $\ast$ \hyperlink{class_node_ad8184598cdea70e4bbdfd76f2b0f9e85}{parent}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The base class from which all other classes inherit. Defines some (virtual) functions common to every class. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_node_ae1a193c43abc2eea6d7c12e8eff40312}\label{class_node_ae1a193c43abc2eea6d7c12e8eff40312}} 
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Node\+::\+Node (\begin{DoxyParamCaption}\item[{\hyperlink{structyyltype}{yyltype}}]{loc }\end{DoxyParamCaption})}
+
+A plain constructor. Nothing to see here. 
+\begin{DoxyParams}{Parameters}
+{\em loc} & the location of the first token which is part of this class. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_node_ad7a34779cad45d997bfd6d3d8043c75f}\label{class_node_ad7a34779cad45d997bfd6d3d8043c75f}} 
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Node\+::\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Another plain constructor. Nothing to see here. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_node_a5f88d55c6f253a29def7ccc443d83d47}\label{class_node_a5f88d55c6f253a29def7ccc443d83d47}} 
+\index{Node@{Node}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Node@{Node}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily virtual void Node\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Performs some basic analysis of the class, such as listing the functional calls and updating the parameter types for the function calls. Also adds entries to the global symbol table when called for functions. Must be overriden by inheriting classes. 
+
+Reimplemented in \hyperlink{class_expr_list_ade8c035ff7457f304c32066712d55e2e}{Expr\+List}, \hyperlink{class_no_ret_call_a9714a8c4429eb932be749909b47394fa}{No\+Ret\+Call}, \hyperlink{class_ret_call_ae97ba198b2aff2badbee17b2f02d989a}{Ret\+Call}, \hyperlink{class_condition_a899d0ab9bddcbe9f23bf0c8af84d7d10}{Condition}, \hyperlink{class_comparison_a4f77494c5f58ec539b190352455a71fb}{Comparison}, \hyperlink{class_if_then_else_a4c6beae98e9fe6d40836fdca839d76a7}{If\+Then\+Else}, \hyperlink{class_pc_a8376e5338c6f9c37363f1012722efef9}{Pc}, \hyperlink{class_label_ae77a5d8983fc941f8289a8ba4e4b56c1}{Label}, \hyperlink{class_neg_operand_a4b7facfe7b6947f5ae0118866b5c013e}{Neg\+Operand}, \hyperlink{class_jump_insn_a2173add8387a3b8bb0e5813942e42b38}{Jump\+Insn}, \hyperlink{class_symbol_ref_expr_aa410e63dd4602d66bda4e880afdb82e9}{Symbol\+Ref\+Expr}, \hyperlink{class_condition_expr_a6bad5562b63bd649a1ed921e43de0dca}{Condition\+Expr}, \hyperlink{class_compare_expr_a6433597757238a3332c637c1ad67ea87}{Compare\+Expr}, \hyperlink{class_subreg_expr_acc9be43aae902cf0727ba6b7ab8d85b1}{Subreg\+Expr}, \hyperlink{class_xor_expr_a94f8a8dfc88b60756ed6487299a1d74d}{Xor\+Expr}, \hyperlink{class_ashift_rt_expr_a324ffb5777b5ccea0e63eba79e0c67c8}{Ashift\+Rt\+Expr}, \hyperlink{class_ashift_expr_a526909d8abcf6a4286835103a0029373}{Ashift\+Expr}, \hyperlink{class_lshift_rt_expr_ae9b2290c259d8d21997f1498d79b4f40}{Lshift\+Rt\+Expr}, \hyperlink{class_lshift_expr_a7d479d7c72009f168afdb15b08e73163}{Lshift\+Expr}, \hyperlink{class_u_mod_expr_a0c1da57d7e2aff1e0e6f46f14f784a83}{U\+Mod\+Expr}, \hyperlink{class_mod_expr_aedcba31811fa2e4311c77a1989ca1d5c}{Mod\+Expr}, \hyperlink{class_u_div_expr_a5c7df8e6be9e8f173b9920d5c13e704f}{U\+Div\+Expr}, \hyperlink{class_div_expr_ac2e3fa38bfbe56b3f832266e1679200f}{Div\+Expr}, \hyperlink{class_mult_expr_accc5d3ee9e4a837eb82c8a51440f69ac}{Mult\+Expr}, \hyperlink{class_minus_expr_af9eea4a87688777fd1ad108c24dbcd11}{Minus\+Expr}, \hyperlink{class_plus_expr_aaf2180ee0d3019f23212104587c0cbb9}{Plus\+Expr}, \hyperlink{class_integer_expr_a523ca156f0653534b5c142fd496de7a4}{Integer\+Expr}, \hyperlink{class_flag_ae09e99101902e5486e9d5712749623b3}{Flag}, \hyperlink{class_mem_type_a40773866273e8e3321c67d1bfaab14da}{Mem\+Type}, \hyperlink{class_loc_info_a129d70c92d57a7ab130b699ee8052ef4}{Loc\+Info}, \hyperlink{class_type_info_a157de3b92f5333b031650065591ac04f}{Type\+Info}, \hyperlink{class_symbol_ref_operand_a41ac48ee73184e0fe254ea735c7ea471}{Symbol\+Ref\+Operand}, \hyperlink{class_deref_operand_a970e6fbc520f6e9f2aee97a306fa1eae}{Deref\+Operand}, \hyperlink{class_extend_operand_ad8496c498f62dd060ea265eff6ec72da}{Extend\+Operand}, \hyperlink{class_expr_operand_a322d7d7cd1aae5b592349824f147b570}{Expr\+Operand}, \hyperlink{class_int_operand_ac509fc25d25b9a69b63ddbdf54f5a353}{Int\+Operand}, \hyperlink{class_use_cmd_a3da3017201b8b7573481cf58c4702050}{Use\+Cmd}, \hyperlink{class_set_cmd_ad3d2a13f9dd92cddd09c3c280e601583}{Set\+Cmd}, \hyperlink{class_clobber_cmd_a3f519dc016d05f38518e6ded60afaee1}{Clobber\+Cmd}, \hyperlink{class_parallel_cmd_afacbf01fd5416bfdc3c20837fefc4dde}{Parallel\+Cmd}, \hyperlink{class_insn_a1e175152ea14cde985c5176e5a226f3d}{Insn}, \hyperlink{class_integer_ac3ffa2f3f2d9feaed58bbb2a5d8f1c59}{Integer}, \hyperlink{class_code_label_a7318d2169f33b5296d9f98e17213f634}{Code\+Label}, \hyperlink{class_barrier_af36430f51da20c09b6e3fa1d6e875fef}{Barrier}, \hyperlink{class_note_a33934adfae6685ff299c6ee9a57fd1f5}{Note}, \hyperlink{class_func_body_a6114d98f4cd6e0341cb8662750266477}{Func\+Body}, and \hyperlink{class_program_a7a533446b23a020e661463df819ae49d}{Program}.
+
+\mbox{\Hypertarget{class_node_acb60e526730e8436056375a3055c2c32}\label{class_node_acb60e526730e8436056375a3055c2c32}} 
+\index{Node@{Node}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Node@{Node}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily virtual string Node\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Performs the code generation of the decompiled c code. Then proceeds to call \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Generate\+Code()} on the child classes recursively. Must be overriden by inheriting classes 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The indentation level for printing the name, determined by the depth of the node in the A\+ST. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{class_expr_list_aabde20280604379c3e0aa4396b0ea98d}{Expr\+List}, \hyperlink{class_no_ret_call_aa22f4dafc2369254349a631034f498d0}{No\+Ret\+Call}, \hyperlink{class_ret_call_a4bb2cb50dc6e81aaf3a312c228cb5f4e}{Ret\+Call}, \hyperlink{class_comparison_a7f806a596494ef371aea077da8050ce4}{Comparison}, \hyperlink{class_if_then_else_adc0bd51e42fed9dd67b67253dd77665a}{If\+Then\+Else}, \hyperlink{class_pc_abd7a71b57da30b20ab9bb20662c9f663}{Pc}, \hyperlink{class_label_aab044ceb8b6c2ea05ab19fd68a4911c2}{Label}, \hyperlink{class_neg_operand_ab205694eabcb30ce4b70e80022b1e751}{Neg\+Operand}, \hyperlink{class_jump_insn_aadcff8ad57eb8c6597b355f1118a23dc}{Jump\+Insn}, \hyperlink{class_symbol_ref_expr_a05ae76345e624e5c7085f49707685c6e}{Symbol\+Ref\+Expr}, \hyperlink{class_condition_expr_aaf08642ee65c2cb3a566a3bfac14e3a4}{Condition\+Expr}, \hyperlink{class_compare_expr_a5e5388b4d036996fc32913efd3ab3123}{Compare\+Expr}, \hyperlink{class_subreg_expr_a4604758277a1e78e9b5f9bb4cdc7b2cd}{Subreg\+Expr}, \hyperlink{class_xor_expr_a527ab580326a7a6f40083de3c2d2a6a4}{Xor\+Expr}, \hyperlink{class_ashift_rt_expr_aec58e35be6c2f84aeb345e48777e2370}{Ashift\+Rt\+Expr}, \hyperlink{class_ashift_expr_a5d4e6261b4885c1947e9e9a4bbf4eae8}{Ashift\+Expr}, \hyperlink{class_lshift_rt_expr_a19a964e6ac37d52a0bb3dbe7fc2f11ad}{Lshift\+Rt\+Expr}, \hyperlink{class_lshift_expr_af6e1f11ac0f62d48377eb064ca092f57}{Lshift\+Expr}, \hyperlink{class_u_mod_expr_a4ffcbf4138165e41c64b5aa3197df086}{U\+Mod\+Expr}, \hyperlink{class_mod_expr_abb2f195af11f6f477b990e3d61e2dfb0}{Mod\+Expr}, \hyperlink{class_u_div_expr_a9d76ec802dcedb0b5045ca8b293a0595}{U\+Div\+Expr}, \hyperlink{class_div_expr_a52d45f24aee4c323d57a133f4ee93b2d}{Div\+Expr}, \hyperlink{class_mult_expr_a06698bfc99d60d7ce2fde5d7f0addc66}{Mult\+Expr}, \hyperlink{class_minus_expr_a1f5c55747832a48d6dc28d1233b16a7c}{Minus\+Expr}, \hyperlink{class_plus_expr_ab8ade880fd47a7a0142c21439f83ca10}{Plus\+Expr}, \hyperlink{class_integer_expr_a72e48794bcd8c04bfeea19d1057636be}{Integer\+Expr}, \hyperlink{class_symbol_ref_operand_afdbed4a7baf9ede2a08687fc8a5704d9}{Symbol\+Ref\+Operand}, \hyperlink{class_deref_operand_a67a9b76b4e9cc9085c03ccf8ed098aff}{Deref\+Operand}, \hyperlink{class_extend_operand_a42bd225e28413b11c5caa6f7f83de37d}{Extend\+Operand}, \hyperlink{class_expr_operand_afed7d58db66e07a07a8edbb10b9a6f5a}{Expr\+Operand}, \hyperlink{class_int_operand_aeaaef4fc5e36f9154dbe66c6b3f471e6}{Int\+Operand}, \hyperlink{class_use_cmd_aa8f27d2684e401c1f7c58cdfa7c50696}{Use\+Cmd}, \hyperlink{class_set_cmd_afa73e8c7e0a5115bdcebd4a6cc3ef1d4}{Set\+Cmd}, \hyperlink{class_clobber_cmd_adc5627025b63c40f5ca73af8283a3e5c}{Clobber\+Cmd}, \hyperlink{class_parallel_cmd_abf18675730f4da91809cc31f7118dc96}{Parallel\+Cmd}, \hyperlink{class_insn_a0bbea68b179d943f1a87aeb6c1b15dac}{Insn}, \hyperlink{class_code_label_a2e6b55e59cbf6213ed5b3e9fc9d8181c}{Code\+Label}, \hyperlink{class_barrier_a8b5b9b199e68d00ae5d11336a1b4591f}{Barrier}, \hyperlink{class_note_a1d4dec4a419c305cfb19376230365dc1}{Note}, \hyperlink{class_func_body_ade15e61124358e79682a8a78dd92f064}{Func\+Body}, and \hyperlink{class_program_a4e709dc5cee7a2c28fe3d96694449c59}{Program}.
+
+\mbox{\Hypertarget{class_node_a4cdeb731db84c3787e77be957f9474a1}\label{class_node_a4cdeb731db84c3787e77be957f9474a1}} 
+\index{Node@{Node}!Get\+Location@{Get\+Location}}
+\index{Get\+Location@{Get\+Location}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Location()}{GetLocation()}}
+{\footnotesize\ttfamily \hyperlink{structyyltype}{yyltype}$\ast$ Node\+::\+Get\+Location (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the location of (the beginning of) this class. \mbox{\Hypertarget{class_node_a3c762d37b1cad8d617db9620784da897}\label{class_node_a3c762d37b1cad8d617db9620784da897}} 
+\index{Node@{Node}!Get\+Parent@{Get\+Parent}}
+\index{Get\+Parent@{Get\+Parent}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Parent()}{GetParent()}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node}$\ast$ Node\+::\+Get\+Parent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the parent of the class. \mbox{\Hypertarget{class_node_a56e29657306ffb004d69c6929ae44269}\label{class_node_a56e29657306ffb004d69c6929ae44269}} 
+\index{Node@{Node}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Node@{Node}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily virtual const char$\ast$ Node\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns the name to be printed for the node. Should be overriden by inheriting classes to their respective names. 
+
+Implemented in \hyperlink{class_expr_list_a1e1febf2b8902accb2751e521b0e16ae}{Expr\+List}, \hyperlink{class_no_ret_call_abfbfa06b9f232f16f1922f1c95b406d9}{No\+Ret\+Call}, \hyperlink{class_ret_call_afb92899368ccb84bad8d95c1a8a57e93}{Ret\+Call}, \hyperlink{class_condition_aafdb69783f81fa13cfdc8896bbd34095}{Condition}, \hyperlink{class_comparison_ae861c70b6cd3696f029139ca8751e8bc}{Comparison}, \hyperlink{class_if_then_else_a6fff2f19c2fc487ca21b2fabb358169e}{If\+Then\+Else}, \hyperlink{class_pc_aa1b66bab13f8d0a36a95369571630303}{Pc}, \hyperlink{class_label_a25ab9ad9a76ebf3011623a12925a8c2f}{Label}, \hyperlink{class_neg_operand_affbee1241ab0faee9839aa89bdba449d}{Neg\+Operand}, \hyperlink{class_jump_insn_a7cde864a50893f645d680015e3cb01c2}{Jump\+Insn}, \hyperlink{class_symbol_ref_expr_adc3249d1505c60488bf5dc22d23f462b}{Symbol\+Ref\+Expr}, \hyperlink{class_condition_expr_a557c885f6f859e0d3757ef7e50170896}{Condition\+Expr}, \hyperlink{class_compare_expr_a28dc1cb43c2251d78c7ac8f443760f2f}{Compare\+Expr}, \hyperlink{class_subreg_expr_a21bea1838b9fe850b49d6a3a31dc99bc}{Subreg\+Expr}, \hyperlink{class_xor_expr_a2620f3b842a78c700d5ea2b1e357ec26}{Xor\+Expr}, \hyperlink{class_ashift_rt_expr_a59b494552a66bdb8a407acb30d6ddc5b}{Ashift\+Rt\+Expr}, \hyperlink{class_ashift_expr_a20bcf80f55372f3fc57d2993d00ff9db}{Ashift\+Expr}, \hyperlink{class_lshift_rt_expr_af70c1654e30718a57ebdb9a85912d9f0}{Lshift\+Rt\+Expr}, \hyperlink{class_lshift_expr_ad4a55396ab3c94748ef2c165cf6abce4}{Lshift\+Expr}, \hyperlink{class_u_mod_expr_afd7d74abecfd12895ee20137c013729d}{U\+Mod\+Expr}, \hyperlink{class_mod_expr_a6e8f088ebc9429ae36cc6ae89c55588e}{Mod\+Expr}, \hyperlink{class_u_div_expr_aa7e3510bc0445544639489b6bc3a9a0c}{U\+Div\+Expr}, \hyperlink{class_div_expr_a1d35e7146d95f16a05fd37e3ed2184e8}{Div\+Expr}, \hyperlink{class_mult_expr_af09a0cb0e06bfc24892dee567f48808c}{Mult\+Expr}, \hyperlink{class_minus_expr_a1b0d17900f1686776d05a5d18233aa2e}{Minus\+Expr}, \hyperlink{class_plus_expr_a37b598c579f8de2b61cd93cc5d28c973}{Plus\+Expr}, \hyperlink{class_integer_expr_a76e0e8357539e515ddac3192ab595fc8}{Integer\+Expr}, \hyperlink{class_flag_a8d133ca3fbbef512357b5c80b0fe1222}{Flag}, \hyperlink{class_mem_type_a9ffea7894f0e757aab866a467b0ae563}{Mem\+Type}, \hyperlink{class_loc_info_a06b3afd2c766a45dbfe9d4e606845e39}{Loc\+Info}, \hyperlink{class_type_info_a3e84b02093115e1ad0c27acbe3ffffd7}{Type\+Info}, \hyperlink{class_symbol_ref_operand_adb5689dfd85cd5da59ad1228f221a875}{Symbol\+Ref\+Operand}, \hyperlink{class_deref_operand_a6cfdfb30a00cc2b0b76cdb511e780411}{Deref\+Operand}, \hyperlink{class_extend_operand_ac5848e09b0f85359a5640d2d721b39be}{Extend\+Operand}, \hyperlink{class_expr_operand_a51b24b2cbb8ff22213783bde2a96642c}{Expr\+Operand}, \hyperlink{class_int_operand_ab81268dfb4d2a7823ab860c5d9d9dc65}{Int\+Operand}, \hyperlink{class_use_cmd_af70d8365f4c00d243bd72a336d21c99b}{Use\+Cmd}, \hyperlink{class_set_cmd_a9a9fc62db9b435358ab4addb1dc4cece}{Set\+Cmd}, \hyperlink{class_clobber_cmd_a3f817894d2213b11bade9b670b95ef26}{Clobber\+Cmd}, \hyperlink{class_parallel_cmd_a7472916d75c070eda8dce632b39fe195}{Parallel\+Cmd}, \hyperlink{class_insn_ac78de59dd99944d8697853dc1c5634dc}{Insn}, \hyperlink{class_integer_ab4a1c2619f03557638a6740419337b82}{Integer}, \hyperlink{class_code_label_a8facbf3c0c9e138c5e20c82638b5f78b}{Code\+Label}, \hyperlink{class_barrier_a3b32a126f5fb975defc7f8c3614a0c68}{Barrier}, \hyperlink{class_note_ae38717d9af17947262aa3f4a1d473363}{Note}, \hyperlink{class_func_body_ae2e7c93a201a73256289ecbb59455961}{Func\+Body}, \hyperlink{class_program_a42317e4371887f452b38b7a729a7533c}{Program}, and \hyperlink{class_error_a610f5e77ca0a86ae8981ac3ed7820bf3}{Error}.
+
+\mbox{\Hypertarget{class_node_a9ef727fd72d1a37792b3db60a8a479dd}\label{class_node_a9ef727fd72d1a37792b3db60a8a479dd}} 
+\index{Node@{Node}!Print@{Print}}
+\index{Print@{Print}!Node@{Node}}
+\subsubsection{\texorpdfstring{Print()}{Print()}}
+{\footnotesize\ttfamily void Node\+::\+Print (\begin{DoxyParamCaption}\item[{int}]{indentlevel,  }\item[{const char $\ast$}]{label = {\ttfamily NULL} }\end{DoxyParamCaption})}
+
+Prints the preorder traversal of the abstract syntax (sub)tree rooted at this node. Must {\itshape not} be overriden by inheriting classes\+: they must override Print\+Children instead. Prints only the name of the node (rest is printed in Print\+Children) 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The indentation level for printing the name, determined by the depth of the node in the A\+ST. \\
+\hline
+{\em label} & A label that must be prepened before the class name. Not used for now. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_node_a3e67ec8d22182b721717af14fe0c3000}\label{class_node_a3e67ec8d22182b721717af14fe0c3000}} 
+\index{Node@{Node}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Node@{Node}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily virtual void Node\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Prints the extra information about the specific class and then calls \hyperlink{class_node_a9ef727fd72d1a37792b3db60a8a479dd}{Print()} on its children. This function {\itshape must} be overriden by inheriting classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The indentation level for printing the name, determined by the depth of the node in the A\+ST. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{class_expr_list_a2a55a32d64cd33b4424d29f1a36e94f8}{Expr\+List}, \hyperlink{class_no_ret_call_a1645309e5db0b7b6ced656a304248600}{No\+Ret\+Call}, \hyperlink{class_ret_call_a93de1dff14cd07dd58441a320df7f798}{Ret\+Call}, \hyperlink{class_condition_abdf41362b3b1f8a2fdeb290d657928a2}{Condition}, \hyperlink{class_comparison_a2c25039240b003ae6ac1e4d755ae1506}{Comparison}, \hyperlink{class_if_then_else_a868f2a8cc77bd5512ea54edaf81aa004}{If\+Then\+Else}, \hyperlink{class_pc_ad44ccd9eecca2d6b41205abf80996412}{Pc}, \hyperlink{class_label_a7a7e823044ba97369dfe7cf5e860a4cd}{Label}, \hyperlink{class_neg_operand_a03ac72f86e78b28781a8a54dd4789ee9}{Neg\+Operand}, \hyperlink{class_jump_insn_a3ab29f081b7c25719c96b6104156c87a}{Jump\+Insn}, \hyperlink{class_symbol_ref_expr_a17635ba3b6120561fd912d2487d9a897}{Symbol\+Ref\+Expr}, \hyperlink{class_condition_expr_a6153d3269f792a6910b2a3f8ea79f406}{Condition\+Expr}, \hyperlink{class_compare_expr_a0a29abbf82133a8a39f5540e68b9b798}{Compare\+Expr}, \hyperlink{class_subreg_expr_a958cb7d3d07cb2b8f1b15759c03fda9d}{Subreg\+Expr}, \hyperlink{class_xor_expr_a36c306045f71b8fc6448b2a74d0d4a4e}{Xor\+Expr}, \hyperlink{class_ashift_rt_expr_a2964d2199eef48495ab173bf2170eb8b}{Ashift\+Rt\+Expr}, \hyperlink{class_ashift_expr_a4d6872f9a592db575d9efa23f7c5775f}{Ashift\+Expr}, \hyperlink{class_lshift_rt_expr_a009f6d7041743b94598b42b0dfdb8880}{Lshift\+Rt\+Expr}, \hyperlink{class_lshift_expr_a01b9cf72d82eeaa4f57ebd87bf20f54b}{Lshift\+Expr}, \hyperlink{class_u_mod_expr_a77b079d55fdc1f8bd1e8266edc6959ea}{U\+Mod\+Expr}, \hyperlink{class_mod_expr_a63c59a077d8f2928ea05902533362e02}{Mod\+Expr}, \hyperlink{class_u_div_expr_aaaa57ba84ad8390c4511bdc808968e4e}{U\+Div\+Expr}, \hyperlink{class_div_expr_aa1cdd3697a8229c022827a041e4ac1be}{Div\+Expr}, \hyperlink{class_mult_expr_ae87b8f5f11f98d66a6327a110267348d}{Mult\+Expr}, \hyperlink{class_minus_expr_ad4dccbb9a497a866f41742f9db77ae99}{Minus\+Expr}, \hyperlink{class_plus_expr_a5ff2d74c543d3dcda4aefb81126e8f51}{Plus\+Expr}, \hyperlink{class_integer_expr_ae8dfeab6ece069ed29c80a5614548268}{Integer\+Expr}, \hyperlink{class_flag_a05ac578c888a303d979d1d7b006ad7ba}{Flag}, \hyperlink{class_mem_type_a98f3fd7954d2edaaa2f809cb2889e420}{Mem\+Type}, \hyperlink{class_loc_info_ade64091d3ca7267ae2b32307c97426dc}{Loc\+Info}, \hyperlink{class_type_info_a9b4bc126eb0ee406f1d515e166256627}{Type\+Info}, \hyperlink{class_symbol_ref_operand_a788a41e0bcf7a1047bb7884e0c8ac857}{Symbol\+Ref\+Operand}, \hyperlink{class_deref_operand_a64fc44093f59b87172b8a04752a13d45}{Deref\+Operand}, \hyperlink{class_extend_operand_afdf1598c150fdcf76f97b2e48f5c2a40}{Extend\+Operand}, \hyperlink{class_expr_operand_a45b3abc5fc95a4184179127f1aed0e94}{Expr\+Operand}, \hyperlink{class_int_operand_ac3a3845a17a1eb9a2c1e3ff631b8a400}{Int\+Operand}, \hyperlink{class_use_cmd_ae8b6bad04d432107afa86f5b6ab98db9}{Use\+Cmd}, \hyperlink{class_set_cmd_ac06d57c11b7c92f3e4b3f94c7a889166}{Set\+Cmd}, \hyperlink{class_clobber_cmd_a45fe80d35161dd6a32ed5d36bd07a5ca}{Clobber\+Cmd}, \hyperlink{class_parallel_cmd_a03464113f3eca068ca4d0fd120cb27cc}{Parallel\+Cmd}, \hyperlink{class_insn_aa0717beb7970d93fa733ffa41b7629ac}{Insn}, \hyperlink{class_integer_ac4122c2a26fe8825c4c3123f217a4021}{Integer}, \hyperlink{class_code_label_a982af1b687ea06a189a87f49a50fdf93}{Code\+Label}, \hyperlink{class_barrier_a4210ab976223e77243f019045f0f3875}{Barrier}, \hyperlink{class_note_ae922da0a006d207db5e141dcade6032e}{Note}, \hyperlink{class_func_body_a6e42023a04da72f19901550f910b2e35}{Func\+Body}, and \hyperlink{class_program_a70520a269a65d735e10c6f28acf075ad}{Program}.
+
+\mbox{\Hypertarget{class_node_ac8f490bfdc412494ac4793e36ecf3a16}\label{class_node_ac8f490bfdc412494ac4793e36ecf3a16}} 
+\index{Node@{Node}!Set\+Parent@{Set\+Parent}}
+\index{Set\+Parent@{Set\+Parent}!Node@{Node}}
+\subsubsection{\texorpdfstring{Set\+Parent()}{SetParent()}}
+{\footnotesize\ttfamily void Node\+::\+Set\+Parent (\begin{DoxyParamCaption}\item[{\hyperlink{class_node}{Node} $\ast$}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+A helper function to set the parent of the class. 
+\begin{DoxyParams}{Parameters}
+{\em p} & The class which must be set as parent. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_node_aa4d56e7ecdd3fd9c483b2309af3e9abf}\label{class_node_aa4d56e7ecdd3fd9c483b2309af3e9abf}} 
+\index{Node@{Node}!location@{location}}
+\index{location@{location}!Node@{Node}}
+\subsubsection{\texorpdfstring{location}{location}}
+{\footnotesize\ttfamily \hyperlink{structyyltype}{yyltype}$\ast$ Node\+::location\hspace{0.3cm}{\ttfamily [protected]}}
+
+Holds the lineno and colno of the starting of the class in-\/code. \mbox{\Hypertarget{class_node_ad8184598cdea70e4bbdfd76f2b0f9e85}\label{class_node_ad8184598cdea70e4bbdfd76f2b0f9e85}} 
+\index{Node@{Node}!parent@{parent}}
+\index{parent@{parent}!Node@{Node}}
+\subsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node}$\ast$ Node\+::parent\hspace{0.3cm}{\ttfamily [protected]}}
+
+A pointer to the parent of this node in the A\+ST. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

@@ -1,0 +1,187 @@
+\hypertarget{class_func_body}{}\section{Func\+Body Class Reference}
+\label{class_func_body}\index{Func\+Body@{Func\+Body}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Func\+Body\+:
+% FIG 0
+
+
+Collaboration diagram for Func\+Body\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_func_body_a13878f3d52215a31d38a6a593d29fe7a}{Func\+Body} (\hyperlink{class_list}{List}$<$ \hyperlink{class_stmt}{Stmt} $\ast$$>$ $\ast$ss, const char $\ast$n)
+\item 
+const char $\ast$ \hyperlink{class_func_body_ae2e7c93a201a73256289ecbb59455961}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_func_body_a6e42023a04da72f19901550f910b2e35}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_func_body_a6114d98f4cd6e0341cb8662750266477}{Analyze} ()
+\item 
+void \hyperlink{class_func_body_a4a2fbd17eb33da81f2ec9d6ff7454463}{set\+Types} (\hyperlink{class_list}{List}$<$ string $>$ $\ast$\hyperlink{class_func_body_ab658c76bb42d23b067c1b1860ddcf9f9}{types}, \hyperlink{class_list}{List}$<$ int $>$ $\ast$\hyperlink{class_func_body_a48a90d46d3c6f767f1a6595c312af970}{regs}, string rtype)
+\item 
+string \hyperlink{class_func_body_ade15e61124358e79682a8a78dd92f064}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_list}{List}$<$ \hyperlink{class_stmt}{Stmt} $\ast$ $>$ $\ast$ \hyperlink{class_func_body_a1946b17051da22b95c723dac2604b7b1}{stmts}
+\item 
+\hyperlink{class_list}{List}$<$ string $>$ $\ast$ \hyperlink{class_func_body_ab658c76bb42d23b067c1b1860ddcf9f9}{types}
+\item 
+\hyperlink{class_list}{List}$<$ int $>$ $\ast$ \hyperlink{class_func_body_a48a90d46d3c6f767f1a6595c312af970}{regs}
+\item 
+const char $\ast$ \hyperlink{class_func_body_a48458c543d655ef7f25c3cbe3206e4b2}{name}
+\item 
+int \hyperlink{class_func_body_a659a0db3f1626e1e03a7fd86e1d38283}{num\+Args}
+\item 
+int \hyperlink{class_func_body_a6f19667df9a4f9662fdbaec70c932394}{sz}
+\item 
+string \hyperlink{class_func_body_ac471c93e30501d687d59aa752a5a312f}{ret\+Type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The class representing a function and its body (not only the body, despite the confusing name). Holds information about the name of the function, the number and types of parameters, the return value and its type; and has pointers to the statements of its body which constitute the node\textquotesingle{}s children. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_func_body_a13878f3d52215a31d38a6a593d29fe7a}\label{class_func_body_a13878f3d52215a31d38a6a593d29fe7a}} 
+\index{Func\+Body@{Func\+Body}!Func\+Body@{Func\+Body}}
+\index{Func\+Body@{Func\+Body}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{Func\+Body()}{FuncBody()}}
+{\footnotesize\ttfamily Func\+Body\+::\+Func\+Body (\begin{DoxyParamCaption}\item[{\hyperlink{class_list}{List}$<$ \hyperlink{class_stmt}{Stmt} $\ast$$>$ $\ast$}]{ss,  }\item[{const char $\ast$}]{n }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em ss} & The list of statements to be assigned to the function \\
+\hline
+{\em n} & The name to be assigned to the function. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_func_body_a6114d98f4cd6e0341cb8662750266477}\label{class_func_body_a6114d98f4cd6e0341cb8662750266477}} 
+\index{Func\+Body@{Func\+Body}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Func\+Body\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Adds an entry to the global symbol table for this function, and then calls \hyperlink{class_func_body_a6114d98f4cd6e0341cb8662750266477}{Analyze()} on the children. \hyperlink{class_note}{Note} that the number and types of args can only be inferred upon finding a call to this function which we facilitate using the global symbol table. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_func_body_ade15e61124358e79682a8a78dd92f064}\label{class_func_body_ade15e61124358e79682a8a78dd92f064}} 
+\index{Func\+Body@{Func\+Body}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string Func\+Body\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generates code for the function. Prints the part such as void f(int a, ...) \{ and also the return x; \} part. Also checks for special names of functions such as main(), printf() and scanf() and takes special actions for them. Then calls \hyperlink{class_func_body_ade15e61124358e79682a8a78dd92f064}{Generate\+Code()} on the children. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation of the printed code. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_func_body_ae2e7c93a201a73256289ecbb59455961}\label{class_func_body_ae2e7c93a201a73256289ecbb59455961}} 
+\index{Func\+Body@{Func\+Body}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Func\+Body\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name of (the type of) class, i.\+e. \hyperlink{class_func_body}{Func\+Body}. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_func_body_a6e42023a04da72f19901550f910b2e35}\label{class_func_body_a6e42023a04da72f19901550f910b2e35}} 
+\index{Func\+Body@{Func\+Body}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Func\+Body\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Prints class-\/specific information and then calls \hyperlink{class_node_a9ef727fd72d1a37792b3db60a8a479dd}{Print()} on the children of this node in the A\+ST.
+\begin{DoxyItemize}
+\item 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & indentation level of the current node in accordance with depth in the A\+ST. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+\mbox{\Hypertarget{class_func_body_a4a2fbd17eb33da81f2ec9d6ff7454463}\label{class_func_body_a4a2fbd17eb33da81f2ec9d6ff7454463}} 
+\index{Func\+Body@{Func\+Body}!set\+Types@{set\+Types}}
+\index{set\+Types@{set\+Types}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{set\+Types()}{setTypes()}}
+{\footnotesize\ttfamily void Func\+Body\+::set\+Types (\begin{DoxyParamCaption}\item[{\hyperlink{class_list}{List}$<$ string $>$ $\ast$}]{types,  }\item[{\hyperlink{class_list}{List}$<$ int $>$ $\ast$}]{regs,  }\item[{string}]{rtype }\end{DoxyParamCaption})}
+
+Called by the body of \hyperlink{class_func_body_a6114d98f4cd6e0341cb8662750266477}{Analyze()} in call statements. Used to set the number, types and the registers of the arguments to this function, along with the return type. 
+\begin{DoxyParams}{Parameters}
+{\em types} & A list of types of arguments to the function, in the same order as regs (i.\+e. the order or passing and the reverse order of declaration) \\
+\hline
+{\em regs} & The registers in which the respective arguments are passed. \\
+\hline
+{\em rtype} & The return type that should be assigned to the function. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_func_body_a48458c543d655ef7f25c3cbe3206e4b2}\label{class_func_body_a48458c543d655ef7f25c3cbe3206e4b2}} 
+\index{Func\+Body@{Func\+Body}!name@{name}}
+\index{name@{name}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily const char$\ast$ Func\+Body\+::name\hspace{0.3cm}{\ttfamily [protected]}}
+
+The name with which the function was declared in the source file, which will be subsequently used when calling the function. \mbox{\Hypertarget{class_func_body_a659a0db3f1626e1e03a7fd86e1d38283}\label{class_func_body_a659a0db3f1626e1e03a7fd86e1d38283}} 
+\index{Func\+Body@{Func\+Body}!num\+Args@{num\+Args}}
+\index{num\+Args@{num\+Args}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{num\+Args}{numArgs}}
+{\footnotesize\ttfamily int Func\+Body\+::num\+Args\hspace{0.3cm}{\ttfamily [protected]}}
+
+The number of arguments that are to be passed to the function. \mbox{\Hypertarget{class_func_body_a48a90d46d3c6f767f1a6595c312af970}\label{class_func_body_a48a90d46d3c6f767f1a6595c312af970}} 
+\index{Func\+Body@{Func\+Body}!regs@{regs}}
+\index{regs@{regs}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{regs}{regs}}
+{\footnotesize\ttfamily \hyperlink{class_list}{List}$<$int$>$$\ast$ Func\+Body\+::regs\hspace{0.3cm}{\ttfamily [protected]}}
+
+The list of register names that the function expects to be passed as parameters, in the order of being passed (in the reverse order of the declaration in the source file). \mbox{\Hypertarget{class_func_body_ac471c93e30501d687d59aa752a5a312f}\label{class_func_body_ac471c93e30501d687d59aa752a5a312f}} 
+\index{Func\+Body@{Func\+Body}!ret\+Type@{ret\+Type}}
+\index{ret\+Type@{ret\+Type}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{ret\+Type}{retType}}
+{\footnotesize\ttfamily string Func\+Body\+::ret\+Type\hspace{0.3cm}{\ttfamily [protected]}}
+
+The return type of the function. \mbox{\Hypertarget{class_func_body_a1946b17051da22b95c723dac2604b7b1}\label{class_func_body_a1946b17051da22b95c723dac2604b7b1}} 
+\index{Func\+Body@{Func\+Body}!stmts@{stmts}}
+\index{stmts@{stmts}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{stmts}{stmts}}
+{\footnotesize\ttfamily \hyperlink{class_list}{List}$<$\hyperlink{class_stmt}{Stmt} $\ast$$>$$\ast$ Func\+Body\+::stmts\hspace{0.3cm}{\ttfamily [protected]}}
+
+The statements that form the body of the function. \mbox{\Hypertarget{class_func_body_a6f19667df9a4f9662fdbaec70c932394}\label{class_func_body_a6f19667df9a4f9662fdbaec70c932394}} 
+\index{Func\+Body@{Func\+Body}!sz@{sz}}
+\index{sz@{sz}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{sz}{sz}}
+{\footnotesize\ttfamily int Func\+Body\+::sz\hspace{0.3cm}{\ttfamily [protected]}}
+
+The size on the stack that must be reserved for the parameters and temporary variables before executing member statements. \mbox{\Hypertarget{class_func_body_ab658c76bb42d23b067c1b1860ddcf9f9}\label{class_func_body_ab658c76bb42d23b067c1b1860ddcf9f9}} 
+\index{Func\+Body@{Func\+Body}!types@{types}}
+\index{types@{types}!Func\+Body@{Func\+Body}}
+\subsubsection{\texorpdfstring{types}{types}}
+{\footnotesize\ttfamily \hyperlink{class_list}{List}$<$string$>$$\ast$ Func\+Body\+::types\hspace{0.3cm}{\ttfamily [protected]}}
+
+A list of types, where the n-\/th type is the type of the n-\/th argument that is passed to the function. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

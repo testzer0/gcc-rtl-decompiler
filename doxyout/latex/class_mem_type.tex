@@ -1,0 +1,108 @@
+\hypertarget{class_mem_type}{}\section{Mem\+Type Class Reference}
+\label{class_mem_type}\index{Mem\+Type@{Mem\+Type}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Mem\+Type\+:
+% FIG 0
+
+
+Collaboration diagram for Mem\+Type\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_mem_type_abfa3afb25f010c3a1815996705f44729}{Mem\+Type} (const char $\ast$t)
+\item 
+const char $\ast$ \hyperlink{class_mem_type_a9ffea7894f0e757aab866a467b0ae563}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_mem_type_a98f3fd7954d2edaaa2f809cb2889e420}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_mem_type_a40773866273e8e3321c67d1bfaab14da}{Analyze} ()
+\item 
+string \hyperlink{class_mem_type_aa7003b89f89d3faa43e6eeaa3116d544}{get\+Type} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{class_mem_type_abf81810db8d14176f971fb6d6c5f510d}{type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The type of memory associated with a \hyperlink{class_loc_info}{Loc\+Info}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_mem_type_abfa3afb25f010c3a1815996705f44729}\label{class_mem_type_abfa3afb25f010c3a1815996705f44729}} 
+\index{Mem\+Type@{Mem\+Type}!Mem\+Type@{Mem\+Type}}
+\index{Mem\+Type@{Mem\+Type}!Mem\+Type@{Mem\+Type}}
+\subsubsection{\texorpdfstring{Mem\+Type()}{MemType()}}
+{\footnotesize\ttfamily Mem\+Type\+::\+Mem\+Type (\begin{DoxyParamCaption}\item[{const char $\ast$}]{t }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em t} & The value to be assigned to type. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mem_type_a40773866273e8e3321c67d1bfaab14da}\label{class_mem_type_a40773866273e8e3321c67d1bfaab14da}} 
+\index{Mem\+Type@{Mem\+Type}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Mem\+Type@{Mem\+Type}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Mem\+Type\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+No analysis to be done for \hyperlink{class_mem_type}{Mem\+Type}. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_mem_type_a9ffea7894f0e757aab866a467b0ae563}\label{class_mem_type_a9ffea7894f0e757aab866a467b0ae563}} 
+\index{Mem\+Type@{Mem\+Type}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Mem\+Type@{Mem\+Type}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Mem\+Type\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_mem_type_aa7003b89f89d3faa43e6eeaa3116d544}\label{class_mem_type_aa7003b89f89d3faa43e6eeaa3116d544}} 
+\index{Mem\+Type@{Mem\+Type}!get\+Type@{get\+Type}}
+\index{get\+Type@{get\+Type}!Mem\+Type@{Mem\+Type}}
+\subsubsection{\texorpdfstring{get\+Type()}{getType()}}
+{\footnotesize\ttfamily string Mem\+Type\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+A helper function to get the type associated with this class. \mbox{\Hypertarget{class_mem_type_a98f3fd7954d2edaaa2f809cb2889e420}\label{class_mem_type_a98f3fd7954d2edaaa2f809cb2889e420}} 
+\index{Mem\+Type@{Mem\+Type}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Mem\+Type@{Mem\+Type}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Mem\+Type\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Prints the type associated with this class. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which this class must be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_mem_type_abf81810db8d14176f971fb6d6c5f510d}\label{class_mem_type_abf81810db8d14176f971fb6d6c5f510d}} 
+\index{Mem\+Type@{Mem\+Type}!type@{type}}
+\index{type@{type}!Mem\+Type@{Mem\+Type}}
+\subsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily const char$\ast$ Mem\+Type\+::type\hspace{0.3cm}{\ttfamily [protected]}}
+
+The type of memory. One of \char`\"{}mem\char`\"{}, \char`\"{}reg\char`\"{}, \char`\"{}symbol\+\_\+ref\char`\"{} etc. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

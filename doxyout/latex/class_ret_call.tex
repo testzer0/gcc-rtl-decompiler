@@ -1,0 +1,147 @@
+\hypertarget{class_ret_call}{}\section{Ret\+Call Class Reference}
+\label{class_ret_call}\index{Ret\+Call@{Ret\+Call}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Ret\+Call\+:
+% FIG 0
+
+
+Collaboration diagram for Ret\+Call\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_ret_call_a36752f2de27b76212b4ae0066ddcd578}{Ret\+Call} (\hyperlink{class_type_info}{Type\+Info} $\ast$ti, int rr, const char $\ast$fn, \hyperlink{class_expr_list}{Expr\+List} $\ast$el)
+\item 
+const char $\ast$ \hyperlink{class_ret_call_afb92899368ccb84bad8d95c1a8a57e93}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_ret_call_a93de1dff14cd07dd58441a320df7f798}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_ret_call_ae97ba198b2aff2badbee17b2f02d989a}{Analyze} ()
+\item 
+string \hyperlink{class_ret_call_a4bb2cb50dc6e81aaf3a312c228cb5f4e}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_type_info}{Type\+Info} $\ast$ \hyperlink{class_ret_call_a5dd7e7af3540ea68eae6e3c4c572e426}{tinfo}
+\item 
+int \hyperlink{class_ret_call_a3fc6d5d729c3d0e52b4e8020719c9d08}{returnreg}
+\item 
+const char $\ast$ \hyperlink{class_ret_call_ade43d299c39866859178279cfe6a85bd}{fnname}
+\item 
+\hyperlink{class_expr_list}{Expr\+List} $\ast$ \hyperlink{class_ret_call_a2be9b1449ca100c24744097616f15db8}{elist}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This type of call has an associated return value, and hence non void return type. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_ret_call_a36752f2de27b76212b4ae0066ddcd578}\label{class_ret_call_a36752f2de27b76212b4ae0066ddcd578}} 
+\index{Ret\+Call@{Ret\+Call}!Ret\+Call@{Ret\+Call}}
+\index{Ret\+Call@{Ret\+Call}!Ret\+Call@{Ret\+Call}}
+\subsubsection{\texorpdfstring{Ret\+Call()}{RetCall()}}
+{\footnotesize\ttfamily Ret\+Call\+::\+Ret\+Call (\begin{DoxyParamCaption}\item[{\hyperlink{class_type_info}{Type\+Info} $\ast$}]{ti,  }\item[{int}]{rr,  }\item[{const char $\ast$}]{fn,  }\item[{\hyperlink{class_expr_list}{Expr\+List} $\ast$}]{el }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em ti} & The value to be assigned to tinfo. \\
+\hline
+{\em rr} & The return register. \\
+\hline
+{\em fn} & The function name to call. \\
+\hline
+{\em el} & The expression list to assign to elist. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_ret_call_ae97ba198b2aff2badbee17b2f02d989a}\label{class_ret_call_ae97ba198b2aff2badbee17b2f02d989a}} 
+\index{Ret\+Call@{Ret\+Call}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Ret\+Call@{Ret\+Call}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Ret\+Call\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+First checks if the name of the function is in the global symbol table. If so, uses the expression list and their types to deduce the number and types of arguments to the function. Then via \hyperlink{class_ret_call_ae97ba198b2aff2badbee17b2f02d989a}{Analyze()} of \hyperlink{class_expr_list}{Expr\+List}, stores this information in the \hyperlink{class_func_body}{Func\+Body} class associated with the function. If the function is not in the global symbol table, it must be imported from one of the header files. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_ret_call_a4bb2cb50dc6e81aaf3a312c228cb5f4e}\label{class_ret_call_a4bb2cb50dc6e81aaf3a312c228cb5f4e}} 
+\index{Ret\+Call@{Ret\+Call}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Ret\+Call@{Ret\+Call}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string Ret\+Call\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generates code for the function call. If the function name is not found in the global symbol table, checks it against some standard library functions. If a match is found, uses the match to typecast the variables accurately (among same width, e.\+g. long long int and int$\ast$ both have a 64 bit width). If not, maps 8 bit to char, 32 bit to int and 64 bit to long long int. This generates warnings but not errors. Finally generates code to store the result in a temporary variable and returns the name of the variable. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the code is to be generated. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_ret_call_afb92899368ccb84bad8d95c1a8a57e93}\label{class_ret_call_afb92899368ccb84bad8d95c1a8a57e93}} 
+\index{Ret\+Call@{Ret\+Call}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Ret\+Call@{Ret\+Call}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Ret\+Call\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_ret_call_a93de1dff14cd07dd58441a320df7f798}\label{class_ret_call_a93de1dff14cd07dd58441a320df7f798}} 
+\index{Ret\+Call@{Ret\+Call}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Ret\+Call@{Ret\+Call}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Ret\+Call\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Calls \hyperlink{class_node_a9ef727fd72d1a37792b3db60a8a479dd}{Print()} on the children of this node. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the current class must be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_ret_call_a2be9b1449ca100c24744097616f15db8}\label{class_ret_call_a2be9b1449ca100c24744097616f15db8}} 
+\index{Ret\+Call@{Ret\+Call}!elist@{elist}}
+\index{elist@{elist}!Ret\+Call@{Ret\+Call}}
+\subsubsection{\texorpdfstring{elist}{elist}}
+{\footnotesize\ttfamily \hyperlink{class_expr_list}{Expr\+List}$\ast$ Ret\+Call\+::elist\hspace{0.3cm}{\ttfamily [protected]}}
+
+The list of arguments to the function, in the form of expressions. \mbox{\Hypertarget{class_ret_call_ade43d299c39866859178279cfe6a85bd}\label{class_ret_call_ade43d299c39866859178279cfe6a85bd}} 
+\index{Ret\+Call@{Ret\+Call}!fnname@{fnname}}
+\index{fnname@{fnname}!Ret\+Call@{Ret\+Call}}
+\subsubsection{\texorpdfstring{fnname}{fnname}}
+{\footnotesize\ttfamily const char$\ast$ Ret\+Call\+::fnname\hspace{0.3cm}{\ttfamily [protected]}}
+
+The name of the function being called. \mbox{\Hypertarget{class_ret_call_a3fc6d5d729c3d0e52b4e8020719c9d08}\label{class_ret_call_a3fc6d5d729c3d0e52b4e8020719c9d08}} 
+\index{Ret\+Call@{Ret\+Call}!returnreg@{returnreg}}
+\index{returnreg@{returnreg}!Ret\+Call@{Ret\+Call}}
+\subsubsection{\texorpdfstring{returnreg}{returnreg}}
+{\footnotesize\ttfamily int Ret\+Call\+::returnreg\hspace{0.3cm}{\ttfamily [protected]}}
+
+The register into which the return value must be put for subsequent use. \mbox{\Hypertarget{class_ret_call_a5dd7e7af3540ea68eae6e3c4c572e426}\label{class_ret_call_a5dd7e7af3540ea68eae6e3c4c572e426}} 
+\index{Ret\+Call@{Ret\+Call}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!Ret\+Call@{Ret\+Call}}
+\subsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \hyperlink{class_type_info}{Type\+Info}$\ast$ Ret\+Call\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+The type into which the return value must be cast. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

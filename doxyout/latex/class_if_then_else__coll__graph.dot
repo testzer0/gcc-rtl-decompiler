@@ -1,0 +1,23 @@
+digraph "IfThenElse"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node4 [label="IfThenElse",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node5 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="Dest",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_dest.html"];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="Operand",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_operand.html"];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="Node",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_node.html"];
+  Node7 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" parent" ];
+  Node8 -> Node7 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" location" ];
+  Node8 [label="yyltype",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structyyltype.html"];
+  Node9 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" comp" ];
+  Node9 [label="Comparison",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_comparison.html"];
+  Node7 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node10 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" cond" ];
+  Node10 [label="Condition",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_condition.html"];
+  Node7 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node6 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" op1\nop2" ];
+  Node6 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" op1\nop2" ];
+}

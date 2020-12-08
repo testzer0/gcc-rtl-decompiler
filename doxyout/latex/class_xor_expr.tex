@@ -1,0 +1,137 @@
+\hypertarget{class_xor_expr}{}\section{Xor\+Expr Class Reference}
+\label{class_xor_expr}\index{Xor\+Expr@{Xor\+Expr}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Xor\+Expr\+:
+% FIG 0
+
+
+Collaboration diagram for Xor\+Expr\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_xor_expr_a3221fdaf30721d0fcaf55f6bff051f90}{Xor\+Expr} (\hyperlink{class_type_info}{Type\+Info} $\ast$ti, \hyperlink{class_operand}{Operand} $\ast$o1, \hyperlink{class_operand}{Operand} $\ast$o2)
+\item 
+const char $\ast$ \hyperlink{class_xor_expr_a2620f3b842a78c700d5ea2b1e357ec26}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_xor_expr_a36c306045f71b8fc6448b2a74d0d4a4e}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_xor_expr_a94f8a8dfc88b60756ed6487299a1d74d}{Analyze} ()
+\item 
+string \hyperlink{class_xor_expr_a527ab580326a7a6f40083de3c2d2a6a4}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_type_info}{Type\+Info} $\ast$ \hyperlink{class_xor_expr_a87b05f2fd9fa26e3c87f96f635240631}{tinfo}
+\item 
+\hyperlink{class_operand}{Operand} $\ast$ \hyperlink{class_xor_expr_a062091e04a196aa0932afcbe7409abce}{op1}
+\item 
+\hyperlink{class_operand}{Operand} $\ast$ \hyperlink{class_xor_expr_ad964f5853c06918d1e7472e921b6878b}{op2}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A xor expression performs the xor of the left and right operands followed by a possible cast into the specified type (width). 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_xor_expr_a3221fdaf30721d0fcaf55f6bff051f90}\label{class_xor_expr_a3221fdaf30721d0fcaf55f6bff051f90}} 
+\index{Xor\+Expr@{Xor\+Expr}!Xor\+Expr@{Xor\+Expr}}
+\index{Xor\+Expr@{Xor\+Expr}!Xor\+Expr@{Xor\+Expr}}
+\subsubsection{\texorpdfstring{Xor\+Expr()}{XorExpr()}}
+{\footnotesize\ttfamily Xor\+Expr\+::\+Xor\+Expr (\begin{DoxyParamCaption}\item[{\hyperlink{class_type_info}{Type\+Info} $\ast$}]{ti,  }\item[{\hyperlink{class_operand}{Operand} $\ast$}]{o1,  }\item[{\hyperlink{class_operand}{Operand} $\ast$}]{o2 }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em ti} & The type information to be assigned to tinfo \\
+\hline
+{\em o1} & The left operand \\
+\hline
+{\em o2} & The right operand. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_xor_expr_a94f8a8dfc88b60756ed6487299a1d74d}\label{class_xor_expr_a94f8a8dfc88b60756ed6487299a1d74d}} 
+\index{Xor\+Expr@{Xor\+Expr}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Xor\+Expr@{Xor\+Expr}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Xor\+Expr\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+No analysis to be done for \hyperlink{class_xor_expr}{Xor\+Expr}. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_xor_expr_a527ab580326a7a6f40083de3c2d2a6a4}\label{class_xor_expr_a527ab580326a7a6f40083de3c2d2a6a4}} 
+\index{Xor\+Expr@{Xor\+Expr}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Xor\+Expr@{Xor\+Expr}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string Xor\+Expr\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generates code to perform the xor of the two operands, and then returns the name of the temporary variable in which the result is stored. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the code is to be generated. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_xor_expr_a2620f3b842a78c700d5ea2b1e357ec26}\label{class_xor_expr_a2620f3b842a78c700d5ea2b1e357ec26}} 
+\index{Xor\+Expr@{Xor\+Expr}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Xor\+Expr@{Xor\+Expr}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Xor\+Expr\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_xor_expr_a36c306045f71b8fc6448b2a74d0d4a4e}\label{class_xor_expr_a36c306045f71b8fc6448b2a74d0d4a4e}} 
+\index{Xor\+Expr@{Xor\+Expr}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Xor\+Expr@{Xor\+Expr}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Xor\+Expr\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Calls \hyperlink{class_node_a9ef727fd72d1a37792b3db60a8a479dd}{Print()} on the children of this node in the A\+ST. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the current node must be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_xor_expr_a062091e04a196aa0932afcbe7409abce}\label{class_xor_expr_a062091e04a196aa0932afcbe7409abce}} 
+\index{Xor\+Expr@{Xor\+Expr}!op1@{op1}}
+\index{op1@{op1}!Xor\+Expr@{Xor\+Expr}}
+\subsubsection{\texorpdfstring{op1}{op1}}
+{\footnotesize\ttfamily \hyperlink{class_operand}{Operand}$\ast$ Xor\+Expr\+::op1\hspace{0.3cm}{\ttfamily [protected]}}
+
+The left operand. \mbox{\Hypertarget{class_xor_expr_ad964f5853c06918d1e7472e921b6878b}\label{class_xor_expr_ad964f5853c06918d1e7472e921b6878b}} 
+\index{Xor\+Expr@{Xor\+Expr}!op2@{op2}}
+\index{op2@{op2}!Xor\+Expr@{Xor\+Expr}}
+\subsubsection{\texorpdfstring{op2}{op2}}
+{\footnotesize\ttfamily \hyperlink{class_operand}{Operand}$\ast$ Xor\+Expr\+::op2\hspace{0.3cm}{\ttfamily [protected]}}
+
+The right operand. \mbox{\Hypertarget{class_xor_expr_a87b05f2fd9fa26e3c87f96f635240631}\label{class_xor_expr_a87b05f2fd9fa26e3c87f96f635240631}} 
+\index{Xor\+Expr@{Xor\+Expr}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!Xor\+Expr@{Xor\+Expr}}
+\subsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \hyperlink{class_type_info}{Type\+Info}$\ast$ Xor\+Expr\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+The type (width) into which the result is cast. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

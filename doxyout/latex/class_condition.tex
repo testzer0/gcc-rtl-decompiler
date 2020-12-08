@@ -1,0 +1,108 @@
+\hypertarget{class_condition}{}\section{Condition Class Reference}
+\label{class_condition}\index{Condition@{Condition}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Condition\+:
+% FIG 0
+
+
+Collaboration diagram for Condition\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_condition_a3f530196d48c1ee077022837cd203ce6}{Condition} (const char $\ast$c)
+\item 
+const char $\ast$ \hyperlink{class_condition_aafdb69783f81fa13cfdc8896bbd34095}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_condition_abdf41362b3b1f8a2fdeb290d657928a2}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_condition_a899d0ab9bddcbe9f23bf0c8af84d7d10}{Analyze} ()
+\item 
+string \hyperlink{class_condition_a2089bf7976fb6f35a8c926d3c5722cc7}{get\+Condition} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{class_condition_ac943c2c4b15adc82cb31b9f02c61b8a3}{cond}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Specifies a condition, such as less than (lt), less than or equal to (le), equal to (eq) etc. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_condition_a3f530196d48c1ee077022837cd203ce6}\label{class_condition_a3f530196d48c1ee077022837cd203ce6}} 
+\index{Condition@{Condition}!Condition@{Condition}}
+\index{Condition@{Condition}!Condition@{Condition}}
+\subsubsection{\texorpdfstring{Condition()}{Condition()}}
+{\footnotesize\ttfamily Condition\+::\+Condition (\begin{DoxyParamCaption}\item[{const char $\ast$}]{c }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em c} & The condition in short form. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_condition_a899d0ab9bddcbe9f23bf0c8af84d7d10}\label{class_condition_a899d0ab9bddcbe9f23bf0c8af84d7d10}} 
+\index{Condition@{Condition}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Condition@{Condition}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Condition\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+No analysis to be performed for condition. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_condition_a2089bf7976fb6f35a8c926d3c5722cc7}\label{class_condition_a2089bf7976fb6f35a8c926d3c5722cc7}} 
+\index{Condition@{Condition}!get\+Condition@{get\+Condition}}
+\index{get\+Condition@{get\+Condition}!Condition@{Condition}}
+\subsubsection{\texorpdfstring{get\+Condition()}{getCondition()}}
+{\footnotesize\ttfamily string Condition\+::get\+Condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+A helper function to get the short form of the condition as a string. \mbox{\Hypertarget{class_condition_aafdb69783f81fa13cfdc8896bbd34095}\label{class_condition_aafdb69783f81fa13cfdc8896bbd34095}} 
+\index{Condition@{Condition}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Condition@{Condition}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Condition\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_condition_abdf41362b3b1f8a2fdeb290d657928a2}\label{class_condition_abdf41362b3b1f8a2fdeb290d657928a2}} 
+\index{Condition@{Condition}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Condition@{Condition}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Condition\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Prints the condition in short form. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the current class must be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_condition_ac943c2c4b15adc82cb31b9f02c61b8a3}\label{class_condition_ac943c2c4b15adc82cb31b9f02c61b8a3}} 
+\index{Condition@{Condition}!cond@{cond}}
+\index{cond@{cond}!Condition@{Condition}}
+\subsubsection{\texorpdfstring{cond}{cond}}
+{\footnotesize\ttfamily const char$\ast$ Condition\+::cond\hspace{0.3cm}{\ttfamily [protected]}}
+
+The condition in short form (lt, eq, le etc) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

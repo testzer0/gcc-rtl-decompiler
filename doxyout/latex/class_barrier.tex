@@ -1,0 +1,102 @@
+\hypertarget{class_barrier}{}\section{Barrier Class Reference}
+\label{class_barrier}\index{Barrier@{Barrier}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Barrier\+:
+% FIG 0
+
+
+Collaboration diagram for Barrier\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_barrier_a462a2435e07b6fabc0265011f03310ee}{Barrier} ()
+\item 
+\hyperlink{class_barrier_acbb7d7324fef5bfefd7424c957b5c25d}{Barrier} (\hyperlink{structyyltype}{yyltype} loc)
+\item 
+const char $\ast$ \hyperlink{class_barrier_a3b32a126f5fb975defc7f8c3614a0c68}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_barrier_a4210ab976223e77243f019045f0f3875}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_barrier_af36430f51da20c09b6e3fa1d6e875fef}{Analyze} ()
+\item 
+string \hyperlink{class_barrier_a8b5b9b199e68d00ae5d11336a1b4591f}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A barrier is another type of statement in R\+TL. Once again it has little of interest to us, since it primarily acts as a marker to tell G\+CC to not (re)order statements between the two portions separated by the barrier. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_barrier_a462a2435e07b6fabc0265011f03310ee}\label{class_barrier_a462a2435e07b6fabc0265011f03310ee}} 
+\index{Barrier@{Barrier}!Barrier@{Barrier}}
+\index{Barrier@{Barrier}!Barrier@{Barrier}}
+\subsubsection{\texorpdfstring{Barrier()}{Barrier()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Barrier\+::\+Barrier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+We simply call the super\textquotesingle{}s constructor. \mbox{\Hypertarget{class_barrier_acbb7d7324fef5bfefd7424c957b5c25d}\label{class_barrier_acbb7d7324fef5bfefd7424c957b5c25d}} 
+\index{Barrier@{Barrier}!Barrier@{Barrier}}
+\index{Barrier@{Barrier}!Barrier@{Barrier}}
+\subsubsection{\texorpdfstring{Barrier()}{Barrier()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Barrier\+::\+Barrier (\begin{DoxyParamCaption}\item[{\hyperlink{structyyltype}{yyltype}}]{loc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em loc} & the location of the first token which is part of this class. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_barrier_af36430f51da20c09b6e3fa1d6e875fef}\label{class_barrier_af36430f51da20c09b6e3fa1d6e875fef}} 
+\index{Barrier@{Barrier}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Barrier@{Barrier}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Barrier\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Again, does nothing since a barrier will also be printed only as a comment in the decompiled code. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_barrier_a8b5b9b199e68d00ae5d11336a1b4591f}\label{class_barrier_a8b5b9b199e68d00ae5d11336a1b4591f}} 
+\index{Barrier@{Barrier}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Barrier@{Barrier}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string Barrier\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generates a comment saying that there existed a barrier here. 
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_barrier_a3b32a126f5fb975defc7f8c3614a0c68}\label{class_barrier_a3b32a126f5fb975defc7f8c3614a0c68}} 
+\index{Barrier@{Barrier}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Barrier@{Barrier}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Barrier\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node in the A\+ST. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_barrier_a4210ab976223e77243f019045f0f3875}\label{class_barrier_a4210ab976223e77243f019045f0f3875}} 
+\index{Barrier@{Barrier}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Barrier@{Barrier}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Barrier\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Does nothing, since a barrier does not have any children in the A\+ST. 
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

@@ -1,0 +1,108 @@
+\hypertarget{class_flag}{}\section{Flag Class Reference}
+\label{class_flag}\index{Flag@{Flag}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Flag\+:
+% FIG 0
+
+
+Collaboration diagram for Flag\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_flag_af71db868b7c54b0b7e33ea0a6e5060c9}{Flag} (const char $\ast$f)
+\item 
+const char $\ast$ \hyperlink{class_flag_a8d133ca3fbbef512357b5c80b0fe1222}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_flag_a05ac578c888a303d979d1d7b006ad7ba}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_flag_ae09e99101902e5486e9d5712749623b3}{Analyze} ()
+\item 
+string \hyperlink{class_flag_a06f1c9c6b30ad492a14c8311c6276159}{get\+Flag} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{class_flag_a78bfa49c8908ef53f7d5b50be62ecbc9}{flag}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A single flag associated with the type information of a result/operand. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_flag_af71db868b7c54b0b7e33ea0a6e5060c9}\label{class_flag_af71db868b7c54b0b7e33ea0a6e5060c9}} 
+\index{Flag@{Flag}!Flag@{Flag}}
+\index{Flag@{Flag}!Flag@{Flag}}
+\subsubsection{\texorpdfstring{Flag()}{Flag()}}
+{\footnotesize\ttfamily Flag\+::\+Flag (\begin{DoxyParamCaption}\item[{const char $\ast$}]{f }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em f} & The flag to be assigned to flag. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_flag_ae09e99101902e5486e9d5712749623b3}\label{class_flag_ae09e99101902e5486e9d5712749623b3}} 
+\index{Flag@{Flag}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Flag@{Flag}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Flag\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+No analysis to be done for \hyperlink{class_flag}{Flag}. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_flag_a06f1c9c6b30ad492a14c8311c6276159}\label{class_flag_a06f1c9c6b30ad492a14c8311c6276159}} 
+\index{Flag@{Flag}!get\+Flag@{get\+Flag}}
+\index{get\+Flag@{get\+Flag}!Flag@{Flag}}
+\subsubsection{\texorpdfstring{get\+Flag()}{getFlag()}}
+{\footnotesize\ttfamily string Flag\+::get\+Flag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+A helper function to get the flag in string form. \mbox{\Hypertarget{class_flag_a8d133ca3fbbef512357b5c80b0fe1222}\label{class_flag_a8d133ca3fbbef512357b5c80b0fe1222}} 
+\index{Flag@{Flag}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Flag@{Flag}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Flag\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_flag_a05ac578c888a303d979d1d7b006ad7ba}\label{class_flag_a05ac578c888a303d979d1d7b006ad7ba}} 
+\index{Flag@{Flag}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Flag@{Flag}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Flag\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Prints the \char`\"{}name\char`\"{} of the flag. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which this class must be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_flag_a78bfa49c8908ef53f7d5b50be62ecbc9}\label{class_flag_a78bfa49c8908ef53f7d5b50be62ecbc9}} 
+\index{Flag@{Flag}!flag@{flag}}
+\index{flag@{flag}!Flag@{Flag}}
+\subsubsection{\texorpdfstring{flag}{flag}}
+{\footnotesize\ttfamily const char$\ast$ Flag\+::flag\hspace{0.3cm}{\ttfamily [protected]}}
+
+The flag. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

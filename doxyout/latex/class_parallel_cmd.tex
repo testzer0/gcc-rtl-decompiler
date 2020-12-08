@@ -1,0 +1,112 @@
+\hypertarget{class_parallel_cmd}{}\section{Parallel\+Cmd Class Reference}
+\label{class_parallel_cmd}\index{Parallel\+Cmd@{Parallel\+Cmd}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Parallel\+Cmd\+:
+% FIG 0
+
+
+Collaboration diagram for Parallel\+Cmd\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_parallel_cmd_a0dbbea6e9939ebb4649880dbb799b09f}{Parallel\+Cmd} (\hyperlink{class_list}{List}$<$ \hyperlink{class_plain_cmd}{Plain\+Cmd} $\ast$$>$ $\ast$cs)
+\item 
+const char $\ast$ \hyperlink{class_parallel_cmd_a7472916d75c070eda8dce632b39fe195}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_parallel_cmd_a03464113f3eca068ca4d0fd120cb27cc}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_parallel_cmd_afacbf01fd5416bfdc3c20837fefc4dde}{Analyze} ()
+\item 
+string \hyperlink{class_parallel_cmd_abf18675730f4da91809cc31f7118dc96}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_list}{List}$<$ \hyperlink{class_plain_cmd}{Plain\+Cmd} $\ast$ $>$ $\ast$ \hyperlink{class_parallel_cmd_af8376052ae9639db51ddf67c4e8dc4b9}{cmds}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A parallel command is the other type of a main command. It consists of many individual commands to be executed in parallel, of which the last is usually (but not always) a clobber command. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_parallel_cmd_a0dbbea6e9939ebb4649880dbb799b09f}\label{class_parallel_cmd_a0dbbea6e9939ebb4649880dbb799b09f}} 
+\index{Parallel\+Cmd@{Parallel\+Cmd}!Parallel\+Cmd@{Parallel\+Cmd}}
+\index{Parallel\+Cmd@{Parallel\+Cmd}!Parallel\+Cmd@{Parallel\+Cmd}}
+\subsubsection{\texorpdfstring{Parallel\+Cmd()}{ParallelCmd()}}
+{\footnotesize\ttfamily Parallel\+Cmd\+::\+Parallel\+Cmd (\begin{DoxyParamCaption}\item[{\hyperlink{class_list}{List}$<$ \hyperlink{class_plain_cmd}{Plain\+Cmd} $\ast$$>$ $\ast$}]{cs }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em cs} & The list of commands to be assigned to cmds. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_parallel_cmd_afacbf01fd5416bfdc3c20837fefc4dde}\label{class_parallel_cmd_afacbf01fd5416bfdc3c20837fefc4dde}} 
+\index{Parallel\+Cmd@{Parallel\+Cmd}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Parallel\+Cmd@{Parallel\+Cmd}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Parallel\+Cmd\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Simply calls \hyperlink{class_parallel_cmd_afacbf01fd5416bfdc3c20837fefc4dde}{Analyze()} on each of the commands in cmds in turn. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_parallel_cmd_abf18675730f4da91809cc31f7118dc96}\label{class_parallel_cmd_abf18675730f4da91809cc31f7118dc96}} 
+\index{Parallel\+Cmd@{Parallel\+Cmd}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Parallel\+Cmd@{Parallel\+Cmd}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string Parallel\+Cmd\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generates code for each of the commands in cmds, in turn. 
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_parallel_cmd_a7472916d75c070eda8dce632b39fe195}\label{class_parallel_cmd_a7472916d75c070eda8dce632b39fe195}} 
+\index{Parallel\+Cmd@{Parallel\+Cmd}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Parallel\+Cmd@{Parallel\+Cmd}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Parallel\+Cmd\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this class while printing the A\+ST. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_parallel_cmd_a03464113f3eca068ca4d0fd120cb27cc}\label{class_parallel_cmd_a03464113f3eca068ca4d0fd120cb27cc}} 
+\index{Parallel\+Cmd@{Parallel\+Cmd}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Parallel\+Cmd@{Parallel\+Cmd}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Parallel\+Cmd\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Calls print on each of the commands in cmds in turn. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The indentation level at which the current class (not the children) must be printed, in accordance with the depth in the A\+ST. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_parallel_cmd_af8376052ae9639db51ddf67c4e8dc4b9}\label{class_parallel_cmd_af8376052ae9639db51ddf67c4e8dc4b9}} 
+\index{Parallel\+Cmd@{Parallel\+Cmd}!cmds@{cmds}}
+\index{cmds@{cmds}!Parallel\+Cmd@{Parallel\+Cmd}}
+\subsubsection{\texorpdfstring{cmds}{cmds}}
+{\footnotesize\ttfamily \hyperlink{class_list}{List}$<$\hyperlink{class_plain_cmd}{Plain\+Cmd} $\ast$$>$$\ast$ Parallel\+Cmd\+::cmds\hspace{0.3cm}{\ttfamily [protected]}}
+
+The list of commands to be executed in parallel. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

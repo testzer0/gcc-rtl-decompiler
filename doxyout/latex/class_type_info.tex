@@ -1,0 +1,108 @@
+\hypertarget{class_type_info}{}\section{Type\+Info Class Reference}
+\label{class_type_info}\index{Type\+Info@{Type\+Info}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Type\+Info\+:
+% FIG 0
+
+
+Collaboration diagram for Type\+Info\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_type_info_a77a1ebcef0494edd828e7912269204fe}{Type\+Info} (const char $\ast$t)
+\item 
+const char $\ast$ \hyperlink{class_type_info_a3e84b02093115e1ad0c27acbe3ffffd7}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_type_info_a9b4bc126eb0ee406f1d515e166256627}{Print\+Children} (int indentlevel)
+\item 
+const char $\ast$ \hyperlink{class_type_info_a53b947997bf124e64ab5a18d16388558}{get\+Type} ()
+\item 
+void \hyperlink{class_type_info_a157de3b92f5333b031650065591ac04f}{Analyze} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{class_type_info_a07af85dc9ce62676640cf960cac376a7}{type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class holds the type information of an operand or result. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_type_info_a77a1ebcef0494edd828e7912269204fe}\label{class_type_info_a77a1ebcef0494edd828e7912269204fe}} 
+\index{Type\+Info@{Type\+Info}!Type\+Info@{Type\+Info}}
+\index{Type\+Info@{Type\+Info}!Type\+Info@{Type\+Info}}
+\subsubsection{\texorpdfstring{Type\+Info()}{TypeInfo()}}
+{\footnotesize\ttfamily Type\+Info\+::\+Type\+Info (\begin{DoxyParamCaption}\item[{const char $\ast$}]{t }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em t} & The type to be assigned to type. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_type_info_a157de3b92f5333b031650065591ac04f}\label{class_type_info_a157de3b92f5333b031650065591ac04f}} 
+\index{Type\+Info@{Type\+Info}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Type\+Info@{Type\+Info}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Type\+Info\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+No analysis (or code generation) to be done for this class. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_type_info_a3e84b02093115e1ad0c27acbe3ffffd7}\label{class_type_info_a3e84b02093115e1ad0c27acbe3ffffd7}} 
+\index{Type\+Info@{Type\+Info}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Type\+Info@{Type\+Info}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Type\+Info\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_type_info_a53b947997bf124e64ab5a18d16388558}\label{class_type_info_a53b947997bf124e64ab5a18d16388558}} 
+\index{Type\+Info@{Type\+Info}!get\+Type@{get\+Type}}
+\index{get\+Type@{get\+Type}!Type\+Info@{Type\+Info}}
+\subsubsection{\texorpdfstring{get\+Type()}{getType()}}
+{\footnotesize\ttfamily const char$\ast$ Type\+Info\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+A helper function to return the type. \mbox{\Hypertarget{class_type_info_a9b4bc126eb0ee406f1d515e166256627}\label{class_type_info_a9b4bc126eb0ee406f1d515e166256627}} 
+\index{Type\+Info@{Type\+Info}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Type\+Info@{Type\+Info}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Type\+Info\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Prints the type associated with this class whe printing the A\+ST. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which this node must be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_type_info_a07af85dc9ce62676640cf960cac376a7}\label{class_type_info_a07af85dc9ce62676640cf960cac376a7}} 
+\index{Type\+Info@{Type\+Info}!type@{type}}
+\index{type@{type}!Type\+Info@{Type\+Info}}
+\subsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily const char$\ast$ Type\+Info\+::type\hspace{0.3cm}{\ttfamily [protected]}}
+
+The type (width) of what this is the information about. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

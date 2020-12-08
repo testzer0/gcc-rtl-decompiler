@@ -1,0 +1,117 @@
+\hypertarget{class_int_operand}{}\section{Int\+Operand Class Reference}
+\label{class_int_operand}\index{Int\+Operand@{Int\+Operand}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Int\+Operand\+:
+% FIG 0
+
+
+Collaboration diagram for Int\+Operand\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_int_operand_ab17cc1b327ea4112715a5ff1f331835d}{Int\+Operand} (int iv)
+\item 
+const char $\ast$ \hyperlink{class_int_operand_ab81268dfb4d2a7823ab860c5d9d9dc65}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_int_operand_ac3a3845a17a1eb9a2c1e3ff631b8a400}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_int_operand_ac509fc25d25b9a69b63ddbdf54f5a353}{Analyze} ()
+\item 
+string \hyperlink{class_int_operand_aeaaef4fc5e36f9154dbe66c6b3f471e6}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_int_operand_ac63d408480b2e50d99d1b239a8466d1a}{intvalue}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The most basic type of operand\+: just an integer constant. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_int_operand_ab17cc1b327ea4112715a5ff1f331835d}\label{class_int_operand_ab17cc1b327ea4112715a5ff1f331835d}} 
+\index{Int\+Operand@{Int\+Operand}!Int\+Operand@{Int\+Operand}}
+\index{Int\+Operand@{Int\+Operand}!Int\+Operand@{Int\+Operand}}
+\subsubsection{\texorpdfstring{Int\+Operand()}{IntOperand()}}
+{\footnotesize\ttfamily Int\+Operand\+::\+Int\+Operand (\begin{DoxyParamCaption}\item[{int}]{iv }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em iv} & The value to be assigned to the integer, \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_int_operand_ac509fc25d25b9a69b63ddbdf54f5a353}\label{class_int_operand_ac509fc25d25b9a69b63ddbdf54f5a353}} 
+\index{Int\+Operand@{Int\+Operand}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Int\+Operand@{Int\+Operand}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Int\+Operand\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+No analysis to be done for an integer expression. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_int_operand_aeaaef4fc5e36f9154dbe66c6b3f471e6}\label{class_int_operand_aeaaef4fc5e36f9154dbe66c6b3f471e6}} 
+\index{Int\+Operand@{Int\+Operand}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Int\+Operand@{Int\+Operand}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string Int\+Operand\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+The code generated for an integer expression is just the value of the expression, which is passed upward to be used in the parent statements/expressions. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which to print the code for the current class. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_int_operand_ab81268dfb4d2a7823ab860c5d9d9dc65}\label{class_int_operand_ab81268dfb4d2a7823ab860c5d9d9dc65}} 
+\index{Int\+Operand@{Int\+Operand}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Int\+Operand@{Int\+Operand}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Int\+Operand\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for the current node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_int_operand_ac3a3845a17a1eb9a2c1e3ff631b8a400}\label{class_int_operand_ac3a3845a17a1eb9a2c1e3ff631b8a400}} 
+\index{Int\+Operand@{Int\+Operand}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Int\+Operand@{Int\+Operand}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Int\+Operand\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Does nothing since an integer operand has no children in the A\+ST. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which to print the current node. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_int_operand_ac63d408480b2e50d99d1b239a8466d1a}\label{class_int_operand_ac63d408480b2e50d99d1b239a8466d1a}} 
+\index{Int\+Operand@{Int\+Operand}!intvalue@{intvalue}}
+\index{intvalue@{intvalue}!Int\+Operand@{Int\+Operand}}
+\subsubsection{\texorpdfstring{intvalue}{intvalue}}
+{\footnotesize\ttfamily int Int\+Operand\+::intvalue\hspace{0.3cm}{\ttfamily [protected]}}
+
+The value of the integer. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

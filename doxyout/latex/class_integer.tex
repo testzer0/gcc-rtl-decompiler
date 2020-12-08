@@ -1,0 +1,103 @@
+\hypertarget{class_integer}{}\section{Integer Class Reference}
+\label{class_integer}\index{Integer@{Integer}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Integer\+:
+% FIG 0
+
+
+Collaboration diagram for Integer\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_integer_a70e6b2eb510b0a2714a00f1227a8edaf}{Integer} (int val)
+\item 
+const char $\ast$ \hyperlink{class_integer_ab4a1c2619f03557638a6740419337b82}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_integer_ac4122c2a26fe8825c4c3123f217a4021}{Print\+Children} (int indentlevel)
+\item 
+int \hyperlink{class_integer_aa3331a24fafb6e1c0fcf284ea9e88472}{get\+Value} ()
+\item 
+void \hyperlink{class_integer_ac3ffa2f3f2d9feaed58bbb2a5d8f1c59}{Analyze} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_integer_a2ac4a32a4ba0682490bb55390a13749e}{value}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A common umbrella class for both \textquotesingle{}Int\+Constant\textquotesingle{} and \textquotesingle{}-\/\+Int\+Constant\textquotesingle{} types of operands. Represents an integer. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_integer_a70e6b2eb510b0a2714a00f1227a8edaf}\label{class_integer_a70e6b2eb510b0a2714a00f1227a8edaf}} 
+\index{Integer@{Integer}!Integer@{Integer}}
+\index{Integer@{Integer}!Integer@{Integer}}
+\subsubsection{\texorpdfstring{Integer()}{Integer()}}
+{\footnotesize\ttfamily Integer\+::\+Integer (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})}
+
+Set\textquotesingle{}s value to val. 
+\begin{DoxyParams}{Parameters}
+{\em val} & the value to be assigned to the integer. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_integer_ac3ffa2f3f2d9feaed58bbb2a5d8f1c59}\label{class_integer_ac3ffa2f3f2d9feaed58bbb2a5d8f1c59}} 
+\index{Integer@{Integer}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Integer@{Integer}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Integer\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+There is no analysis to be done for an integer. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_integer_ab4a1c2619f03557638a6740419337b82}\label{class_integer_ab4a1c2619f03557638a6740419337b82}} 
+\index{Integer@{Integer}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Integer@{Integer}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Integer\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for the class. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_integer_aa3331a24fafb6e1c0fcf284ea9e88472}\label{class_integer_aa3331a24fafb6e1c0fcf284ea9e88472}} 
+\index{Integer@{Integer}!get\+Value@{get\+Value}}
+\index{get\+Value@{get\+Value}!Integer@{Integer}}
+\subsubsection{\texorpdfstring{get\+Value()}{getValue()}}
+{\footnotesize\ttfamily int Integer\+::get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+A helper function which returns the value of the represented integer. \mbox{\Hypertarget{class_integer_ac4122c2a26fe8825c4c3123f217a4021}\label{class_integer_ac4122c2a26fe8825c4c3123f217a4021}} 
+\index{Integer@{Integer}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Integer@{Integer}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Integer\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Does nothing since an \hyperlink{class_integer}{Integer} does not have children in the A\+ST. 
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_integer_a2ac4a32a4ba0682490bb55390a13749e}\label{class_integer_a2ac4a32a4ba0682490bb55390a13749e}} 
+\index{Integer@{Integer}!value@{value}}
+\index{value@{value}!Integer@{Integer}}
+\subsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily int Integer\+::value\hspace{0.3cm}{\ttfamily [protected]}}
+
+The value of the represented integer. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

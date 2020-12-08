@@ -1,0 +1,127 @@
+\hypertarget{class_no_ret_call}{}\section{No\+Ret\+Call Class Reference}
+\label{class_no_ret_call}\index{No\+Ret\+Call@{No\+Ret\+Call}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for No\+Ret\+Call\+:
+% FIG 0
+
+
+Collaboration diagram for No\+Ret\+Call\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_no_ret_call_adb7fef6a0a2f27c75f9c73c164ea20a2}{No\+Ret\+Call} (const char $\ast$fn, \hyperlink{class_expr_list}{Expr\+List} $\ast$el)
+\item 
+const char $\ast$ \hyperlink{class_no_ret_call_abfbfa06b9f232f16f1922f1c95b406d9}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_no_ret_call_a1645309e5db0b7b6ced656a304248600}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_no_ret_call_a9714a8c4429eb932be749909b47394fa}{Analyze} ()
+\item 
+string \hyperlink{class_no_ret_call_aa22f4dafc2369254349a631034f498d0}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{class_no_ret_call_af4879d2f433a03c715e74124d636f4d2}{fnname}
+\item 
+\hyperlink{class_expr_list}{Expr\+List} $\ast$ \hyperlink{class_no_ret_call_a2ce5041d16e7ac1ea8b338ad2005d7a2}{elist}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This type of call has no associated return value, and hence a void return type. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_no_ret_call_adb7fef6a0a2f27c75f9c73c164ea20a2}\label{class_no_ret_call_adb7fef6a0a2f27c75f9c73c164ea20a2}} 
+\index{No\+Ret\+Call@{No\+Ret\+Call}!No\+Ret\+Call@{No\+Ret\+Call}}
+\index{No\+Ret\+Call@{No\+Ret\+Call}!No\+Ret\+Call@{No\+Ret\+Call}}
+\subsubsection{\texorpdfstring{No\+Ret\+Call()}{NoRetCall()}}
+{\footnotesize\ttfamily No\+Ret\+Call\+::\+No\+Ret\+Call (\begin{DoxyParamCaption}\item[{const char $\ast$}]{fn,  }\item[{\hyperlink{class_expr_list}{Expr\+List} $\ast$}]{el }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em fn} & The function name to call. \\
+\hline
+{\em el} & The expression list to assign to elist. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_no_ret_call_a9714a8c4429eb932be749909b47394fa}\label{class_no_ret_call_a9714a8c4429eb932be749909b47394fa}} 
+\index{No\+Ret\+Call@{No\+Ret\+Call}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!No\+Ret\+Call@{No\+Ret\+Call}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void No\+Ret\+Call\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+First checks if the name of the function is in the global symbol table. If so, uses the expression list and their types to deduce the number and types of arguments to the function. Then via \hyperlink{class_no_ret_call_a9714a8c4429eb932be749909b47394fa}{Analyze()} of \hyperlink{class_expr_list}{Expr\+List}, stores this information in the \hyperlink{class_func_body}{Func\+Body} class associated with the function. If the function is not in the global symbol table, it must be imported from one of the header files. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_no_ret_call_aa22f4dafc2369254349a631034f498d0}\label{class_no_ret_call_aa22f4dafc2369254349a631034f498d0}} 
+\index{No\+Ret\+Call@{No\+Ret\+Call}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!No\+Ret\+Call@{No\+Ret\+Call}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string No\+Ret\+Call\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generates code for the function call. If the function name is not found in the global symbol table, checks it against some standard library functions. If a match is found, uses the match to typecast the variables accurately (among same width, e.\+g. long long int and int$\ast$ both have a 64 bit width). If not, maps 8 bit to char, 32 bit to int and 64 bit to long long int. This generates warnings but not errors. Finally generates code to store the result in a temporary variable and returns the name of the variable. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the code is to be generated. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_no_ret_call_abfbfa06b9f232f16f1922f1c95b406d9}\label{class_no_ret_call_abfbfa06b9f232f16f1922f1c95b406d9}} 
+\index{No\+Ret\+Call@{No\+Ret\+Call}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!No\+Ret\+Call@{No\+Ret\+Call}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ No\+Ret\+Call\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_no_ret_call_a1645309e5db0b7b6ced656a304248600}\label{class_no_ret_call_a1645309e5db0b7b6ced656a304248600}} 
+\index{No\+Ret\+Call@{No\+Ret\+Call}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!No\+Ret\+Call@{No\+Ret\+Call}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void No\+Ret\+Call\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Calls \hyperlink{class_node_a9ef727fd72d1a37792b3db60a8a479dd}{Print()} on the children of this node. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the current class must be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_no_ret_call_a2ce5041d16e7ac1ea8b338ad2005d7a2}\label{class_no_ret_call_a2ce5041d16e7ac1ea8b338ad2005d7a2}} 
+\index{No\+Ret\+Call@{No\+Ret\+Call}!elist@{elist}}
+\index{elist@{elist}!No\+Ret\+Call@{No\+Ret\+Call}}
+\subsubsection{\texorpdfstring{elist}{elist}}
+{\footnotesize\ttfamily \hyperlink{class_expr_list}{Expr\+List}$\ast$ No\+Ret\+Call\+::elist\hspace{0.3cm}{\ttfamily [protected]}}
+
+The list of arguments to the function, in the form of expressions. \mbox{\Hypertarget{class_no_ret_call_af4879d2f433a03c715e74124d636f4d2}\label{class_no_ret_call_af4879d2f433a03c715e74124d636f4d2}} 
+\index{No\+Ret\+Call@{No\+Ret\+Call}!fnname@{fnname}}
+\index{fnname@{fnname}!No\+Ret\+Call@{No\+Ret\+Call}}
+\subsubsection{\texorpdfstring{fnname}{fnname}}
+{\footnotesize\ttfamily const char$\ast$ No\+Ret\+Call\+::fnname\hspace{0.3cm}{\ttfamily [protected]}}
+
+The name of the function being called. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

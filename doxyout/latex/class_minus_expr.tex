@@ -1,0 +1,137 @@
+\hypertarget{class_minus_expr}{}\section{Minus\+Expr Class Reference}
+\label{class_minus_expr}\index{Minus\+Expr@{Minus\+Expr}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Minus\+Expr\+:
+% FIG 0
+
+
+Collaboration diagram for Minus\+Expr\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_minus_expr_ab5de7cd20f4d0d8f3725750bf6d020c0}{Minus\+Expr} (\hyperlink{class_type_info}{Type\+Info} $\ast$ti, \hyperlink{class_operand}{Operand} $\ast$o1, \hyperlink{class_operand}{Operand} $\ast$o2)
+\item 
+const char $\ast$ \hyperlink{class_minus_expr_a1b0d17900f1686776d05a5d18233aa2e}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_minus_expr_ad4dccbb9a497a866f41742f9db77ae99}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_minus_expr_af9eea4a87688777fd1ad108c24dbcd11}{Analyze} ()
+\item 
+string \hyperlink{class_minus_expr_a1f5c55747832a48d6dc28d1233b16a7c}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_type_info}{Type\+Info} $\ast$ \hyperlink{class_minus_expr_a974e557c0b440352c557c760f689bf52}{tinfo}
+\item 
+\hyperlink{class_operand}{Operand} $\ast$ \hyperlink{class_minus_expr_a757e5b2e7d8a593e3a62ed2b7caadbb4}{op1}
+\item 
+\hyperlink{class_operand}{Operand} $\ast$ \hyperlink{class_minus_expr_ae40bb3302e5fedad288bb78ea0975205}{op2}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A \hyperlink{class_minus_expr}{Minus\+Expr} represents subtraction of the value of the right operand from the left operand, and is followed by a possible type-\/cast into the specified type. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_minus_expr_ab5de7cd20f4d0d8f3725750bf6d020c0}\label{class_minus_expr_ab5de7cd20f4d0d8f3725750bf6d020c0}} 
+\index{Minus\+Expr@{Minus\+Expr}!Minus\+Expr@{Minus\+Expr}}
+\index{Minus\+Expr@{Minus\+Expr}!Minus\+Expr@{Minus\+Expr}}
+\subsubsection{\texorpdfstring{Minus\+Expr()}{MinusExpr()}}
+{\footnotesize\ttfamily Minus\+Expr\+::\+Minus\+Expr (\begin{DoxyParamCaption}\item[{\hyperlink{class_type_info}{Type\+Info} $\ast$}]{ti,  }\item[{\hyperlink{class_operand}{Operand} $\ast$}]{o1,  }\item[{\hyperlink{class_operand}{Operand} $\ast$}]{o2 }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em ti} & The type information to be assigned to tinfo \\
+\hline
+{\em o1} & The left operand \\
+\hline
+{\em o2} & The right operand. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_minus_expr_af9eea4a87688777fd1ad108c24dbcd11}\label{class_minus_expr_af9eea4a87688777fd1ad108c24dbcd11}} 
+\index{Minus\+Expr@{Minus\+Expr}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Minus\+Expr@{Minus\+Expr}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Minus\+Expr\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+No analysis to be done for \hyperlink{class_minus_expr}{Minus\+Expr} 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_minus_expr_a1f5c55747832a48d6dc28d1233b16a7c}\label{class_minus_expr_a1f5c55747832a48d6dc28d1233b16a7c}} 
+\index{Minus\+Expr@{Minus\+Expr}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Minus\+Expr@{Minus\+Expr}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string Minus\+Expr\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generates code to subtract the value of the right operand from that of the left operand and then returs the name of the temporary variable in which the result is stored. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the code is to be generated. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_minus_expr_a1b0d17900f1686776d05a5d18233aa2e}\label{class_minus_expr_a1b0d17900f1686776d05a5d18233aa2e}} 
+\index{Minus\+Expr@{Minus\+Expr}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Minus\+Expr@{Minus\+Expr}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Minus\+Expr\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_minus_expr_ad4dccbb9a497a866f41742f9db77ae99}\label{class_minus_expr_ad4dccbb9a497a866f41742f9db77ae99}} 
+\index{Minus\+Expr@{Minus\+Expr}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Minus\+Expr@{Minus\+Expr}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Minus\+Expr\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Calls \hyperlink{class_node_a9ef727fd72d1a37792b3db60a8a479dd}{Print()} on the children of this node in the A\+ST. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the current node must be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_minus_expr_a757e5b2e7d8a593e3a62ed2b7caadbb4}\label{class_minus_expr_a757e5b2e7d8a593e3a62ed2b7caadbb4}} 
+\index{Minus\+Expr@{Minus\+Expr}!op1@{op1}}
+\index{op1@{op1}!Minus\+Expr@{Minus\+Expr}}
+\subsubsection{\texorpdfstring{op1}{op1}}
+{\footnotesize\ttfamily \hyperlink{class_operand}{Operand}$\ast$ Minus\+Expr\+::op1\hspace{0.3cm}{\ttfamily [protected]}}
+
+The left operand. \mbox{\Hypertarget{class_minus_expr_ae40bb3302e5fedad288bb78ea0975205}\label{class_minus_expr_ae40bb3302e5fedad288bb78ea0975205}} 
+\index{Minus\+Expr@{Minus\+Expr}!op2@{op2}}
+\index{op2@{op2}!Minus\+Expr@{Minus\+Expr}}
+\subsubsection{\texorpdfstring{op2}{op2}}
+{\footnotesize\ttfamily \hyperlink{class_operand}{Operand}$\ast$ Minus\+Expr\+::op2\hspace{0.3cm}{\ttfamily [protected]}}
+
+The right operand. \mbox{\Hypertarget{class_minus_expr_a974e557c0b440352c557c760f689bf52}\label{class_minus_expr_a974e557c0b440352c557c760f689bf52}} 
+\index{Minus\+Expr@{Minus\+Expr}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!Minus\+Expr@{Minus\+Expr}}
+\subsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \hyperlink{class_type_info}{Type\+Info}$\ast$ Minus\+Expr\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+The type (width) into which the result is cast. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

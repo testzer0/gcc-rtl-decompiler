@@ -1,0 +1,112 @@
+\hypertarget{class_symbol_ref_operand}{}\section{Symbol\+Ref\+Operand Class Reference}
+\label{class_symbol_ref_operand}\index{Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Symbol\+Ref\+Operand\+:
+% FIG 0
+
+
+Collaboration diagram for Symbol\+Ref\+Operand\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symbol_ref_operand_a0c928789d6c5abc49a57eeb030c9fa7a}{Symbol\+Ref\+Operand} (const char $\ast$s)
+\item 
+const char $\ast$ \hyperlink{class_symbol_ref_operand_adb5689dfd85cd5da59ad1228f221a875}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_symbol_ref_operand_a788a41e0bcf7a1047bb7884e0c8ac857}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_symbol_ref_operand_a41ac48ee73184e0fe254ea735c7ea471}{Analyze} ()
+\item 
+string \hyperlink{class_symbol_ref_operand_afdbed4a7baf9ede2a08687fc8a5704d9}{Generate\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{class_symbol_ref_operand_a3bd54497892f2bd316927b2931447826}{symbol}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An operand which denotes the variable which has the specified symbol associated with it. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_symbol_ref_operand_a0c928789d6c5abc49a57eeb030c9fa7a}\label{class_symbol_ref_operand_a0c928789d6c5abc49a57eeb030c9fa7a}} 
+\index{Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}!Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}}
+\index{Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}!Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}}
+\subsubsection{\texorpdfstring{Symbol\+Ref\+Operand()}{SymbolRefOperand()}}
+{\footnotesize\ttfamily Symbol\+Ref\+Operand\+::\+Symbol\+Ref\+Operand (\begin{DoxyParamCaption}\item[{const char $\ast$}]{s }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em s} & The name of the symbol. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_symbol_ref_operand_a41ac48ee73184e0fe254ea735c7ea471}\label{class_symbol_ref_operand_a41ac48ee73184e0fe254ea735c7ea471}} 
+\index{Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Symbol\+Ref\+Operand\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+No analysis to be done for \hyperlink{class_symbol_ref_operand}{Symbol\+Ref\+Operand}. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_symbol_ref_operand_afdbed4a7baf9ede2a08687fc8a5704d9}\label{class_symbol_ref_operand_afdbed4a7baf9ede2a08687fc8a5704d9}} 
+\index{Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string Symbol\+Ref\+Operand\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generates code to read the value of the symbol-\/reference into a temporary variable and returns the name of the variable. 
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_symbol_ref_operand_adb5689dfd85cd5da59ad1228f221a875}\label{class_symbol_ref_operand_adb5689dfd85cd5da59ad1228f221a875}} 
+\index{Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Symbol\+Ref\+Operand\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_symbol_ref_operand_a788a41e0bcf7a1047bb7884e0c8ac857}\label{class_symbol_ref_operand_a788a41e0bcf7a1047bb7884e0c8ac857}} 
+\index{Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Symbol\+Ref\+Operand\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Prints the name of the symbol. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the current node is to be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_symbol_ref_operand_a3bd54497892f2bd316927b2931447826}\label{class_symbol_ref_operand_a3bd54497892f2bd316927b2931447826}} 
+\index{Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}!symbol@{symbol}}
+\index{symbol@{symbol}!Symbol\+Ref\+Operand@{Symbol\+Ref\+Operand}}
+\subsubsection{\texorpdfstring{symbol}{symbol}}
+{\footnotesize\ttfamily const char$\ast$ Symbol\+Ref\+Operand\+::symbol\hspace{0.3cm}{\ttfamily [protected]}}
+
+The symbol which specifies the variable/value. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}

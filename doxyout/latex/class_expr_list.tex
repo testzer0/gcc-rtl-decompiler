@@ -1,0 +1,158 @@
+\hypertarget{class_expr_list}{}\section{Expr\+List Class Reference}
+\label{class_expr_list}\index{Expr\+List@{Expr\+List}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Expr\+List\+:
+% FIG 0
+
+
+Collaboration diagram for Expr\+List\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_expr_list_ad7fa8764d55851639add773477d80a26}{Expr\+List} (\hyperlink{class_list}{List}$<$ pair$<$ int, const char $\ast$$>$$>$ $\ast$as)
+\item 
+const char $\ast$ \hyperlink{class_expr_list_a1e1febf2b8902accb2751e521b0e16ae}{Get\+Print\+Name\+For\+Node} ()
+\item 
+void \hyperlink{class_expr_list_a2a55a32d64cd33b4424d29f1a36e94f8}{Print\+Children} (int indentlevel)
+\item 
+void \hyperlink{class_expr_list_ade8c035ff7457f304c32066712d55e2e}{Analyze} ()
+\item 
+void \hyperlink{class_expr_list_a09056537b95e88b367a1cfa306ed2349}{Set\+Args} (string name, string rettype)
+\item 
+string \hyperlink{class_expr_list_aabde20280604379c3e0aa4396b0ea98d}{Generate\+Code} (int indentlevel)
+\item 
+string \hyperlink{class_expr_list_a6174594c14ca2b1bedadc7a30aa145c5}{Gen\+Scanf\+Code} (int indentlevel)
+\item 
+string \hyperlink{class_expr_list_a4a4b3abb07a05a8be2d62cdcbcd5c070}{Gen\+Printf\+Code} (int indentlevel)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_list}{List}$<$ pair$<$ int, const char $\ast$ $>$ $>$ $\ast$ \hyperlink{class_expr_list_a4f32b04d153d6d304265ecfdb16929c2}{args}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The list of parameters associated with a function call. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_expr_list_ad7fa8764d55851639add773477d80a26}\label{class_expr_list_ad7fa8764d55851639add773477d80a26}} 
+\index{Expr\+List@{Expr\+List}!Expr\+List@{Expr\+List}}
+\index{Expr\+List@{Expr\+List}!Expr\+List@{Expr\+List}}
+\subsubsection{\texorpdfstring{Expr\+List()}{ExprList()}}
+{\footnotesize\ttfamily Expr\+List\+::\+Expr\+List (\begin{DoxyParamCaption}\item[{\hyperlink{class_list}{List}$<$ pair$<$ int, const char $\ast$$>$$>$ $\ast$}]{as }\end{DoxyParamCaption})}
+
+A simple constructor. 
+\begin{DoxyParams}{Parameters}
+{\em as} & The list of arguments to be assigned to args. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_expr_list_ade8c035ff7457f304c32066712d55e2e}\label{class_expr_list_ade8c035ff7457f304c32066712d55e2e}} 
+\index{Expr\+List@{Expr\+List}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Expr\+List@{Expr\+List}}
+\subsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Expr\+List\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+The analysis assocated with the class is via Set\+Args. 
+
+Reimplemented from \hyperlink{class_node_a5f88d55c6f253a29def7ccc443d83d47}{Node}.
+
+\mbox{\Hypertarget{class_expr_list_aabde20280604379c3e0aa4396b0ea98d}\label{class_expr_list_aabde20280604379c3e0aa4396b0ea98d}} 
+\index{Expr\+List@{Expr\+List}!Generate\+Code@{Generate\+Code}}
+\index{Generate\+Code@{Generate\+Code}!Expr\+List@{Expr\+List}}
+\subsubsection{\texorpdfstring{Generate\+Code()}{GenerateCode()}}
+{\footnotesize\ttfamily string Expr\+List\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generates code for the arguments of a function call. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the code is to be generated. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_acb60e526730e8436056375a3055c2c32}{Node}.
+
+\mbox{\Hypertarget{class_expr_list_a4a4b3abb07a05a8be2d62cdcbcd5c070}\label{class_expr_list_a4a4b3abb07a05a8be2d62cdcbcd5c070}} 
+\index{Expr\+List@{Expr\+List}!Gen\+Printf\+Code@{Gen\+Printf\+Code}}
+\index{Gen\+Printf\+Code@{Gen\+Printf\+Code}!Expr\+List@{Expr\+List}}
+\subsubsection{\texorpdfstring{Gen\+Printf\+Code()}{GenPrintfCode()}}
+{\footnotesize\ttfamily string Expr\+List\+::\+Gen\+Printf\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})}
+
+Generates code for the arguments of a function call to printf(). 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the code is to be generated. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_expr_list_a6174594c14ca2b1bedadc7a30aa145c5}\label{class_expr_list_a6174594c14ca2b1bedadc7a30aa145c5}} 
+\index{Expr\+List@{Expr\+List}!Gen\+Scanf\+Code@{Gen\+Scanf\+Code}}
+\index{Gen\+Scanf\+Code@{Gen\+Scanf\+Code}!Expr\+List@{Expr\+List}}
+\subsubsection{\texorpdfstring{Gen\+Scanf\+Code()}{GenScanfCode()}}
+{\footnotesize\ttfamily string Expr\+List\+::\+Gen\+Scanf\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})}
+
+Generates code for the arguments of a function call to scanf(). 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the code is to be generated. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_expr_list_a1e1febf2b8902accb2751e521b0e16ae}\label{class_expr_list_a1e1febf2b8902accb2751e521b0e16ae}} 
+\index{Expr\+List@{Expr\+List}!Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}}
+\index{Get\+Print\+Name\+For\+Node@{Get\+Print\+Name\+For\+Node}!Expr\+List@{Expr\+List}}
+\subsubsection{\texorpdfstring{Get\+Print\+Name\+For\+Node()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Expr\+List\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the name to be printed for this node. 
+
+Implements \hyperlink{class_node_a56e29657306ffb004d69c6929ae44269}{Node}.
+
+\mbox{\Hypertarget{class_expr_list_a2a55a32d64cd33b4424d29f1a36e94f8}\label{class_expr_list_a2a55a32d64cd33b4424d29f1a36e94f8}} 
+\index{Expr\+List@{Expr\+List}!Print\+Children@{Print\+Children}}
+\index{Print\+Children@{Print\+Children}!Expr\+List@{Expr\+List}}
+\subsubsection{\texorpdfstring{Print\+Children()}{PrintChildren()}}
+{\footnotesize\ttfamily void Expr\+List\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Prints each argument in order. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & The level of indentation at which the current class must be printed. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_node_a3e67ec8d22182b721717af14fe0c3000}{Node}.
+
+\mbox{\Hypertarget{class_expr_list_a09056537b95e88b367a1cfa306ed2349}\label{class_expr_list_a09056537b95e88b367a1cfa306ed2349}} 
+\index{Expr\+List@{Expr\+List}!Set\+Args@{Set\+Args}}
+\index{Set\+Args@{Set\+Args}!Expr\+List@{Expr\+List}}
+\subsubsection{\texorpdfstring{Set\+Args()}{SetArgs()}}
+{\footnotesize\ttfamily void Expr\+List\+::\+Set\+Args (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{string}]{rettype }\end{DoxyParamCaption})}
+
+Called by a call instruction to set the argument types and number, along with total width and return type for a function, if found in the global symbol table. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the function. \\
+\hline
+{\em rettype} & The return type to be assigned to the function. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_expr_list_a4f32b04d153d6d304265ecfdb16929c2}\label{class_expr_list_a4f32b04d153d6d304265ecfdb16929c2}} 
+\index{Expr\+List@{Expr\+List}!args@{args}}
+\index{args@{args}!Expr\+List@{Expr\+List}}
+\subsubsection{\texorpdfstring{args}{args}}
+{\footnotesize\ttfamily \hyperlink{class_list}{List}$<$pair$<$int,const char$\ast$$>$ $>$$\ast$ Expr\+List\+::args\hspace{0.3cm}{\ttfamily [protected]}}
+
+The list of arguments to the function call. Each pair consists of the register in which the argument is passed along with the width of the argument in short form (\char`\"{}si\char`\"{}, \char`\"{}di\char`\"{} etc.) as a const char $\ast$. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/zer0/rtl2\+C/ast.\+h\item 
+/home/zer0/rtl2\+C/ast.\+cc\end{DoxyCompactItemize}
