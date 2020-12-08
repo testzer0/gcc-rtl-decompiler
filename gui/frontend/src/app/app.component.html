@@ -1,0 +1,23 @@
+<h1>RTL</h1>
+
+<div  class="textAreaColumn">
+    <form [formGroup]="data" (ngSubmit)="onClick()">
+    
+        <label>
+            <span>Original Code</span>
+            <textarea formControlName="code"></textarea>
+        </label>
+        <label>
+            <span>Generated RTL</span>
+            <textarea formControlName="rtl"></textarea>
+        </label>
+        <label>
+            <span>CPP code generated from RTL</span>
+            <textarea formControlName="cpp"></textarea>
+        </label>
+        <br><br>
+        <div class="sub">
+            <button type="submit">Generate</button>
+        </div>
+    </form>
+</div>
