@@ -17,7 +17,13 @@ def index(request):
         with open('./tempin.c','w+') as file:
             file.write(data['code'])
         os.system("gcc -fno-stack-protector -fdump-rtl-vregs tempin.c ")
+        os.system("gcc tempin.c -S")
         os.system("./rcc <./tempin.c.230r.vregs >./tempout")
+        lookfor = "results/symbols"
+        symbolsname = "tempin.S"
+        outname = "tempout"
+        pycmd = "python3 symbols.py --lookfor \"" + lookfor + "\" --symbols \"" + symbolsname +"\" --outfile \"" + outname + "\""
+        subprocess.run("./rcc < %s > %s" % (fullname,outname), shell=True)
         with open('./tempout') as file:
             cpp = file.read()
         with open('./tempin.c.230r.vregs') as file:
