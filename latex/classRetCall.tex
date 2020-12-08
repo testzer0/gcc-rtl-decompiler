@@ -1,0 +1,150 @@
+\hypertarget{classRetCall}{}\doxysection{Ret\+Call Class Reference}
+\label{classRetCall}\index{RetCall@{RetCall}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Ret\+Call\+:
+% FIG 0
+
+
+Collaboration diagram for Ret\+Call\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRetCall_a36752f2de27b76212b4ae0066ddcd578}{Ret\+Call}} (\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ti, int rr, const char $\ast$fn, \mbox{\hyperlink{classExprList}{Expr\+List}} $\ast$el)
+\item 
+const char $\ast$ \mbox{\hyperlink{classRetCall_afb92899368ccb84bad8d95c1a8a57e93}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classRetCall_a93de1dff14cd07dd58441a320df7f798}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classRetCall_ae97ba198b2aff2badbee17b2f02d989a}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classRetCall_a4bb2cb50dc6e81aaf3a312c228cb5f4e}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ \mbox{\hyperlink{classRetCall_a5dd7e7af3540ea68eae6e3c4c572e426}{tinfo}}
+\item 
+int \mbox{\hyperlink{classRetCall_a3fc6d5d729c3d0e52b4e8020719c9d08}{returnreg}}
+\item 
+const char $\ast$ \mbox{\hyperlink{classRetCall_ade43d299c39866859178279cfe6a85bd}{fnname}}
+\item 
+\mbox{\hyperlink{classExprList}{Expr\+List}} $\ast$ \mbox{\hyperlink{classRetCall_a2be9b1449ca100c24744097616f15db8}{elist}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing a call that involves returning a value. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classRetCall_a36752f2de27b76212b4ae0066ddcd578}\label{classRetCall_a36752f2de27b76212b4ae0066ddcd578}} 
+\index{RetCall@{RetCall}!RetCall@{RetCall}}
+\index{RetCall@{RetCall}!RetCall@{RetCall}}
+\doxysubsubsection{\texorpdfstring{RetCall()}{RetCall()}}
+{\footnotesize\ttfamily Ret\+Call\+::\+Ret\+Call (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$}]{ti,  }\item[{int}]{rr,  }\item[{const char $\ast$}]{fn,  }\item[{\mbox{\hyperlink{classExprList}{Expr\+List}} $\ast$}]{el }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em ti} & return type information \\
+\hline
+{\em rr} & name of return register \\
+\hline
+{\em fn} & name of function to be called \\
+\hline
+{\em el} & expression list \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classRetCall_ae97ba198b2aff2badbee17b2f02d989a}\label{classRetCall_ae97ba198b2aff2badbee17b2f02d989a}} 
+\index{RetCall@{RetCall}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!RetCall@{RetCall}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Ret\+Call\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classRetCall_a4bb2cb50dc6e81aaf3a312c228cb5f4e}\label{classRetCall_a4bb2cb50dc6e81aaf3a312c228cb5f4e}} 
+\index{RetCall@{RetCall}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!RetCall@{RetCall}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Ret\+Call\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classRetCall_afb92899368ccb84bad8d95c1a8a57e93}\label{classRetCall_afb92899368ccb84bad8d95c1a8a57e93}} 
+\index{RetCall@{RetCall}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!RetCall@{RetCall}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Ret\+Call\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classRetCall_a93de1dff14cd07dd58441a320df7f798}\label{classRetCall_a93de1dff14cd07dd58441a320df7f798}} 
+\index{RetCall@{RetCall}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!RetCall@{RetCall}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Ret\+Call\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classRetCall_a2be9b1449ca100c24744097616f15db8}\label{classRetCall_a2be9b1449ca100c24744097616f15db8}} 
+\index{RetCall@{RetCall}!elist@{elist}}
+\index{elist@{elist}!RetCall@{RetCall}}
+\doxysubsubsection{\texorpdfstring{elist}{elist}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classExprList}{Expr\+List}}$\ast$ Ret\+Call\+::elist\hspace{0.3cm}{\ttfamily [protected]}}
+
+list of expressions involved in the call\+\_\+insn block \mbox{\Hypertarget{classRetCall_ade43d299c39866859178279cfe6a85bd}\label{classRetCall_ade43d299c39866859178279cfe6a85bd}} 
+\index{RetCall@{RetCall}!fnname@{fnname}}
+\index{fnname@{fnname}!RetCall@{RetCall}}
+\doxysubsubsection{\texorpdfstring{fnname}{fnname}}
+{\footnotesize\ttfamily const char$\ast$ Ret\+Call\+::fnname\hspace{0.3cm}{\ttfamily [protected]}}
+
+name of function to be called \mbox{\Hypertarget{classRetCall_a3fc6d5d729c3d0e52b4e8020719c9d08}\label{classRetCall_a3fc6d5d729c3d0e52b4e8020719c9d08}} 
+\index{RetCall@{RetCall}!returnreg@{returnreg}}
+\index{returnreg@{returnreg}!RetCall@{RetCall}}
+\doxysubsubsection{\texorpdfstring{returnreg}{returnreg}}
+{\footnotesize\ttfamily int Ret\+Call\+::returnreg\hspace{0.3cm}{\ttfamily [protected]}}
+
+register containing the returned value \mbox{\Hypertarget{classRetCall_a5dd7e7af3540ea68eae6e3c4c572e426}\label{classRetCall_a5dd7e7af3540ea68eae6e3c4c572e426}} 
+\index{RetCall@{RetCall}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!RetCall@{RetCall}}
+\doxysubsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTypeInfo}{Type\+Info}}$\ast$ Ret\+Call\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+return type 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

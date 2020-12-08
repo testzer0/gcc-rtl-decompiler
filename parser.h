@@ -14,7 +14,16 @@
 #include "y.tab.h"              
 #endif
 
-int yyparse();              // Defined in the generated y.tab.c file
-void InitParser();          // Defined in parser.y
+/**
+ *  the main function responsible for parsing.
+ *  It is generated in y.tab.c, using bison.
+ */
+int yyparse();
+
+/**
+ *  initializes the parser. Debug mode is turned off.
+ *  The function is defined in parser.y
+ */
+void InitParser();
 
 #endif

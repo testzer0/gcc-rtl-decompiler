@@ -1,0 +1,140 @@
+\hypertarget{classExprOperand}{}\doxysection{Expr\+Operand Class Reference}
+\label{classExprOperand}\index{ExprOperand@{ExprOperand}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Expr\+Operand\+:
+% FIG 0
+
+
+Collaboration diagram for Expr\+Operand\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classExprOperand_a2769211a7a5fe60474dc8b332b86b8e2}{Expr\+Operand}} (\mbox{\hyperlink{classLocInfo}{Loc\+Info}} $\ast$li, \mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ti, \mbox{\hyperlink{classExpr}{Expr}} $\ast$e)
+\item 
+const char $\ast$ \mbox{\hyperlink{classExprOperand_a51b24b2cbb8ff22213783bde2a96642c}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classExprOperand_a45b3abc5fc95a4184179127f1aed0e94}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classExprOperand_a322d7d7cd1aae5b592349824f147b570}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classExprOperand_afed7d58db66e07a07a8edbb10b9a6f5a}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLocInfo}{Loc\+Info}} $\ast$ \mbox{\hyperlink{classExprOperand_a1f69e2905035f08a4687dc3d3fc913f9}{linfo}}
+\item 
+\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ \mbox{\hyperlink{classExprOperand_a30dfef7cd9e9d56a9a02f48080785ab3}{tinfo}}
+\item 
+\mbox{\hyperlink{classExpr}{Expr}} $\ast$ \mbox{\hyperlink{classExprOperand_a0912668446b445f8451c9c2b52a969ad}{expr}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing register-\/type operands. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classExprOperand_a2769211a7a5fe60474dc8b332b86b8e2}\label{classExprOperand_a2769211a7a5fe60474dc8b332b86b8e2}} 
+\index{ExprOperand@{ExprOperand}!ExprOperand@{ExprOperand}}
+\index{ExprOperand@{ExprOperand}!ExprOperand@{ExprOperand}}
+\doxysubsubsection{\texorpdfstring{ExprOperand()}{ExprOperand()}}
+{\footnotesize\ttfamily Expr\+Operand\+::\+Expr\+Operand (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classLocInfo}{Loc\+Info}} $\ast$}]{li,  }\item[{\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$}]{ti,  }\item[{\mbox{\hyperlink{classExpr}{Expr}} $\ast$}]{e }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em li} & location info \\
+\hline
+{\em ti} & type info \\
+\hline
+{\em e} & expression \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classExprOperand_a322d7d7cd1aae5b592349824f147b570}\label{classExprOperand_a322d7d7cd1aae5b592349824f147b570}} 
+\index{ExprOperand@{ExprOperand}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!ExprOperand@{ExprOperand}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Expr\+Operand\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classExprOperand_afed7d58db66e07a07a8edbb10b9a6f5a}\label{classExprOperand_afed7d58db66e07a07a8edbb10b9a6f5a}} 
+\index{ExprOperand@{ExprOperand}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!ExprOperand@{ExprOperand}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Expr\+Operand\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classExprOperand_a51b24b2cbb8ff22213783bde2a96642c}\label{classExprOperand_a51b24b2cbb8ff22213783bde2a96642c}} 
+\index{ExprOperand@{ExprOperand}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!ExprOperand@{ExprOperand}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Expr\+Operand\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classExprOperand_a45b3abc5fc95a4184179127f1aed0e94}\label{classExprOperand_a45b3abc5fc95a4184179127f1aed0e94}} 
+\index{ExprOperand@{ExprOperand}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!ExprOperand@{ExprOperand}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Expr\+Operand\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classExprOperand_a0912668446b445f8451c9c2b52a969ad}\label{classExprOperand_a0912668446b445f8451c9c2b52a969ad}} 
+\index{ExprOperand@{ExprOperand}!expr@{expr}}
+\index{expr@{expr}!ExprOperand@{ExprOperand}}
+\doxysubsubsection{\texorpdfstring{expr}{expr}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classExpr}{Expr}}$\ast$ Expr\+Operand\+::expr\hspace{0.3cm}{\ttfamily [protected]}}
+
+the actual expression in the operand. Expressions can be of 7 types. \mbox{\Hypertarget{classExprOperand_a1f69e2905035f08a4687dc3d3fc913f9}\label{classExprOperand_a1f69e2905035f08a4687dc3d3fc913f9}} 
+\index{ExprOperand@{ExprOperand}!linfo@{linfo}}
+\index{linfo@{linfo}!ExprOperand@{ExprOperand}}
+\doxysubsubsection{\texorpdfstring{linfo}{linfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLocInfo}{Loc\+Info}}$\ast$ Expr\+Operand\+::linfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+location information for the operand. This includes memory type, and the flags involved. \mbox{\Hypertarget{classExprOperand_a30dfef7cd9e9d56a9a02f48080785ab3}\label{classExprOperand_a30dfef7cd9e9d56a9a02f48080785ab3}} 
+\index{ExprOperand@{ExprOperand}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!ExprOperand@{ExprOperand}}
+\doxysubsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTypeInfo}{Type\+Info}}$\ast$ Expr\+Operand\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+type information for the operand 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

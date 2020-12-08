@@ -1,0 +1,130 @@
+\hypertarget{classSetCmd}{}\doxysection{Set\+Cmd Class Reference}
+\label{classSetCmd}\index{SetCmd@{SetCmd}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Set\+Cmd\+:
+% FIG 0
+
+
+Collaboration diagram for Set\+Cmd\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSetCmd_ac83b6dcab00a2c796e088ac4c7013cd7}{Set\+Cmd}} (\mbox{\hyperlink{classOperand}{Operand}} $\ast$o1, \mbox{\hyperlink{classOperand}{Operand}} $\ast$o2)
+\item 
+const char $\ast$ \mbox{\hyperlink{classSetCmd_a9a9fc62db9b435358ab4addb1dc4cece}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classSetCmd_ac06d57c11b7c92f3e4b3f94c7a889166}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classSetCmd_ad3d2a13f9dd92cddd09c3c280e601583}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classSetCmd_afa73e8c7e0a5115bdcebd4a6cc3ef1d4}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classOperand}{Operand}} $\ast$ \mbox{\hyperlink{classSetCmd_a702a81ef272dd4597f628eee77b09b73}{op1}}
+\item 
+\mbox{\hyperlink{classOperand}{Operand}} $\ast$ \mbox{\hyperlink{classSetCmd_aa588cf968d396ab4cf7e9b8ca69d6801}{op2}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing a set command in the program. The set command is basically used for assignment. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSetCmd_ac83b6dcab00a2c796e088ac4c7013cd7}\label{classSetCmd_ac83b6dcab00a2c796e088ac4c7013cd7}} 
+\index{SetCmd@{SetCmd}!SetCmd@{SetCmd}}
+\index{SetCmd@{SetCmd}!SetCmd@{SetCmd}}
+\doxysubsubsection{\texorpdfstring{SetCmd()}{SetCmd()}}
+{\footnotesize\ttfamily Set\+Cmd\+::\+Set\+Cmd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperand}{Operand}} $\ast$}]{o1,  }\item[{\mbox{\hyperlink{classOperand}{Operand}} $\ast$}]{o2 }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em o1} & first operand of set command \\
+\hline
+{\em o2} & second operand of set command \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSetCmd_ad3d2a13f9dd92cddd09c3c280e601583}\label{classSetCmd_ad3d2a13f9dd92cddd09c3c280e601583}} 
+\index{SetCmd@{SetCmd}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!SetCmd@{SetCmd}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Set\+Cmd\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classSetCmd_afa73e8c7e0a5115bdcebd4a6cc3ef1d4}\label{classSetCmd_afa73e8c7e0a5115bdcebd4a6cc3ef1d4}} 
+\index{SetCmd@{SetCmd}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!SetCmd@{SetCmd}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Set\+Cmd\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classSetCmd_a9a9fc62db9b435358ab4addb1dc4cece}\label{classSetCmd_a9a9fc62db9b435358ab4addb1dc4cece}} 
+\index{SetCmd@{SetCmd}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!SetCmd@{SetCmd}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Set\+Cmd\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classSetCmd_ac06d57c11b7c92f3e4b3f94c7a889166}\label{classSetCmd_ac06d57c11b7c92f3e4b3f94c7a889166}} 
+\index{SetCmd@{SetCmd}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!SetCmd@{SetCmd}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Set\+Cmd\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSetCmd_a702a81ef272dd4597f628eee77b09b73}\label{classSetCmd_a702a81ef272dd4597f628eee77b09b73}} 
+\index{SetCmd@{SetCmd}!op1@{op1}}
+\index{op1@{op1}!SetCmd@{SetCmd}}
+\doxysubsubsection{\texorpdfstring{op1}{op1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classOperand}{Operand}}$\ast$ Set\+Cmd\+::op1\hspace{0.3cm}{\ttfamily [protected]}}
+
+first operand of set command; i.\+e., operand into which value is to be stored \mbox{\Hypertarget{classSetCmd_aa588cf968d396ab4cf7e9b8ca69d6801}\label{classSetCmd_aa588cf968d396ab4cf7e9b8ca69d6801}} 
+\index{SetCmd@{SetCmd}!op2@{op2}}
+\index{op2@{op2}!SetCmd@{SetCmd}}
+\doxysubsubsection{\texorpdfstring{op2}{op2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classOperand}{Operand}}$\ast$ Set\+Cmd\+::op2\hspace{0.3cm}{\ttfamily [protected]}}
+
+second operand of set command; i.\+e., operand from which value is to be taken 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

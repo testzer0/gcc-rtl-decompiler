@@ -7,49 +7,75 @@ using namespace std;
 
 class Node;
 
+/**
+ *  A custom deque-based class for storing and manipulating lists of objects in the abstract syntax tree.
+ */
 template<class Element> class List {
 
  private:
     deque<Element> elems;
 
  public:
-           // Create a new empty list
+    /**
+     *  default constructor, creates an empty list.
+     */
     List() {}
 
-           // Returns count of elements currently in list
+    /**
+     *  returns the number of elements currently in the list.
+     *  @return number of elements in list
+     */
     int NumElements() const
-	{ return elems.size(); }
+	  { return elems.size(); }
 
-          // Returns element at index in list. Indexing is 0-based.
-          // Raises an assert if index is out of range.
+    /**
+     *  Returns element at index in list. Indexing is 0-based.
+     *  Raises assert if index out of range
+     *  @param index index of element to be returned
+     *  @return element at the desired index
+     */
     Element Nth(int index) const
 	{ Assert(index >= 0 && index < NumElements());
 	  return elems[index]; }
 
-          // Inserts element at index, shuffling over others
-          // Raises assert if index out of range
+    /**
+     *  Inserts element at index, shuffling over others
+     *  Raises assert if index out of range
+     *  @param elem element to be inserted
+     *  @param index index at which element is to be inserted
+     */
     void InsertAt(const Element &elem, int index)
 	{ Assert(index >= 0 && index <= NumElements());
 	  elems.insert(elems.begin() + index, elem); }
 
-          // Adds element to list end
+    /**
+     *  Adds element to list end
+     *  @param elem element to be added
+     */
     void Append(const Element &elem)
 	{ elems.push_back(elem); }
 
-         // Removes element at index, shuffling down others
-         // Raises assert if index out of range
+    /** 
+     *  Removes element at index, shuffling down others
+     *  Raises assert if index out of range
+     *  @param index index at which element is to be removed
+     */
     void RemoveAt(int index)
 	{ Assert(index >= 0 && index < NumElements());
 	  elems.erase(elems.begin() + index); }
           
-       // These are some specific methods useful for lists of ast nodes
-       // They will only work on lists of elements that respond to the
-       // messages, but since C++ only instantiates the template if you use
-       // you can still have Lists of ints, chars*, as long as you 
-       // don't try to SetParentAll on that list.
+    /**
+     *  Sets node p as the parent for each node in the list
+     *  @param p parent-to-be node
+     */
     void SetParentAll(Node *p)
         { for (int i = 0; i < NumElements(); i++)
              Nth(i)->SetParent(p); }
+
+    /**
+     *  Prints all nodes in the list with an appropriate indentation level
+     *  @param indentLevel indentation level at which the list is to be printed
+     */
     void PrintAll(int indentLevel, const char *label = NULL)
         { for (int i = 0; i < NumElements(); i++)
              Nth(i)->Print(indentLevel, label); }

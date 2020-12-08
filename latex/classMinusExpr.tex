@@ -1,0 +1,140 @@
+\hypertarget{classMinusExpr}{}\doxysection{Minus\+Expr Class Reference}
+\label{classMinusExpr}\index{MinusExpr@{MinusExpr}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Minus\+Expr\+:
+% FIG 0
+
+
+Collaboration diagram for Minus\+Expr\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMinusExpr_ab5de7cd20f4d0d8f3725750bf6d020c0}{Minus\+Expr}} (\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ti, \mbox{\hyperlink{classOperand}{Operand}} $\ast$o1, \mbox{\hyperlink{classOperand}{Operand}} $\ast$o2)
+\item 
+const char $\ast$ \mbox{\hyperlink{classMinusExpr_a1b0d17900f1686776d05a5d18233aa2e}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classMinusExpr_ad4dccbb9a497a866f41742f9db77ae99}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classMinusExpr_af9eea4a87688777fd1ad108c24dbcd11}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classMinusExpr_a1f5c55747832a48d6dc28d1233b16a7c}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ \mbox{\hyperlink{classMinusExpr_a974e557c0b440352c557c760f689bf52}{tinfo}}
+\item 
+\mbox{\hyperlink{classOperand}{Operand}} $\ast$ \mbox{\hyperlink{classMinusExpr_a757e5b2e7d8a593e3a62ed2b7caadbb4}{op1}}
+\item 
+\mbox{\hyperlink{classOperand}{Operand}} $\ast$ \mbox{\hyperlink{classMinusExpr_ae40bb3302e5fedad288bb78ea0975205}{op2}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class denoting subtraction expressions in the program. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMinusExpr_ab5de7cd20f4d0d8f3725750bf6d020c0}\label{classMinusExpr_ab5de7cd20f4d0d8f3725750bf6d020c0}} 
+\index{MinusExpr@{MinusExpr}!MinusExpr@{MinusExpr}}
+\index{MinusExpr@{MinusExpr}!MinusExpr@{MinusExpr}}
+\doxysubsubsection{\texorpdfstring{MinusExpr()}{MinusExpr()}}
+{\footnotesize\ttfamily Minus\+Expr\+::\+Minus\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$}]{ti,  }\item[{\mbox{\hyperlink{classOperand}{Operand}} $\ast$}]{o1,  }\item[{\mbox{\hyperlink{classOperand}{Operand}} $\ast$}]{o2 }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em ti} & type information \\
+\hline
+{\em o1} & first operand \\
+\hline
+{\em o2} & second operand \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMinusExpr_af9eea4a87688777fd1ad108c24dbcd11}\label{classMinusExpr_af9eea4a87688777fd1ad108c24dbcd11}} 
+\index{MinusExpr@{MinusExpr}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!MinusExpr@{MinusExpr}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Minus\+Expr\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classMinusExpr_a1f5c55747832a48d6dc28d1233b16a7c}\label{classMinusExpr_a1f5c55747832a48d6dc28d1233b16a7c}} 
+\index{MinusExpr@{MinusExpr}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!MinusExpr@{MinusExpr}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Minus\+Expr\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classMinusExpr_a1b0d17900f1686776d05a5d18233aa2e}\label{classMinusExpr_a1b0d17900f1686776d05a5d18233aa2e}} 
+\index{MinusExpr@{MinusExpr}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!MinusExpr@{MinusExpr}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Minus\+Expr\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classMinusExpr_ad4dccbb9a497a866f41742f9db77ae99}\label{classMinusExpr_ad4dccbb9a497a866f41742f9db77ae99}} 
+\index{MinusExpr@{MinusExpr}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!MinusExpr@{MinusExpr}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Minus\+Expr\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classMinusExpr_a757e5b2e7d8a593e3a62ed2b7caadbb4}\label{classMinusExpr_a757e5b2e7d8a593e3a62ed2b7caadbb4}} 
+\index{MinusExpr@{MinusExpr}!op1@{op1}}
+\index{op1@{op1}!MinusExpr@{MinusExpr}}
+\doxysubsubsection{\texorpdfstring{op1}{op1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classOperand}{Operand}}$\ast$ Minus\+Expr\+::op1\hspace{0.3cm}{\ttfamily [protected]}}
+
+first operand in subtraction \mbox{\Hypertarget{classMinusExpr_ae40bb3302e5fedad288bb78ea0975205}\label{classMinusExpr_ae40bb3302e5fedad288bb78ea0975205}} 
+\index{MinusExpr@{MinusExpr}!op2@{op2}}
+\index{op2@{op2}!MinusExpr@{MinusExpr}}
+\doxysubsubsection{\texorpdfstring{op2}{op2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classOperand}{Operand}}$\ast$ Minus\+Expr\+::op2\hspace{0.3cm}{\ttfamily [protected]}}
+
+second operand in subtraction \mbox{\Hypertarget{classMinusExpr_a974e557c0b440352c557c760f689bf52}\label{classMinusExpr_a974e557c0b440352c557c760f689bf52}} 
+\index{MinusExpr@{MinusExpr}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!MinusExpr@{MinusExpr}}
+\doxysubsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTypeInfo}{Type\+Info}}$\ast$ Minus\+Expr\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+types of the operands 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

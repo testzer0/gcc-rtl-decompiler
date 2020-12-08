@@ -6,22 +6,25 @@
 
 #ifndef YYLTYPE
 
+/**
+ *  a struct to represent lexical locations in the program.
+ */
 typedef struct yyltype {
-    int first_line, first_column;
-    int last_line, last_column;
-    char *text;
+    int first_line, first_column; /**< beginning position */
+    int last_line, last_column; /**< ending position */
+    char *text; /**< the content at that location */
 } yyltype;
 
 #define YYLTYPE yyltype
 
 extern struct yyltype yylloc;
 
-/*-----------------------------------------------------------*
- * Function: Join()                                          *
- *                                                           * 
- * Takes two locations and combines their span into one.     *
- *-----------------------------------------------------------*/
-
+/**
+ *  Takes two locations and combines their span into one.
+ *  @param first first location
+ *  @param second second location
+ *  @return combined location
+ */
 inline yyltype Join(yyltype first, yyltype second) {
     yyltype combined;
     combined.first_line = first.first_line;
@@ -31,6 +34,12 @@ inline yyltype Join(yyltype first, yyltype second) {
     return combined;
 }
 
+/**
+ *  Combines two locations using pointers.
+ *  @param first pointer to first location
+ *  @param second pointer to second location
+ *  @param combined location
+ */
 inline yyltype Join(yyltype *first, yyltype *second) {
     return Join(*first,*second);
 }

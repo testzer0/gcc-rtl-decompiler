@@ -1,0 +1,120 @@
+\hypertarget{classInsn}{}\doxysection{Insn Class Reference}
+\label{classInsn}\index{Insn@{Insn}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Insn\+:
+% FIG 0
+
+
+Collaboration diagram for Insn\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classInsn_ab28b61272c44b3e5df0e59308cd1b139}{Insn}} (\mbox{\hyperlink{classMainCmd}{Main\+Cmd}} $\ast$mc)
+\item 
+const char $\ast$ \mbox{\hyperlink{classInsn_ac78de59dd99944d8697853dc1c5634dc}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classInsn_aa0717beb7970d93fa733ffa41b7629ac}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classInsn_a1e175152ea14cde985c5176e5a226f3d}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classInsn_a0bbea68b179d943f1a87aeb6c1b15dac}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMainCmd}{Main\+Cmd}} $\ast$ \mbox{\hyperlink{classInsn_ab5605fe6decf9aa5a49aaa4b4674861a}{maincmd}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing a general instruction (insn in R\+TL). 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classInsn_ab28b61272c44b3e5df0e59308cd1b139}\label{classInsn_ab28b61272c44b3e5df0e59308cd1b139}} 
+\index{Insn@{Insn}!Insn@{Insn}}
+\index{Insn@{Insn}!Insn@{Insn}}
+\doxysubsubsection{\texorpdfstring{Insn()}{Insn()}}
+{\footnotesize\ttfamily Insn\+::\+Insn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMainCmd}{Main\+Cmd}} $\ast$}]{mc }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em mc} & main command for the instruction \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classInsn_a1e175152ea14cde985c5176e5a226f3d}\label{classInsn_a1e175152ea14cde985c5176e5a226f3d}} 
+\index{Insn@{Insn}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Insn@{Insn}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Insn\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classInsn_a0bbea68b179d943f1a87aeb6c1b15dac}\label{classInsn_a0bbea68b179d943f1a87aeb6c1b15dac}} 
+\index{Insn@{Insn}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!Insn@{Insn}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Insn\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classInsn_ac78de59dd99944d8697853dc1c5634dc}\label{classInsn_ac78de59dd99944d8697853dc1c5634dc}} 
+\index{Insn@{Insn}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!Insn@{Insn}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Insn\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classInsn_aa0717beb7970d93fa733ffa41b7629ac}\label{classInsn_aa0717beb7970d93fa733ffa41b7629ac}} 
+\index{Insn@{Insn}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!Insn@{Insn}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Insn\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classInsn_ab5605fe6decf9aa5a49aaa4b4674861a}\label{classInsn_ab5605fe6decf9aa5a49aaa4b4674861a}} 
+\index{Insn@{Insn}!maincmd@{maincmd}}
+\index{maincmd@{maincmd}!Insn@{Insn}}
+\doxysubsubsection{\texorpdfstring{maincmd}{maincmd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMainCmd}{Main\+Cmd}}$\ast$ Insn\+::maincmd\hspace{0.3cm}{\ttfamily [protected]}}
+
+pointer to the main command in the instruction 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

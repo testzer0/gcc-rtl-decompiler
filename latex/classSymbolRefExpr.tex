@@ -1,0 +1,130 @@
+\hypertarget{classSymbolRefExpr}{}\doxysection{Symbol\+Ref\+Expr Class Reference}
+\label{classSymbolRefExpr}\index{SymbolRefExpr@{SymbolRefExpr}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Symbol\+Ref\+Expr\+:
+% FIG 0
+
+
+Collaboration diagram for Symbol\+Ref\+Expr\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSymbolRefExpr_afc8337c9c2794b7221ef3f3356e5928b}{Symbol\+Ref\+Expr}} (\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$t, const char $\ast$s)
+\item 
+const char $\ast$ \mbox{\hyperlink{classSymbolRefExpr_adc3249d1505c60488bf5dc22d23f462b}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classSymbolRefExpr_a17635ba3b6120561fd912d2487d9a897}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classSymbolRefExpr_aa410e63dd4602d66bda4e880afdb82e9}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classSymbolRefExpr_a05ae76345e624e5c7085f49707685c6e}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ \mbox{\hyperlink{classSymbolRefExpr_ab6892732ae00329f8526e8c1fe5e28b5}{ti}}
+\item 
+const char $\ast$ \mbox{\hyperlink{classSymbolRefExpr_aad73b9ace3c0e22cbe9bc151a70616fa}{sym}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class denoting symbol\+\_\+ref expressions in the program. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSymbolRefExpr_afc8337c9c2794b7221ef3f3356e5928b}\label{classSymbolRefExpr_afc8337c9c2794b7221ef3f3356e5928b}} 
+\index{SymbolRefExpr@{SymbolRefExpr}!SymbolRefExpr@{SymbolRefExpr}}
+\index{SymbolRefExpr@{SymbolRefExpr}!SymbolRefExpr@{SymbolRefExpr}}
+\doxysubsubsection{\texorpdfstring{SymbolRefExpr()}{SymbolRefExpr()}}
+{\footnotesize\ttfamily Symbol\+Ref\+Expr\+::\+Symbol\+Ref\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$}]{t,  }\item[{const char $\ast$}]{s }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em ti} & type information \\
+\hline
+{\em s} & symbol \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSymbolRefExpr_aa410e63dd4602d66bda4e880afdb82e9}\label{classSymbolRefExpr_aa410e63dd4602d66bda4e880afdb82e9}} 
+\index{SymbolRefExpr@{SymbolRefExpr}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!SymbolRefExpr@{SymbolRefExpr}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Symbol\+Ref\+Expr\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classSymbolRefExpr_a05ae76345e624e5c7085f49707685c6e}\label{classSymbolRefExpr_a05ae76345e624e5c7085f49707685c6e}} 
+\index{SymbolRefExpr@{SymbolRefExpr}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!SymbolRefExpr@{SymbolRefExpr}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Symbol\+Ref\+Expr\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classSymbolRefExpr_adc3249d1505c60488bf5dc22d23f462b}\label{classSymbolRefExpr_adc3249d1505c60488bf5dc22d23f462b}} 
+\index{SymbolRefExpr@{SymbolRefExpr}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!SymbolRefExpr@{SymbolRefExpr}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Symbol\+Ref\+Expr\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classSymbolRefExpr_a17635ba3b6120561fd912d2487d9a897}\label{classSymbolRefExpr_a17635ba3b6120561fd912d2487d9a897}} 
+\index{SymbolRefExpr@{SymbolRefExpr}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!SymbolRefExpr@{SymbolRefExpr}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Symbol\+Ref\+Expr\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSymbolRefExpr_aad73b9ace3c0e22cbe9bc151a70616fa}\label{classSymbolRefExpr_aad73b9ace3c0e22cbe9bc151a70616fa}} 
+\index{SymbolRefExpr@{SymbolRefExpr}!sym@{sym}}
+\index{sym@{sym}!SymbolRefExpr@{SymbolRefExpr}}
+\doxysubsubsection{\texorpdfstring{sym}{sym}}
+{\footnotesize\ttfamily const char$\ast$ Symbol\+Ref\+Expr\+::sym\hspace{0.3cm}{\ttfamily [protected]}}
+
+string \mbox{\Hypertarget{classSymbolRefExpr_ab6892732ae00329f8526e8c1fe5e28b5}\label{classSymbolRefExpr_ab6892732ae00329f8526e8c1fe5e28b5}} 
+\index{SymbolRefExpr@{SymbolRefExpr}!ti@{ti}}
+\index{ti@{ti}!SymbolRefExpr@{SymbolRefExpr}}
+\doxysubsubsection{\texorpdfstring{ti}{ti}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTypeInfo}{Type\+Info}}$\ast$ Symbol\+Ref\+Expr\+::ti\hspace{0.3cm}{\ttfamily [protected]}}
+
+type information 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

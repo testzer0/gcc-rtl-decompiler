@@ -1,0 +1,120 @@
+\hypertarget{classCodeLabel}{}\doxysection{Code\+Label Class Reference}
+\label{classCodeLabel}\index{CodeLabel@{CodeLabel}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Code\+Label\+:
+% FIG 0
+
+
+Collaboration diagram for Code\+Label\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCodeLabel_a62f32ceb3260da49e06e44432d58b8b1}{Code\+Label}} (int lno)
+\item 
+const char $\ast$ \mbox{\hyperlink{classCodeLabel_a8facbf3c0c9e138c5e20c82638b5f78b}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classCodeLabel_a982af1b687ea06a189a87f49a50fdf93}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classCodeLabel_a7318d2169f33b5296d9f98e17213f634}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classCodeLabel_a2e6b55e59cbf6213ed5b3e9fc9d8181c}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classCodeLabel_a6dd4c69e6bc1c0b479d2bea79b0aa568}{labelno}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing code\+\_\+label statements in the program. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCodeLabel_a62f32ceb3260da49e06e44432d58b8b1}\label{classCodeLabel_a62f32ceb3260da49e06e44432d58b8b1}} 
+\index{CodeLabel@{CodeLabel}!CodeLabel@{CodeLabel}}
+\index{CodeLabel@{CodeLabel}!CodeLabel@{CodeLabel}}
+\doxysubsubsection{\texorpdfstring{CodeLabel()}{CodeLabel()}}
+{\footnotesize\ttfamily Code\+Label\+::\+Code\+Label (\begin{DoxyParamCaption}\item[{int}]{lno }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em lno} & the label number of the code label \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCodeLabel_a7318d2169f33b5296d9f98e17213f634}\label{classCodeLabel_a7318d2169f33b5296d9f98e17213f634}} 
+\index{CodeLabel@{CodeLabel}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!CodeLabel@{CodeLabel}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Code\+Label\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classCodeLabel_a2e6b55e59cbf6213ed5b3e9fc9d8181c}\label{classCodeLabel_a2e6b55e59cbf6213ed5b3e9fc9d8181c}} 
+\index{CodeLabel@{CodeLabel}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!CodeLabel@{CodeLabel}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Code\+Label\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classCodeLabel_a8facbf3c0c9e138c5e20c82638b5f78b}\label{classCodeLabel_a8facbf3c0c9e138c5e20c82638b5f78b}} 
+\index{CodeLabel@{CodeLabel}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!CodeLabel@{CodeLabel}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Code\+Label\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classCodeLabel_a982af1b687ea06a189a87f49a50fdf93}\label{classCodeLabel_a982af1b687ea06a189a87f49a50fdf93}} 
+\index{CodeLabel@{CodeLabel}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!CodeLabel@{CodeLabel}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Code\+Label\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classCodeLabel_a6dd4c69e6bc1c0b479d2bea79b0aa568}\label{classCodeLabel_a6dd4c69e6bc1c0b479d2bea79b0aa568}} 
+\index{CodeLabel@{CodeLabel}!labelno@{labelno}}
+\index{labelno@{labelno}!CodeLabel@{CodeLabel}}
+\doxysubsubsection{\texorpdfstring{labelno}{labelno}}
+{\footnotesize\ttfamily int Code\+Label\+::labelno\hspace{0.3cm}{\ttfamily [protected]}}
+
+the label number of that code label 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

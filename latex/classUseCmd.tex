@@ -1,0 +1,115 @@
+\hypertarget{classUseCmd}{}\doxysection{Use\+Cmd Class Reference}
+\label{classUseCmd}\index{UseCmd@{UseCmd}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Use\+Cmd\+:
+% FIG 0
+
+
+Collaboration diagram for Use\+Cmd\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUseCmd_ac609ee5d62f7ff96ff56f03c1cabba2c}{Use\+Cmd}} ()
+\item 
+\mbox{\hyperlink{classUseCmd_ae0dc39f5419dd6a38c7c5a46ef67f823}{Use\+Cmd}} (\mbox{\hyperlink{structyyltype}{yyltype}} loc)
+\item 
+const char $\ast$ \mbox{\hyperlink{classUseCmd_af70d8365f4c00d243bd72a336d21c99b}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classUseCmd_ae8b6bad04d432107afa86f5b6ab98db9}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classUseCmd_a3da3017201b8b7573481cf58c4702050}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classUseCmd_aa8f27d2684e401c1f7c58cdfa7c50696}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A class representing a use command in the program. The use command is used to convey which register is finally to be used for the return value of a function. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classUseCmd_ac609ee5d62f7ff96ff56f03c1cabba2c}\label{classUseCmd_ac609ee5d62f7ff96ff56f03c1cabba2c}} 
+\index{UseCmd@{UseCmd}!UseCmd@{UseCmd}}
+\index{UseCmd@{UseCmd}!UseCmd@{UseCmd}}
+\doxysubsubsection{\texorpdfstring{UseCmd()}{UseCmd()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Use\+Cmd\+::\+Use\+Cmd (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+default constructor \mbox{\Hypertarget{classUseCmd_ae0dc39f5419dd6a38c7c5a46ef67f823}\label{classUseCmd_ae0dc39f5419dd6a38c7c5a46ef67f823}} 
+\index{UseCmd@{UseCmd}!UseCmd@{UseCmd}}
+\index{UseCmd@{UseCmd}!UseCmd@{UseCmd}}
+\doxysubsubsection{\texorpdfstring{UseCmd()}{UseCmd()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Use\+Cmd\+::\+Use\+Cmd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structyyltype}{yyltype}}}]{loc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em loc} & lexical location of the use command \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classUseCmd_a3da3017201b8b7573481cf58c4702050}\label{classUseCmd_a3da3017201b8b7573481cf58c4702050}} 
+\index{UseCmd@{UseCmd}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!UseCmd@{UseCmd}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Use\+Cmd\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classUseCmd_aa8f27d2684e401c1f7c58cdfa7c50696}\label{classUseCmd_aa8f27d2684e401c1f7c58cdfa7c50696}} 
+\index{UseCmd@{UseCmd}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!UseCmd@{UseCmd}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Use\+Cmd\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classUseCmd_af70d8365f4c00d243bd72a336d21c99b}\label{classUseCmd_af70d8365f4c00d243bd72a336d21c99b}} 
+\index{UseCmd@{UseCmd}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!UseCmd@{UseCmd}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Use\+Cmd\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classUseCmd_ae8b6bad04d432107afa86f5b6ab98db9}\label{classUseCmd_ae8b6bad04d432107afa86f5b6ab98db9}} 
+\index{UseCmd@{UseCmd}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!UseCmd@{UseCmd}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Use\+Cmd\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

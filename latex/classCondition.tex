@@ -1,0 +1,114 @@
+\hypertarget{classCondition}{}\doxysection{Condition Class Reference}
+\label{classCondition}\index{Condition@{Condition}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Condition\+:
+% FIG 0
+
+
+Collaboration diagram for Condition\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCondition_a3f530196d48c1ee077022837cd203ce6}{Condition}} (const char $\ast$c)
+\item 
+const char $\ast$ \mbox{\hyperlink{classCondition_aafdb69783f81fa13cfdc8896bbd34095}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classCondition_abdf41362b3b1f8a2fdeb290d657928a2}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classCondition_a899d0ab9bddcbe9f23bf0c8af84d7d10}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classCondition_a2089bf7976fb6f35a8c926d3c5722cc7}{get\+Condition}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{classCondition_ac943c2c4b15adc82cb31b9f02c61b8a3}{cond}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing conditions, i.\+e., relational operators. Conditions may be lt, gt, ltu, gtu, le, ge, leu, geu, eq, ne. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCondition_a3f530196d48c1ee077022837cd203ce6}\label{classCondition_a3f530196d48c1ee077022837cd203ce6}} 
+\index{Condition@{Condition}!Condition@{Condition}}
+\index{Condition@{Condition}!Condition@{Condition}}
+\doxysubsubsection{\texorpdfstring{Condition()}{Condition()}}
+{\footnotesize\ttfamily Condition\+::\+Condition (\begin{DoxyParamCaption}\item[{const char $\ast$}]{c }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em c} & string denoting relational operator \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCondition_a899d0ab9bddcbe9f23bf0c8af84d7d10}\label{classCondition_a899d0ab9bddcbe9f23bf0c8af84d7d10}} 
+\index{Condition@{Condition}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Condition@{Condition}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Condition\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classCondition_a2089bf7976fb6f35a8c926d3c5722cc7}\label{classCondition_a2089bf7976fb6f35a8c926d3c5722cc7}} 
+\index{Condition@{Condition}!getCondition@{getCondition}}
+\index{getCondition@{getCondition}!Condition@{Condition}}
+\doxysubsubsection{\texorpdfstring{getCondition()}{getCondition()}}
+{\footnotesize\ttfamily string Condition\+::get\+Condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+returns the relational operator involved here \begin{DoxyReturn}{Returns}
+string representing relational operator 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCondition_aafdb69783f81fa13cfdc8896bbd34095}\label{classCondition_aafdb69783f81fa13cfdc8896bbd34095}} 
+\index{Condition@{Condition}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!Condition@{Condition}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Condition\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classCondition_abdf41362b3b1f8a2fdeb290d657928a2}\label{classCondition_abdf41362b3b1f8a2fdeb290d657928a2}} 
+\index{Condition@{Condition}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!Condition@{Condition}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Condition\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classCondition_ac943c2c4b15adc82cb31b9f02c61b8a3}\label{classCondition_ac943c2c4b15adc82cb31b9f02c61b8a3}} 
+\index{Condition@{Condition}!cond@{cond}}
+\index{cond@{cond}!Condition@{Condition}}
+\doxysubsubsection{\texorpdfstring{cond}{cond}}
+{\footnotesize\ttfamily const char$\ast$ Condition\+::cond\hspace{0.3cm}{\ttfamily [protected]}}
+
+string denoting the relational operator involved 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

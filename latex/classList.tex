@@ -1,0 +1,136 @@
+\hypertarget{classList}{}\doxysection{List$<$ Element $>$ Class Template Reference}
+\label{classList}\index{List$<$ Element $>$@{List$<$ Element $>$}}
+
+
+{\ttfamily \#include $<$list.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classList_acdfa9a2a43d22f973fe2ecc55318847a}{List}} ()
+\item 
+int \mbox{\hyperlink{classList_a7197533d7f956ee56ecb27784b9e647f}{Num\+Elements}} () const
+\item 
+Element \mbox{\hyperlink{classList_ae5bbd00a0cfcfec0104347a43123911c}{Nth}} (int index) const
+\item 
+void \mbox{\hyperlink{classList_a8d86a82c138b259da6fa0d046aed985b}{Insert\+At}} (const Element \&elem, int index)
+\item 
+void \mbox{\hyperlink{classList_a473190098e38206d0125b0737245e613}{Append}} (const Element \&elem)
+\item 
+void \mbox{\hyperlink{classList_af17f72d263f90d53ea8501b5b1853470}{Remove\+At}} (int index)
+\item 
+void \mbox{\hyperlink{classList_ae461121db8d03106e92af9f87fa68b7d}{Set\+Parent\+All}} (\mbox{\hyperlink{classNode}{Node}} $\ast$p)
+\item 
+void \mbox{\hyperlink{classList_a54eba5c4ab139128c47bc535b276be3a}{Print\+All}} (int indent\+Level, const char $\ast$label=N\+U\+LL)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Element$>$\newline
+class List$<$ Element $>$}
+
+A custom deque-\/based class for storing and manipulating lists of objects in the abstract syntax tree. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classList_acdfa9a2a43d22f973fe2ecc55318847a}\label{classList_acdfa9a2a43d22f973fe2ecc55318847a}} 
+\index{List$<$ Element $>$@{List$<$ Element $>$}!List@{List}}
+\index{List@{List}!List$<$ Element $>$@{List$<$ Element $>$}}
+\doxysubsubsection{\texorpdfstring{List()}{List()}}
+{\footnotesize\ttfamily template$<$class Element $>$ \\
+\mbox{\hyperlink{classList}{List}}$<$ Element $>$\+::\mbox{\hyperlink{classList}{List}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+default constructor, creates an empty list. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classList_a473190098e38206d0125b0737245e613}\label{classList_a473190098e38206d0125b0737245e613}} 
+\index{List$<$ Element $>$@{List$<$ Element $>$}!Append@{Append}}
+\index{Append@{Append}!List$<$ Element $>$@{List$<$ Element $>$}}
+\doxysubsubsection{\texorpdfstring{Append()}{Append()}}
+{\footnotesize\ttfamily template$<$class Element $>$ \\
+void \mbox{\hyperlink{classList}{List}}$<$ Element $>$\+::Append (\begin{DoxyParamCaption}\item[{const Element \&}]{elem }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Adds element to list end 
+\begin{DoxyParams}{Parameters}
+{\em elem} & element to be added \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classList_a8d86a82c138b259da6fa0d046aed985b}\label{classList_a8d86a82c138b259da6fa0d046aed985b}} 
+\index{List$<$ Element $>$@{List$<$ Element $>$}!InsertAt@{InsertAt}}
+\index{InsertAt@{InsertAt}!List$<$ Element $>$@{List$<$ Element $>$}}
+\doxysubsubsection{\texorpdfstring{InsertAt()}{InsertAt()}}
+{\footnotesize\ttfamily template$<$class Element $>$ \\
+void \mbox{\hyperlink{classList}{List}}$<$ Element $>$\+::Insert\+At (\begin{DoxyParamCaption}\item[{const Element \&}]{elem,  }\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Inserts element at index, shuffling over others Raises assert if index out of range 
+\begin{DoxyParams}{Parameters}
+{\em elem} & element to be inserted \\
+\hline
+{\em index} & index at which element is to be inserted \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classList_ae5bbd00a0cfcfec0104347a43123911c}\label{classList_ae5bbd00a0cfcfec0104347a43123911c}} 
+\index{List$<$ Element $>$@{List$<$ Element $>$}!Nth@{Nth}}
+\index{Nth@{Nth}!List$<$ Element $>$@{List$<$ Element $>$}}
+\doxysubsubsection{\texorpdfstring{Nth()}{Nth()}}
+{\footnotesize\ttfamily template$<$class Element $>$ \\
+Element \mbox{\hyperlink{classList}{List}}$<$ Element $>$\+::Nth (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns element at index in list. Indexing is 0-\/based. Raises assert if index out of range 
+\begin{DoxyParams}{Parameters}
+{\em index} & index of element to be returned \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+element at the desired index 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classList_a7197533d7f956ee56ecb27784b9e647f}\label{classList_a7197533d7f956ee56ecb27784b9e647f}} 
+\index{List$<$ Element $>$@{List$<$ Element $>$}!NumElements@{NumElements}}
+\index{NumElements@{NumElements}!List$<$ Element $>$@{List$<$ Element $>$}}
+\doxysubsubsection{\texorpdfstring{NumElements()}{NumElements()}}
+{\footnotesize\ttfamily template$<$class Element $>$ \\
+int \mbox{\hyperlink{classList}{List}}$<$ Element $>$\+::Num\+Elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+returns the number of elements currently in the list. \begin{DoxyReturn}{Returns}
+number of elements in list 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classList_a54eba5c4ab139128c47bc535b276be3a}\label{classList_a54eba5c4ab139128c47bc535b276be3a}} 
+\index{List$<$ Element $>$@{List$<$ Element $>$}!PrintAll@{PrintAll}}
+\index{PrintAll@{PrintAll}!List$<$ Element $>$@{List$<$ Element $>$}}
+\doxysubsubsection{\texorpdfstring{PrintAll()}{PrintAll()}}
+{\footnotesize\ttfamily template$<$class Element $>$ \\
+void \mbox{\hyperlink{classList}{List}}$<$ Element $>$\+::Print\+All (\begin{DoxyParamCaption}\item[{int}]{indent\+Level,  }\item[{const char $\ast$}]{label = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Prints all nodes in the list with an appropriate indentation level 
+\begin{DoxyParams}{Parameters}
+{\em indent\+Level} & indentation level at which the list is to be printed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classList_af17f72d263f90d53ea8501b5b1853470}\label{classList_af17f72d263f90d53ea8501b5b1853470}} 
+\index{List$<$ Element $>$@{List$<$ Element $>$}!RemoveAt@{RemoveAt}}
+\index{RemoveAt@{RemoveAt}!List$<$ Element $>$@{List$<$ Element $>$}}
+\doxysubsubsection{\texorpdfstring{RemoveAt()}{RemoveAt()}}
+{\footnotesize\ttfamily template$<$class Element $>$ \\
+void \mbox{\hyperlink{classList}{List}}$<$ Element $>$\+::Remove\+At (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Removes element at index, shuffling down others Raises assert if index out of range 
+\begin{DoxyParams}{Parameters}
+{\em index} & index at which element is to be removed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classList_ae461121db8d03106e92af9f87fa68b7d}\label{classList_ae461121db8d03106e92af9f87fa68b7d}} 
+\index{List$<$ Element $>$@{List$<$ Element $>$}!SetParentAll@{SetParentAll}}
+\index{SetParentAll@{SetParentAll}!List$<$ Element $>$@{List$<$ Element $>$}}
+\doxysubsubsection{\texorpdfstring{SetParentAll()}{SetParentAll()}}
+{\footnotesize\ttfamily template$<$class Element $>$ \\
+void \mbox{\hyperlink{classList}{List}}$<$ Element $>$\+::Set\+Parent\+All (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classNode}{Node}} $\ast$}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sets node p as the parent for each node in the list 
+\begin{DoxyParams}{Parameters}
+{\em p} & parent-\/to-\/be node \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+list.\+h\end{DoxyCompactItemize}

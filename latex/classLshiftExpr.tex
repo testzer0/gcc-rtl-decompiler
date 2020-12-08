@@ -1,0 +1,140 @@
+\hypertarget{classLshiftExpr}{}\doxysection{Lshift\+Expr Class Reference}
+\label{classLshiftExpr}\index{LshiftExpr@{LshiftExpr}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Lshift\+Expr\+:
+% FIG 0
+
+
+Collaboration diagram for Lshift\+Expr\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLshiftExpr_ab2ed23d37c701ff989ba067eed3ba82c}{Lshift\+Expr}} (\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ti, \mbox{\hyperlink{classOperand}{Operand}} $\ast$o1, \mbox{\hyperlink{classOperand}{Operand}} $\ast$o2)
+\item 
+const char $\ast$ \mbox{\hyperlink{classLshiftExpr_ad4a55396ab3c94748ef2c165cf6abce4}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classLshiftExpr_a01b9cf72d82eeaa4f57ebd87bf20f54b}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classLshiftExpr_a7d479d7c72009f168afdb15b08e73163}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classLshiftExpr_af6e1f11ac0f62d48377eb064ca092f57}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ \mbox{\hyperlink{classLshiftExpr_ae5943ee9b52c7124a25a2f43238561af}{tinfo}}
+\item 
+\mbox{\hyperlink{classOperand}{Operand}} $\ast$ \mbox{\hyperlink{classLshiftExpr_a09d1f3231f0a2c79349d5e0c1799684b}{op1}}
+\item 
+\mbox{\hyperlink{classOperand}{Operand}} $\ast$ \mbox{\hyperlink{classLshiftExpr_a1822bf673e7eead888ae65c47bd7cd18}{op2}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class denoting logical left shift expressions in the program. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLshiftExpr_ab2ed23d37c701ff989ba067eed3ba82c}\label{classLshiftExpr_ab2ed23d37c701ff989ba067eed3ba82c}} 
+\index{LshiftExpr@{LshiftExpr}!LshiftExpr@{LshiftExpr}}
+\index{LshiftExpr@{LshiftExpr}!LshiftExpr@{LshiftExpr}}
+\doxysubsubsection{\texorpdfstring{LshiftExpr()}{LshiftExpr()}}
+{\footnotesize\ttfamily Lshift\+Expr\+::\+Lshift\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$}]{ti,  }\item[{\mbox{\hyperlink{classOperand}{Operand}} $\ast$}]{o1,  }\item[{\mbox{\hyperlink{classOperand}{Operand}} $\ast$}]{o2 }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em ti} & type information \\
+\hline
+{\em o1} & first operand \\
+\hline
+{\em o2} & second operand \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLshiftExpr_a7d479d7c72009f168afdb15b08e73163}\label{classLshiftExpr_a7d479d7c72009f168afdb15b08e73163}} 
+\index{LshiftExpr@{LshiftExpr}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!LshiftExpr@{LshiftExpr}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Lshift\+Expr\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classLshiftExpr_af6e1f11ac0f62d48377eb064ca092f57}\label{classLshiftExpr_af6e1f11ac0f62d48377eb064ca092f57}} 
+\index{LshiftExpr@{LshiftExpr}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!LshiftExpr@{LshiftExpr}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Lshift\+Expr\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classLshiftExpr_ad4a55396ab3c94748ef2c165cf6abce4}\label{classLshiftExpr_ad4a55396ab3c94748ef2c165cf6abce4}} 
+\index{LshiftExpr@{LshiftExpr}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!LshiftExpr@{LshiftExpr}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Lshift\+Expr\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classLshiftExpr_a01b9cf72d82eeaa4f57ebd87bf20f54b}\label{classLshiftExpr_a01b9cf72d82eeaa4f57ebd87bf20f54b}} 
+\index{LshiftExpr@{LshiftExpr}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!LshiftExpr@{LshiftExpr}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Lshift\+Expr\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classLshiftExpr_a09d1f3231f0a2c79349d5e0c1799684b}\label{classLshiftExpr_a09d1f3231f0a2c79349d5e0c1799684b}} 
+\index{LshiftExpr@{LshiftExpr}!op1@{op1}}
+\index{op1@{op1}!LshiftExpr@{LshiftExpr}}
+\doxysubsubsection{\texorpdfstring{op1}{op1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classOperand}{Operand}}$\ast$ Lshift\+Expr\+::op1\hspace{0.3cm}{\ttfamily [protected]}}
+
+first operand in expression \mbox{\Hypertarget{classLshiftExpr_a1822bf673e7eead888ae65c47bd7cd18}\label{classLshiftExpr_a1822bf673e7eead888ae65c47bd7cd18}} 
+\index{LshiftExpr@{LshiftExpr}!op2@{op2}}
+\index{op2@{op2}!LshiftExpr@{LshiftExpr}}
+\doxysubsubsection{\texorpdfstring{op2}{op2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classOperand}{Operand}}$\ast$ Lshift\+Expr\+::op2\hspace{0.3cm}{\ttfamily [protected]}}
+
+second operand in expression \mbox{\Hypertarget{classLshiftExpr_ae5943ee9b52c7124a25a2f43238561af}\label{classLshiftExpr_ae5943ee9b52c7124a25a2f43238561af}} 
+\index{LshiftExpr@{LshiftExpr}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!LshiftExpr@{LshiftExpr}}
+\doxysubsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTypeInfo}{Type\+Info}}$\ast$ Lshift\+Expr\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+types of the operands 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

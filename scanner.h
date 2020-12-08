@@ -10,8 +10,19 @@ extern char *yytext;
 
 extern char *yytext; 
 
+/**
+ *  the function responsible for the main lexical analysis.
+ */
 int yylex();
+
+/**
+ *  initializes the scanner.
+ */
 void InitScanner();
+
+/**
+ *  gets a particular line of code using the line number.
+ */
 const char *GetLineNumbered(int n);
 
 #endif

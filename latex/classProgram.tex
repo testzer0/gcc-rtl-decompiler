@@ -1,0 +1,120 @@
+\hypertarget{classProgram}{}\doxysection{Program Class Reference}
+\label{classProgram}\index{Program@{Program}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Program\+:
+% FIG 0
+
+
+Collaboration diagram for Program\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classProgram_a39e220a602d45e53de52c33b41d70ef4}{Program}} (\mbox{\hyperlink{classList}{List}}$<$ \mbox{\hyperlink{classFuncBody}{Func\+Body}} $\ast$ $>$ $\ast$bodylist)
+\item 
+const char $\ast$ \mbox{\hyperlink{classProgram_a42317e4371887f452b38b7a729a7533c}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classProgram_a70520a269a65d735e10c6f28acf075ad}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classProgram_a7a533446b23a020e661463df819ae49d}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classProgram_a4e709dc5cee7a2c28fe3d96694449c59}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classList}{List}}$<$ \mbox{\hyperlink{classFuncBody}{Func\+Body}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classProgram_ab1c6f9b96b35cf94504ed2aa30cfb692}{funcbodylist}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing the entire program. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classProgram_a39e220a602d45e53de52c33b41d70ef4}\label{classProgram_a39e220a602d45e53de52c33b41d70ef4}} 
+\index{Program@{Program}!Program@{Program}}
+\index{Program@{Program}!Program@{Program}}
+\doxysubsubsection{\texorpdfstring{Program()}{Program()}}
+{\footnotesize\ttfamily Program\+::\+Program (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classList}{List}}$<$ \mbox{\hyperlink{classFuncBody}{Func\+Body}} $\ast$ $>$ $\ast$}]{bodylist }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em bodylist} & pointer to list of all function bodies in the program \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classProgram_a7a533446b23a020e661463df819ae49d}\label{classProgram_a7a533446b23a020e661463df819ae49d}} 
+\index{Program@{Program}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Program@{Program}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Program\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classProgram_a4e709dc5cee7a2c28fe3d96694449c59}\label{classProgram_a4e709dc5cee7a2c28fe3d96694449c59}} 
+\index{Program@{Program}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!Program@{Program}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Program\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classProgram_a42317e4371887f452b38b7a729a7533c}\label{classProgram_a42317e4371887f452b38b7a729a7533c}} 
+\index{Program@{Program}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!Program@{Program}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Program\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classProgram_a70520a269a65d735e10c6f28acf075ad}\label{classProgram_a70520a269a65d735e10c6f28acf075ad}} 
+\index{Program@{Program}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!Program@{Program}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Program\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classProgram_ab1c6f9b96b35cf94504ed2aa30cfb692}\label{classProgram_ab1c6f9b96b35cf94504ed2aa30cfb692}} 
+\index{Program@{Program}!funcbodylist@{funcbodylist}}
+\index{funcbodylist@{funcbodylist}!Program@{Program}}
+\doxysubsubsection{\texorpdfstring{funcbodylist}{funcbodylist}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classList}{List}}$<$\mbox{\hyperlink{classFuncBody}{Func\+Body}} $\ast$$>$$\ast$ Program\+::funcbodylist\hspace{0.3cm}{\ttfamily [protected]}}
+
+pointer to a list of \mbox{\hyperlink{classFuncBody}{Func\+Body}} pointers. Each \mbox{\hyperlink{classFuncBody}{Func\+Body}} object contains the body of one function. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

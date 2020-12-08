@@ -1,0 +1,114 @@
+\hypertarget{classTypeInfo}{}\doxysection{Type\+Info Class Reference}
+\label{classTypeInfo}\index{TypeInfo@{TypeInfo}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Type\+Info\+:
+% FIG 0
+
+
+Collaboration diagram for Type\+Info\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTypeInfo_a77a1ebcef0494edd828e7912269204fe}{Type\+Info}} (const char $\ast$t)
+\item 
+const char $\ast$ \mbox{\hyperlink{classTypeInfo_a3e84b02093115e1ad0c27acbe3ffffd7}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classTypeInfo_a9b4bc126eb0ee406f1d515e166256627}{Print\+Children}} (int indentlevel)
+\item 
+const char $\ast$ \mbox{\hyperlink{classTypeInfo_a53b947997bf124e64ab5a18d16388558}{get\+Type}} ()
+\item 
+void \mbox{\hyperlink{classTypeInfo_a157de3b92f5333b031650065591ac04f}{Analyze}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{classTypeInfo_a07af85dc9ce62676640cf960cac376a7}{type}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing type information of operands. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTypeInfo_a77a1ebcef0494edd828e7912269204fe}\label{classTypeInfo_a77a1ebcef0494edd828e7912269204fe}} 
+\index{TypeInfo@{TypeInfo}!TypeInfo@{TypeInfo}}
+\index{TypeInfo@{TypeInfo}!TypeInfo@{TypeInfo}}
+\doxysubsubsection{\texorpdfstring{TypeInfo()}{TypeInfo()}}
+{\footnotesize\ttfamily Type\+Info\+::\+Type\+Info (\begin{DoxyParamCaption}\item[{const char $\ast$}]{t }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em t} & type for initialization \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTypeInfo_a157de3b92f5333b031650065591ac04f}\label{classTypeInfo_a157de3b92f5333b031650065591ac04f}} 
+\index{TypeInfo@{TypeInfo}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!TypeInfo@{TypeInfo}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Type\+Info\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classTypeInfo_a3e84b02093115e1ad0c27acbe3ffffd7}\label{classTypeInfo_a3e84b02093115e1ad0c27acbe3ffffd7}} 
+\index{TypeInfo@{TypeInfo}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!TypeInfo@{TypeInfo}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Type\+Info\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classTypeInfo_a53b947997bf124e64ab5a18d16388558}\label{classTypeInfo_a53b947997bf124e64ab5a18d16388558}} 
+\index{TypeInfo@{TypeInfo}!getType@{getType}}
+\index{getType@{getType}!TypeInfo@{TypeInfo}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily const char$\ast$ Type\+Info\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+returns the type of the operand \begin{DoxyReturn}{Returns}
+operand type, if it exists 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classTypeInfo_a9b4bc126eb0ee406f1d515e166256627}\label{classTypeInfo_a9b4bc126eb0ee406f1d515e166256627}} 
+\index{TypeInfo@{TypeInfo}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!TypeInfo@{TypeInfo}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Type\+Info\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classTypeInfo_a07af85dc9ce62676640cf960cac376a7}\label{classTypeInfo_a07af85dc9ce62676640cf960cac376a7}} 
+\index{TypeInfo@{TypeInfo}!type@{type}}
+\index{type@{type}!TypeInfo@{TypeInfo}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily const char$\ast$ Type\+Info\+::type\hspace{0.3cm}{\ttfamily [protected]}}
+
+string representing operand type 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

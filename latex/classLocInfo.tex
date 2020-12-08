@@ -1,0 +1,140 @@
+\hypertarget{classLocInfo}{}\doxysection{Loc\+Info Class Reference}
+\label{classLocInfo}\index{LocInfo@{LocInfo}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Loc\+Info\+:
+% FIG 0
+
+
+Collaboration diagram for Loc\+Info\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLocInfo_addd45d92087bdcadfce0a67cd48d8207}{Loc\+Info}} (\mbox{\hyperlink{classMemType}{Mem\+Type}} $\ast$mt, \mbox{\hyperlink{classList}{List}}$<$ \mbox{\hyperlink{classFlag}{Flag}} $\ast$ $>$ $\ast$f)
+\item 
+const char $\ast$ \mbox{\hyperlink{classLocInfo_a06b3afd2c766a45dbfe9d4e606845e39}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classLocInfo_ade64091d3ca7267ae2b32307c97426dc}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classLocInfo_a129d70c92d57a7ab130b699ee8052ef4}{Analyze}} ()
+\item 
+bool \mbox{\hyperlink{classLocInfo_a3ff1c09b9f5a2e417c39e03168dfd639}{check\+For\+Flag}} (string flag)
+\item 
+string \mbox{\hyperlink{classLocInfo_ae4dcb587c75774e4952af629003076bd}{get\+Mem\+Type}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMemType}{Mem\+Type}} $\ast$ \mbox{\hyperlink{classLocInfo_a05a5b4ddedff7bbcc41c04f093711987}{mtype}}
+\item 
+\mbox{\hyperlink{classList}{List}}$<$ \mbox{\hyperlink{classFlag}{Flag}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classLocInfo_a4732d45b7e41e9ecd36d1db6ded5bad6}{flags}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing location information of operands. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classLocInfo_addd45d92087bdcadfce0a67cd48d8207}\label{classLocInfo_addd45d92087bdcadfce0a67cd48d8207}} 
+\index{LocInfo@{LocInfo}!LocInfo@{LocInfo}}
+\index{LocInfo@{LocInfo}!LocInfo@{LocInfo}}
+\doxysubsubsection{\texorpdfstring{LocInfo()}{LocInfo()}}
+{\footnotesize\ttfamily Loc\+Info\+::\+Loc\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMemType}{Mem\+Type}} $\ast$}]{mt,  }\item[{\mbox{\hyperlink{classList}{List}}$<$ \mbox{\hyperlink{classFlag}{Flag}} $\ast$ $>$ $\ast$}]{f }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em mt} & memory type \\
+\hline
+{\em f} & pointer to the list of operand flags \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLocInfo_a129d70c92d57a7ab130b699ee8052ef4}\label{classLocInfo_a129d70c92d57a7ab130b699ee8052ef4}} 
+\index{LocInfo@{LocInfo}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!LocInfo@{LocInfo}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Loc\+Info\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classLocInfo_a3ff1c09b9f5a2e417c39e03168dfd639}\label{classLocInfo_a3ff1c09b9f5a2e417c39e03168dfd639}} 
+\index{LocInfo@{LocInfo}!checkForFlag@{checkForFlag}}
+\index{checkForFlag@{checkForFlag}!LocInfo@{LocInfo}}
+\doxysubsubsection{\texorpdfstring{checkForFlag()}{checkForFlag()}}
+{\footnotesize\ttfamily bool Loc\+Info\+::check\+For\+Flag (\begin{DoxyParamCaption}\item[{string}]{flag }\end{DoxyParamCaption})}
+
+checks for a particular flag in the operand 
+\begin{DoxyParams}{Parameters}
+{\em flag} & flag to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if flag is set, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocInfo_ae4dcb587c75774e4952af629003076bd}\label{classLocInfo_ae4dcb587c75774e4952af629003076bd}} 
+\index{LocInfo@{LocInfo}!getMemType@{getMemType}}
+\index{getMemType@{getMemType}!LocInfo@{LocInfo}}
+\doxysubsubsection{\texorpdfstring{getMemType()}{getMemType()}}
+{\footnotesize\ttfamily string Loc\+Info\+::get\+Mem\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+returns the memory type of the operand \begin{DoxyReturn}{Returns}
+memory type 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLocInfo_a06b3afd2c766a45dbfe9d4e606845e39}\label{classLocInfo_a06b3afd2c766a45dbfe9d4e606845e39}} 
+\index{LocInfo@{LocInfo}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!LocInfo@{LocInfo}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Loc\+Info\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classLocInfo_ade64091d3ca7267ae2b32307c97426dc}\label{classLocInfo_ade64091d3ca7267ae2b32307c97426dc}} 
+\index{LocInfo@{LocInfo}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!LocInfo@{LocInfo}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Loc\+Info\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classLocInfo_a4732d45b7e41e9ecd36d1db6ded5bad6}\label{classLocInfo_a4732d45b7e41e9ecd36d1db6ded5bad6}} 
+\index{LocInfo@{LocInfo}!flags@{flags}}
+\index{flags@{flags}!LocInfo@{LocInfo}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classList}{List}}$<$\mbox{\hyperlink{classFlag}{Flag}} $\ast$$>$$\ast$ Loc\+Info\+::flags\hspace{0.3cm}{\ttfamily [protected]}}
+
+flags involved in the operand \mbox{\Hypertarget{classLocInfo_a05a5b4ddedff7bbcc41c04f093711987}\label{classLocInfo_a05a5b4ddedff7bbcc41c04f093711987}} 
+\index{LocInfo@{LocInfo}!mtype@{mtype}}
+\index{mtype@{mtype}!LocInfo@{LocInfo}}
+\doxysubsubsection{\texorpdfstring{mtype}{mtype}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMemType}{Mem\+Type}}$\ast$ Loc\+Info\+::mtype\hspace{0.3cm}{\ttfamily [protected]}}
+
+the memory type of the operand 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

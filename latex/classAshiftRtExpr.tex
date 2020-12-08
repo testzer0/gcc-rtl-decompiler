@@ -1,0 +1,140 @@
+\hypertarget{classAshiftRtExpr}{}\doxysection{Ashift\+Rt\+Expr Class Reference}
+\label{classAshiftRtExpr}\index{AshiftRtExpr@{AshiftRtExpr}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Ashift\+Rt\+Expr\+:
+% FIG 0
+
+
+Collaboration diagram for Ashift\+Rt\+Expr\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAshiftRtExpr_a70ad2de1ccc23dfed85711d4c9ad6b3f}{Ashift\+Rt\+Expr}} (\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ti, \mbox{\hyperlink{classOperand}{Operand}} $\ast$o1, \mbox{\hyperlink{classOperand}{Operand}} $\ast$o2)
+\item 
+const char $\ast$ \mbox{\hyperlink{classAshiftRtExpr_a59b494552a66bdb8a407acb30d6ddc5b}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classAshiftRtExpr_a2964d2199eef48495ab173bf2170eb8b}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classAshiftRtExpr_a324ffb5777b5ccea0e63eba79e0c67c8}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classAshiftRtExpr_aec58e35be6c2f84aeb345e48777e2370}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ \mbox{\hyperlink{classAshiftRtExpr_a553f113d3c2b9dae1165a0b9852dc99a}{tinfo}}
+\item 
+\mbox{\hyperlink{classOperand}{Operand}} $\ast$ \mbox{\hyperlink{classAshiftRtExpr_a9559eedf8e5f553ec14eb4503c956ab8}{op1}}
+\item 
+\mbox{\hyperlink{classOperand}{Operand}} $\ast$ \mbox{\hyperlink{classAshiftRtExpr_af343100baf13dc58ccbb76a7224ff449}{op2}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class denoting arithmetic right shift expressions in the program. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classAshiftRtExpr_a70ad2de1ccc23dfed85711d4c9ad6b3f}\label{classAshiftRtExpr_a70ad2de1ccc23dfed85711d4c9ad6b3f}} 
+\index{AshiftRtExpr@{AshiftRtExpr}!AshiftRtExpr@{AshiftRtExpr}}
+\index{AshiftRtExpr@{AshiftRtExpr}!AshiftRtExpr@{AshiftRtExpr}}
+\doxysubsubsection{\texorpdfstring{AshiftRtExpr()}{AshiftRtExpr()}}
+{\footnotesize\ttfamily Ashift\+Rt\+Expr\+::\+Ashift\+Rt\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$}]{ti,  }\item[{\mbox{\hyperlink{classOperand}{Operand}} $\ast$}]{o1,  }\item[{\mbox{\hyperlink{classOperand}{Operand}} $\ast$}]{o2 }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em ti} & type information \\
+\hline
+{\em o1} & first operand \\
+\hline
+{\em o2} & second operand \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classAshiftRtExpr_a324ffb5777b5ccea0e63eba79e0c67c8}\label{classAshiftRtExpr_a324ffb5777b5ccea0e63eba79e0c67c8}} 
+\index{AshiftRtExpr@{AshiftRtExpr}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!AshiftRtExpr@{AshiftRtExpr}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Ashift\+Rt\+Expr\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classAshiftRtExpr_aec58e35be6c2f84aeb345e48777e2370}\label{classAshiftRtExpr_aec58e35be6c2f84aeb345e48777e2370}} 
+\index{AshiftRtExpr@{AshiftRtExpr}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!AshiftRtExpr@{AshiftRtExpr}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Ashift\+Rt\+Expr\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classAshiftRtExpr_a59b494552a66bdb8a407acb30d6ddc5b}\label{classAshiftRtExpr_a59b494552a66bdb8a407acb30d6ddc5b}} 
+\index{AshiftRtExpr@{AshiftRtExpr}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!AshiftRtExpr@{AshiftRtExpr}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Ashift\+Rt\+Expr\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classAshiftRtExpr_a2964d2199eef48495ab173bf2170eb8b}\label{classAshiftRtExpr_a2964d2199eef48495ab173bf2170eb8b}} 
+\index{AshiftRtExpr@{AshiftRtExpr}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!AshiftRtExpr@{AshiftRtExpr}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Ashift\+Rt\+Expr\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classAshiftRtExpr_a9559eedf8e5f553ec14eb4503c956ab8}\label{classAshiftRtExpr_a9559eedf8e5f553ec14eb4503c956ab8}} 
+\index{AshiftRtExpr@{AshiftRtExpr}!op1@{op1}}
+\index{op1@{op1}!AshiftRtExpr@{AshiftRtExpr}}
+\doxysubsubsection{\texorpdfstring{op1}{op1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classOperand}{Operand}}$\ast$ Ashift\+Rt\+Expr\+::op1\hspace{0.3cm}{\ttfamily [protected]}}
+
+first operand in expression \mbox{\Hypertarget{classAshiftRtExpr_af343100baf13dc58ccbb76a7224ff449}\label{classAshiftRtExpr_af343100baf13dc58ccbb76a7224ff449}} 
+\index{AshiftRtExpr@{AshiftRtExpr}!op2@{op2}}
+\index{op2@{op2}!AshiftRtExpr@{AshiftRtExpr}}
+\doxysubsubsection{\texorpdfstring{op2}{op2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classOperand}{Operand}}$\ast$ Ashift\+Rt\+Expr\+::op2\hspace{0.3cm}{\ttfamily [protected]}}
+
+second operand in expression \mbox{\Hypertarget{classAshiftRtExpr_a553f113d3c2b9dae1165a0b9852dc99a}\label{classAshiftRtExpr_a553f113d3c2b9dae1165a0b9852dc99a}} 
+\index{AshiftRtExpr@{AshiftRtExpr}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!AshiftRtExpr@{AshiftRtExpr}}
+\doxysubsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTypeInfo}{Type\+Info}}$\ast$ Ashift\+Rt\+Expr\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+types of the operands 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

@@ -1,0 +1,179 @@
+\hypertarget{classFuncBody}{}\doxysection{Func\+Body Class Reference}
+\label{classFuncBody}\index{FuncBody@{FuncBody}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Func\+Body\+:
+% FIG 0
+
+
+Collaboration diagram for Func\+Body\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFuncBody_a6c75a1100ab03a0b923eb502cf80514b}{Func\+Body}} (\mbox{\hyperlink{classList}{List}}$<$ \mbox{\hyperlink{classStmt}{Stmt}} $\ast$ $>$ $\ast$ss, const char $\ast$n)
+\item 
+const char $\ast$ \mbox{\hyperlink{classFuncBody_ae2e7c93a201a73256289ecbb59455961}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classFuncBody_a6e42023a04da72f19901550f910b2e35}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classFuncBody_a6114d98f4cd6e0341cb8662750266477}{Analyze}} ()
+\item 
+void \mbox{\hyperlink{classFuncBody_a4a2fbd17eb33da81f2ec9d6ff7454463}{set\+Types}} (\mbox{\hyperlink{classList}{List}}$<$ string $>$ $\ast$\mbox{\hyperlink{classFuncBody_ab658c76bb42d23b067c1b1860ddcf9f9}{types}}, \mbox{\hyperlink{classList}{List}}$<$ int $>$ $\ast$\mbox{\hyperlink{classFuncBody_a48a90d46d3c6f767f1a6595c312af970}{regs}}, string rtype)
+\item 
+string \mbox{\hyperlink{classFuncBody_ade15e61124358e79682a8a78dd92f064}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classList}{List}}$<$ \mbox{\hyperlink{classStmt}{Stmt}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classFuncBody_a1946b17051da22b95c723dac2604b7b1}{stmts}}
+\item 
+\mbox{\hyperlink{classList}{List}}$<$ string $>$ $\ast$ \mbox{\hyperlink{classFuncBody_ab658c76bb42d23b067c1b1860ddcf9f9}{types}}
+\item 
+\mbox{\hyperlink{classList}{List}}$<$ int $>$ $\ast$ \mbox{\hyperlink{classFuncBody_a48a90d46d3c6f767f1a6595c312af970}{regs}}
+\item 
+const char $\ast$ \mbox{\hyperlink{classFuncBody_a48458c543d655ef7f25c3cbe3206e4b2}{name}}
+\item 
+int \mbox{\hyperlink{classFuncBody_a659a0db3f1626e1e03a7fd86e1d38283}{num\+Args}}
+\item 
+string \mbox{\hyperlink{classFuncBody_ac471c93e30501d687d59aa752a5a312f}{ret\+Type}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing the body of one function in the program. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classFuncBody_a6c75a1100ab03a0b923eb502cf80514b}\label{classFuncBody_a6c75a1100ab03a0b923eb502cf80514b}} 
+\index{FuncBody@{FuncBody}!FuncBody@{FuncBody}}
+\index{FuncBody@{FuncBody}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{FuncBody()}{FuncBody()}}
+{\footnotesize\ttfamily Func\+Body\+::\+Func\+Body (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classList}{List}}$<$ \mbox{\hyperlink{classStmt}{Stmt}} $\ast$ $>$ $\ast$}]{ss,  }\item[{const char $\ast$}]{n }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em ss} & pointer to list of statements in the function body \\
+\hline
+{\em n} & name of the function \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classFuncBody_a6114d98f4cd6e0341cb8662750266477}\label{classFuncBody_a6114d98f4cd6e0341cb8662750266477}} 
+\index{FuncBody@{FuncBody}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Func\+Body\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classFuncBody_ade15e61124358e79682a8a78dd92f064}\label{classFuncBody_ade15e61124358e79682a8a78dd92f064}} 
+\index{FuncBody@{FuncBody}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Func\+Body\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classFuncBody_ae2e7c93a201a73256289ecbb59455961}\label{classFuncBody_ae2e7c93a201a73256289ecbb59455961}} 
+\index{FuncBody@{FuncBody}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Func\+Body\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classFuncBody_a6e42023a04da72f19901550f910b2e35}\label{classFuncBody_a6e42023a04da72f19901550f910b2e35}} 
+\index{FuncBody@{FuncBody}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Func\+Body\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+\mbox{\Hypertarget{classFuncBody_a4a2fbd17eb33da81f2ec9d6ff7454463}\label{classFuncBody_a4a2fbd17eb33da81f2ec9d6ff7454463}} 
+\index{FuncBody@{FuncBody}!setTypes@{setTypes}}
+\index{setTypes@{setTypes}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{setTypes()}{setTypes()}}
+{\footnotesize\ttfamily void Func\+Body\+::set\+Types (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classList}{List}}$<$ string $>$ $\ast$}]{types,  }\item[{\mbox{\hyperlink{classList}{List}}$<$ int $>$ $\ast$}]{regs,  }\item[{string}]{rtype }\end{DoxyParamCaption})}
+
+sets types, registers, and return type for the \mbox{\hyperlink{classFuncBody}{Func\+Body}} object. 
+\begin{DoxyParams}{Parameters}
+{\em types} & list of strings representing types \\
+\hline
+{\em regs} & list of registers for the function \\
+\hline
+{\em rtype} & return type of the function \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classFuncBody_a48458c543d655ef7f25c3cbe3206e4b2}\label{classFuncBody_a48458c543d655ef7f25c3cbe3206e4b2}} 
+\index{FuncBody@{FuncBody}!name@{name}}
+\index{name@{name}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily const char$\ast$ Func\+Body\+::name\hspace{0.3cm}{\ttfamily [protected]}}
+
+name of the function \mbox{\Hypertarget{classFuncBody_a659a0db3f1626e1e03a7fd86e1d38283}\label{classFuncBody_a659a0db3f1626e1e03a7fd86e1d38283}} 
+\index{FuncBody@{FuncBody}!numArgs@{numArgs}}
+\index{numArgs@{numArgs}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{numArgs}{numArgs}}
+{\footnotesize\ttfamily int Func\+Body\+::num\+Args\hspace{0.3cm}{\ttfamily [protected]}}
+
+number of arguments in the function \mbox{\Hypertarget{classFuncBody_a48a90d46d3c6f767f1a6595c312af970}\label{classFuncBody_a48a90d46d3c6f767f1a6595c312af970}} 
+\index{FuncBody@{FuncBody}!regs@{regs}}
+\index{regs@{regs}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{regs}{regs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classList}{List}}$<$int$>$$\ast$ Func\+Body\+::regs\hspace{0.3cm}{\ttfamily [protected]}}
+
+pointer to a list of the registers used \mbox{\Hypertarget{classFuncBody_ac471c93e30501d687d59aa752a5a312f}\label{classFuncBody_ac471c93e30501d687d59aa752a5a312f}} 
+\index{FuncBody@{FuncBody}!retType@{retType}}
+\index{retType@{retType}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{retType}{retType}}
+{\footnotesize\ttfamily string Func\+Body\+::ret\+Type\hspace{0.3cm}{\ttfamily [protected]}}
+
+return type of the function \mbox{\Hypertarget{classFuncBody_a1946b17051da22b95c723dac2604b7b1}\label{classFuncBody_a1946b17051da22b95c723dac2604b7b1}} 
+\index{FuncBody@{FuncBody}!stmts@{stmts}}
+\index{stmts@{stmts}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{stmts}{stmts}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classList}{List}}$<$\mbox{\hyperlink{classStmt}{Stmt}} $\ast$$>$$\ast$ Func\+Body\+::stmts\hspace{0.3cm}{\ttfamily [protected]}}
+
+pointer to a list of statements within the function \mbox{\Hypertarget{classFuncBody_ab658c76bb42d23b067c1b1860ddcf9f9}\label{classFuncBody_ab658c76bb42d23b067c1b1860ddcf9f9}} 
+\index{FuncBody@{FuncBody}!types@{types}}
+\index{types@{types}!FuncBody@{FuncBody}}
+\doxysubsubsection{\texorpdfstring{types}{types}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classList}{List}}$<$string$>$$\ast$ Func\+Body\+::types\hspace{0.3cm}{\ttfamily [protected]}}
+
+pointer to a list of strings which represent statement types 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

@@ -1,0 +1,140 @@
+\hypertarget{classCompareExpr}{}\doxysection{Compare\+Expr Class Reference}
+\label{classCompareExpr}\index{CompareExpr@{CompareExpr}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Compare\+Expr\+:
+% FIG 0
+
+
+Collaboration diagram for Compare\+Expr\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCompareExpr_aea18e0dd8ae60cd31dc4cc0ff6c826ea}{Compare\+Expr}} (\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ti, \mbox{\hyperlink{classOperand}{Operand}} $\ast$o1, \mbox{\hyperlink{classOperand}{Operand}} $\ast$o2)
+\item 
+const char $\ast$ \mbox{\hyperlink{classCompareExpr_a28dc1cb43c2251d78c7ac8f443760f2f}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classCompareExpr_a0a29abbf82133a8a39f5540e68b9b798}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classCompareExpr_a6433597757238a3332c637c1ad67ea87}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classCompareExpr_a5e5388b4d036996fc32913efd3ab3123}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ \mbox{\hyperlink{classCompareExpr_a023d7d23d623b0f2545756e2ffbae522}{tinfo}}
+\item 
+\mbox{\hyperlink{classOperand}{Operand}} $\ast$ \mbox{\hyperlink{classCompareExpr_a5c8876f3b3d13cceaeef338e2db519f7}{op1}}
+\item 
+\mbox{\hyperlink{classOperand}{Operand}} $\ast$ \mbox{\hyperlink{classCompareExpr_a3f32ffb22ac225f4581b284a9f97f2e7}{op2}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class denoting comparison expressions in the program. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCompareExpr_aea18e0dd8ae60cd31dc4cc0ff6c826ea}\label{classCompareExpr_aea18e0dd8ae60cd31dc4cc0ff6c826ea}} 
+\index{CompareExpr@{CompareExpr}!CompareExpr@{CompareExpr}}
+\index{CompareExpr@{CompareExpr}!CompareExpr@{CompareExpr}}
+\doxysubsubsection{\texorpdfstring{CompareExpr()}{CompareExpr()}}
+{\footnotesize\ttfamily Compare\+Expr\+::\+Compare\+Expr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$}]{ti,  }\item[{\mbox{\hyperlink{classOperand}{Operand}} $\ast$}]{o1,  }\item[{\mbox{\hyperlink{classOperand}{Operand}} $\ast$}]{o2 }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em ti} & type information \\
+\hline
+{\em o1} & first operand \\
+\hline
+{\em o2} & second operand \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCompareExpr_a6433597757238a3332c637c1ad67ea87}\label{classCompareExpr_a6433597757238a3332c637c1ad67ea87}} 
+\index{CompareExpr@{CompareExpr}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!CompareExpr@{CompareExpr}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Compare\+Expr\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classCompareExpr_a5e5388b4d036996fc32913efd3ab3123}\label{classCompareExpr_a5e5388b4d036996fc32913efd3ab3123}} 
+\index{CompareExpr@{CompareExpr}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!CompareExpr@{CompareExpr}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Compare\+Expr\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classCompareExpr_a28dc1cb43c2251d78c7ac8f443760f2f}\label{classCompareExpr_a28dc1cb43c2251d78c7ac8f443760f2f}} 
+\index{CompareExpr@{CompareExpr}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!CompareExpr@{CompareExpr}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Compare\+Expr\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classCompareExpr_a0a29abbf82133a8a39f5540e68b9b798}\label{classCompareExpr_a0a29abbf82133a8a39f5540e68b9b798}} 
+\index{CompareExpr@{CompareExpr}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!CompareExpr@{CompareExpr}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Compare\+Expr\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classCompareExpr_a5c8876f3b3d13cceaeef338e2db519f7}\label{classCompareExpr_a5c8876f3b3d13cceaeef338e2db519f7}} 
+\index{CompareExpr@{CompareExpr}!op1@{op1}}
+\index{op1@{op1}!CompareExpr@{CompareExpr}}
+\doxysubsubsection{\texorpdfstring{op1}{op1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classOperand}{Operand}}$\ast$ Compare\+Expr\+::op1\hspace{0.3cm}{\ttfamily [protected]}}
+
+first operand in expression \mbox{\Hypertarget{classCompareExpr_a3f32ffb22ac225f4581b284a9f97f2e7}\label{classCompareExpr_a3f32ffb22ac225f4581b284a9f97f2e7}} 
+\index{CompareExpr@{CompareExpr}!op2@{op2}}
+\index{op2@{op2}!CompareExpr@{CompareExpr}}
+\doxysubsubsection{\texorpdfstring{op2}{op2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classOperand}{Operand}}$\ast$ Compare\+Expr\+::op2\hspace{0.3cm}{\ttfamily [protected]}}
+
+second operand in expression \mbox{\Hypertarget{classCompareExpr_a023d7d23d623b0f2545756e2ffbae522}\label{classCompareExpr_a023d7d23d623b0f2545756e2ffbae522}} 
+\index{CompareExpr@{CompareExpr}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!CompareExpr@{CompareExpr}}
+\doxysubsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTypeInfo}{Type\+Info}}$\ast$ Compare\+Expr\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+types of the operands 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

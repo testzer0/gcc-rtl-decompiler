@@ -1,0 +1,130 @@
+\hypertarget{classExtendOperand}{}\doxysection{Extend\+Operand Class Reference}
+\label{classExtendOperand}\index{ExtendOperand@{ExtendOperand}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Extend\+Operand\+:
+% FIG 0
+
+
+Collaboration diagram for Extend\+Operand\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classExtendOperand_acf52217cacec2d8ff3ad0f1e659bc41d}{Extend\+Operand}} (\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ti, \mbox{\hyperlink{classOperand}{Operand}} $\ast$o)
+\item 
+const char $\ast$ \mbox{\hyperlink{classExtendOperand_ac5848e09b0f85359a5640d2d721b39be}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classExtendOperand_afdf1598c150fdcf76f97b2e48f5c2a40}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classExtendOperand_ad8496c498f62dd060ea265eff6ec72da}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classExtendOperand_a42bd225e28413b11c5caa6f7f83de37d}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$ \mbox{\hyperlink{classExtendOperand_abe2019abb3a9e61cb5d9a7b962eb223d}{tinfo}}
+\item 
+\mbox{\hyperlink{classOperand}{Operand}} $\ast$ \mbox{\hyperlink{classExtendOperand_a3070ccb0d6648ae1c98d54fa4134a483}{op}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing extended register operands. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classExtendOperand_acf52217cacec2d8ff3ad0f1e659bc41d}\label{classExtendOperand_acf52217cacec2d8ff3ad0f1e659bc41d}} 
+\index{ExtendOperand@{ExtendOperand}!ExtendOperand@{ExtendOperand}}
+\index{ExtendOperand@{ExtendOperand}!ExtendOperand@{ExtendOperand}}
+\doxysubsubsection{\texorpdfstring{ExtendOperand()}{ExtendOperand()}}
+{\footnotesize\ttfamily Extend\+Operand\+::\+Extend\+Operand (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classTypeInfo}{Type\+Info}} $\ast$}]{ti,  }\item[{\mbox{\hyperlink{classOperand}{Operand}} $\ast$}]{o }\end{DoxyParamCaption})}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em ti} & value to initialize type info \\
+\hline
+{\em o} & value to initialize operand \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classExtendOperand_ad8496c498f62dd060ea265eff6ec72da}\label{classExtendOperand_ad8496c498f62dd060ea265eff6ec72da}} 
+\index{ExtendOperand@{ExtendOperand}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!ExtendOperand@{ExtendOperand}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Extend\+Operand\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classExtendOperand_a42bd225e28413b11c5caa6f7f83de37d}\label{classExtendOperand_a42bd225e28413b11c5caa6f7f83de37d}} 
+\index{ExtendOperand@{ExtendOperand}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!ExtendOperand@{ExtendOperand}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Extend\+Operand\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classExtendOperand_ac5848e09b0f85359a5640d2d721b39be}\label{classExtendOperand_ac5848e09b0f85359a5640d2d721b39be}} 
+\index{ExtendOperand@{ExtendOperand}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!ExtendOperand@{ExtendOperand}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Extend\+Operand\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classExtendOperand_afdf1598c150fdcf76f97b2e48f5c2a40}\label{classExtendOperand_afdf1598c150fdcf76f97b2e48f5c2a40}} 
+\index{ExtendOperand@{ExtendOperand}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!ExtendOperand@{ExtendOperand}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Extend\+Operand\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classExtendOperand_a3070ccb0d6648ae1c98d54fa4134a483}\label{classExtendOperand_a3070ccb0d6648ae1c98d54fa4134a483}} 
+\index{ExtendOperand@{ExtendOperand}!op@{op}}
+\index{op@{op}!ExtendOperand@{ExtendOperand}}
+\doxysubsubsection{\texorpdfstring{op}{op}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classOperand}{Operand}}$\ast$ Extend\+Operand\+::op\hspace{0.3cm}{\ttfamily [protected]}}
+
+the operand which is extended \mbox{\Hypertarget{classExtendOperand_abe2019abb3a9e61cb5d9a7b962eb223d}\label{classExtendOperand_abe2019abb3a9e61cb5d9a7b962eb223d}} 
+\index{ExtendOperand@{ExtendOperand}!tinfo@{tinfo}}
+\index{tinfo@{tinfo}!ExtendOperand@{ExtendOperand}}
+\doxysubsubsection{\texorpdfstring{tinfo}{tinfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classTypeInfo}{Type\+Info}}$\ast$ Extend\+Operand\+::tinfo\hspace{0.3cm}{\ttfamily [protected]}}
+
+type information of the operand 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

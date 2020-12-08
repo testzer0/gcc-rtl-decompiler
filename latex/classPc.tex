@@ -1,0 +1,114 @@
+\hypertarget{classPc}{}\doxysection{Pc Class Reference}
+\label{classPc}\index{Pc@{Pc}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Pc\+:
+% FIG 0
+
+
+Collaboration diagram for Pc\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPc_aef7314496cee3c1bd2c329aac4dc4f21}{Pc}} ()
+\item 
+\mbox{\hyperlink{classPc_a9cda0e0530fc008372c70ff09532ea48}{Pc}} (\mbox{\hyperlink{structyyltype}{yyltype}} loc)
+\item 
+const char $\ast$ \mbox{\hyperlink{classPc_aa1b66bab13f8d0a36a95369571630303}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classPc_ad44ccd9eecca2d6b41205abf80996412}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classPc_a8376e5338c6f9c37363f1012722efef9}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classPc_abd7a71b57da30b20ab9bb20662c9f663}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Not actually a possible production. However, since we need \mbox{\hyperlink{classDest}{Dest}} to double up as In\+Dest as well, we will let \mbox{\hyperlink{classPc}{Pc}} derive from \mbox{\hyperlink{classDest}{Dest}}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPc_aef7314496cee3c1bd2c329aac4dc4f21}\label{classPc_aef7314496cee3c1bd2c329aac4dc4f21}} 
+\index{Pc@{Pc}!Pc@{Pc}}
+\index{Pc@{Pc}!Pc@{Pc}}
+\doxysubsubsection{\texorpdfstring{Pc()}{Pc()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Pc\+::\+Pc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+default constructor \mbox{\Hypertarget{classPc_a9cda0e0530fc008372c70ff09532ea48}\label{classPc_a9cda0e0530fc008372c70ff09532ea48}} 
+\index{Pc@{Pc}!Pc@{Pc}}
+\index{Pc@{Pc}!Pc@{Pc}}
+\doxysubsubsection{\texorpdfstring{Pc()}{Pc()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Pc\+::\+Pc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structyyltype}{yyltype}}}]{loc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em loc} & lexical location \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPc_a8376e5338c6f9c37363f1012722efef9}\label{classPc_a8376e5338c6f9c37363f1012722efef9}} 
+\index{Pc@{Pc}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Pc@{Pc}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Pc\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classPc_abd7a71b57da30b20ab9bb20662c9f663}\label{classPc_abd7a71b57da30b20ab9bb20662c9f663}} 
+\index{Pc@{Pc}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!Pc@{Pc}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Pc\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classPc_aa1b66bab13f8d0a36a95369571630303}\label{classPc_aa1b66bab13f8d0a36a95369571630303}} 
+\index{Pc@{Pc}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!Pc@{Pc}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Pc\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classPc_ad44ccd9eecca2d6b41205abf80996412}\label{classPc_ad44ccd9eecca2d6b41205abf80996412}} 
+\index{Pc@{Pc}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!Pc@{Pc}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Pc\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\end{DoxyCompactItemize}

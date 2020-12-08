@@ -1,0 +1,115 @@
+\hypertarget{classBarrier}{}\doxysection{Barrier Class Reference}
+\label{classBarrier}\index{Barrier@{Barrier}}
+
+
+{\ttfamily \#include $<$ast.\+h$>$}
+
+
+
+Inheritance diagram for Barrier\+:
+% FIG 0
+
+
+Collaboration diagram for Barrier\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBarrier_a462a2435e07b6fabc0265011f03310ee}{Barrier}} ()
+\item 
+\mbox{\hyperlink{classBarrier_acbb7d7324fef5bfefd7424c957b5c25d}{Barrier}} (\mbox{\hyperlink{structyyltype}{yyltype}} loc)
+\item 
+const char $\ast$ \mbox{\hyperlink{classBarrier_a3b32a126f5fb975defc7f8c3614a0c68}{Get\+Print\+Name\+For\+Node}} ()
+\item 
+void \mbox{\hyperlink{classBarrier_a4210ab976223e77243f019045f0f3875}{Print\+Children}} (int indentlevel)
+\item 
+void \mbox{\hyperlink{classBarrier_af36430f51da20c09b6e3fa1d6e875fef}{Analyze}} ()
+\item 
+string \mbox{\hyperlink{classBarrier_a8b5b9b199e68d00ae5d11336a1b4591f}{Generate\+Code}} (int indentlevel)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A class representing barrier statements in the program. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBarrier_a462a2435e07b6fabc0265011f03310ee}\label{classBarrier_a462a2435e07b6fabc0265011f03310ee}} 
+\index{Barrier@{Barrier}!Barrier@{Barrier}}
+\index{Barrier@{Barrier}!Barrier@{Barrier}}
+\doxysubsubsection{\texorpdfstring{Barrier()}{Barrier()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Barrier\+::\+Barrier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+default constructor \mbox{\Hypertarget{classBarrier_acbb7d7324fef5bfefd7424c957b5c25d}\label{classBarrier_acbb7d7324fef5bfefd7424c957b5c25d}} 
+\index{Barrier@{Barrier}!Barrier@{Barrier}}
+\index{Barrier@{Barrier}!Barrier@{Barrier}}
+\doxysubsubsection{\texorpdfstring{Barrier()}{Barrier()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Barrier\+::\+Barrier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structyyltype}{yyltype}}}]{loc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+constructor 
+\begin{DoxyParams}{Parameters}
+{\em loc} & lexical location of barrier statement \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBarrier_af36430f51da20c09b6e3fa1d6e875fef}\label{classBarrier_af36430f51da20c09b6e3fa1d6e875fef}} 
+\index{Barrier@{Barrier}!Analyze@{Analyze}}
+\index{Analyze@{Analyze}!Barrier@{Barrier}}
+\doxysubsubsection{\texorpdfstring{Analyze()}{Analyze()}}
+{\footnotesize\ttfamily void Barrier\+::\+Analyze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+analyzes statements in the program for useful information and stores them into relevant member variables. 
+
+Reimplemented from \mbox{\hyperlink{classNode_a5f88d55c6f253a29def7ccc443d83d47}{Node}}.
+
+\mbox{\Hypertarget{classBarrier_a8b5b9b199e68d00ae5d11336a1b4591f}\label{classBarrier_a8b5b9b199e68d00ae5d11336a1b4591f}} 
+\index{Barrier@{Barrier}!GenerateCode@{GenerateCode}}
+\index{GenerateCode@{GenerateCode}!Barrier@{Barrier}}
+\doxysubsubsection{\texorpdfstring{GenerateCode()}{GenerateCode()}}
+{\footnotesize\ttfamily string Barrier\+::\+Generate\+Code (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generates the equivalent pseudo-\/C code for that node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_acb60e526730e8436056375a3055c2c32}{Node}}.
+
+\mbox{\Hypertarget{classBarrier_a3b32a126f5fb975defc7f8c3614a0c68}\label{classBarrier_a3b32a126f5fb975defc7f8c3614a0c68}} 
+\index{Barrier@{Barrier}!GetPrintNameForNode@{GetPrintNameForNode}}
+\index{GetPrintNameForNode@{GetPrintNameForNode}!Barrier@{Barrier}}
+\doxysubsubsection{\texorpdfstring{GetPrintNameForNode()}{GetPrintNameForNode()}}
+{\footnotesize\ttfamily const char$\ast$ Barrier\+::\+Get\+Print\+Name\+For\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+returns the name to be printed for the current node. It is a virtual function since it will be redefined in derived classes. \begin{DoxyReturn}{Returns}
+name of the current node 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classNode_a56e29657306ffb004d69c6929ae44269}{Node}}.
+
+\mbox{\Hypertarget{classBarrier_a4210ab976223e77243f019045f0f3875}\label{classBarrier_a4210ab976223e77243f019045f0f3875}} 
+\index{Barrier@{Barrier}!PrintChildren@{PrintChildren}}
+\index{PrintChildren@{PrintChildren}!Barrier@{Barrier}}
+\doxysubsubsection{\texorpdfstring{PrintChildren()}{PrintChildren()}}
+{\footnotesize\ttfamily void Barrier\+::\+Print\+Children (\begin{DoxyParamCaption}\item[{int}]{indentlevel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+prints the subtree rooted at the current node. It is a virtual function, and is redefined for individual token classes. 
+\begin{DoxyParams}{Parameters}
+{\em indentlevel} & desired indentation level for the current node \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_a3e67ec8d22182b721717af14fe0c3000}{Node}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ast.\+h\item 
+ast.\+cc\end{DoxyCompactItemize}

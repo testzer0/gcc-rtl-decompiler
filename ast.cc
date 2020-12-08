@@ -1,8 +1,8 @@
 #include "ast.h"
-#include <string.h> // strdup
-#include <stdio.h>  // printf
+#include <string.h>
+#include <stdio.h>
 #include "list.h"
-#include <bits/stdc++.h>  // later replace by specific header
+#include <bits/stdc++.h>
 
 #define out cout<<indentation
 
