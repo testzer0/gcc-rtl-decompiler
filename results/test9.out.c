@@ -14,8 +14,8 @@ long long int rcx;
 long long int rdx;
 long long int rax;
 long long int othersymbols[2];
-long long int symboltail = (long long int)&othersymbols[1];
-long long int symbolhead = (long long int)&othersymbols[0];
+long long int symbolhead = (long long int)&othersymbols[1];
+long long int symboltail = (long long int)&othersymbols[0];
 
 void my_free(long long int arg0) {
     rdi = (long long int)arg0;
