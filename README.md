@@ -12,7 +12,7 @@ We use GNU Bison to create a parser. The file parser.y, used with bison, generat
 
 ## Code Generation
 
-The files ast.h and ast.cpp define the necessary classes and methods to carry out some minor data flow analysis and the final code generation
+The files ast.h and ast.cc define the necessary classes and methods to carry out some minor data flow analysis and the final code generation
 using the abstract syntax tree obtained from parsing. Code generation is done recursively.
 
 ## Documentation
