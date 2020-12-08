@@ -1128,7 +1128,7 @@
 (insn 29 28 30 4 (set (reg:DI 5 di)
         (reg:DI 101)) "tempin.c":66 81 {*movdi_internal}
      (nil))
-(call_insn 30 29 31 4 (call (mem:QI (symbol_ref:DI ("mergeSort") [flags 0x3]  <function_decl 0x7f2d9713e900 mergeSort>) [0 mergeSort S1 A8])
+(call_insn 30 29 31 4 (call (mem:QI (symbol_ref:DI ("mergeSort") [flags 0x3]  <function_decl 0x7fb49100f900 mergeSort>) [0 mergeSort S1 A8])
         (const_int 0 [0])) "tempin.c":66 665 {*call}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))
@@ -1166,7 +1166,7 @@
 (insn 37 36 38 4 (set (reg:DI 5 di)
         (reg:DI 104)) "tempin.c":67 81 {*movdi_internal}
      (nil))
-(call_insn 38 37 39 4 (call (mem:QI (symbol_ref:DI ("mergeSort") [flags 0x3]  <function_decl 0x7f2d9713e900 mergeSort>) [0 mergeSort S1 A8])
+(call_insn 38 37 39 4 (call (mem:QI (symbol_ref:DI ("mergeSort") [flags 0x3]  <function_decl 0x7fb49100f900 mergeSort>) [0 mergeSort S1 A8])
         (const_int 0 [0])) "tempin.c":67 665 {*call}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))
@@ -1201,7 +1201,7 @@
 (insn 46 45 47 4 (set (reg:DI 5 di)
         (reg:DI 108)) "tempin.c":69 81 {*movdi_internal}
      (nil))
-(call_insn 47 46 50 4 (call (mem:QI (symbol_ref:DI ("merge") [flags 0x3]  <function_decl 0x7f2d9713e700 merge>) [0 merge S1 A8])
+(call_insn 47 46 50 4 (call (mem:QI (symbol_ref:DI ("merge") [flags 0x3]  <function_decl 0x7fb49100f700 merge>) [0 merge S1 A8])
         (const_int 0 [0])) "tempin.c":69 665 {*call}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))
@@ -1271,13 +1271,13 @@
         (reg:SI 90 [ _4 ])) "tempin.c":79 82 {*movsi_internal}
      (nil))
 (insn 18 17 19 4 (set (reg:DI 5 di)
-        (symbol_ref/f:DI ("*.LC0") [flags 0x2]  <var_decl 0x7f2d96d6fc60 *.LC0>)) "tempin.c":79 81 {*movdi_internal}
+        (symbol_ref/f:DI ("*.LC0") [flags 0x2]  <var_decl 0x7fb490c40c60 *.LC0>)) "tempin.c":79 81 {*movdi_internal}
      (nil))
 (insn 19 18 20 4 (set (reg:QI 0 ax)
         (const_int 0 [0])) "tempin.c":79 84 {*movqi_internal}
      (nil))
 (call_insn 20 19 21 4 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("printf") [flags 0x41]  <function_decl 0x7f2d97002f00 printf>) [0 __builtin_printf S1 A8])
+        (call (mem:QI (symbol_ref:DI ("printf") [flags 0x41]  <function_decl 0x7fb490ed3f00 printf>) [0 __builtin_printf S1 A8])
             (const_int 0 [0]))) "tempin.c":79 676 {*call_value}
      (nil)
     (expr_list (use (reg:QI 0 ax))
@@ -1316,7 +1316,7 @@
         (const_int 10 [0xa])) "tempin.c":80 82 {*movsi_internal}
      (nil))
 (call_insn 30 29 33 6 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("putchar") [flags 0x41]  <function_decl 0x7f2d97003200 __builtin_putchar>) [0 __builtin_putchar S1 A8])
+        (call (mem:QI (symbol_ref:DI ("putchar") [flags 0x41]  <function_decl 0x7fb490ed4200 __builtin_putchar>) [0 __builtin_putchar S1 A8])
             (const_int 0 [0]))) "tempin.c":80 676 {*call_value}
      (nil)
     (expr_list:SI (use (reg:SI 5 di))
@@ -1358,10 +1358,10 @@
         (const_int 6 [0x6])) "tempin.c":87 82 {*movsi_internal}
      (nil))
 (insn 12 11 13 2 (set (reg:DI 5 di)
-        (symbol_ref/f:DI ("*.LC1") [flags 0x2]  <var_decl 0x7f2d96d79240 *.LC1>)) "tempin.c":89 81 {*movdi_internal}
+        (symbol_ref/f:DI ("*.LC1") [flags 0x2]  <var_decl 0x7fb490c4a240 *.LC1>)) "tempin.c":89 81 {*movdi_internal}
      (nil))
 (call_insn 13 12 14 2 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("puts") [flags 0x41]  <function_decl 0x7f2d97003600 __builtin_puts>) [0 __builtin_puts S1 A8])
+        (call (mem:QI (symbol_ref:DI ("puts") [flags 0x41]  <function_decl 0x7fb490ed4600 __builtin_puts>) [0 __builtin_puts S1 A8])
             (const_int 0 [0]))) "tempin.c":89 676 {*call_value}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))
@@ -1383,7 +1383,7 @@
 (insn 17 16 18 2 (set (reg:DI 5 di)
         (reg:DI 91)) "tempin.c":90 81 {*movdi_internal}
      (nil))
-(call_insn 18 17 19 2 (call (mem:QI (symbol_ref:DI ("printArray") [flags 0x3]  <function_decl 0x7f2d9713eb00 printArray>) [0 printArray S1 A8])
+(call_insn 18 17 19 2 (call (mem:QI (symbol_ref:DI ("printArray") [flags 0x3]  <function_decl 0x7fb49100fb00 printArray>) [0 printArray S1 A8])
         (const_int 0 [0])) "tempin.c":90 665 {*call}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))
@@ -1419,7 +1419,7 @@
 (insn 24 23 25 2 (set (reg:DI 5 di)
         (reg:DI 93)) "tempin.c":92 81 {*movdi_internal}
      (nil))
-(call_insn 25 24 26 2 (call (mem:QI (symbol_ref:DI ("mergeSort") [flags 0x3]  <function_decl 0x7f2d9713e900 mergeSort>) [0 mergeSort S1 A8])
+(call_insn 25 24 26 2 (call (mem:QI (symbol_ref:DI ("mergeSort") [flags 0x3]  <function_decl 0x7fb49100f900 mergeSort>) [0 mergeSort S1 A8])
         (const_int 0 [0])) "tempin.c":92 665 {*call}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))
@@ -1427,10 +1427,10 @@
             (expr_list:SI (use (reg:SI 1 dx))
                 (nil)))))
 (insn 26 25 27 2 (set (reg:DI 5 di)
-        (symbol_ref/f:DI ("*.LC2") [flags 0x2]  <var_decl 0x7f2d96d792d0 *.LC2>)) "tempin.c":94 81 {*movdi_internal}
+        (symbol_ref/f:DI ("*.LC2") [flags 0x2]  <var_decl 0x7fb490c4a2d0 *.LC2>)) "tempin.c":94 81 {*movdi_internal}
      (nil))
 (call_insn 27 26 28 2 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("puts") [flags 0x41]  <function_decl 0x7f2d97003600 __builtin_puts>) [0 __builtin_puts S1 A8])
+        (call (mem:QI (symbol_ref:DI ("puts") [flags 0x41]  <function_decl 0x7fb490ed4600 __builtin_puts>) [0 __builtin_puts S1 A8])
             (const_int 0 [0]))) "tempin.c":94 676 {*call_value}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))
@@ -1452,7 +1452,7 @@
 (insn 31 30 32 2 (set (reg:DI 5 di)
         (reg:DI 95)) "tempin.c":95 81 {*movdi_internal}
      (nil))
-(call_insn 32 31 33 2 (call (mem:QI (symbol_ref:DI ("printArray") [flags 0x3]  <function_decl 0x7f2d9713eb00 printArray>) [0 printArray S1 A8])
+(call_insn 32 31 33 2 (call (mem:QI (symbol_ref:DI ("printArray") [flags 0x3]  <function_decl 0x7fb49100fb00 printArray>) [0 printArray S1 A8])
         (const_int 0 [0])) "tempin.c":95 665 {*call}
      (nil)
     (expr_list:DI (use (reg:DI 5 di))
