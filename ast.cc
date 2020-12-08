@@ -1,16 +1,17 @@
 #include "ast.h"
-#include <string.h>
-#include <stdio.h>
+#include <string.h> // strdup
+#include <stdio.h>  // printf
 #include "list.h"
-#include <bits/stdc++.h>
+#include <bits/stdc++.h>  // later replace by specific header
 
 #define out cout<<indentation
 
 int tempcounter = 0, argcounter;
 int genCodeReg, genCodeVal, genCodeTempNum;
-string genCodeType, genCodeSymbol;
+string genCodeType, genCodeSymbol, genCodeFunName;
 string jumpAddr;
 bool genCodeSignal;
+ofstream symbols("results/symbols");
 
 map<string,void *> gSymbolTable;
 
@@ -56,10 +57,10 @@ void Program::Analyze() {
 
 string Program::GenerateCode(int indentlevel) {
     string indentation = string(indentlevel*4, ' ');
-    out << "#include <bits/stdc++.h>\n";
-    out << "using namespace std;\n\n";
-    out << "long long int regs[512];\n";
-    out << "map<string, long long int> externSymbolTable;\n\n";
+    out << "#include <stdio.h>\n";
+    out << "#include <stdbool.h>\n";
+    out << "#include <stdlib.h>\n";
+    out << "long long int regs[512];\n\n";
     for (int i = 0; i < funcbodylist->NumElements(); i++) {
         funcbodylist->Nth(i)->GenerateCode(indentlevel);
     }
@@ -94,6 +95,8 @@ string FuncBody::GenerateCode(int indentlevel) {
     string fname(name);
     if (fname == "main") {
         out << "int main(int argc, char **argv) {\n";
+        out << "    regs[20] = (long long int)malloc(0x1000000) + 0x1000000;\n";
+        out << "    regs[7] = regs[20] - 0x50;\n";
     }
     else if (numArgs == -1)
         return ""; // Function is never called
@@ -108,7 +111,7 @@ string FuncBody::GenerateCode(int indentlevel) {
         }
         if (numArgs) {
             arg = "arg"+to_string(argcounter);
-            cout << types->Nth(numArgs-1) << ' ' << arg << ") {\n";
+            cout << types->Nth(0) << ' ' << arg << ") {\n";
         }
         else cout << ") {\n";
         for (int i = numArgs-1; i >= 0; i--) {
@@ -116,9 +119,15 @@ string FuncBody::GenerateCode(int indentlevel) {
             arg = "arg"+to_string(numArgs-1-i);
             out << "    regs[" << to_string(reg) << "] = (long long int)" << arg << ";\n";
         }
+        out << "    regs[20] -= 0x100;\n";
+        out << "    regs[7] -= 0x100;\n";
     }
     for (int i = 0; i < stmts->NumElements(); i++) {
         stmts->Nth(i)->GenerateCode(indentlevel+1);
+    }
+    if (fname != "main") { 
+        out << "    regs[20] += 0x100;\n";
+        out << "    regs[7] += 0x100;\n";
     }
     if (retType != "void") {
         out << "    return (" << retType << ")(regs[0]);\n"; 
@@ -134,6 +143,7 @@ void FuncBody::setTypes(List<string> *ts, List<int> *rs, string rtype) {
     types = ts;
     regs = rs;
     retType = rtype;
+    sz = genCodeTempNum;
 }
 
 Integer::Integer(int val) {
@@ -171,7 +181,8 @@ void CodeLabel::PrintChildren(int indentlevel) {
 string CodeLabel::GenerateCode(int indentlevel) {
     string indentation = string(indentlevel*4, ' ');
     string lbl = "label"+to_string(labelno)+":";
-    out << lbl << '\n';
+    out << lbl << "\n";
+    out << "0; // NO-OP to keep gcc happy\n";
     return "";
 }
 
@@ -288,7 +299,7 @@ string ExprOperand::GenerateCode(int indentlevel) {
     if (linfo && linfo->getMemType() == "reg") {
         retstr = "regs[" + retstr + "]";
     }
-    if (linfo && linfo->checkForFlag("c")) {
+    else if (linfo) {
         string tempname = "temp" + to_string(tempcounter++);
         out << genCodeType << " *" << tempname << " = (" << genCodeType << " *)" << retstr << ";\n"; 
         retstr = "*"+tempname;
@@ -343,7 +354,7 @@ string DerefOperand::GenerateCode(int indentlevel) {
         genCodeType = "int";
     else if (t == "di")
         genCodeType = "long long int";
-    if (linfo->checkForFlag("c")) {
+    if (linfo) {
         string tempname = "temp" + to_string(tempcounter++);
         out << genCodeType << " *" << tempname << " = (" << genCodeType << " *)" << retstr << ";\n"; 
         retstr = "*"+tempname;
@@ -363,7 +374,8 @@ string SymbolRefOperand::GenerateCode(int indentlevel) {
     string name = string(symbol);
     string indentation = string(indentlevel*4, ' ');
     string tempname = "temp"+to_string(tempcounter++);
-    out << "long long int " << tempname << " = externSymbolTable[" << name << "];\n";
+    out << "long long int " << tempname << " = (long long int)externSymbolTable[" << name << "];\n";
+    symbols << name << ' ';
     return tempname;
 }
 
@@ -744,6 +756,34 @@ string AshiftRtExpr::GenerateCode(int indentlevel) {
     return tempname;
 }
 
+XorExpr::XorExpr(TypeInfo *ti, Operand *o1, Operand *o2) {
+    Assert(ti != NULL && o1 != NULL && o2 != NULL);
+    (tinfo = ti)->SetParent(this);
+    (op1 = o1)->SetParent(this);
+    (op2 = o2)->SetParent(this);
+}
+
+void XorExpr::PrintChildren(int indentlevel) {
+    printf("\n");
+    tinfo->Print(indentlevel+1);
+    op1->Print(indentlevel+1);
+    op2->Print(indentlevel+1);
+}
+
+string XorExpr::GenerateCode(int indentlevel) {
+    string indentation = string(indentlevel*4, ' ');
+    string opone = op1->GenerateCode(indentlevel), optwo = op2->GenerateCode(indentlevel);
+    string tempname = "temp" + to_string(tempcounter++);
+    string type, t(tinfo->getType());
+    if (t == "qi")
+        type = "char";
+    else if (t == "si")
+        type = "int";
+    else type = "long long int";
+    out << type << ' ' << tempname << " = (" << type << ")(" << opone << " ^ " << optwo << ");\n";
+    return tempname;
+}
+
 SubregExpr::SubregExpr(TypeInfo *ti, Operand *o) {
     Assert(ti != NULL && o != NULL);
     (tinfo = ti)->SetParent(this);
@@ -840,7 +880,7 @@ string ConditionExpr::GenerateCode(int indentlevel) {
         type = "int";
     else type = "long long int";
     temp1 = "temp" + to_string(tempcounter++);
-    out << temp1 << " = (" << type << ")(" << opone << " == " << optwo << ");\n";
+    out << type << " " << temp1 << " = (" << type << ")(" << opone << " == " << optwo << ");\n";
     return temp1;
 }
 
@@ -865,6 +905,7 @@ string SymbolRefExpr::GenerateCode(int indentlevel) {
         type = "int";
     else type = "long long int";
     out << type << " " << tempname << " = (" << type << ")externSymbolTable[" << string(sym) << "];\n";
+    symbols << string(sym) << ' ';
     return tempname;
 }
 
@@ -892,6 +933,15 @@ NegOperand::NegOperand(Operand *o) {
 void NegOperand::PrintChildren(int indentlevel) {
     printf("\n");
     op->Print(indentlevel+1);
+}
+
+string NegOperand::GenerateCode(int indentlevel) {
+    string indentation = string(indentlevel*4, ' ');
+    string retstring = op->GenerateCode(indentlevel);
+    string tp = genCodeType;
+    string tempname = "temp" + to_string(tempcounter++);
+    out << tp << " " << tempname << " = -" << retstring << ";\n";
+    return tempname;
 }
 
 Label::Label(int lno) {
@@ -1021,13 +1071,19 @@ string RetCall::GenerateCode(int indentlevel) {
     string type, t(tinfo->getType());
     string fname(fnname);
     fname = fname.substr(1,fname.size()-2);
+    if (fname == "*__isoc99_scanf")
+        fname = "scanf";
     if (t == "qi")
         type = "char";
     else if (t == "si")
         type = "int";
     else type = "long long int";
     out << type << " " << tempname << " = " << fname << "(";
-    elist->GenerateCode(indentlevel);
+    if (fname == "scanf")
+        elist->GenScanfCode(indentlevel);
+    else if (fname == "printf")
+        elist->GenPrintfCode(indentlevel);
+    else elist->GenerateCode(indentlevel);
     cout << ");\n";
     out << "regs[0] = (long long int)" << tempname << ";\n";
     return "";
@@ -1053,6 +1109,7 @@ string NoRetCall::GenerateCode(int indentlevel) {
     string fname(fnname);
     fname = fname.substr(1,fname.size()-2);
     out << fname << "(";
+    genCodeFunName = fname;
     elist->GenerateCode(indentlevel);
     cout << ");\n";
     return "";
@@ -1076,16 +1133,22 @@ void ExprList::SetArgs(string sname, string rettype) {
         return;
     List<string> *types = new List<string>;
     List<int> *regs = new List<int>;
+    genCodeTempNum = 0;
     for (int i = 0; i < args->NumElements(); i++) {
         regs->Append(args->Nth(i).first);
         string temp = args->Nth(i).second;
         if (temp == "qi") {
             types->Append("char");
+            genCodeTempNum++;
         }
         else if (temp == "si") {
             types->Append("int");
+            genCodeTempNum += 4;
         }
-        else types->Append("long long int");
+        else {
+            types->Append("long long int");
+            genCodeTempNum += 8;
+        }
     }
     string rtype = "void";
     if (rettype == "qi")
@@ -1121,6 +1184,70 @@ string ExprList::GenerateCode(int indentlevel) {
     else if (t == "si")
         type = "int";
     else type = "long long int";
+    if (type == "long long int")
+        cout << "regs[" << reg << "]";
+    else cout << "(" << type << ")regs[" << reg << "]";
+    return "";
+}
+
+string ExprList::GenScanfCode(int indentlevel) {
+    int n = args->NumElements();
+    string type, t;
+    for (int i = n-2; i > 0; i--) {
+        int reg = args->Nth(i).first;
+        t = string(args->Nth(i).second);
+        if (t == "qi")
+            type = "char";
+        else if (t == "si")
+            type = "int";
+        else type = "long long int";
+        if (i == n-2)
+            type = "const char *";
+        if (type != "long long int")
+            cout << "(" << type << ")" << "regs[" << reg << "], ";
+        else cout << "regs[" << reg << "], "; 
+    }
+    int reg = args->Nth(0).first;
+    t = string(args->Nth(0).second);
+    if (t == "qi")
+        type = "char";
+    else if (t == "si")
+        type = "int";
+    else type = "long long int";
+    if (n == 2)
+        type = "const char *";
+    if (type == "long long int")
+        cout << "regs[" << reg << "]";
+    else cout << "(" << type << ")regs[" << reg << "]";
+    return "";
+}
+
+string ExprList::GenPrintfCode(int indentlevel) {
+    int n = args->NumElements();
+    string type, t;
+    for (int i = n-2; i > 0; i--) {
+        int reg = args->Nth(i).first;
+        t = string(args->Nth(i).second);
+        if (t == "qi")
+            type = "char";
+        else if (t == "si")
+            type = "int";
+        else type = "long long int";
+        if (i == n-2)
+            type = "const char *";
+        if (type != "long long int")
+            cout << "(" << type << ")" << "regs[" << reg << "], ";
+        else cout << "regs[" << reg << "], "; 
+    }
+    int reg = args->Nth(0).first;
+    t = string(args->Nth(0).second);
+    if (t == "qi")
+        type = "char";
+    else if (t == "si")
+        type = "int";
+    else type = "long long int";
+    if (n == 2)
+        type = "const char *";
     if (type == "long long int")
         cout << "regs[" << reg << "]";
     else cout << "(" << type << ")regs[" << reg << "]";

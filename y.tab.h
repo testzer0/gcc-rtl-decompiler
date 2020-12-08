@@ -105,10 +105,11 @@ extern int yydebug;
     T_Leu = 315,
     T_Geu = 316,
     T_Neg = 317,
-    T_StringConstant = 318,
-    T_IntConstant = 319,
-    T_FunBegin = 320,
-    TWO = 321
+    T_Xor = 318,
+    T_StringConstant = 319,
+    T_IntConstant = 320,
+    T_FunBegin = 321,
+    TWO = 322
   };
 #endif
 /* Tokens.  */
@@ -172,10 +173,11 @@ extern int yydebug;
 #define T_Leu 315
 #define T_Geu 316
 #define T_Neg 317
-#define T_StringConstant 318
-#define T_IntConstant 319
-#define T_FunBegin 320
-#define TWO 321
+#define T_Xor 318
+#define T_StringConstant 319
+#define T_IntConstant 320
+#define T_FunBegin 321
+#define TWO 322
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -226,6 +228,7 @@ union YYSTYPE
     AshiftExpr *ashiftexpr;
     LshiftRtExpr *lshiftrtexpr;
     AshiftRtExpr *ashiftrtexpr;
+    XorExpr *xorexpr;
     SubregExpr *subregexpr;
     CompareExpr *compareexpr;
     ConditionExpr *conditionexpr;
@@ -247,7 +250,7 @@ union YYSTYPE
     const char *stringConstant;
     char identifier[32];
 
-#line 251 "y.tab.h" /* yacc.c:1909  */
+#line 254 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

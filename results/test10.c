@@ -20,6 +20,7 @@ Node *newNode(int val, Node *par)
     create->left = NULL;
     create->right = NULL;
     create->color = 1;
+    return create;
 }
 
 // Check if the node is the leaf
@@ -792,6 +793,7 @@ int main()
             "Quit\n\nPlease Enter the Choice - ");
         scanf("%d", &choice);
     }
+    return 0;
 }
 
 // 32 12 50 53 1 2 3 4 5 6 7 8 9

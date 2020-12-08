@@ -54,6 +54,7 @@
     AshiftExpr *ashiftexpr;
     LshiftRtExpr *lshiftrtexpr;
     AshiftRtExpr *ashiftrtexpr;
+    XorExpr *xorexpr;
     SubregExpr *subregexpr;
     CompareExpr *compareexpr;
     ConditionExpr *conditionexpr;
@@ -81,7 +82,7 @@
 %token T_IFlag T_VFlag T_FFlag T_CFlag T_SIType T_DIType T_QIType T_CCType T_CCZType T_CCGCType
 %token T_Plus T_Minus T_Mult T_Div T_Lshift T_Ashift T_LshiftRt T_AshiftRt T_Subreg T_ExprList 
 %token T_EndPara T_RArrow T_SiExtend T_Compare T_Lt T_Gt T_Le T_Ge T_Eq T_Ne T_CodeLabel T_UDiv
-%token T_Mod T_UMod T_CCGOCType T_ZeExtend T_Gtu T_Ltu T_Leu T_Geu T_Neg
+%token T_Mod T_UMod T_CCGOCType T_ZeExtend T_Gtu T_Ltu T_Leu T_Geu T_Neg T_Xor
 
 %token <stringConstant> T_StringConstant
 %token <integerConstant> T_IntConstant
@@ -129,6 +130,7 @@
 %type <ashiftexpr> AshiftExpr
 %type <lshiftrtexpr> LshiftRtExpr
 %type <ashiftrtexpr> AshiftRtExpr
+%type <xorexpr> XorExpr
 %type <subregexpr> SubregExpr
 %type <compareexpr> CompareExpr
 %type <conditionexpr> ConditionExpr
@@ -234,7 +236,7 @@ Cmds            :   Cmds '(' PlainCmd ')'              { ($$ = $1)->Append($3); 
                 |   '(' PlainCmd ')'                   { ($$ = new List<PlainCmd *>)->Append($2); }
                 ;
 
-ClobberCmd      :   T_Clobber '(' T_Reg ':' T_CCType T_IntConstant ')' { $$ = new ClobberCmd(); }
+ClobberCmd      :   T_Clobber '(' T_Reg ':' TypeInfo T_IntConstant ')' { $$ = new ClobberCmd(); }
                 |   T_Clobber '(' T_Reg Flags ':' TypeInfo T_IntConstant ')' { $$ = new ClobberCmd(); }
                 |   T_Clobber '(' T_Mem ':' '(' ')' ')' { $$ = new ClobberCmd(); }
                 |   T_Clobber '(' T_Mem ':' '(' Operand ')' ')' { $$ = new ClobberCmd(); }
@@ -271,6 +273,7 @@ ExprOperand     :   LocInfo ':' TypeInfo Expr   { $$ = new ExprOperand($1,$3,$4)
                 |   UDivExpr %prec TWO                   { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   ModExpr %prec TWO                    { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   UModExpr %prec TWO                   { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   XorExpr %prec TWO               { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   SubregExpr %prec TWO                 { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   ConditionExpr %prec TWO              { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   SymbolRefExpr %prec TWO              { $$ = new ExprOperand(NULL,NULL,$1); }
@@ -319,13 +322,14 @@ TypeInfo        :   T_SIType                    { $$ = new TypeInfo("si"); }
                 ;
 
 Expr            :   IntegerExpr                 { $$ = $1; }
-                |   '(' PlusExpr ')'           { $$ = $2; }
+                |   '(' PlusExpr ')'            { $$ = $2; }
                 |   '(' MinusExpr ')'           { $$ = $2; }
                 |   '(' MultExpr ')'            { $$ = $2; }
                 |   '(' AshiftExpr ')'          { $$ = $2; }
                 |   '(' LshiftExpr ')'          { $$ = $2; }
                 |   '(' AshiftRtExpr ')'        { $$ = $2; }
                 |   '(' LshiftRtExpr ')'        { $$ = $2; }
+                |   '(' XorExpr ')'             { $$ = $2; }
                 |   '(' SubregExpr ')'          { $$ = $2; }
                 |   '(' CompareExpr ')'         { $$ = $2; }
                 |   '(' DivExpr ')'             { $$ = $2; }
@@ -370,6 +374,9 @@ LshiftRtExpr    :   T_LshiftRt TypeInfo '(' Operand ')' '(' Operand ')'     { $$
                 ;
 
 AshiftRtExpr    :   T_AshiftRt TypeInfo '(' Operand ')' '(' Operand ')'     { $$ = new AshiftRtExpr($2,$4,$7); }
+                ;
+
+XorExpr         :   T_Xor TypeInfo '(' Operand ')' '(' Operand ')'     { $$ = new XorExpr($2,$4,$7); }
                 ;
 
 SubregExpr      :   T_Subreg TypeInfo '(' Operand ')' Integer           { $$ = new SubregExpr($2,$4); }

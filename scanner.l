@@ -58,6 +58,7 @@ END_IGNORE3     (">")
 "/v" 				{ return T_VFlag; }
 "/f" 				{ return T_FFlag; }
 "/c" 				{ return T_CFlag; }
+"/j"				;
 "SI" 				{ return T_SIType; }
 "DI" 				{ return T_DIType; }
 "QI" 				{ return T_QIType; }
@@ -73,6 +74,7 @@ END_IGNORE3     (">")
 "udiv:"				{ return T_UDiv; }
 "mod:"				{ return T_Mod; }
 "umod:"				{ return T_UMod; }
+"xor:"				{ return T_Xor; }
 "ashiftrt:"			{ return T_AshiftRt; }
 "lshiftrt:"			{ return T_LshiftRt; }
 "ashift:"			{ return T_Ashift; }

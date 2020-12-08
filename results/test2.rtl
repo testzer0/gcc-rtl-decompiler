@@ -11,25 +11,35 @@
         (reg:SI 5 di [ a ])) "test1.c":3 82 {*movsi_internal}
      (nil))
 (note 3 2 6 2 NOTE_INSN_FUNCTION_BEG)
-(insn 6 3 7 2 (set (reg:SI 89)
+(insn 6 3 7 2 (set (reg:SI 91)
         (mem/c:SI (plus:DI (reg/f:DI 20 frame)
                 (const_int -20 [0xffffffffffffffec])) [1 a+0 S4 A32])) "test1.c":4 82 {*movsi_internal}
      (nil))
-(insn 7 6 8 2 (set (mem/c:QI (plus:DI (reg/f:DI 20 frame)
-                (const_int -1 [0xffffffffffffffff])) [0 ch+0 S1 A8])
-        (subreg:QI (reg:SI 89) 0)) "test1.c":4 84 {*movqi_internal}
+(insn 7 6 8 2 (set (reg:QI 87 [ _1 ])
+        (subreg:QI (reg:SI 91) 0)) "test1.c":4 84 {*movqi_internal}
      (nil))
-(insn 8 7 11 2 (set (reg:QI 87 [ _3 ])
+(insn 8 7 9 2 (parallel [
+            (set (reg:QI 88 [ _2 ])
+                (plus:QI (reg:QI 87 [ _1 ])
+                    (const_int 97 [0x61])))
+            (clobber (reg:CC 17 flags))
+        ]) "test1.c":4 221 {*addqi_1}
+     (nil))
+(insn 9 8 10 2 (set (mem/c:QI (plus:DI (reg/f:DI 20 frame)
+                (const_int -1 [0xffffffffffffffff])) [0 ch+0 S1 A8])
+        (reg:QI 88 [ _2 ])) "test1.c":4 84 {*movqi_internal}
+     (nil))
+(insn 10 9 13 2 (set (reg:QI 89 [ _5 ])
         (mem/c:QI (plus:DI (reg/f:DI 20 frame)
                 (const_int -1 [0xffffffffffffffff])) [0 ch+0 S1 A8])) "test1.c":5 84 {*movqi_internal}
      (nil))
-(insn 11 8 15 2 (set (reg:QI 88 [ <retval> ])
-        (reg:QI 87 [ _3 ])) "test1.c":5 84 {*movqi_internal}
+(insn 13 10 17 2 (set (reg:QI 90 [ <retval> ])
+        (reg:QI 89 [ _5 ])) "test1.c":5 84 {*movqi_internal}
      (nil))
-(insn 15 11 16 2 (set (reg/i:QI 0 ax)
-        (reg:QI 88 [ <retval> ])) "test1.c":6 84 {*movqi_internal}
+(insn 17 13 18 2 (set (reg/i:QI 0 ax)
+        (reg:QI 90 [ <retval> ])) "test1.c":6 84 {*movqi_internal}
      (nil))
-(insn 16 15 0 2 (use (reg/i:QI 0 ax)) "test1.c":6 -1
+(insn 18 17 0 2 (use (reg/i:QI 0 ax)) "test1.c":6 -1
      (nil))
 ;;  succ:       EXIT [100.0%]  (FALLTHRU)
 
@@ -53,13 +63,13 @@
         (reg:DI 91)) "test1.c":10 81 {*movdi_internal}
      (nil))
 (insn 7 6 8 2 (set (reg:DI 5 di)
-        (symbol_ref/f:DI ("*.LC0") [flags 0x2]  <var_decl 0x7fa48b4a23f0 *.LC0>)) "test1.c":10 81 {*movdi_internal}
+        (symbol_ref/f:DI ("*.LC0") [flags 0x2]  <var_decl 0x7f69262163f0 *.LC0>)) "test1.c":10 81 {*movdi_internal}
      (nil))
 (insn 8 7 9 2 (set (reg:QI 0 ax)
         (const_int 0 [0])) "test1.c":10 84 {*movqi_internal}
      (nil))
 (call_insn 9 8 10 2 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("*__isoc99_scanf") [flags 0x41]  <function_decl 0x7fa48b3b0b00 scanf>) [0 __builtin_scanf S1 A8])
+        (call (mem:QI (symbol_ref:DI ("*__isoc99_scanf") [flags 0x41]  <function_decl 0x7f6926122b00 scanf>) [0 __builtin_scanf S1 A8])
             (const_int 0 [0]))) "test1.c":10 676 {*call_value}
      (nil)
     (expr_list (use (reg:QI 0 ax))
@@ -74,7 +84,7 @@
         (reg:SI 87 [ c.0_1 ])) "test1.c":11 82 {*movsi_internal}
      (nil))
 (call_insn 12 11 13 2 (set (reg:QI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("inttochar") [flags 0x3]  <function_decl 0x7fa48b499f00 inttochar>) [0 inttochar S1 A8])
+        (call (mem:QI (symbol_ref:DI ("inttochar") [flags 0x3]  <function_decl 0x7f692620bf00 inttochar>) [0 inttochar S1 A8])
             (const_int 0 [0]))) "test1.c":11 676 {*call_value}
      (nil)
     (expr_list:SI (use (reg:SI 5 di))
@@ -94,13 +104,13 @@
         (reg:SI 88 [ _2 ])) "test1.c":12 82 {*movsi_internal}
      (nil))
 (insn 17 16 18 2 (set (reg:DI 5 di)
-        (symbol_ref/f:DI ("*.LC1") [flags 0x2]  <var_decl 0x7fa48b4a2480 *.LC1>)) "test1.c":12 81 {*movdi_internal}
+        (symbol_ref/f:DI ("*.LC1") [flags 0x2]  <var_decl 0x7f6926216480 *.LC1>)) "test1.c":12 81 {*movdi_internal}
      (nil))
 (insn 18 17 19 2 (set (reg:QI 0 ax)
         (const_int 0 [0])) "test1.c":12 84 {*movqi_internal}
      (nil))
 (call_insn 19 18 20 2 (set (reg:SI 0 ax)
-        (call (mem:QI (symbol_ref:DI ("printf") [flags 0x41]  <function_decl 0x7fa48b3aff00 printf>) [0 __builtin_printf S1 A8])
+        (call (mem:QI (symbol_ref:DI ("printf") [flags 0x41]  <function_decl 0x7f6926121f00 printf>) [0 __builtin_printf S1 A8])
             (const_int 0 [0]))) "test1.c":12 676 {*call_value}
      (nil)
     (expr_list (use (reg:QI 0 ax))

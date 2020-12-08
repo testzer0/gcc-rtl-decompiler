@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 char inttochar(int a) {
-	char ch = a-97+'a'; // only lowercase
+	char ch = a+'a'; // only lowercase
 	return ch;
 }
 

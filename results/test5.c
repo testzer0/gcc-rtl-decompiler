@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 struct somestruct{
 	int a;
 	int b;
@@ -13,5 +15,6 @@ int main() {
 	s.a = 2;
 	s.b = 3;
 	int c = f(s);
+	printf("%d\n",c);
 	return 0;
 }
