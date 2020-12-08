@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import json
+import subprocess
 
 # Create your views here.
 import os
@@ -20,10 +21,12 @@ def index(request):
         os.system("gcc tempin.c -S")
         os.system("./rcc <./tempin.c.230r.vregs >./tempout")
         lookfor = "results/symbols"
-        symbolsname = "tempin.S"
+        symbolsname = "tempin.s"
+        fullname = "tempin.c.230r.vregs"
         outname = "tempout"
-        pycmd = "python3 symbols.py --lookfor \"" + lookfor + "\" --symbols \"" + symbolsname +"\" --outfile \"" + outname + "\""
         subprocess.run("./rcc < %s > %s" % (fullname,outname), shell=True)
+        pycmd = "python3 symbols.py --lookfor \"" + lookfor + "\" --symbols \"" + symbolsname +"\" --outfile \"" + outname + "\""
+        subprocess.run(pycmd,shell=True)
         with open('./tempout') as file:
             cpp = file.read()
         with open('./tempin.c.230r.vregs') as file:

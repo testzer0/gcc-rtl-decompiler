@@ -1,147 +1,418 @@
 
-;; Function f1 (f1, funcdef_no=0, decl_uid=1792, cgraph_uid=0, symbol_order=0)
-
-(note 1 0 3 NOTE_INSN_DELETED)
-(note 3 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
-(note 2 3 5 2 NOTE_INSN_FUNCTION_BEG)
-(insn 5 2 8 2 (set (reg:SI 87 [ _1 ])
-        (const_int 2 [0x2])) "tempin.c":4 82 {*movsi_internal}
-     (nil))
-(insn 8 5 12 2 (set (reg:SI 88 [ <retval> ])
-        (reg:SI 87 [ _1 ])) "tempin.c":4 82 {*movsi_internal}
-     (nil))
-(insn 12 8 13 2 (set (reg/i:SI 0 ax)
-        (reg:SI 88 [ <retval> ])) "tempin.c":5 82 {*movsi_internal}
-     (nil))
-(insn 13 12 0 2 (use (reg/i:SI 0 ax)) "tempin.c":5 -1
-     (nil))
-
-;; Function f2 (f2, funcdef_no=1, decl_uid=1796, cgraph_uid=1, symbol_order=1)
-
-(note 1 0 5 NOTE_INSN_DELETED)
-(note 5 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
-(insn 2 5 3 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -20 [0xffffffffffffffec])) [1 a+0 S4 A32])
-        (reg:SI 5 di [ a ])) "tempin.c":7 82 {*movsi_internal}
-     (nil))
-(insn 3 2 4 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -24 [0xffffffffffffffe8])) [1 b+0 S4 A32])
-        (reg:SI 4 si [ b ])) "tempin.c":7 82 {*movsi_internal}
-     (nil))
-(note 4 3 10 2 NOTE_INSN_FUNCTION_BEG)
-(insn 10 4 11 2 (set (reg:SI 92)
-        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -20 [0xffffffffffffffec])) [1 a+0 S4 A32])) "tempin.c":8 82 {*movsi_internal}
-     (nil))
-(insn 11 10 12 2 (parallel [
-            (set (reg:SI 91)
-                (ashift:SI (reg:SI 92)
-                    (const_int 1 [0x1])))
-            (clobber (reg:CC 17 flags))
-        ]) "tempin.c":8 521 {*ashlsi3_1}
-     (expr_list:REG_EQUAL (ashift:SI (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                    (const_int -20 [0xffffffffffffffec])) [1 a+0 S4 A32])
-            (const_int 1 [0x1]))
-        (nil)))
-(insn 12 11 13 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -4 [0xfffffffffffffffc])) [1 c+0 S4 A32])
-        (reg:SI 91)) "tempin.c":8 82 {*movsi_internal}
-     (nil))
-(insn 13 12 14 2 (set (reg:SI 93)
-        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -24 [0xffffffffffffffe8])) [1 b+0 S4 A32])) "tempin.c":9 82 {*movsi_internal}
-     (nil))
-(insn 14 13 15 2 (set (reg:SI 94)
-        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -4 [0xfffffffffffffffc])) [1 c+0 S4 A32])) "tempin.c":9 82 {*movsi_internal}
-     (nil))
-(insn 15 14 18 2 (parallel [
-            (set (reg:SI 87 [ _4 ])
-                (plus:SI (reg:SI 93)
-                    (reg:SI 94)))
-            (clobber (reg:CC 17 flags))
-        ]) "tempin.c":9 217 {*addsi_1}
-     (expr_list:REG_EQUAL (plus:SI (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                    (const_int -24 [0xffffffffffffffe8])) [1 b+0 S4 A32])
-            (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                    (const_int -4 [0xfffffffffffffffc])) [1 c+0 S4 A32]))
-        (nil)))
-(insn 18 15 22 2 (set (reg:SI 88 [ <retval> ])
-        (reg:SI 87 [ _4 ])) "tempin.c":9 82 {*movsi_internal}
-     (nil))
-(insn 22 18 23 2 (set (reg/i:SI 0 ax)
-        (reg:SI 88 [ <retval> ])) "tempin.c":10 82 {*movsi_internal}
-     (nil))
-(insn 23 22 0 2 (use (reg/i:SI 0 ax)) "tempin.c":10 -1
-     (nil))
-
-;; Function f3 (f3, funcdef_no=2, decl_uid=1801, cgraph_uid=2, symbol_order=2)
+;; Function binary_search (binary_search, funcdef_no=0, decl_uid=2251, cgraph_uid=0, symbol_order=0)
 
 (note 1 0 7 NOTE_INSN_DELETED)
 (note 7 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
-(insn 2 7 5 2 (set (reg:SI 92)
-        (reg:SI 5 di [ a ])) "tempin.c":12 82 {*movsi_internal}
+(insn 2 7 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [2 a+0 S8 A64])
+        (reg:DI 5 di [ a ])) "tempin.c":3 81 {*movdi_internal}
      (nil))
-(insn 5 2 3 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -8 [0xfffffffffffffff8])) [1 b+0 S4 A32])
-        (reg:SI 4 si [ b ])) "tempin.c":12 82 {*movsi_internal}
+(insn 3 2 4 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -28 [0xffffffffffffffe4])) [1 l+0 S4 A32])
+        (reg:SI 4 si [ l ])) "tempin.c":3 82 {*movsi_internal}
      (nil))
-(insn 3 5 4 2 (set (reg:QI 93)
-        (subreg:QI (reg:SI 92) 0)) "tempin.c":12 84 {*movqi_internal}
+(insn 4 3 5 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -32 [0xffffffffffffffe0])) [1 r+0 S4 A32])
+        (reg:SI 1 dx [ r ])) "tempin.c":3 82 {*movsi_internal}
      (nil))
-(insn 4 3 6 2 (set (mem/c:QI (plus:DI (reg/f:DI 20 frame)
-                (const_int -4 [0xfffffffffffffffc])) [0 a+0 S1 A32])
-        (reg:QI 93)) "tempin.c":12 84 {*movqi_internal}
+(insn 5 4 6 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -36 [0xffffffffffffffdc])) [1 find+0 S4 A32])
+        (reg:SI 2 cx [ find ])) "tempin.c":3 82 {*movsi_internal}
      (nil))
-(note 6 4 9 2 NOTE_INSN_FUNCTION_BEG)
-(insn 9 6 10 2 (set (reg:SI 94)
+(note 6 5 9 2 NOTE_INSN_FUNCTION_BEG)
+(insn 9 6 10 2 (set (reg:SI 101)
         (mem/c:SI (plus:DI (reg/f:DI 20 frame)
-                (const_int -8 [0xfffffffffffffff8])) [1 b+0 S4 A32])) "tempin.c":13 82 {*movsi_internal}
+                (const_int -28 [0xffffffffffffffe4])) [1 l+0 S4 A32])) "tempin.c":4 82 {*movsi_internal}
      (nil))
-(insn 10 9 11 2 (set (reg:QI 87 [ _1 ])
-        (subreg:QI (reg:SI 94) 0)) "tempin.c":13 84 {*movqi_internal}
+(insn 10 9 11 2 (set (reg:CCGC 17 flags)
+        (compare:CCGC (reg:SI 101)
+            (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -32 [0xffffffffffffffe0])) [1 r+0 S4 A32]))) "tempin.c":4 7 {*cmpsi_1}
      (nil))
-(insn 11 10 12 2 (set (reg:QI 88 [ a.0_2 ])
-        (mem/c:QI (plus:DI (reg/f:DI 20 frame)
-                (const_int -4 [0xfffffffffffffffc])) [0 a+0 S1 A32])) "tempin.c":13 84 {*movqi_internal}
+(jump_insn 11 10 12 2 (set (pc)
+        (if_then_else (le (reg:CCGC 17 flags)
+                (const_int 0 [0]))
+            (label_ref 16)
+            (pc))) "tempin.c":4 627 {*jcc_1}
+     (nil)
+ -> 16)
+(note 12 11 13 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 13 12 14 4 (set (reg:SI 99 [ _13 ])
+        (const_int -1 [0xffffffffffffffff])) "tempin.c":5 82 {*movsi_internal}
      (nil))
-(insn 12 11 13 2 (parallel [
-            (set (reg:QI 89 [ _3 ])
-                (plus:QI (reg:QI 87 [ _1 ])
-                    (reg:QI 88 [ a.0_2 ])))
+(jump_insn 14 13 15 4 (set (pc)
+        (label_ref 79)) "tempin.c":5 659 {jump}
+     (nil)
+ -> 79)
+(barrier 15 14 16)
+(code_label 16 15 17 5 2 (nil) [1 uses])
+(note 17 16 18 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 18 17 19 5 (set (reg:SI 102)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -32 [0xffffffffffffffe0])) [1 r+0 S4 A32])) "tempin.c":6 82 {*movsi_internal}
+     (nil))
+(insn 19 18 20 5 (parallel [
+            (set (reg:SI 87 [ _1 ])
+                (minus:SI (reg:SI 102)
+                    (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                            (const_int -28 [0xffffffffffffffe4])) [1 l+0 S4 A32])))
             (clobber (reg:CC 17 flags))
-        ]) "tempin.c":13 221 {*addqi_1}
+        ]) "tempin.c":6 273 {*subsi_1}
+     (expr_list:REG_EQUAL (minus:SI (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -32 [0xffffffffffffffe0])) [1 r+0 S4 A32])
+            (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -28 [0xffffffffffffffe4])) [1 l+0 S4 A32]))
+        (nil)))
+(insn 20 19 21 5 (parallel [
+            (set (reg:SI 103)
+                (lshiftrt:SI (reg:SI 87 [ _1 ])
+                    (const_int 31 [0x1f])))
+            (clobber (reg:CC 17 flags))
+        ]) "tempin.c":6 554 {*lshrsi3_1}
      (nil))
-(insn 13 12 14 2 (set (mem/c:QI (plus:DI (reg/f:DI 20 frame)
-                (const_int -4 [0xfffffffffffffffc])) [0 a+0 S1 A32])
-        (reg:QI 89 [ _3 ])) "tempin.c":13 84 {*movqi_internal}
+(insn 21 20 22 5 (parallel [
+            (set (reg:SI 104)
+                (plus:SI (reg:SI 103)
+                    (reg:SI 87 [ _1 ])))
+            (clobber (reg:CC 17 flags))
+        ]) "tempin.c":6 217 {*addsi_1}
      (nil))
-(insn 14 13 17 2 (set (reg:QI 90 [ _7 ])
-        (mem/c:QI (plus:DI (reg/f:DI 20 frame)
-                (const_int -4 [0xfffffffffffffffc])) [0 a+0 S1 A32])) "tempin.c":14 84 {*movqi_internal}
+(insn 22 21 23 5 (parallel [
+            (set (reg:SI 105)
+                (ashiftrt:SI (reg:SI 104)
+                    (const_int 1 [0x1])))
+            (clobber (reg:CC 17 flags))
+        ]) "tempin.c":6 555 {*ashrsi3_1}
+     (expr_list:REG_EQUAL (div:SI (reg:SI 87 [ _1 ])
+            (const_int 2 [0x2]))
+        (nil)))
+(insn 23 22 27 5 (set (reg:SI 88 [ _2 ])
+        (reg:SI 105)) "tempin.c":6 82 {*movsi_internal}
      (nil))
-(insn 17 14 21 2 (set (reg:QI 91 [ <retval> ])
-        (reg:QI 90 [ _7 ])) "tempin.c":14 84 {*movqi_internal}
+(insn 27 23 28 5 (set (reg:SI 109)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -28 [0xffffffffffffffe4])) [1 l+0 S4 A32])) "tempin.c":6 82 {*movsi_internal}
      (nil))
-(insn 21 17 22 2 (set (reg/i:QI 0 ax)
-        (reg:QI 91 [ <retval> ])) "tempin.c":15 84 {*movqi_internal}
+(insn 28 27 29 5 (parallel [
+            (set (reg:SI 108)
+                (plus:SI (reg:SI 88 [ _2 ])
+                    (reg:SI 109)))
+            (clobber (reg:CC 17 flags))
+        ]) "tempin.c":6 217 {*addsi_1}
+     (expr_list:REG_EQUAL (plus:SI (reg:SI 88 [ _2 ])
+            (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -28 [0xffffffffffffffe4])) [1 l+0 S4 A32]))
+        (nil)))
+(insn 29 28 30 5 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -4 [0xfffffffffffffffc])) [1 m+0 S4 A32])
+        (reg:SI 108)) "tempin.c":6 82 {*movsi_internal}
      (nil))
-(insn 22 21 0 2 (use (reg/i:QI 0 ax)) "tempin.c":15 -1
+(insn 30 29 31 5 (set (reg:SI 110)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -4 [0xfffffffffffffffc])) [1 m+0 S4 A32])) "tempin.c":7 82 {*movsi_internal}
+     (nil))
+(insn 31 30 32 5 (set (reg:DI 89 [ _3 ])
+        (sign_extend:DI (reg:SI 110))) "tempin.c":7 145 {*extendsidi2_rex64}
+     (nil))
+(insn 32 31 33 5 (parallel [
+            (set (reg:DI 90 [ _4 ])
+                (ashift:DI (reg:DI 89 [ _3 ])
+                    (const_int 2 [0x2])))
+            (clobber (reg:CC 17 flags))
+        ]) "tempin.c":7 522 {*ashldi3_1}
+     (nil))
+(insn 33 32 34 5 (set (reg/f:DI 111)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [2 a+0 S8 A64])) "tempin.c":7 81 {*movdi_internal}
+     (nil))
+(insn 34 33 35 5 (parallel [
+            (set (reg/f:DI 91 [ _5 ])
+                (plus:DI (reg:DI 90 [ _4 ])
+                    (reg/f:DI 111)))
+            (clobber (reg:CC 17 flags))
+        ]) "tempin.c":7 218 {*adddi_1}
+     (expr_list:REG_EQUAL (plus:DI (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -24 [0xffffffffffffffe8])) [2 a+0 S8 A64])
+            (reg:DI 90 [ _4 ]))
+        (nil)))
+(insn 35 34 36 5 (set (reg:SI 92 [ _6 ])
+        (mem:SI (reg/f:DI 91 [ _5 ]) [1 *_5+0 S4 A32])) "tempin.c":7 82 {*movsi_internal}
+     (nil))
+(insn 36 35 37 5 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -36 [0xffffffffffffffdc])) [1 find+0 S4 A32])
+            (reg:SI 92 [ _6 ]))) "tempin.c":7 7 {*cmpsi_1}
+     (nil))
+(jump_insn 37 36 38 5 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 42)
+            (pc))) "tempin.c":7 627 {*jcc_1}
+     (nil)
+ -> 42)
+(note 38 37 39 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(insn 39 38 40 6 (set (reg:SI 99 [ _13 ])
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -4 [0xfffffffffffffffc])) [1 m+0 S4 A32])) "tempin.c":8 82 {*movsi_internal}
+     (nil))
+(jump_insn 40 39 41 6 (set (pc)
+        (label_ref 79)) "tempin.c":8 659 {jump}
+     (nil)
+ -> 79)
+(barrier 41 40 42)
+(code_label 42 41 43 7 4 (nil) [1 uses])
+(note 43 42 44 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 44 43 45 7 (set (reg:SI 112)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -4 [0xfffffffffffffffc])) [1 m+0 S4 A32])) "tempin.c":10 82 {*movsi_internal}
+     (nil))
+(insn 45 44 46 7 (set (reg:DI 93 [ _7 ])
+        (sign_extend:DI (reg:SI 112))) "tempin.c":10 145 {*extendsidi2_rex64}
+     (nil))
+(insn 46 45 47 7 (parallel [
+            (set (reg:DI 94 [ _8 ])
+                (ashift:DI (reg:DI 93 [ _7 ])
+                    (const_int 2 [0x2])))
+            (clobber (reg:CC 17 flags))
+        ]) "tempin.c":10 522 {*ashldi3_1}
+     (nil))
+(insn 47 46 48 7 (set (reg/f:DI 113)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [2 a+0 S8 A64])) "tempin.c":10 81 {*movdi_internal}
+     (nil))
+(insn 48 47 49 7 (parallel [
+            (set (reg/f:DI 95 [ _9 ])
+                (plus:DI (reg:DI 94 [ _8 ])
+                    (reg/f:DI 113)))
+            (clobber (reg:CC 17 flags))
+        ]) "tempin.c":10 218 {*adddi_1}
+     (expr_list:REG_EQUAL (plus:DI (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -24 [0xffffffffffffffe8])) [2 a+0 S8 A64])
+            (reg:DI 94 [ _8 ]))
+        (nil)))
+(insn 49 48 50 7 (set (reg:SI 96 [ _10 ])
+        (mem:SI (reg/f:DI 95 [ _9 ]) [1 *_9+0 S4 A32])) "tempin.c":10 82 {*movsi_internal}
+     (nil))
+(insn 50 49 51 7 (set (reg:CCGC 17 flags)
+        (compare:CCGC (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -36 [0xffffffffffffffdc])) [1 find+0 S4 A32])
+            (reg:SI 96 [ _10 ]))) "tempin.c":10 7 {*cmpsi_1}
+     (nil))
+(jump_insn 51 50 52 7 (set (pc)
+        (if_then_else (le (reg:CCGC 17 flags)
+                (const_int 0 [0]))
+            (label_ref 66)
+            (pc))) "tempin.c":10 627 {*jcc_1}
+     (nil)
+ -> 66)
+(note 52 51 53 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(insn 53 52 54 8 (set (reg:SI 114)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -4 [0xfffffffffffffffc])) [1 m+0 S4 A32])) "tempin.c":11 82 {*movsi_internal}
+     (nil))
+(insn 54 53 55 8 (parallel [
+            (set (reg:SI 97 [ _11 ])
+                (plus:SI (reg:SI 114)
+                    (const_int 1 [0x1])))
+            (clobber (reg:CC 17 flags))
+        ]) "tempin.c":11 217 {*addsi_1}
+     (expr_list:REG_EQUAL (plus:SI (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -4 [0xfffffffffffffffc])) [1 m+0 S4 A32])
+            (const_int 1 [0x1]))
+        (nil)))
+(insn 55 54 56 8 (set (reg:SI 115)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -36 [0xffffffffffffffdc])) [1 find+0 S4 A32])) "tempin.c":11 82 {*movsi_internal}
+     (nil))
+(insn 56 55 57 8 (set (reg:SI 116)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -32 [0xffffffffffffffe0])) [1 r+0 S4 A32])) "tempin.c":11 82 {*movsi_internal}
+     (nil))
+(insn 57 56 58 8 (set (reg:DI 117)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [2 a+0 S8 A64])) "tempin.c":11 81 {*movdi_internal}
+     (nil))
+(insn 58 57 59 8 (set (reg:SI 2 cx)
+        (reg:SI 115)) "tempin.c":11 82 {*movsi_internal}
+     (nil))
+(insn 59 58 60 8 (set (reg:SI 1 dx)
+        (reg:SI 116)) "tempin.c":11 82 {*movsi_internal}
+     (nil))
+(insn 60 59 61 8 (set (reg:SI 4 si)
+        (reg:SI 97 [ _11 ])) "tempin.c":11 82 {*movsi_internal}
+     (nil))
+(insn 61 60 62 8 (set (reg:DI 5 di)
+        (reg:DI 117)) "tempin.c":11 81 {*movdi_internal}
+     (nil))
+(call_insn 62 61 63 8 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("binary_search") [flags 0x3]  <function_decl 0x7f5283146f00 binary_search>) [0 binary_search S1 A8])
+            (const_int 0 [0]))) "tempin.c":11 676 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (expr_list:SI (use (reg:SI 1 dx))
+                (expr_list:SI (use (reg:SI 2 cx))
+                    (nil))))))
+(insn 63 62 64 8 (set (reg:SI 99 [ _13 ])
+        (reg:SI 0 ax)) "tempin.c":11 82 {*movsi_internal}
+     (nil))
+(jump_insn 64 63 65 8 (set (pc)
+        (label_ref 79)) "tempin.c":11 659 {jump}
+     (nil)
+ -> 79)
+(barrier 65 64 66)
+(code_label 66 65 67 9 5 (nil) [1 uses])
+(note 67 66 68 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(insn 68 67 69 9 (set (reg:SI 118)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -4 [0xfffffffffffffffc])) [1 m+0 S4 A32])) "tempin.c":12 82 {*movsi_internal}
+     (nil))
+(insn 69 68 70 9 (parallel [
+            (set (reg:SI 98 [ _12 ])
+                (plus:SI (reg:SI 118)
+                    (const_int -1 [0xffffffffffffffff])))
+            (clobber (reg:CC 17 flags))
+        ]) "tempin.c":12 217 {*addsi_1}
+     (expr_list:REG_EQUAL (plus:SI (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -4 [0xfffffffffffffffc])) [1 m+0 S4 A32])
+            (const_int -1 [0xffffffffffffffff]))
+        (nil)))
+(insn 70 69 71 9 (set (reg:SI 119)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -36 [0xffffffffffffffdc])) [1 find+0 S4 A32])) "tempin.c":12 82 {*movsi_internal}
+     (nil))
+(insn 71 70 72 9 (set (reg:SI 120)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -28 [0xffffffffffffffe4])) [1 l+0 S4 A32])) "tempin.c":12 82 {*movsi_internal}
+     (nil))
+(insn 72 71 73 9 (set (reg:DI 121)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [2 a+0 S8 A64])) "tempin.c":12 81 {*movdi_internal}
+     (nil))
+(insn 73 72 74 9 (set (reg:SI 2 cx)
+        (reg:SI 119)) "tempin.c":12 82 {*movsi_internal}
+     (nil))
+(insn 74 73 75 9 (set (reg:SI 1 dx)
+        (reg:SI 98 [ _12 ])) "tempin.c":12 82 {*movsi_internal}
+     (nil))
+(insn 75 74 76 9 (set (reg:SI 4 si)
+        (reg:SI 120)) "tempin.c":12 82 {*movsi_internal}
+     (nil))
+(insn 76 75 77 9 (set (reg:DI 5 di)
+        (reg:DI 121)) "tempin.c":12 81 {*movdi_internal}
+     (nil))
+(call_insn 77 76 78 9 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("binary_search") [flags 0x3]  <function_decl 0x7f5283146f00 binary_search>) [0 binary_search S1 A8])
+            (const_int 0 [0]))) "tempin.c":12 676 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (expr_list:SI (use (reg:SI 1 dx))
+                (expr_list:SI (use (reg:SI 2 cx))
+                    (nil))))))
+(insn 78 77 79 9 (set (reg:SI 99 [ _13 ])
+        (reg:SI 0 ax)) "tempin.c":12 82 {*movsi_internal}
+     (nil))
+(code_label 79 78 80 10 3 (nil) [3 uses])
+(note 80 79 81 10 [bb 10] NOTE_INSN_BASIC_BLOCK)
+(insn 81 80 85 10 (set (reg:SI 100 [ <retval> ])
+        (reg:SI 99 [ _13 ])) 82 {*movsi_internal}
+     (nil))
+(insn 85 81 86 10 (set (reg/i:SI 0 ax)
+        (reg:SI 100 [ <retval> ])) "tempin.c":13 82 {*movsi_internal}
+     (nil))
+(insn 86 85 0 10 (use (reg/i:SI 0 ax)) "tempin.c":13 -1
      (nil))
 
-;; Function main (main, funcdef_no=3, decl_uid=1803, cgraph_uid=3, symbol_order=3)
+;; Function main (main, funcdef_no=1, decl_uid=2254, cgraph_uid=1, symbol_order=1)
 
 (note 1 0 3 NOTE_INSN_DELETED)
 (note 3 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
 (note 2 3 5 2 NOTE_INSN_FUNCTION_BEG)
-(insn 5 2 8 2 (set (reg:SI 87 [ _1 ])
-        (const_int 0 [0])) "tempin.c":18 82 {*movsi_internal}
+(insn 5 2 6 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -32 [0xffffffffffffffe0])) [1 a+0 S4 A64])
+        (const_int 3 [0x3])) "tempin.c":16 82 {*movsi_internal}
      (nil))
-(insn 8 5 12 2 (set (reg:SI 88 [ <retval> ])
-        (reg:SI 87 [ _1 ])) 82 {*movsi_internal}
+(insn 6 5 7 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -28 [0xffffffffffffffe4])) [1 a+4 S4 A32])
+        (const_int 5 [0x5])) "tempin.c":16 82 {*movsi_internal}
      (nil))
-(insn 12 8 13 2 (set (reg/i:SI 0 ax)
-        (reg:SI 88 [ <retval> ])) "tempin.c":19 82 {*movsi_internal}
+(insn 7 6 8 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [1 a+8 S4 A64])
+        (const_int 11 [0xb])) "tempin.c":16 82 {*movsi_internal}
      (nil))
-(insn 13 12 0 2 (use (reg/i:SI 0 ax)) "tempin.c":19 -1
+(insn 8 7 9 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -20 [0xffffffffffffffec])) [1 a+12 S4 A32])
+        (const_int 33 [0x21])) "tempin.c":16 82 {*movsi_internal}
+     (nil))
+(insn 9 8 10 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -16 [0xfffffffffffffff0])) [1 a+16 S4 A64])
+        (const_int 71 [0x47])) "tempin.c":16 82 {*movsi_internal}
+     (nil))
+(insn 10 9 11 2 (parallel [
+            (set (reg:DI 89)
+                (plus:DI (reg/f:DI 20 frame)
+                    (const_int -32 [0xffffffffffffffe0])))
+            (clobber (reg:CC 17 flags))
+        ]) "tempin.c":17 218 {*adddi_1}
+     (nil))
+(insn 11 10 12 2 (set (reg:SI 2 cx)
+        (const_int 33 [0x21])) "tempin.c":17 82 {*movsi_internal}
+     (nil))
+(insn 12 11 13 2 (set (reg:SI 1 dx)
+        (const_int 4 [0x4])) "tempin.c":17 82 {*movsi_internal}
+     (nil))
+(insn 13 12 14 2 (set (reg:SI 4 si)
+        (const_int 0 [0])) "tempin.c":17 82 {*movsi_internal}
+     (nil))
+(insn 14 13 15 2 (set (reg:DI 5 di)
+        (reg:DI 89)) "tempin.c":17 81 {*movdi_internal}
+     (nil))
+(call_insn 15 14 16 2 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("binary_search") [flags 0x3]  <function_decl 0x7f5283146f00 binary_search>) [0 binary_search S1 A8])
+            (const_int 0 [0]))) "tempin.c":17 676 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (expr_list:SI (use (reg:SI 1 dx))
+                (expr_list:SI (use (reg:SI 2 cx))
+                    (nil))))))
+(insn 16 15 17 2 (set (reg:SI 90)
+        (reg:SI 0 ax)) "tempin.c":17 82 {*movsi_internal}
+     (nil))
+(insn 17 16 18 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -4 [0xfffffffffffffffc])) [1 pos+0 S4 A32])
+        (reg:SI 90)) "tempin.c":17 82 {*movsi_internal}
+     (nil))
+(insn 18 17 19 2 (set (reg:SI 91)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -4 [0xfffffffffffffffc])) [1 pos+0 S4 A32])) "tempin.c":18 82 {*movsi_internal}
+     (nil))
+(insn 19 18 20 2 (set (reg:SI 4 si)
+        (reg:SI 91)) "tempin.c":18 82 {*movsi_internal}
+     (nil))
+(insn 20 19 21 2 (set (reg:DI 5 di)
+        (symbol_ref/f:DI ("*.LC0") [flags 0x2]  <var_decl 0x7f528315e7e0 *.LC0>)) "tempin.c":18 81 {*movdi_internal}
+     (nil))
+(insn 21 20 22 2 (set (reg:QI 0 ax)
+        (const_int 0 [0])) "tempin.c":18 84 {*movqi_internal}
+     (nil))
+(call_insn 22 21 23 2 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("printf") [flags 0x41]  <function_decl 0x7f528305cf00 printf>) [0 __builtin_printf S1 A8])
+            (const_int 0 [0]))) "tempin.c":18 676 {*call_value}
+     (nil)
+    (expr_list (use (reg:QI 0 ax))
+        (expr_list:DI (use (reg:DI 5 di))
+            (expr_list:SI (use (reg:SI 4 si))
+                (nil)))))
+(insn 23 22 26 2 (set (reg:SI 87 [ _10 ])
+        (const_int 0 [0])) "tempin.c":19 82 {*movsi_internal}
+     (nil))
+(insn 26 23 30 2 (set (reg:SI 88 [ <retval> ])
+        (reg:SI 87 [ _10 ])) 82 {*movsi_internal}
+     (nil))
+(insn 30 26 31 2 (set (reg/i:SI 0 ax)
+        (reg:SI 88 [ <retval> ])) "tempin.c":20 82 {*movsi_internal}
+     (nil))
+(insn 31 30 0 2 (use (reg/i:SI 0 ax)) "tempin.c":20 -1
      (nil))
