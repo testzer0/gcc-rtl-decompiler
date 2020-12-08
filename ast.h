@@ -2345,6 +2345,7 @@ class FixOperand : public Operand {
          * is to be generated.
          */
         string GenerateCode(int indentlevel);
+};
 
 
 /**

@@ -36,6 +36,7 @@
     DerefOperand *derefoperand;
     SymbolRefOperand *symbolrefoperand;
     NegOperand *negoperand;
+    FixOperand *fixoperand;
     TypeInfo *typeinfo;
     LocInfo *locinfo;
     MemType *memtype;

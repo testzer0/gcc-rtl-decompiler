@@ -68,48 +68,52 @@ extern int yydebug;
     T_VFlag = 278,
     T_FFlag = 279,
     T_CFlag = 280,
-    T_SIType = 281,
-    T_DIType = 282,
-    T_QIType = 283,
-    T_CCType = 284,
-    T_CCZType = 285,
-    T_CCGCType = 286,
-    T_Plus = 287,
-    T_Minus = 288,
-    T_Mult = 289,
-    T_Div = 290,
-    T_Lshift = 291,
-    T_Ashift = 292,
-    T_LshiftRt = 293,
-    T_AshiftRt = 294,
-    T_Subreg = 295,
-    T_ExprList = 296,
-    T_EndPara = 297,
-    T_RArrow = 298,
-    T_SiExtend = 299,
-    T_Compare = 300,
-    T_Lt = 301,
-    T_Gt = 302,
-    T_Le = 303,
-    T_Ge = 304,
-    T_Eq = 305,
-    T_Ne = 306,
-    T_CodeLabel = 307,
-    T_UDiv = 308,
-    T_Mod = 309,
-    T_UMod = 310,
-    T_CCGOCType = 311,
-    T_ZeExtend = 312,
-    T_Gtu = 313,
-    T_Ltu = 314,
-    T_Leu = 315,
-    T_Geu = 316,
-    T_Neg = 317,
-    T_Xor = 318,
-    T_StringConstant = 319,
-    T_IntConstant = 320,
-    T_FunBegin = 321,
-    TWO = 322
+    T_UFlag = 281,
+    T_SIType = 282,
+    T_SFType = 283,
+    T_DIType = 284,
+    T_QIType = 285,
+    T_CCType = 286,
+    T_CCZType = 287,
+    T_CCGCType = 288,
+    T_Plus = 289,
+    T_Minus = 290,
+    T_Mult = 291,
+    T_Div = 292,
+    T_Lshift = 293,
+    T_Ashift = 294,
+    T_LshiftRt = 295,
+    T_AshiftRt = 296,
+    T_Subreg = 297,
+    T_ExprList = 298,
+    T_EndPara = 299,
+    T_RArrow = 300,
+    T_SiExtend = 301,
+    T_Compare = 302,
+    T_Lt = 303,
+    T_Gt = 304,
+    T_Le = 305,
+    T_Ge = 306,
+    T_Eq = 307,
+    T_Ne = 308,
+    T_CodeLabel = 309,
+    T_UDiv = 310,
+    T_Mod = 311,
+    T_UMod = 312,
+    T_CCGOCType = 313,
+    T_ZeExtend = 314,
+    T_FlExtend = 315,
+    T_Gtu = 316,
+    T_Ltu = 317,
+    T_Leu = 318,
+    T_Geu = 319,
+    T_Neg = 320,
+    T_Xor = 321,
+    T_Fix = 322,
+    T_StringConstant = 323,
+    T_IntConstant = 324,
+    T_FunBegin = 325,
+    TWO = 326
   };
 #endif
 /* Tokens.  */
@@ -136,48 +140,52 @@ extern int yydebug;
 #define T_VFlag 278
 #define T_FFlag 279
 #define T_CFlag 280
-#define T_SIType 281
-#define T_DIType 282
-#define T_QIType 283
-#define T_CCType 284
-#define T_CCZType 285
-#define T_CCGCType 286
-#define T_Plus 287
-#define T_Minus 288
-#define T_Mult 289
-#define T_Div 290
-#define T_Lshift 291
-#define T_Ashift 292
-#define T_LshiftRt 293
-#define T_AshiftRt 294
-#define T_Subreg 295
-#define T_ExprList 296
-#define T_EndPara 297
-#define T_RArrow 298
-#define T_SiExtend 299
-#define T_Compare 300
-#define T_Lt 301
-#define T_Gt 302
-#define T_Le 303
-#define T_Ge 304
-#define T_Eq 305
-#define T_Ne 306
-#define T_CodeLabel 307
-#define T_UDiv 308
-#define T_Mod 309
-#define T_UMod 310
-#define T_CCGOCType 311
-#define T_ZeExtend 312
-#define T_Gtu 313
-#define T_Ltu 314
-#define T_Leu 315
-#define T_Geu 316
-#define T_Neg 317
-#define T_Xor 318
-#define T_StringConstant 319
-#define T_IntConstant 320
-#define T_FunBegin 321
-#define TWO 322
+#define T_UFlag 281
+#define T_SIType 282
+#define T_SFType 283
+#define T_DIType 284
+#define T_QIType 285
+#define T_CCType 286
+#define T_CCZType 287
+#define T_CCGCType 288
+#define T_Plus 289
+#define T_Minus 290
+#define T_Mult 291
+#define T_Div 292
+#define T_Lshift 293
+#define T_Ashift 294
+#define T_LshiftRt 295
+#define T_AshiftRt 296
+#define T_Subreg 297
+#define T_ExprList 298
+#define T_EndPara 299
+#define T_RArrow 300
+#define T_SiExtend 301
+#define T_Compare 302
+#define T_Lt 303
+#define T_Gt 304
+#define T_Le 305
+#define T_Ge 306
+#define T_Eq 307
+#define T_Ne 308
+#define T_CodeLabel 309
+#define T_UDiv 310
+#define T_Mod 311
+#define T_UMod 312
+#define T_CCGOCType 313
+#define T_ZeExtend 314
+#define T_FlExtend 315
+#define T_Gtu 316
+#define T_Ltu 317
+#define T_Leu 318
+#define T_Geu 319
+#define T_Neg 320
+#define T_Xor 321
+#define T_Fix 322
+#define T_StringConstant 323
+#define T_IntConstant 324
+#define T_FunBegin 325
+#define TWO 326
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -210,6 +218,7 @@ union YYSTYPE
     DerefOperand *derefoperand;
     SymbolRefOperand *symbolrefoperand;
     NegOperand *negoperand;
+    FixOperand *fixoperand;
     TypeInfo *typeinfo;
     LocInfo *locinfo;
     MemType *memtype;
@@ -250,7 +259,7 @@ union YYSTYPE
     const char *stringConstant;
     char identifier[32];
 
-#line 254 "y.tab.h" /* yacc.c:1909  */
+#line 263 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
