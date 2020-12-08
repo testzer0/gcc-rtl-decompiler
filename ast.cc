@@ -295,6 +295,8 @@ string ExprOperand::GenerateCode(int indentlevel) {
         genCodeType =  "char";
     else if (t == "si")
         genCodeType = "int";
+    else if (t == "sf")
+        genCodeType = "float";
     else genCodeType = "long long int";
     if (linfo && linfo->getMemType() == "reg") {
         retstr = "regs[" + retstr + "]";
@@ -326,6 +328,8 @@ string ExtendOperand::GenerateCode(int indentlevel) {
         genCodeType = "char";
     else if (t == "si")
         genCodeType = "int";
+    else if (t == "sf")
+        genCodeType = "float";
     else genCodeType = "long long int";
     return retstring;
 }
@@ -352,6 +356,8 @@ string DerefOperand::GenerateCode(int indentlevel) {
         genCodeType = "char";
     else if (t == "si")
         genCodeType = "int";
+    else if (t == "sf")
+        genCodeType = "float";
     else if (t == "di")
         genCodeType = "long long int";
     if (linfo) {
@@ -806,6 +812,10 @@ string SubregExpr::GenerateCode(int indentlevel) {
         out << "char " << tempname << " = (char)(" << retstring << " & 255);\n";
         genCodeType = "char";
     }
+    else if (newtype == "sf") {
+        out << "float " << tempname << " = (float)(" << retstring << ");\n";
+        genCodeType = "float";
+    }    
     else if (newtype == "si") {
         out << "int " << tempname << " = (int)(" << retstring << " & 4294967295ll);\n";
         genCodeType = "int";
@@ -941,6 +951,25 @@ string NegOperand::GenerateCode(int indentlevel) {
     string tp = genCodeType;
     string tempname = "temp" + to_string(tempcounter++);
     out << tp << " " << tempname << " = -" << retstring << ";\n";
+    return tempname;
+}
+
+FixOperand::FixOperand(Operand *o) {
+    Assert(o != NULL);
+    (op = o)->SetParent(this);
+}
+
+void FixOperand::PrintChildren(int indentlevel) {
+    printf("\n");
+    op->Print(indentlevel+1);
+}
+
+string FixOperand::GenerateCode(int indentlevel) {
+    string indentation = string(indentlevel*4, ' ');
+    string retstring = op->GenerateCode(indentlevel);
+    string tp = genCodeType;
+    string tempname = "temp" + to_string(tempcounter++);
+    out << tp << " " << tempname << " = (float)(" << retstring << ");\n";
     return tempname;
 }
 

@@ -2302,6 +2302,50 @@ class NegOperand : public Operand {
         string GenerateCode(int indentlevel);
 };
 
+/**
+ * A fix operand denotes the truncated integral value of a floating point.
+ */
+class FixOperand : public Operand {
+    protected:
+        /**
+         * The inner operand.
+         */
+        Operand *op;
+    public:
+        /**
+         * A simple constructor.
+         * @param o The operand to be assigned to op.
+         */
+        FixOperand(Operand *o);
+
+        /**
+         * Returns the name to be printed for this node.
+         */
+        const char *GetPrintNameForNode() {
+            return "FixOperand";
+        }
+
+        /**
+         * Calls Print() on op.
+         * @param indentlevel The level of indentation at which the
+         *  current class must be printed.
+         */
+        void PrintChildren(int indentlevel);
+
+         /**
+         * No analysis to be performed on FixOperand.
+         */
+        void Analyze() { }
+
+
+        /**
+         * Just returns '(float)' + the string returned by GenerateCode()
+         * of op.
+         * @param indentlevel The level of indentation at which the code 
+         * is to be generated.
+         */
+        string GenerateCode(int indentlevel);
+
 
 /**
  * One of the possible destinations of a jump: a label.

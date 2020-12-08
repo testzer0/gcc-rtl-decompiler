@@ -59,7 +59,9 @@ END_IGNORE3     (">")
 "/f" 				{ return T_FFlag; }
 "/c" 				{ return T_CFlag; }
 "/j"				;
+"/u" 				{ return T_UFlag; }
 "SI" 				{ return T_SIType; }
+"SF" 				{ return T_SFType; }
 "DI" 				{ return T_DIType; }
 "QI" 				{ return T_QIType; }
 "TI"				{ return T_TIType; }
@@ -83,8 +85,10 @@ END_IGNORE3     (">")
 "expr_list:"		{ return T_ExprList; }
 "sign_extend:"		{ return T_SiExtend; }
 "zero_extend:"		{ return T_ZeExtend; }
+"float_extend:"		{ return T_FlExtend; }
 "compare:"			{ return T_Compare; }
 "neg"				{ return T_Neg; }
+"fix"				{ return T_Fix; }
 "ltu"				{ return T_Ltu; }
 "gtu"				{ return T_Gtu; }
 "lt" 				{ return T_Lt; }
