@@ -1,6 +1,6 @@
 # rtl2C decompiler
 
-A decompiler written for the conversion of gcc rtl (230r, vregs) into corresponding pseudo-C code.
+A decompiler written for the conversion of gcc rtl (230r, vregs) into corresponding C code.
 
 ## Scanning
 
