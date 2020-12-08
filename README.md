@@ -1,6 +1,6 @@
 # rtl2C decompiler
 
-A decompiler written for the conversion of gcc rtl (230r, vregs) into corresponding pseudo-C code.
+A decompiler written for the conversion of gcc rtl (230r, vregs) into corresponding C code.
 
 ## Scanning
 
@@ -12,7 +12,7 @@ We use GNU Bison to create a parser. The file parser.y, used with bison, generat
 
 ## Code Generation
 
-The files ast.h and ast.cpp define the necessary classes and methods to carry out some minor data flow analysis and the final code generation
+The files ast.h and ast.cc define the necessary classes and methods to carry out some minor data flow analysis and the final code generation
 using the abstract syntax tree obtained from parsing. Code generation is done recursively.
 
 ## Documentation
@@ -23,4 +23,6 @@ the repository, and then either open the HTML documentation in an internet brows
 ## Graphical User Interface
 
 We have also included a GUI for easier utilization of this decompiler tool. It is present under the 'gui' directory, which further contains
-the frontend and the backend.
+the frontend and the backend. Here is an example of the GUI in action!
+
+![GUI in Action](./gui/example.png)
