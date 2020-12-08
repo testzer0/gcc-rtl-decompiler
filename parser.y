@@ -36,6 +36,7 @@
     DerefOperand *derefoperand;
     SymbolRefOperand *symbolrefoperand;
     NegOperand *negoperand;
+    FixOperand *fixoperand;
     TypeInfo *typeinfo;
     LocInfo *locinfo;
     MemType *memtype;
@@ -78,10 +79,10 @@
 
 %token T_Note T_Insn T_JumpInsn T_CallInsn T_Call T_SymbolRef T_Nil T_Parallel T_TIType
 %token T_Clobber T_Set T_Use T_IfThenElse T_ConstInt T_Barrier T_Mem T_Reg T_Pc T_LabelRef
-%token T_IFlag T_VFlag T_FFlag T_CFlag T_SIType T_DIType T_QIType T_CCType T_CCZType T_CCGCType
+%token T_IFlag T_VFlag T_FFlag T_CFlag T_UFlag T_SIType T_SFType T_DIType T_QIType T_CCType T_CCZType T_CCGCType
 %token T_Plus T_Minus T_Mult T_Div T_Lshift T_Ashift T_LshiftRt T_AshiftRt T_Subreg T_ExprList 
 %token T_EndPara T_RArrow T_SiExtend T_Compare T_Lt T_Gt T_Le T_Ge T_Eq T_Ne T_CodeLabel T_UDiv
-%token T_Mod T_UMod T_CCGOCType T_ZeExtend T_Gtu T_Ltu T_Leu T_Geu T_Neg
+%token T_Mod T_UMod T_CCGOCType T_ZeExtend T_FlExtend T_Gtu T_Ltu T_Leu T_Geu T_Neg T_Fix
 
 %token <stringConstant> T_StringConstant
 %token <integerConstant> T_IntConstant
@@ -111,6 +112,7 @@
 %type <derefoperand> DerefOperand;
 %type <symbolrefoperand> SymbolRefOperand
 %type <negoperand> NegOperand
+%type <fixoperand> FixOperand
 %type <typeinfo> TypeInfo
 %type <locinfo> LocInfo
 %type <memtype> MemType
@@ -252,6 +254,7 @@ Operand         :   IntOperand                  { $$ = $1; }
                 |   SymbolRefOperand            { $$ = $1; }
                 |   DerefOperand                { $$ = $1; }
                 |   NegOperand                  { $$ = $1; }
+                |   FixOperand                  { $$ = $1; }
                 |   Dest                        { $$ = $1; }
                 ;
 
@@ -273,11 +276,12 @@ ExprOperand     :   LocInfo ':' TypeInfo Expr   { $$ = new ExprOperand($1,$3,$4)
                 |   UModExpr %prec TWO                   { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   SubregExpr %prec TWO                 { $$ = new ExprOperand(NULL,NULL,$1); }
                 |   ConditionExpr %prec TWO              { $$ = new ExprOperand(NULL,NULL,$1); }
-                |   SymbolRefExpr %prec TWO              { $$ = new ExprOperand(NULL,NULL,$1); }
+                |   SymbolRefExpr %prec TWO              { $$ = new ExprOperand(NULL,NULL,$1); } 
                 ;
 
 ExtendOperand   :   T_SiExtend TypeInfo '(' Operand ')' { $$ = new ExtendOperand($2,$4); }
                 |   T_ZeExtend TypeInfo '(' Operand ')' { $$ = new ExtendOperand($2,$4); }
+                |   T_FlExtend TypeInfo '(' Operand ')' { $$ = new ExtendOperand($2,$4); }
                 ;
 
 DerefOperand    :   LocInfo ':' TypeInfo '(' Operand ')' { $$ = new DerefOperand($1,$3,$5); }
@@ -288,6 +292,9 @@ SymbolRefOperand :  T_SymbolRef Flags ':' T_DIType '(' T_StringConstant ')' { $$
 
 NegOperand      :  T_Neg ':' TypeInfo '(' Operand ')'       { $$ = new NegOperand($5); }
                 |  T_Neg '(' Operand ')'                    { $$ = new NegOperand($3); }
+                ;
+
+FixOperand      :  T_Fix ':' TypeInfo '(' Operand ')'       { $$ = new FixOperand($5); }
                 ;
 
 LocInfo         :   MemType Flags               { $$ = new LocInfo($1, $2); }
@@ -302,6 +309,7 @@ Flag            :   T_IFlag                     { $$ = new Flag("i"); }
                 |   T_VFlag                     { $$ = new Flag("v"); }
                 |   T_FFlag                     { $$ = new Flag("f"); }
                 |   T_CFlag                     { $$ = new Flag("c"); }
+                |   T_UFlag                     { $$ = new Flag("u"); }
                 ;
 
 MemType         :   T_Mem                       { $$ = new MemType("mem"); }
@@ -309,6 +317,7 @@ MemType         :   T_Mem                       { $$ = new MemType("mem"); }
                 ;
 
 TypeInfo        :   T_SIType                    { $$ = new TypeInfo("si"); }
+                |   T_SFType                    { $$ = new TypeInfo("sf"); }
                 |   T_DIType                    { $$ = new TypeInfo("di"); }
                 |   T_QIType                    { $$ = new TypeInfo("qi"); }
                 |   T_TIType                    { $$ = new TypeInfo("ti"); }

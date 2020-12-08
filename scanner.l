@@ -1,3 +1,5 @@
+%option yylineno
+
 %{
 	/*-----------------------------------------------------*
 	 * This part is copied verbatim to the lex.yy.c file.  *
@@ -18,6 +20,9 @@
 	// Note that {} arent in punctuation. If needed add later
 	// Also, '-' is in punctuation, but instead should be taken later as part of a number, e.g. -2.
 	// Add this when doing parsing.
+	static void DoBeforeEachAction(); 
+	#define YY_USER_ACTION DoBeforeEachAction();
+
 %}
 
 PUNCTUATION   	([!:,.()*-])
@@ -58,7 +63,9 @@ END_IGNORE3     (">")
 "/v" 				{ return T_VFlag; }
 "/f" 				{ return T_FFlag; }
 "/c" 				{ return T_CFlag; }
+"/u" 				{ return T_UFlag; }
 "SI" 				{ return T_SIType; }
+"SF" 				{ return T_SFType; }
 "DI" 				{ return T_DIType; }
 "QI" 				{ return T_QIType; }
 "TI"				{ return T_TIType; }
@@ -81,7 +88,9 @@ END_IGNORE3     (">")
 "expr_list:"		{ return T_ExprList; }
 "sign_extend:"		{ return T_SiExtend; }
 "zero_extend:"		{ return T_ZeExtend; }
+"float_extend:"		{ return T_FlExtend; }
 "compare:"			{ return T_Compare; }
+"fix"				{ return T_Fix; }
 "neg"				{ return T_Neg; }
 "ltu"				{ return T_Ltu; }
 "gtu"				{ return T_Gtu; }
@@ -138,12 +147,13 @@ END_IGNORE3     (">")
 [ \r\n_A-Z]				;
 "\]"				{ return T_EndPara;}
 "->"				{ return T_RArrow; }
+"\n"				{ lineno++; colno=1; }
 . 					{ ReportError::UnrecogChar(&yylloc, yytext[0]); }
 
 %%
 void InitScanner()
 {
-	// printf("Initializing scanner.\n\n");
+	printf("Initializing scanner.\n\n");
     yy_flex_debug = false;
     lineno = 1;
     colno = 1;
@@ -155,4 +165,6 @@ static void DoBeforeEachAction()
 	yylloc.first_column = colno;
 	yylloc.last_column = colno + yyleng + 1;
 	colno = colno + yyleng;
+	// cout<<yylineno<<" "<<yytext<<endl;
+
 }

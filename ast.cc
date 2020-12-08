@@ -284,6 +284,8 @@ string ExprOperand::GenerateCode(int indentlevel) {
         genCodeType =  "char";
     else if (t == "si")
         genCodeType = "int";
+    else if (t == "sf")
+        genCodeType = "float";
     else genCodeType = "long long int";
     if (linfo && linfo->getMemType() == "reg") {
         retstr = "regs[" + retstr + "]";
@@ -315,6 +317,8 @@ string ExtendOperand::GenerateCode(int indentlevel) {
         genCodeType = "char";
     else if (t == "si")
         genCodeType = "int";
+    else if (t == "sf")
+        genCodeType = "float";
     else genCodeType = "long long int";
     return retstring;
 }
@@ -341,6 +345,8 @@ string DerefOperand::GenerateCode(int indentlevel) {
         genCodeType = "char";
     else if (t == "si")
         genCodeType = "int";
+    else if (t == "sf")
+        genCodeType = "float";
     else if (t == "di")
         genCodeType = "long long int";
     if (linfo->checkForFlag("c")) {
@@ -770,6 +776,10 @@ string SubregExpr::GenerateCode(int indentlevel) {
         out << "int " << tempname << " = (int)(" << retstring << " & 4294967295ll);\n";
         genCodeType = "int";
     }
+    else if (newtype == "sf") {
+        out << "float " << tempname << " = (float)(" << retstring << ");\n";
+        genCodeType = "int";
+    }
     else {
         out << "long long int " << tempname << " = " << retstring << ";\n";
         genCodeType = "long long int";
@@ -892,6 +902,26 @@ NegOperand::NegOperand(Operand *o) {
 void NegOperand::PrintChildren(int indentlevel) {
     printf("\n");
     op->Print(indentlevel+1);
+}
+
+string NegOperand::GenerateCode(int indentlevel) {
+    string oper = op->GenerateCode(indentlevel);
+    return "(-"+oper+")";
+}
+
+FixOperand::FixOperand(Operand *o) {
+    Assert(o != NULL);
+    (op = o)->SetParent(this);
+}
+
+void FixOperand::PrintChildren(int indentlevel) {
+    printf("\n");
+    op->Print(indentlevel+1);
+}
+
+string FixOperand::GenerateCode(int indentlevel) {
+    string oper = op->GenerateCode(indentlevel);
+    return "(int)("+oper+")";
 }
 
 Label::Label(int lno) {

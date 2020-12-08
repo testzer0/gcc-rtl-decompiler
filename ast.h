@@ -657,6 +657,20 @@ class NegOperand : public Operand {
         }
         void PrintChildren(int indentlevel);
         void Analyze() { }
+        string GenerateCode(int indentlevel);
+};
+
+class FixOperand : public Operand {
+    protected:
+        Operand *op;
+    public:
+        FixOperand(Operand *o);
+        const char *GetPrintNameForNode() {
+            return "FixOperand";
+        }
+        void PrintChildren(int indentlevel);
+        void Analyze() { }
+        string GenerateCode(int indentlevel);
 };
 
 class Label : public Dest {
