@@ -244,6 +244,7 @@ Cmds            :   Cmds '(' PlainCmd ')'              { ($$ = $1)->Append($3); 
 ClobberCmd      :   T_Clobber '(' T_Reg ':' TypeInfo T_IntConstant ')' { $$ = new ClobberCmd(); }
                 |   T_Clobber '(' T_Reg Flags ':' TypeInfo T_IntConstant ')' { $$ = new ClobberCmd(); }
                 |   T_Clobber '(' T_Mem ':' '(' ')' ')' { $$ = new ClobberCmd(); }
+                |   T_Clobber '(' T_Mem ':' '(' T_Scratch ')' ')' { $$ = new ClobberCmd(); }
                 |   T_Clobber '(' T_Mem ':' '(' Operand ')' ')' { $$ = new ClobberCmd(); }
                 |   T_Clobber '(' T_Scratch ':' TypeInfo ')' { $$ = new ClobberCmd(); }
                 ;
@@ -475,6 +476,7 @@ ExprListExpr    :   T_ExprList TypeInfo '(' T_Use '(' T_Reg ':' TypeInfo T_IntCo
                                                     { ($$=$13)->Append(make_pair($9,$8->getType())); }
                 |   '(' T_Use '(' T_Reg ':' TypeInfo T_IntConstant ')' ')' '(' ExprListExpr ')'
                                                     { ($$=$11)->Append(make_pair($7,$6->getType())); }
+                |   T_Nil                           { $$ = new List<pair<int,const char*>>; }
                 ;
 
 Junk2           :    T_Nil          { }
@@ -487,5 +489,5 @@ Junk2           :    T_Nil          { }
 void InitParser()
 {
    // printf("Initializing parser.\n\n");
-   yydebug = true;
+   yydebug = false;
 }
