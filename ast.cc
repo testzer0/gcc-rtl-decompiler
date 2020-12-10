@@ -1282,3 +1282,28 @@ string ExprList::GenPrintfCode(int indentlevel) {
     else cout << "(" << type << ")regs[" << reg << "]";
     return "";
 }
+
+TruncateOperand::TruncateOperand(TypeInfo *ti, Operand *o) {
+    Assert(ti != NULL && o != NULL);
+    (tinfo = ti)->SetParent(this);
+    (op = o)->SetParent(this);
+}
+
+void TruncateOperand::PrintChildren(int indentlevel) {
+    printf("\n");
+    tinfo->Print(indentlevel+1);
+    op->Print(indentlevel+1);
+}
+
+string TruncateOperand::GenerateCode(int indentlevel) {
+    string retstring = op->GenerateCode(indentlevel);
+    string t(tinfo->getType());
+    if (t == "qi")
+        genCodeType = "char";
+    else if (t == "si")
+        genCodeType = "int";
+    else if (t == "sf")
+        genCodeType = "float";
+    else genCodeType = "long long int";
+    return retstring;
+}

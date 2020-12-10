@@ -72,6 +72,7 @@
     NoRetCall *noretcall;
     ExprList *exprlist;
     List<pair<int,const char *>> *exprlistexpr;
+    TruncateOperand *truncateoperand;
 
     int integerConstant;
     const char *stringConstant;
@@ -84,6 +85,7 @@
 %token T_Plus T_Minus T_Mult T_Div T_Lshift T_Ashift T_LshiftRt T_AshiftRt T_Subreg T_ExprList 
 %token T_EndPara T_RArrow T_SiExtend T_Compare T_Lt T_Gt T_Le T_Ge T_Eq T_Ne T_CodeLabel T_UDiv
 %token T_Mod T_UMod T_CCGOCType T_ZeExtend T_FlExtend T_Gtu T_Ltu T_Leu T_Geu T_Neg T_Xor T_Fix
+%token T_Truncate T_Scratch
 
 %token <stringConstant> T_StringConstant
 %token <integerConstant> T_IntConstant
@@ -149,6 +151,7 @@
 %type <noretcall> NoRetCall
 %type <exprlist> ExprList
 %type <exprlistexpr> ExprListExpr
+%type <truncateoperand> TruncateOperand
 
 %left TWO
 %left ')'
@@ -242,6 +245,7 @@ ClobberCmd      :   T_Clobber '(' T_Reg ':' TypeInfo T_IntConstant ')' { $$ = ne
                 |   T_Clobber '(' T_Reg Flags ':' TypeInfo T_IntConstant ')' { $$ = new ClobberCmd(); }
                 |   T_Clobber '(' T_Mem ':' '(' ')' ')' { $$ = new ClobberCmd(); }
                 |   T_Clobber '(' T_Mem ':' '(' Operand ')' ')' { $$ = new ClobberCmd(); }
+                |   T_Clobber '(' T_Scratch ':' TypeInfo ')' { $$ = new ClobberCmd(); }
                 ;
 
 SetCmd          :   T_Set '(' Operand ')' '(' Operand ')'       { $$ = new SetCmd($3,$6); }
@@ -253,6 +257,7 @@ UseCmd          :   T_Use '(' T_Reg Flags ':' TypeInfo T_IntConstant ')'  { $$ =
 Operand         :   IntOperand                  { $$ = $1; }
                 |   ExprOperand                 { $$ = $1; }
                 |   ExtendOperand               { $$ = $1; }
+                |   TruncateOperand             { $$ = $1; }
                 |   SymbolRefOperand            { $$ = $1; }
                 |   DerefOperand                { $$ = $1; }
                 |   NegOperand                  { $$ = $1; }
@@ -285,6 +290,9 @@ ExprOperand     :   LocInfo ':' TypeInfo Expr   { $$ = new ExprOperand($1,$3,$4)
 ExtendOperand   :   T_SiExtend TypeInfo '(' Operand ')' { $$ = new ExtendOperand($2,$4); }
                 |   T_ZeExtend TypeInfo '(' Operand ')' { $$ = new ExtendOperand($2,$4); }
                 |   T_FlExtend TypeInfo '(' Operand ')' { $$ = new ExtendOperand($2,$4); }                
+                ;
+
+TruncateOperand :   T_Truncate TypeInfo '(' Operand ')' { $$ = new TruncateOperand($2,$4); }
                 ;
 
 DerefOperand    :   LocInfo ':' TypeInfo '(' Operand ')' { $$ = new DerefOperand($1,$3,$5); }
@@ -479,5 +487,5 @@ Junk2           :    T_Nil          { }
 void InitParser()
 {
    // printf("Initializing parser.\n\n");
-   yydebug = false;
+   yydebug = true;
 }

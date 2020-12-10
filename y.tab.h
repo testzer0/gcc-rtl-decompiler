@@ -110,10 +110,12 @@ extern int yydebug;
     T_Neg = 320,
     T_Xor = 321,
     T_Fix = 322,
-    T_StringConstant = 323,
-    T_IntConstant = 324,
-    T_FunBegin = 325,
-    TWO = 326
+    T_Truncate = 323,
+    T_Scratch = 324,
+    T_StringConstant = 325,
+    T_IntConstant = 326,
+    T_FunBegin = 327,
+    TWO = 328
   };
 #endif
 /* Tokens.  */
@@ -182,10 +184,12 @@ extern int yydebug;
 #define T_Neg 320
 #define T_Xor 321
 #define T_Fix 322
-#define T_StringConstant 323
-#define T_IntConstant 324
-#define T_FunBegin 325
-#define TWO 326
+#define T_Truncate 323
+#define T_Scratch 324
+#define T_StringConstant 325
+#define T_IntConstant 326
+#define T_FunBegin 327
+#define TWO 328
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -254,12 +258,13 @@ union YYSTYPE
     NoRetCall *noretcall;
     ExprList *exprlist;
     List<pair<int,const char *>> *exprlistexpr;
+    TruncateOperand *truncateoperand;
 
     int integerConstant;
     const char *stringConstant;
     char identifier[32];
 
-#line 263 "y.tab.h" /* yacc.c:1909  */
+#line 268 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

@@ -2811,4 +2811,56 @@ class ExprList : public Node{
         string GenPrintfCode(int indentlevel);
 };
 
+/**
+ * An operand which extends the result of another operand to
+ * a lower width (which is given by typeinfo)
+ */
+class TruncateOperand : public Operand {
+    protected:
+        /**
+         * The width to which the inner operand is extended.
+         */
+        TypeInfo *tinfo;
+
+        /**
+         * The inner operand.
+         */
+        Operand *op;
+    public:
+        /**
+         * A simple constructor.
+         * @param ti The type information to be assigned to tinfo.
+         * @param o The inner operand.
+         */
+        TruncateOperand(TypeInfo *ti, Operand *o);
+
+        /**
+         * The name to be printed for the current node.
+         */
+        const char *GetPrintNameForNode() {
+            return "ExtendOperand";
+        }
+
+        /**
+         * Calls Print() on the children of this node in the AST.
+         * @param indentlevel The level of indentation at which the
+         *  current node must be printed.
+         */
+        void PrintChildren(int indentlevel);
+
+        /**
+         * No analysis to be done for TruncateOperand.
+         */
+        void Analyze() { }
+
+        /**
+         * Generates code to extend the value of the inner operand
+         * to the specified width, and returns the name of the temporary
+         * variable in which the result is stored.
+         * @param indentlevel The level of indentation at which the code
+         *  is generated.
+         */
+        string GenerateCode(int indentlevel);
+};
+
 #endif

@@ -86,6 +86,8 @@ END_IGNORE3     (">")
 "sign_extend:"		{ return T_SiExtend; }
 "zero_extend:"		{ return T_ZeExtend; }
 "float_extend:"		{ return T_FlExtend; }
+"truncate:"			{ return T_Truncate; }
+"scratch" 			{ return T_Scratch; }
 "compare:"			{ return T_Compare; }
 "neg"				{ return T_Neg; }
 "fix"				{ return T_Fix; }
