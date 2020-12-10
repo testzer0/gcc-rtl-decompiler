@@ -1,0 +1,408 @@
+
+;; Function reverse (reverse, funcdef_no=5, decl_uid=2765, cgraph_uid=5, symbol_order=5)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 4 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -40 [0xffffffffffffffd8])) [2 head_ref+0 S8 A64])
+        (reg:DI 5 di [ head_ref ])) "test16.c":13 81 {*movdi_internal}
+     (nil))
+(note 3 2 6 2 NOTE_INSN_FUNCTION_BEG)
+(insn 6 3 7 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 prev+0 S8 A64])
+        (const_int 0 [0])) "test16.c":14 81 {*movdi_internal}
+     (nil))
+(insn 7 6 8 2 (set (reg/f:DI 87)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -40 [0xffffffffffffffd8])) [2 head_ref+0 S8 A64])) "test16.c":15 81 {*movdi_internal}
+     (nil))
+(insn 8 7 9 2 (set (reg/f:DI 88)
+        (mem/f:DI (reg/f:DI 87) [1 *head_ref_6(D)+0 S8 A64])) "test16.c":15 81 {*movdi_internal}
+     (nil))
+(insn 9 8 10 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -16 [0xfffffffffffffff0])) [1 current+0 S8 A64])
+        (reg/f:DI 88)) "test16.c":15 81 {*movdi_internal}
+     (nil))
+(jump_insn 10 9 11 2 (set (pc)
+        (label_ref 23)) "test16.c":17 659 {jump}
+     (nil)
+ -> 23)
+(barrier 11 10 25)
+(code_label 25 11 12 4 3 (nil) [1 uses])
+(note 12 25 13 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 13 12 14 4 (set (reg/f:DI 89)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -16 [0xfffffffffffffff0])) [1 current+0 S8 A64])) "test16.c":19 81 {*movdi_internal}
+     (nil))
+(insn 14 13 15 4 (set (reg/f:DI 90)
+        (mem/f:DI (plus:DI (reg/f:DI 89)
+                (const_int 8 [0x8])) [1 current_2->next+0 S8 A64])) "test16.c":19 81 {*movdi_internal}
+     (nil))
+(insn 15 14 16 4 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [1 next+0 S8 A64])
+        (reg/f:DI 90)) "test16.c":19 81 {*movdi_internal}
+     (nil))
+(insn 16 15 17 4 (set (reg/f:DI 91)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -16 [0xfffffffffffffff0])) [1 current+0 S8 A64])) "test16.c":20 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 4 (set (reg/f:DI 92)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 prev+0 S8 A64])) "test16.c":20 81 {*movdi_internal}
+     (nil))
+(insn 18 17 19 4 (set (mem/f:DI (plus:DI (reg/f:DI 91)
+                (const_int 8 [0x8])) [1 current_2->next+0 S8 A64])
+        (reg/f:DI 92)) "test16.c":20 81 {*movdi_internal}
+     (nil))
+(insn 19 18 20 4 (set (reg/f:DI 93)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -16 [0xfffffffffffffff0])) [1 current+0 S8 A64])) "test16.c":21 81 {*movdi_internal}
+     (nil))
+(insn 20 19 21 4 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 prev+0 S8 A64])
+        (reg/f:DI 93)) "test16.c":21 81 {*movdi_internal}
+     (nil))
+(insn 21 20 22 4 (set (reg/f:DI 94)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [1 next+0 S8 A64])) "test16.c":22 81 {*movdi_internal}
+     (nil))
+(insn 22 21 23 4 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -16 [0xfffffffffffffff0])) [1 current+0 S8 A64])
+        (reg/f:DI 94)) "test16.c":22 81 {*movdi_internal}
+     (nil))
+(code_label 23 22 24 5 2 (nil) [1 uses])
+(note 24 23 26 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 26 24 27 5 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -16 [0xfffffffffffffff0])) [1 current+0 S8 A64])
+            (const_int 0 [0]))) "test16.c":17 4 {*cmpdi_ccno_1}
+     (nil))
+(jump_insn 27 26 28 5 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 25)
+            (pc))) "test16.c":17 627 {*jcc_1}
+     (nil)
+ -> 25)
+(note 28 27 29 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(insn 29 28 30 6 (set (reg/f:DI 95)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -40 [0xffffffffffffffd8])) [2 head_ref+0 S8 A64])) "test16.c":24 81 {*movdi_internal}
+     (nil))
+(insn 30 29 31 6 (set (reg/f:DI 96)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 prev+0 S8 A64])) "test16.c":24 81 {*movdi_internal}
+     (nil))
+(insn 31 30 34 6 (set (mem/f:DI (reg/f:DI 95) [1 *head_ref_6(D)+0 S8 A64])
+        (reg/f:DI 96)) "test16.c":24 81 {*movdi_internal}
+     (nil))
+(insn 34 31 0 6 (const_int 0 [0]) "test16.c":25 694 {nop}
+     (nil))
+
+;; Function push (push, funcdef_no=6, decl_uid=2775, cgraph_uid=6, symbol_order=6)
+
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 5 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [2 head_ref+0 S8 A64])
+        (reg:DI 5 di [ head_ref ])) "test16.c":29 81 {*movdi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -28 [0xffffffffffffffe4])) [4 new_data+0 S4 A32])
+        (reg:SI 4 si [ new_data ])) "test16.c":29 82 {*movsi_internal}
+     (nil))
+(note 4 3 7 2 NOTE_INSN_FUNCTION_BEG)
+(insn 7 4 8 2 (set (reg:DI 5 di)
+        (const_int 16 [0x10])) "test16.c":31 81 {*movdi_internal}
+     (nil))
+(call_insn 8 7 9 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("malloc") [flags 0x41]  <function_decl 0x7f817291d300 malloc>) [0 __builtin_malloc S1 A8])
+            (const_int 0 [0]))) "test16.c":31 676 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 9 8 10 2 (set (reg/f:DI 88)
+        (reg:DI 0 ax)) "test16.c":31 81 {*movdi_internal}
+     (expr_list:REG_NOALIAS (reg/f:DI 88)
+        (nil)))
+(insn 10 9 11 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 new_node+0 S8 A64])
+        (reg/f:DI 88)) "test16.c":31 81 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (reg/f:DI 89)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 new_node+0 S8 A64])) "test16.c":35 81 {*movdi_internal}
+     (nil))
+(insn 12 11 13 2 (set (reg:SI 90)
+        (mem/c:SI (plus:DI (reg/f:DI 20 frame)
+                (const_int -28 [0xffffffffffffffe4])) [4 new_data+0 S4 A32])) "test16.c":35 82 {*movsi_internal}
+     (nil))
+(insn 13 12 14 2 (set (mem:SI (reg/f:DI 89) [4 new_node_4->data+0 S4 A64])
+        (reg:SI 90)) "test16.c":35 82 {*movsi_internal}
+     (nil))
+(insn 14 13 15 2 (set (reg/f:DI 91)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [2 head_ref+0 S8 A64])) "test16.c":38 81 {*movdi_internal}
+     (nil))
+(insn 15 14 16 2 (set (reg/f:DI 87 [ _1 ])
+        (mem/f:DI (reg/f:DI 91) [1 *head_ref_7(D)+0 S8 A64])) "test16.c":38 81 {*movdi_internal}
+     (nil))
+(insn 16 15 17 2 (set (reg/f:DI 92)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 new_node+0 S8 A64])) "test16.c":38 81 {*movdi_internal}
+     (nil))
+(insn 17 16 18 2 (set (mem/f:DI (plus:DI (reg/f:DI 92)
+                (const_int 8 [0x8])) [1 new_node_4->next+0 S8 A64])
+        (reg/f:DI 87 [ _1 ])) "test16.c":38 81 {*movdi_internal}
+     (nil))
+(insn 18 17 19 2 (set (reg/f:DI 93)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [2 head_ref+0 S8 A64])) "test16.c":41 81 {*movdi_internal}
+     (nil))
+(insn 19 18 20 2 (set (reg/f:DI 94)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 new_node+0 S8 A64])) "test16.c":41 81 {*movdi_internal}
+     (nil))
+(insn 20 19 23 2 (set (mem/f:DI (reg/f:DI 93) [1 *head_ref_7(D)+0 S8 A64])
+        (reg/f:DI 94)) "test16.c":41 81 {*movdi_internal}
+     (nil))
+(insn 23 20 0 2 (const_int 0 [0]) "test16.c":42 694 {nop}
+     (nil))
+
+;; Function printList (printList, funcdef_no=7, decl_uid=2779, cgraph_uid=7, symbol_order=7)
+
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 4 3 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [1 head+0 S8 A64])
+        (reg:DI 5 di [ head ])) "test16.c":46 81 {*movdi_internal}
+     (nil))
+(note 3 2 6 2 NOTE_INSN_FUNCTION_BEG)
+(insn 6 3 7 2 (set (reg/f:DI 88)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -24 [0xffffffffffffffe8])) [1 head+0 S8 A64])) "test16.c":47 81 {*movdi_internal}
+     (nil))
+(insn 7 6 8 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 temp+0 S8 A64])
+        (reg/f:DI 88)) "test16.c":47 81 {*movdi_internal}
+     (nil))
+(jump_insn 8 7 9 2 (set (pc)
+        (label_ref 20)) "test16.c":48 659 {jump}
+     (nil)
+ -> 20)
+(barrier 9 8 22)
+(code_label 22 9 10 4 7 (nil) [1 uses])
+(note 10 22 11 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 11 10 12 4 (set (reg/f:DI 89)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 temp+0 S8 A64])) "test16.c":50 81 {*movdi_internal}
+     (nil))
+(insn 12 11 13 4 (set (reg:SI 87 [ _1 ])
+        (mem:SI (reg/f:DI 89) [4 temp_2->data+0 S4 A64])) "test16.c":50 82 {*movsi_internal}
+     (nil))
+(insn 13 12 14 4 (set (reg:SI 4 si)
+        (reg:SI 87 [ _1 ])) "test16.c":50 82 {*movsi_internal}
+     (nil))
+(insn 14 13 15 4 (set (reg:DI 5 di)
+        (symbol_ref/f:DI ("*.LC0") [flags 0x2]  <var_decl 0x7f8172a4d480 *.LC0>)) "test16.c":50 81 {*movdi_internal}
+     (nil))
+(insn 15 14 16 4 (set (reg:QI 0 ax)
+        (const_int 0 [0])) "test16.c":50 84 {*movqi_internal}
+     (nil))
+(call_insn 16 15 17 4 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("printf") [flags 0x41]  <function_decl 0x7f81728faf00 printf>) [0 __builtin_printf S1 A8])
+            (const_int 0 [0]))) "test16.c":50 676 {*call_value}
+     (nil)
+    (expr_list (use (reg:QI 0 ax))
+        (expr_list:DI (use (reg:DI 5 di))
+            (expr_list:SI (use (reg:SI 4 si))
+                (nil)))))
+(insn 17 16 18 4 (set (reg/f:DI 90)
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 temp+0 S8 A64])) "test16.c":51 81 {*movdi_internal}
+     (nil))
+(insn 18 17 19 4 (set (reg/f:DI 91)
+        (mem/f:DI (plus:DI (reg/f:DI 90)
+                (const_int 8 [0x8])) [1 temp_2->next+0 S8 A64])) "test16.c":51 81 {*movdi_internal}
+     (nil))
+(insn 19 18 20 4 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 temp+0 S8 A64])
+        (reg/f:DI 91)) "test16.c":51 81 {*movdi_internal}
+     (nil))
+(code_label 20 19 21 5 6 (nil) [1 uses])
+(note 21 20 23 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 23 21 24 5 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                    (const_int -8 [0xfffffffffffffff8])) [1 temp+0 S8 A64])
+            (const_int 0 [0]))) "test16.c":48 4 {*cmpdi_ccno_1}
+     (nil))
+(jump_insn 24 23 25 5 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 22)
+            (pc))) "test16.c":48 627 {*jcc_1}
+     (nil)
+ -> 22)
+(note 25 24 28 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(insn 28 25 0 6 (const_int 0 [0]) "test16.c":53 694 {nop}
+     (nil))
+
+;; Function main (main, funcdef_no=8, decl_uid=2785, cgraph_uid=8, symbol_order=8)
+
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(note 2 3 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 6 2 (set (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 head+0 S8 A64])
+        (const_int 0 [0])) "test16.c":59 81 {*movdi_internal}
+     (nil))
+(insn 6 5 7 2 (parallel [
+            (set (reg:DI 91)
+                (plus:DI (reg/f:DI 20 frame)
+                    (const_int -8 [0xfffffffffffffff8])))
+            (clobber (reg:CC 17 flags))
+        ]) "test16.c":61 218 {*adddi_1}
+     (nil))
+(insn 7 6 8 2 (set (reg:SI 4 si)
+        (const_int 20 [0x14])) "test16.c":61 82 {*movsi_internal}
+     (nil))
+(insn 8 7 9 2 (set (reg:DI 5 di)
+        (reg:DI 91)) "test16.c":61 81 {*movdi_internal}
+     (nil))
+(call_insn 9 8 10 2 (call (mem:QI (symbol_ref:DI ("push") [flags 0x3]  <function_decl 0x7f8172a36900 push>) [0 push S1 A8])
+        (const_int 0 [0])) "test16.c":61 665 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(insn 10 9 11 2 (parallel [
+            (set (reg:DI 92)
+                (plus:DI (reg/f:DI 20 frame)
+                    (const_int -8 [0xfffffffffffffff8])))
+            (clobber (reg:CC 17 flags))
+        ]) "test16.c":62 218 {*adddi_1}
+     (nil))
+(insn 11 10 12 2 (set (reg:SI 4 si)
+        (const_int 4 [0x4])) "test16.c":62 82 {*movsi_internal}
+     (nil))
+(insn 12 11 13 2 (set (reg:DI 5 di)
+        (reg:DI 92)) "test16.c":62 81 {*movdi_internal}
+     (nil))
+(call_insn 13 12 14 2 (call (mem:QI (symbol_ref:DI ("push") [flags 0x3]  <function_decl 0x7f8172a36900 push>) [0 push S1 A8])
+        (const_int 0 [0])) "test16.c":62 665 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(insn 14 13 15 2 (parallel [
+            (set (reg:DI 93)
+                (plus:DI (reg/f:DI 20 frame)
+                    (const_int -8 [0xfffffffffffffff8])))
+            (clobber (reg:CC 17 flags))
+        ]) "test16.c":63 218 {*adddi_1}
+     (nil))
+(insn 15 14 16 2 (set (reg:SI 4 si)
+        (const_int 15 [0xf])) "test16.c":63 82 {*movsi_internal}
+     (nil))
+(insn 16 15 17 2 (set (reg:DI 5 di)
+        (reg:DI 93)) "test16.c":63 81 {*movdi_internal}
+     (nil))
+(call_insn 17 16 18 2 (call (mem:QI (symbol_ref:DI ("push") [flags 0x3]  <function_decl 0x7f8172a36900 push>) [0 push S1 A8])
+        (const_int 0 [0])) "test16.c":63 665 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(insn 18 17 19 2 (parallel [
+            (set (reg:DI 94)
+                (plus:DI (reg/f:DI 20 frame)
+                    (const_int -8 [0xfffffffffffffff8])))
+            (clobber (reg:CC 17 flags))
+        ]) "test16.c":64 218 {*adddi_1}
+     (nil))
+(insn 19 18 20 2 (set (reg:SI 4 si)
+        (const_int 85 [0x55])) "test16.c":64 82 {*movsi_internal}
+     (nil))
+(insn 20 19 21 2 (set (reg:DI 5 di)
+        (reg:DI 94)) "test16.c":64 81 {*movdi_internal}
+     (nil))
+(call_insn 21 20 22 2 (call (mem:QI (symbol_ref:DI ("push") [flags 0x3]  <function_decl 0x7f8172a36900 push>) [0 push S1 A8])
+        (const_int 0 [0])) "test16.c":64 665 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(insn 22 21 23 2 (set (reg:DI 5 di)
+        (symbol_ref/f:DI ("*.LC1") [flags 0x2]  <var_decl 0x7f8172a4da20 *.LC1>)) "test16.c":66 81 {*movdi_internal}
+     (nil))
+(call_insn 23 22 24 2 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("puts") [flags 0x41]  <function_decl 0x7f81728fb600 __builtin_puts>) [0 __builtin_puts S1 A8])
+            (const_int 0 [0]))) "test16.c":66 676 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 24 23 25 2 (set (reg/f:DI 87 [ head.0_1 ])
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 head+0 S8 A64])) "test16.c":67 81 {*movdi_internal}
+     (nil))
+(insn 25 24 26 2 (set (reg:DI 5 di)
+        (reg/f:DI 87 [ head.0_1 ])) "test16.c":67 81 {*movdi_internal}
+     (nil))
+(call_insn 26 25 27 2 (call (mem:QI (symbol_ref:DI ("printList") [flags 0x3]  <function_decl 0x7f8172a36b00 printList>) [0 printList S1 A8])
+        (const_int 0 [0])) "test16.c":67 665 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 27 26 28 2 (parallel [
+            (set (reg:DI 95)
+                (plus:DI (reg/f:DI 20 frame)
+                    (const_int -8 [0xfffffffffffffff8])))
+            (clobber (reg:CC 17 flags))
+        ]) "test16.c":68 218 {*adddi_1}
+     (nil))
+(insn 28 27 29 2 (set (reg:DI 5 di)
+        (reg:DI 95)) "test16.c":68 81 {*movdi_internal}
+     (nil))
+(call_insn 29 28 30 2 (call (mem:QI (symbol_ref:DI ("reverse") [flags 0x3]  <function_decl 0x7f8172a36700 reverse>) [0 reverse S1 A8])
+        (const_int 0 [0])) "test16.c":68 665 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 30 29 31 2 (set (reg:DI 5 di)
+        (symbol_ref/f:DI ("*.LC2") [flags 0x2]  <var_decl 0x7f8172a4dab0 *.LC2>)) "test16.c":69 81 {*movdi_internal}
+     (nil))
+(call_insn 31 30 32 2 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("puts") [flags 0x41]  <function_decl 0x7f81728fb600 __builtin_puts>) [0 __builtin_puts S1 A8])
+            (const_int 0 [0]))) "test16.c":69 676 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 32 31 33 2 (set (reg/f:DI 88 [ head.1_2 ])
+        (mem/f/c:DI (plus:DI (reg/f:DI 20 frame)
+                (const_int -8 [0xfffffffffffffff8])) [1 head+0 S8 A64])) "test16.c":70 81 {*movdi_internal}
+     (nil))
+(insn 33 32 34 2 (set (reg:DI 5 di)
+        (reg/f:DI 88 [ head.1_2 ])) "test16.c":70 81 {*movdi_internal}
+     (nil))
+(call_insn 34 33 35 2 (call (mem:QI (symbol_ref:DI ("printList") [flags 0x3]  <function_decl 0x7f8172a36b00 printList>) [0 printList S1 A8])
+        (const_int 0 [0])) "test16.c":70 665 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(call_insn 35 34 36 2 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("getchar") [flags 0x41]  <function_decl 0x7f81729d2900 getchar>) [0 getchar S1 A8])
+            (const_int 0 [0]))) "test16.c":71 676 {*call_value}
+     (nil)
+    (nil))
+(insn 36 35 39 2 (set (reg:SI 89 [ _16 ])
+        (const_int 0 [0])) "<built-in>":0 82 {*movsi_internal}
+     (nil))
+(insn 39 36 43 2 (set (reg:SI 90 [ <retval> ])
+        (reg:SI 89 [ _16 ])) "<built-in>":0 82 {*movsi_internal}
+     (nil))
+(insn 43 39 44 2 (set (reg/i:SI 0 ax)
+        (reg:SI 90 [ <retval> ])) "test16.c":72 82 {*movsi_internal}
+     (nil))
+(insn 44 43 0 2 (use (reg/i:SI 0 ax)) "test16.c":72 -1
+     (nil))
